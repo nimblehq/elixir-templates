@@ -24,6 +24,7 @@ defmodule Nimble.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Nimble.DataCase
+      import Nimble.Factory
     end
   end
 

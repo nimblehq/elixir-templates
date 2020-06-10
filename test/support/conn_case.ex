@@ -23,6 +23,8 @@ defmodule NimbleWeb.ConnCase do
       use Phoenix.ConnTest
       alias NimbleWeb.Router.Helpers, as: Routes
 
+      import Nimble.Factory
+
       # The default endpoint for testing
       @endpoint NimbleWeb.Endpoint
     end

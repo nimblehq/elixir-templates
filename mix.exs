@@ -45,6 +45,7 @@ defmodule Nimble.MixProject do
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ecto_sql, "~> 3.1"},
       {:excoveralls, "~> 0.12.2", only: :test},
+      {:ex_machina, "~> 2.4", only: :test},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
