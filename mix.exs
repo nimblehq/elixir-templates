@@ -42,6 +42,7 @@ defmodule Nimble.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ecto_sql, "~> 3.1"},
       {:excoveralls, "~> 0.12.2", only: :test},
       {:gettext, "~> 0.11"},
@@ -65,6 +66,7 @@ defmodule Nimble.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
+      lint: ["format --check-formatted", "credo"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
