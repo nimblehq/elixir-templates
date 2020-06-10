@@ -1,0 +1,12 @@
+{
+  "skip_files": [
+    "lib/mix",
+    "lib/nimble/application.ex",
+    "lib/nimble/release_tasks.ex",
+    "lib/nimble_web.ex",
+    "lib/nimble_mail.ex",
+    "lib/nimble_web/endpoint.ex",
+    "lib/nimble_web/views/error_helpers.ex",
+    "test/support"
+  ]
+}
