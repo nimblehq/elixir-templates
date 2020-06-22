@@ -16,8 +16,6 @@ defmodule Nimble.MixProject do
         lint: :test,
         coverage: :test,
         coveralls: :test,
-        "coveralls.detail": :test,
-        "coveralls.post": :test,
         "coveralls.html": :test
       ]
     ]
