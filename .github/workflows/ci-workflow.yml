@@ -6,10 +6,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: elixir:1.10-alpine
+
     services:
       db:
         image: postgres:11-alpine
+        ports: ['5432:5432']
         env:
           POSTGRES_PASSWORD: postgres
         options: >-
@@ -23,27 +24,40 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
-    - name: Update container
-      run: |
-        apk update
-        apk add build-base
-        mix local.rebar --force
-        mix local.hex --force
+    - uses: actions/setup-elixir@v1
+      with:
+        otp-version: '22.3.4.2'
+        elixir-version: '1.10.4'
+  
+    - name: Cache build
+      uses: actions/cache@v2
+      with: 
+        path: |
+          _build
+          deps
+        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-mix- 
 
     - name: Install Dependencies
       run: mix deps.get
+
+    - name: Compile
+      run: mix compile
+      env: 
+        MIX_ENV: test
 
     - name: Create database
       run: mix ecto.create
       env:
         MIX_ENV: test
-        DB_HOST: db
+        DB_HOST: localhost
 
     - name: Migrate database
       run: mix ecto.migrate
       env:
         MIX_ENV: test
-        DB_HOST: db
+        DB_HOST: localhost
 
     - name: Run lint
       run: mix lint
@@ -51,6 +65,5 @@ jobs:
     - name: Run Tests
       run: mix test
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         MIX_ENV: test
-        DB_HOST: db
+        DB_HOST: localhost
