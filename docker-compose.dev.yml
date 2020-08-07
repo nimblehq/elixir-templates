@@ -1,11 +1,11 @@
-version: '3.2'
+version: "3.2"
 
 services:
   db:
     image: postgres:12.3
-    container_name: elixir_template
+    container_name: Nimble
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_DB=elixir_template_development
+      - POSTGRES_DB=Nimble_development
     ports:
       - "5432:5432"
