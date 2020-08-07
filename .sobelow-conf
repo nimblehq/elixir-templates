@@ -1,6 +1,7 @@
 [
   verbose: false,
   private: false,
+  compact: true,
   skip: true,
   router: "",
   exit: "low",
