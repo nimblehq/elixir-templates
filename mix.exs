@@ -66,11 +66,11 @@ defmodule Nimble.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      lint: ["format --check-formatted", "credo"],
+      codebase: ["format --check-formatted", "credo", "sobelow --config"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
-      coverage: ["sobelow --config", "coveralls.html --raise"]
+      coverage: ["coveralls.html --raise"]
     ]
   end
 end
