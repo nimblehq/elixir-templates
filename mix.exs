@@ -55,7 +55,8 @@ defmodule Nimble.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
       {:sobelow, "~> 0.8", only: [:dev, :test], runtime: false},
-      {:wallaby, "~> 0.26.2", only: :test, runtime: false}
+      {:wallaby, "~> 0.26.2", only: :test, runtime: false},
+      {:mox, "~> 0.5.2", only: :test}
     ]
   end
 
