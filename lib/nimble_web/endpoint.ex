@@ -1,7 +1,7 @@
 defmodule NimbleWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :nimble
 
-  if Application.get_env(:ex_marketer_web, :sql_sandbox) do
+  if Application.get_env(:nimble_web, :sql_sandbox) do
     plug Phoenix.Ecto.SQL.Sandbox
   end
 
