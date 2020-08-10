@@ -1,4 +1,4 @@
-defmodule Nimble.FeatureCase do
+defmodule NimbleWeb.FeatureCase do
   use ExUnit.CaseTemplate
 
   using do
@@ -8,7 +8,7 @@ defmodule Nimble.FeatureCase do
       import Nimble.Factory
       import Nimble.Gettext
 
-      alias Nimble.Router.Helpers, as: Routes
+      alias NimbleWeb.Router.Helpers, as: Routes
     end
   end
 end
