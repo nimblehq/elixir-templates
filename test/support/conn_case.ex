@@ -27,6 +27,7 @@ defmodule NimbleWeb.ConnCase do
       alias NimbleWeb.Router.Helpers, as: Routes
 
       import Nimble.Factory
+      import Nimble.Gettext
 
       # The default endpoint for testing
       @endpoint NimbleWeb.Endpoint

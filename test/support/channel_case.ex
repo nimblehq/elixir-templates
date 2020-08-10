@@ -24,6 +24,9 @@ defmodule NimbleWeb.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
+      import Nimble.Factory
+      import Nimble.Gettext
+
       # The default endpoint for testing
       @endpoint NimbleWeb.Endpoint
     end

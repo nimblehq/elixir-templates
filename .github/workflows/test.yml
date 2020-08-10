@@ -8,7 +8,7 @@ jobs:
     services:
       db:
         image: postgres:11-alpine
-        ports: ['5432:5432']
+        ports: ["5432:5432"]
         env:
           POSTGRES_PASSWORD: postgres
         options: >-
@@ -16,7 +16,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    
+
     steps:
       - uses: actions/checkout@v2
         with:
@@ -24,26 +24,40 @@ jobs:
 
       - uses: actions/setup-elixir@v1
         with:
-          otp-version: '22.3.4.2'
-          elixir-version: '1.10.4'
-    
-      - name: Cache build
+          otp-version: "22.3.4.2"
+          elixir-version: "1.10.4"
+
+      - name: Cache Elixir build
         uses: actions/cache@v2
-        with: 
+        with:
           path: |
             _build
             deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
-            ${{ runner.os }}-mix- 
+            ${{ runner.os }}-mix-
+
+      - name: Cache Node npm
+        uses: actions/cache@v2
+        with:
+          path: assets/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install Dependencies
         run: mix deps.get
 
       - name: Compile
-        run: mix compile --warnings-as-errors
-        env: 
+        run: mix compile
+        env:
           MIX_ENV: test
+
+      - name: Install node module
+        run: cd assets && npm install
+
+      - name: Compile assets
+        run: cd assets && ./node_modules/.bin/webpack --mode development
 
       - name: Create database
         run: mix ecto.create
@@ -59,9 +73,21 @@ jobs:
 
       - name: Run codebase check
         run: mix codebase
-        
-      - name: Run Tests
+
+      - name: Run Coverage
         run: mix coverage
         env:
           MIX_ENV: test
           DB_HOST: localhost
+
+      - name: Run Test
+        run: mix test
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: wallaby_screenshots
+          path: tmp/wallaby_screenshots/

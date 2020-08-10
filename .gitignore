@@ -36,3 +36,6 @@ npm-debug.log
 # Usual suspects
 .DS_Store
 .idea/
+
+# tmp
+**/tmp/

@@ -28,6 +28,7 @@ defmodule Nimble.DataCase do
       import Ecto.Query
       import Nimble.DataCase
       import Nimble.Factory
+      import Nimble.Gettext
     end
   end
 
