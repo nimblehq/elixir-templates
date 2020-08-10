@@ -1,4 +1,4 @@
-.PHONY: env_setup
+.PHONY: docker_setup
 
-env_setup: ## Setup development environment
+docker_setup:
 	docker-compose -f docker-compose.dev.yml up -d
