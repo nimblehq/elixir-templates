@@ -6,7 +6,6 @@ defmodule NimbleWeb.FeatureCase do
       use Wallaby.Feature
 
       import Nimble.Factory
-      import Nimble.Gettext
 
       alias NimbleWeb.Router.Helpers, as: Routes
     end
