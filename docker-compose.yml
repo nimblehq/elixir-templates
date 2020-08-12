@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  builder:
+    build:
+      context: .
+      cache_from:
+        - nimble-builder
+      target: builder
+    image: nimble-builder
+
+  app:
+    build:
+      context: .
+      cache_from:
+        - nimble-builder
+        - nimble
+      target: app
+    image: nimble
+    environment:
+      - DATABASE_URL=postgresql://postgres@db/nimble
+      - HOST=nimblehq.co
+      - POOL_SIZE=10
+      - PORT=80
+      - SECRET_KEY_BASE=
+    ports:
+      - "80:80"
