@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Login to Heroku registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+
+      - name: Build and push image
+        env:
+          DOCKER_IMAGE: nimble
+          HEROKU_REGISTRY: registry.heroku.com/elixir-template-test/web
+        run: |
+          docker-compose build
+          docker tag $DOCKER_IMAGE $HEROKU_REGISTRY
+          docker push $HEROKU_REGISTRY
+
+      - name: Release
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP: elixir-template-test
+        run: heroku container:release web --app $HEROKU_APP
