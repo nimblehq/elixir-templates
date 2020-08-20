@@ -1,4 +1,4 @@
-name: 'CI Tests'
+name: "CI Tests"
 on: pull_request
 
 jobs:
@@ -74,7 +74,7 @@ jobs:
       - name: Run codebase check
         run: mix codebase
 
-      - name: Run Test
+      - name: Run Tests
         run: mix coverage
         env:
           MIX_ENV: test
