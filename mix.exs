@@ -82,6 +82,6 @@ defmodule Nimble.MixProject do
   end
 
   defp compile_assets(_) do
-    Mix.shell().cmd("cd assets && ./node_modules/.bin/webpack --mode development", quiet: true)
+    Mix.shell().cmd("cd assets && npm run build:dev", quiet: true)
   end
 end
