@@ -22,6 +22,6 @@ config :logger, level: :warn
 # Wallaby
 config :wallaby,
   otp_app: :nimble,
-  chromedriver: [headless: System.get_env("CHROME_HEADLESS", "true") !== "false"],
+  chromedriver: [headless: System.get_env("CHROME_HEADLESS", "true") === "true"],
   screenshot_dir: "tmp/wallaby_screenshots",
   screenshot_on_failure: true
