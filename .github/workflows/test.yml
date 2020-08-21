@@ -54,10 +54,10 @@ jobs:
           MIX_ENV: test
 
       - name: Install node module
-        run: cd assets && npm install
+        run: npm --prefix assets install
 
       - name: Compile assets
-        run: cd assets && ./node_modules/.bin/webpack --mode development
+        run: npm run --prefix assets build:dev
 
       - name: Create database
         run: mix ecto.create

@@ -82,6 +82,6 @@ defmodule Nimble.MixProject do
   end
 
   defp compile_assets(_) do
-    Mix.shell().cmd("cd assets && npm run build:dev", quiet: true)
+    Mix.shell().cmd("npm run --prefix assets build:dev", quiet: true)
   end
 end
