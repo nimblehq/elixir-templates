@@ -12,7 +12,16 @@ config :nimble, Nimble.Repo,
 # you can enable the server option below.
 config :nimble, NimbleWeb.Endpoint,
   http: [port: 4002],
-  server: false
+  server: true
+
+config :nimble_web, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Wallaby
+config :wallaby,
+  otp_app: :nimble,
+  chromedriver: [headless: System.get_env("CHROME_HEADLESS", "true") === "true"],
+  screenshot_dir: "tmp/wallaby_screenshots",
+  screenshot_on_failure: true

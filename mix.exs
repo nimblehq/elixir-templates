@@ -54,7 +54,8 @@ defmodule Nimble.MixProject do
       {:phoenix, "~> 1.4.16"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
-      {:sobelow, "~> 0.8", only: [:dev, :test], runtime: false}
+      {:sobelow, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:wallaby, "~> 0.26.2", only: :test, runtime: false}
     ]
   end
 
@@ -67,10 +68,20 @@ defmodule Nimble.MixProject do
   defp aliases do
     [
       codebase: ["format --check-formatted", "credo", "sobelow --config"],
+      coverage: ["coveralls.html --raise"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"],
-      coverage: ["coveralls.html --raise"]
+      test: [
+        "ecto.create --quiet",
+        "ecto.migrate",
+        "assets.compile --quiet",
+        "test"
+      ],
+      "assets.compile": &compile_assets/1
     ]
+  end
+
+  defp compile_assets(_) do
+    Mix.shell().cmd("npm run --prefix assets build:dev", quiet: true)
   end
 end

@@ -16,7 +16,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    
+
     steps:
       - uses: actions/checkout@v2
         with:
@@ -26,24 +26,38 @@ jobs:
         with:
           otp-version: '22.3.4.2'
           elixir-version: '1.10.4'
-    
-      - name: Cache build
+
+      - name: Cache Elixir build
         uses: actions/cache@v2
-        with: 
+        with:
           path: |
             _build
             deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
-            ${{ runner.os }}-mix- 
+            ${{ runner.os }}-mix-
+
+      - name: Cache Node npm
+        uses: actions/cache@v2
+        with:
+          path: assets/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install Dependencies
         run: mix deps.get
 
       - name: Compile
         run: mix compile --warnings-as-errors
-        env: 
+        env:
           MIX_ENV: test
+
+      - name: Install node module
+        run: npm --prefix assets install
+
+      - name: Compile assets
+        run: npm run --prefix assets build:dev
 
       - name: Create database
         run: mix ecto.create
@@ -59,9 +73,15 @@ jobs:
 
       - name: Run codebase check
         run: mix codebase
-        
+
       - name: Run Tests
         run: mix coverage
         env:
           MIX_ENV: test
           DB_HOST: localhost
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: wallaby_screenshots
+          path: tmp/wallaby_screenshots/
