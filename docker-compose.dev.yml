@@ -3,7 +3,7 @@ version: "3.2"
 services:
   db:
     image: postgres:12.3
-    container_name: nimble
+    container_name: nimble_db
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_DB=nimble_dev
