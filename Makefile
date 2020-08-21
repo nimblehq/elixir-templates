@@ -8,8 +8,8 @@ bootstrap:
 	echo "Bootstraping $(APP_NAME)"
 
 	echo "🤖 Renaming modules and variables"
-	find . ! -path "./deps/*" -name "*.ex*" -print0 | xargs -0 sed -i '' -e "s/Nimble/$(APP_NAME)/g"
-	find . ! -path "./deps/*" -name "*.ex*" -print0 | xargs -0 sed -i '' -e "s/nimble/$(OTP_NAME)/g"
+	find . ! -path "./deps/*" -name "*.ex*" -print0 | xargs -0 sed -i '' -e "s/$(TEMPLATE_APP_NAME)/$(APP_NAME)/g"
+	find . ! -path "./deps/*" -name "*.ex*,*.yml" -print0 | xargs -0 sed -i '' -e "s/$(TEMPLATE_OTP_NAME)/$(OTP_NAME)/g"
 
 	echo "📝 Renaming files"
 	mv lib/nimble.ex lib/$(OTP_NAME).ex
