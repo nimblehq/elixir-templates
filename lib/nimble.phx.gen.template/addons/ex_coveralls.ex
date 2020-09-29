@@ -13,9 +13,11 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
   end
 
   defp copy_files(%Project{otp_app: otp_app} = project) do
+    # There is no test for `lib/*/router.ex` on the new Phoenix app, so that reduce the coverage to 77.8%
+    # We are setting the minimum_coverage as 77 to work with the new Phoenix app
     binding = [
-      otp_app: otp_app,
-      minimum_coverage: 100
+      otp_app: project.otp_app,
+      minimum_coverage: 77
     ]
 
     Generator.copy_file([{:eex, "coveralls.json.eex", "coveralls.json"}], binding)
