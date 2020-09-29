@@ -1,0 +1,10 @@
+defmodule <%= base_module %>.Factory do
+  use ExMachina.Ecto, repo: <%= base_module %>.Repo
+
+  # Define your factories
+  # def user_factory do
+  #   %User{
+  #     email: sequence(:email, &"test-#{&1}@omise.co")
+  #   }
+  # end
+end
