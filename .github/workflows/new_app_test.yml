@@ -1,0 +1,106 @@
+name: "Generate new app"
+on: pull_request
+
+env:
+  PHOENIX_VERSION: 1.5.5
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        variant: [web, api]
+    
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: "23.0.2"
+          elixir-version: "1.10.4"
+    
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "12"
+          
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
+      
+      - name: npm packages cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
+            **/yarn.lock
+            **/node_modules
+          key: ${{ runner.os }}-npm-packages-${{ hashFiles('**/package.json*') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-packages-
+              
+      - name: Install Dependencies
+        run: mix deps.get
+      
+      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
+        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+        
+      - name: Create project
+        run: make create_project VARIANT=${{ matrix.variant }}
+      
+      - name: Apply template
+        run: make apply_template VARIANT=${{ matrix.variant }} PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+      
+      - name: Run mix ecto.create
+        run: cd ${{ matrix.variant }}_project && mix ecto.create
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      
+      - name: Run mix ecto.migrate
+        run: cd ${{ matrix.variant }}_project && mix ecto.migrate
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+          
+      - name: Run mix compile
+        run: cd ${{ matrix.variant }}_project && mix compile --warnings-as-errors
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      
+      - name: Run mix codebase
+        run: cd ${{ matrix.variant }}_project && mix codebase
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+        
+      - name: Run mix test
+        run: cd ${{ matrix.variant }}_project && mix coverage
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
