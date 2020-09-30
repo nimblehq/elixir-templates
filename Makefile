@@ -4,7 +4,7 @@ install_phoenix:
 	printf "Y\n" | mix archive.install hex phx_new ${PHOENIX_VERSION}
 
 create_project:
-	printf "Y\nY\n" | mix phx.new ${PROJECT_PATH}
+	printf "N\nN\n" | mix phx.new ${PROJECT_PATH}
 
 inject_dependency:
 	cd ${PROJECT_PATH} && \
