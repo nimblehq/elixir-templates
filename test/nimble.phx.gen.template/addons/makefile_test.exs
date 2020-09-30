@@ -6,7 +6,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.MakefileTest do
       in_test_app(test_app_path, fn ->
         Addons.Makefile.apply(project, {})
 
-        assert File.regular?("Makefile") === true
+        assert_file("Makefile")
       end)
     end
   end

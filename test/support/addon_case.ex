@@ -12,6 +12,10 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
           File.rm_rf!(test_app_path)
         end
       end
+
+      defp assert_file(file) do
+        assert File.regular?(file), "Expected #{file} to exist, but does not"
+      end
     end
   end
 
