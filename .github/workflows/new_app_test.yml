@@ -72,7 +72,7 @@ jobs:
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
         
       - name: Create project
-        run: make create_project PROJECT_PATH=/tmp/${{ matrix.variant }}
+        run: printf "Y\nY\n" | make create_project PROJECT_PATH=/tmp/${{ matrix.variant }}
       
       - name: Inject dependency
         run: make inject_dependency PROJECT_PATH=/tmp/${{ matrix.variant }}

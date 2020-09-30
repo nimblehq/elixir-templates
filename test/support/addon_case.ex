@@ -24,7 +24,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   end
 
   defp create_new_project(project_path) do
-    Mix.shell().cmd("make create_project PROJECT_PATH=#{project_path}")
+    Mix.shell().cmd("printf \"N\n\" | make create_project PROJECT_PATH=#{project_path}")
   end
 
   defp test_app_path do
