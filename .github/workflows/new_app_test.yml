@@ -72,40 +72,40 @@ jobs:
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
         
       - name: Create project
-        run: printf "Y\nY\n" | make create_project PROJECT_PATH=${{ matrix.variant }}
+        run: printf "Y\nY\n" | make create_project PROJECT_PATH=${{ matrix.variant }}_project
       
       - name: Inject dependency
-        run: make inject_dependency PROJECT_PATH=${{ matrix.variant }}
+        run: make inject_dependency PROJECT_PATH=${{ matrix.variant }}_project
         
       - name: Apply template
-        run: make apply_template PROJECT_PATH=${{ matrix.variant }} VARIANT=${{ matrix.variant }}
+        run: make apply_template PROJECT_PATH=${{ matrix.variant }}_project VARIANT=${{ matrix.variant }}
       
       - name: Run mix ecto.create
-        run: cd ${{ matrix.variant }} && mix ecto.create
+        run: cd ${{ matrix.variant }}_project && mix ecto.create
         env:
           MIX_ENV: test
           DB_HOST: localhost
       
       - name: Run mix ecto.migrate
-        run: cd ${{ matrix.variant }} && mix ecto.migrate
+        run: cd ${{ matrix.variant }}_project && mix ecto.migrate
         env:
           MIX_ENV: test
           DB_HOST: localhost
           
       - name: Run mix compile
-        run: cd ${{ matrix.variant }} && mix compile --warnings-as-errors
+        run: cd ${{ matrix.variant }}_project && mix compile --warnings-as-errors
         env:
           MIX_ENV: test
           DB_HOST: localhost
       
       - name: Run mix codebase
-        run: cd ${{ matrix.variant }} && mix codebase
+        run: cd ${{ matrix.variant }}_project && mix codebase
         env:
           MIX_ENV: test
           DB_HOST: localhost
         
       - name: Run mix test
-        run: cd ${{ matrix.variant }} && mix coverage
+        run: cd ${{ matrix.variant }}_project && mix coverage
         env:
           MIX_ENV: test
           DB_HOST: localhost
