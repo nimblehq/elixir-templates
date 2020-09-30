@@ -78,7 +78,7 @@ jobs:
         run: make inject_dependency PROJECT_PATH=${{ matrix.variant }}
         
       - name: Apply template
-        run: make apply_template PROJECT_PATH=${{ matrix.variant }}
+        run: make apply_template PROJECT_PATH=${{ matrix.variant }} VARIANT=${{ matrix.variant }}
       
       - name: Run mix ecto.create
         run: cd ${{ matrix.variant }}_project && mix ecto.create
