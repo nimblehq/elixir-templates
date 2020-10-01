@@ -31,23 +31,23 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
     Generator.copy_file(files)
   end
 
-  defp generate_github_action(project) do
+  def generate_github_action(%Project{} = project) do
     binding = [
       otp_version: @versions.otp_version,
       elixir_version: @versions.elixir_version
     ]
 
-    template_file_path =
-      if project.api_project? do
-        Path.join([".github", "workflows", "test.yml.eex"])
-      else
-        Path.join(["variants", "web", ".github", "workflows", "test.yml.eex"])
-      end
-
     files = [
-      {:eex, template_file_path, Path.join([".github", "workflows", "test.yml"])}
+      {:eex, github_action_template_path(project),
+       Path.join([".github", "workflows", "test.yml"])}
     ]
 
     Generator.copy_file(files, binding)
   end
+
+  def github_action_template_path(%Project{api_project?: true}),
+    do: Path.join([".github", "workflows", "test.yml.eex"])
+
+  def github_action_template_path(%Project{api_project?: false}),
+    do: Path.join(["variants", "web", ".github", "workflows", "test.yml.eex"])
 end
