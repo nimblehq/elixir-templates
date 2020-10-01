@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
     # Mix.Phoenix.inflect requires a String argument
     # but that argument doesn't affect to `web_module` attribute, so we could pass the "_DUMMY_" argument
     %Project{
-      api_project?: opts[:api],
+      api_project?: opts[:api] === true,
       otp_app: Mix.Phoenix.otp_app(),
       base_module: Mix.Phoenix.base(),
       web_module: Mix.Phoenix.inflect("_DUMMY_")[:web_module],

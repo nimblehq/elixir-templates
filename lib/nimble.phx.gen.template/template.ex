@@ -4,13 +4,9 @@ defmodule Nimble.Phx.Gen.Template.Template do
   alias Nimble.Phx.Gen.Template.Web.Template, as: WebTemplate
 
   def apply(%Project{} = project) do
-    common_setup(project)
-
-    if project.api_project? do
-      ApiTemplate.apply(project)
-    else
-      WebTemplate.apply(project)
-    end
+    project
+    |> common_setup()
+    |> variant_setup()
 
     if Mix.shell().yes?("\nFetch and install dependencies?"), do: Mix.shell().cmd("mix deps.get")
   end
@@ -37,6 +33,9 @@ defmodule Nimble.Phx.Gen.Template.Template do
     |> Addons.ExMachina.apply()
     |> Addons.Mox.apply()
   end
+
+  def variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)
+  def variant_setup(%Project{api_project?: false} = project), do: WebTemplate.apply(project)
 
   defp host_on_github?(), do: Mix.shell().yes?("\nWill you host this project on Github?")
 
