@@ -8,7 +8,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
   @version Mix.Project.config()[:version]
   @variants [api: :boolean, web: :boolean]
 
-  def run([version]) when version in ~w(-v --version) do
+  def run([args]) when args in ~w(-v --version) do
     Mix.shell().info("Nimble.Phx.Gen.Template v#{@version}")
   end
 
