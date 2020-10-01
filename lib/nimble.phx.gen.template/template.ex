@@ -6,7 +6,7 @@ defmodule Nimble.Phx.Gen.Template.Template do
   def apply(%Project{} = project) do
     common_setup(project)
 
-    if project.is_api_project? do
+    if project.api_project? do
       ApiTemplate.apply(project)
     else
       WebTemplate.apply(project)

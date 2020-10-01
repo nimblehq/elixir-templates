@@ -3,5 +3,5 @@ defmodule Nimble.Phx.Gen.Template.Project do
             base_module: nil,
             web_module: nil,
             web_test_path: nil,
-            is_api_project?: nil
+            api_project?: nil
 end
