@@ -20,15 +20,6 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
     project
   end
 
-  def generate_github_template?(),
-    do:
-      Mix.shell().yes?(
-        "\nDo you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?"
-      )
-
-  def generate_github_action?(),
-    do: Mix.shell().yes?("\nDo you want to generate the Github Action workflow?")
-
   defp generate_github_template() do
     files = [
       {:text, Path.join([".github", "ISSUE_TEMPLATE.md"]),
