@@ -1,8 +1,10 @@
 defmodule Nimble.Phx.Gen.Template.Generator do
+  @template_resource "priv/templates/nimble.phx.gen.template"
+
   def copy_file(files, binding \\ []) do
     Mix.Phoenix.copy_from(
       [:nimble_phx_gen_template],
-      "priv/templates/nimble.phx.gen.template",
+      @template_resource,
       binding,
       files
     )
