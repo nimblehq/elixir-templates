@@ -2,7 +2,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
   use Nimble.Phx.Gen.Template.Addon
 
   @versions %{
-    wallaby: "~> 0.26.2"
+    wallaby: "~> 0.26.2",
+    otp_version: "23.0.2",
+    elixir_version: "1.10.4"
   }
 
   @impl true
@@ -26,7 +28,25 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
 
     Generator.copy_file(files, binding)
 
+    if File.exists?(Path.join([".github", "workflows", "test.yml"])) do
+      copy_github_action()
+    end
+
     project
+  end
+
+  defp copy_github_action do
+    binding = [
+      otp_version: @versions.otp_version,
+      elixir_version: @versions.elixir_version
+    ]
+
+    files = [
+      {:eex, Path.join(["variants", "web", ".github", "workflows", "test.yml.eex"]),
+       Path.join([".github", "workflows", "test.yml"])}
+    ]
+
+    Generator.copy_file(files, binding)
   end
 
   defp edit_files(%Project{} = project) do
@@ -38,10 +58,6 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
     |> edit_test_config
     |> edit_gitignore
     |> edit_assets_package
-
-    if File.exists?(Path.join([".github", "workflows", "test.yml"])) do
-      edit_github_action(project)
-    end
 
     project
   end
@@ -170,91 +186,6 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
       """
           "watch": "webpack --mode development --watch",
           "build:dev": "webpack --mode development"
-      """
-    )
-
-    project
-  end
-
-  defp edit_github_action(project) do
-    Generator.replace_content(
-      ".github/workflows/test.yml",
-      """
-            - name: Cache Elixir build
-              uses: actions/cache@v2
-              with:
-                path: |
-                  _build
-                  deps
-                key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-                restore-keys: |
-                  ${{ runner.os }}-mix-
-      """,
-      """
-            - name: Cache Elixir build
-              uses: actions/cache@v2
-              with:
-                path: |
-                  _build
-                  deps
-                key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-                restore-keys: |
-                  ${{ runner.os }}-mix-
-
-            - name: Cache Node npm
-              uses: actions/cache@v2
-              with:
-                path: assets/node_modules
-                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-                restore-keys: |
-                  ${{ runner.os }}-node-
-      """
-    )
-
-    Generator.replace_content(
-      ".github/workflows/test.yml",
-      """
-            - name: Compile
-              run: mix compile --warnings-as-errors
-              env:
-                MIX_ENV: test
-
-      """,
-      """
-            - name: Compile
-              run: mix compile --warnings-as-errors
-              env:
-                MIX_ENV: test
-
-            - name: Install node module
-              run: npm --prefix assets install
-
-            - name: Compile assets
-              run: npm run --prefix assets build:dev
-      """
-    )
-
-    Generator.replace_content(
-      ".github/workflows/test.yml",
-      """
-            - name: Run Tests
-              run: mix coverage
-              env:
-                MIX_ENV: test
-                DB_HOST: localhost
-      """,
-      """
-            - name: Run Tests
-              run: mix coverage
-              env:
-                MIX_ENV: test
-                DB_HOST: localhost
-
-            - uses: actions/upload-artifact@v2
-              if: ${{ failure() }}
-              with:
-                name: wallaby_screenshots
-                path: tmp/wallaby_screenshots/
       """
     )
 

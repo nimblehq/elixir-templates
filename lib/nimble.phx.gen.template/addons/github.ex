@@ -47,7 +47,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
     ]
 
     files = [
-      {:eex, Path.join([".github", "workflows", "test.yml"]),
+      {:eex, Path.join([".github", "workflows", "test.yml.eex"]),
        Path.join([".github", "workflows", "test.yml"])}
     ]
 
