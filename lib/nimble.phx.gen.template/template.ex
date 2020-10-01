@@ -16,6 +16,12 @@ defmodule Nimble.Phx.Gen.Template.Template do
     project
     |> Addons.Makefile.apply()
     |> Addons.Docker.apply()
+    |> Addons.TestEnv.apply()
+    |> Addons.Credo.apply()
+    |> Addons.Dialyxir.apply()
+    |> Addons.ExCoveralls.apply()
+    |> Addons.ExMachina.apply()
+    |> Addons.Mox.apply()
 
     if host_on_github?() do
       if generate_github_template?(),
@@ -24,14 +30,6 @@ defmodule Nimble.Phx.Gen.Template.Template do
       if generate_github_action?(),
         do: Addons.Github.apply(project, %{github_action: true})
     end
-
-    project
-    |> Addons.TestEnv.apply()
-    |> Addons.Credo.apply()
-    |> Addons.Dialyxir.apply()
-    |> Addons.ExCoveralls.apply()
-    |> Addons.ExMachina.apply()
-    |> Addons.Mox.apply()
   end
 
   def variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)
