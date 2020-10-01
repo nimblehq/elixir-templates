@@ -12,9 +12,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.Mox do
     |> edit_files()
   end
 
-  defp copy_files(%Project{} = project) do
+  defp copy_files(%Project{base_module: base_module} = project) do
     Generator.copy_file([{:eex, "test/support/mock.ex.eex", "test/support/mock.ex"}],
-      base_module: project.base_module
+      base_module: base_module
     )
 
     project

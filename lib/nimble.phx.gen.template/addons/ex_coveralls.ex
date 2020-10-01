@@ -12,9 +12,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
     |> edit_files()
   end
 
-  defp copy_files(%Project{} = project) do
+  defp copy_files(%Project{otp_app: otp_app} = project) do
     binding = [
-      otp_app: project.otp_app,
+      otp_app: otp_app,
       minimum_coverage: 100
     ]
 

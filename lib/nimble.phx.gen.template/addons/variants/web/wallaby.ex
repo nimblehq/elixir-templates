@@ -14,16 +14,19 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
     |> edit_files
   end
 
-  defp copy_files(%Project{} = project) do
+  defp copy_files(
+         %Project{web_module: web_module, base_module: base_module, web_test_path: web_test_path} =
+           project
+       ) do
     binding = [
-      web_module: project.web_module,
-      base_module: project.base_module
+      web_module: web_module,
+      base_module: base_module
     ]
 
     files = [
       {:eex, "test/support/feature_case.ex.eex", "test/support/feature_case.ex"},
       {:eex, "test/features/home_page/view_home_page_test.exs.eex",
-       "#{project.web_test_path}/features/home_page/view_home_page_test.exs"}
+       "#{web_test_path}/features/home_page/view_home_page_test.exs"}
     ]
 
     Generator.copy_file(files, binding)
@@ -81,37 +84,37 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
     project
   end
 
-  defp edit_test_helper(project) do
+  defp edit_test_helper(%Project{base_module: base_module, web_module: web_module} = project) do
     Generator.replace_content(
       "test/test_helper.exs",
       """
 
       ExUnit.start()
-      Ecto.Adapters.SQL.Sandbox.mode(#{project.base_module}.Repo, :manual)
+      Ecto.Adapters.SQL.Sandbox.mode(#{base_module}.Repo, :manual)
       """,
       """
       {:ok, _} = Application.ensure_all_started(:wallaby)
 
       ExUnit.start()
-      Ecto.Adapters.SQL.Sandbox.mode(#{project.base_module}.Repo, :manual)
+      Ecto.Adapters.SQL.Sandbox.mode(#{base_module}.Repo, :manual)
 
-      Application.put_env(:wallaby, :base_url, #{project.web_module}.Endpoint.url())
+      Application.put_env(:wallaby, :base_url, #{web_module}.Endpoint.url())
       """
     )
 
     project
   end
 
-  def edit_endpoint(project) do
+  def edit_endpoint(%Project{otp_app: otp_app} = project) do
     Generator.replace_content(
-      "lib/#{project.otp_app}_web/endpoint.ex",
+      "lib/#{otp_app}_web/endpoint.ex",
       """
-        use Phoenix.Endpoint, otp_app: :#{project.otp_app}
+        use Phoenix.Endpoint, otp_app: :#{otp_app}
       """,
       """
-        use Phoenix.Endpoint, otp_app: :#{project.otp_app}
+        use Phoenix.Endpoint, otp_app: :#{otp_app}
 
-        if Application.get_env(:#{project.otp_app}, :sql_sandbox) do
+        if Application.get_env(:#{otp_app}, :sql_sandbox) do
           plug Phoenix.Ecto.SQL.Sandbox
         end
       """
@@ -120,7 +123,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
     project
   end
 
-  defp edit_test_config(project) do
+  defp edit_test_config(%Project{otp_app: otp_app} = project) do
     Generator.replace_content(
       "config/test.exs",
       """
@@ -129,10 +132,10 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
       """
         server: true
 
-      config :#{project.otp_app}, :sql_sandbox, true
+      config :#{otp_app}, :sql_sandbox, true
 
       config :wallaby,
-        otp_app: :#{project.otp_app},
+        otp_app: :#{otp_app},
         chromedriver: [headless: System.get_env("CHROME_HEADLESS", "true") === "true"],
         screenshot_dir: "tmp/wallaby_screenshots",
         screenshot_on_failure: true
@@ -142,7 +145,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
     project
   end
 
-  defp edit_gitignore(project) do
+  defp edit_gitignore(%Project{} = project) do
     Generator.replace_content(
       ".gitignore",
       """
@@ -159,7 +162,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
     project
   end
 
-  defp edit_assets_package(project) do
+  defp edit_assets_package(%Project{} = project) do
     Generator.replace_content(
       "assets/package.json",
       """

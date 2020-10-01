@@ -8,19 +8,6 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
 
   @impl true
   def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_template) do
-    generate_github_template()
-
-    project
-  end
-
-  @impl true
-  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_action) do
-    generate_github_action(project)
-
-    project
-  end
-
-  defp generate_github_template() do
     files = [
       {:text, Path.join([".github", "ISSUE_TEMPLATE.md"]),
        Path.join([".github", "ISSUE_TEMPLATE.md"])},
@@ -29,9 +16,12 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
     ]
 
     Generator.copy_file(files)
+
+    project
   end
 
-  def generate_github_action(%Project{} = project) do
+  @impl true
+  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_action) do
     binding = [
       otp_version: @versions.otp_version,
       elixir_version: @versions.elixir_version
@@ -43,6 +33,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
     ]
 
     Generator.copy_file(files, binding)
+
+    project
   end
 
   def github_action_template_path(%Project{api_project?: true}),

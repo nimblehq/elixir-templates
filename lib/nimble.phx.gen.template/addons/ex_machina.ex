@@ -12,9 +12,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
     |> edit_files()
   end
 
-  defp copy_files(%Project{} = project) do
+  defp copy_files(%Project{base_module: base_module} = project) do
     Generator.copy_file([{:eex, "test/support/factory.ex.eex", "test/support/factory.ex"}],
-      base_module: project.base_module
+      base_module: base_module
     )
 
     project
@@ -29,13 +29,13 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
     project
   end
 
-  defp inject_mix_dependency(project) do
+  defp inject_mix_dependency(%Project{} = project) do
     Generator.inject_mix_dependency({:ex_machina, @versions.ex_machina, only: :test})
 
     project
   end
 
-  defp edit_test_helper(project) do
+  defp edit_test_helper(%Project{} = project) do
     Generator.replace_content(
       "test/test_helper.exs",
       """
@@ -51,37 +51,37 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
     project
   end
 
-  defp import_factory(project) do
+  defp import_factory(%Project{base_module: base_module, web_module: web_module} = project) do
     Generator.replace_content(
       "test/support/data_case.ex",
       """
-            import #{project.base_module}.DataCase
+            import #{base_module}.DataCase
       """,
       """
-            import #{project.base_module}.DataCase
-            import #{project.base_module}.Factory
+            import #{base_module}.DataCase
+            import #{base_module}.Factory
       """
     )
 
     Generator.replace_content(
       "test/support/channel_case.ex",
       """
-            import #{project.web_module}.ChannelCase
+            import #{web_module}.ChannelCase
       """,
       """
-            import #{project.web_module}.ChannelCase
-            import #{project.base_module}.Factory
+            import #{web_module}.ChannelCase
+            import #{base_module}.Factory
       """
     )
 
     Generator.replace_content(
       "test/support/conn_case.ex",
       """
-            import #{project.web_module}.ConnCase
+            import #{web_module}.ConnCase
       """,
       """
-            import #{project.web_module}.ConnCase
-            import #{project.base_module}.Factory
+            import #{web_module}.ConnCase
+            import #{base_module}.Factory
       """
     )
 
