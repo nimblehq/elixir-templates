@@ -5,6 +5,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
     wallaby: "~> 0.26.2"
   }
 
+  @github_action_test_path Path.join([".github", "workflows", "test.yml"])
+
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
