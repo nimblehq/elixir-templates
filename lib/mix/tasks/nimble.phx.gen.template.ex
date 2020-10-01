@@ -6,7 +6,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
   alias Nimble.Phx.Gen.Template.{Project, Template}
 
   @version Mix.Project.config()[:version]
-  @switches [api: :boolean, web: :boolean]
+  @variants [api: :boolean, web: :boolean]
 
   def run([version]) when version in ~w(-v --version) do
     Mix.shell().info("Nimble.Phx.Gen.Template v#{@version}")
@@ -30,7 +30,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
   end
 
   defp parse_opts(args) do
-    case OptionParser.parse(args, strict: @switches) do
+    case OptionParser.parse(args, strict: @variants) do
       {opts, args, []} ->
         {opts, args}
 
