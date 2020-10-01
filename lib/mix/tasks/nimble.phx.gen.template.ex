@@ -35,10 +35,10 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
         {opts, args}
 
       {_opts, _args, [switch | _]} ->
-        Mix.raise("Invalid option: " <> switch_to_string(switch))
+        Mix.raise("Invalid option: " <> humanize_variant_option(switch))
     end
   end
 
-  defp switch_to_string({name, nil}), do: name
-  defp switch_to_string({name, val}), do: name <> "=" <> val
+  defp humanize_variant_option({name, nil}), do: name
+  defp humanize_variant_option({name, val}), do: name <> "=" <> val
 end
