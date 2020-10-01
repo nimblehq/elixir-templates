@@ -16,7 +16,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
     # There is no test for `lib/*/router.ex` on the new Phoenix app, so that reduce the coverage to 77.8%
     # We are setting the minimum_coverage as 77 to work with the new Phoenix app
     binding = [
-      otp_app: project.otp_app,
+      otp_app: otp_app,
       minimum_coverage: 77
     ]
 
