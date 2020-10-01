@@ -28,25 +28,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
 
     Generator.copy_file(files, binding)
 
-    if File.exists?(Path.join([".github", "workflows", "test.yml"])) do
-      copy_github_action()
-    end
-
     project
-  end
-
-  defp copy_github_action do
-    binding = [
-      otp_version: @versions.otp_version,
-      elixir_version: @versions.elixir_version
-    ]
-
-    files = [
-      {:eex, Path.join(["variants", "web", ".github", "workflows", "test.yml.eex"]),
-       Path.join([".github", "workflows", "test.yml"])}
-    ]
-
-    Generator.copy_file(files, binding)
   end
 
   defp edit_files(%Project{} = project) do
