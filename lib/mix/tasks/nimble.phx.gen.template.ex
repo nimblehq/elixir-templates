@@ -20,7 +20,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
     {opts, _params} = parse_opts(args)
 
     %Project{
-      is_api_project: opts[:api],
+      is_api_project?: opts[:api],
       otp_app: Mix.Phoenix.otp_app(),
       base_module: Mix.Phoenix.base(),
       web_module: Mix.Phoenix.inflect("_DUMMY_")[:web_module],
