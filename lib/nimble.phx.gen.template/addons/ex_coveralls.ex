@@ -90,6 +90,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
         pipeline :api do
           plug :accepts, ["json"]
         end
+
         # coveralls-ignore-stop
       """
     )
