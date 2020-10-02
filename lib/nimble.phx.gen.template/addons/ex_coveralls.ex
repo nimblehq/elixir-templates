@@ -68,10 +68,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
     project
   end
 
-  defp edit_web_router(%Project{api_project?: true} = project),
-    do: ignore_ex_coverall_on_api_pipeline(project)
-
-  defp edit_web_router(%Project{api_project?: false} = project) do
+  defp edit_web_router(%Project{} = project) do
     project
     |> ignore_ex_coverall_on_api_pipeline()
     |> ignore_ex_coverall_on_live_dashboard()
