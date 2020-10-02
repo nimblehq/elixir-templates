@@ -25,9 +25,15 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
 
   defp edit_files(%Project{} = project) do
     project
+<<<<<<< HEAD
     |> inject_mix_dependency()
     |> edit_mix()
     |> edit_web_router()
+=======
+    |> inject_mix_dependency
+    |> edit_mix
+    |> edit_web_router
+>>>>>>> ignore coverall on web router
   end
 
   defp inject_mix_dependency(project) do
@@ -68,7 +74,14 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
     project
   end
 
+<<<<<<< HEAD
   defp edit_web_router(%Project{} = project) do
+=======
+  defp edit_web_router(%Project{api_project?: true} = project),
+    do: ignore_ex_coverall_on_api_pipeline(project)
+
+  defp edit_web_router(%Project{api_project?: false} = project) do
+>>>>>>> ignore coverall on web router
     project
     |> ignore_ex_coverall_on_api_pipeline()
     |> ignore_ex_coverall_on_live_dashboard()
