@@ -6,6 +6,7 @@ env:
   OTP_VERSION: 23.0.2
   ELIXIR_VERSION: 1.10.4
   PHOENIX_VERSION: 1.5.5
+  NODE_VERSION: 12
 
 jobs:
   unit_test:
@@ -78,7 +79,7 @@ jobs:
     
       - uses: actions/setup-node@v2-beta
         with:
-          node-version: "12"
+          node-version: ${{ env.NODE_VERSION }}
           
       - name: Cache Elixir build
         uses: actions/cache@v2
