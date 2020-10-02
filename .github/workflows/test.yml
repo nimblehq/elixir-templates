@@ -115,7 +115,7 @@ jobs:
         run: make create_project VARIANT=${{ matrix.variant }}
       
       - name: Apply template
-        run: make apply_template VARIANT=${{ matrix.variant }} PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+        run: make apply_template VARIANT=${{ matrix.variant }}
       
       - name: Run mix ecto.create
         run: cd ${{ matrix.variant }}_project && mix ecto.create
