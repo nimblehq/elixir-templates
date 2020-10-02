@@ -33,11 +33,10 @@ defmodule Nimble.Phx.Gen.Template.Addons.Credo do
   end
 
   defp edit_mix(project) do
-    Generator.inject_content(
+    Generator.replace_content(
       "mix.exs",
       """
-        defp aliases do
-          [
+            codebase: ["format --check-formatted"],
       """,
       """
             codebase: ["format --check-formatted", "credo"],
