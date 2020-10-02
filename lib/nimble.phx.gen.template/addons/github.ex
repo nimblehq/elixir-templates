@@ -38,7 +38,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
   end
 
   def github_action_template_path(%Project{api_project?: true}),
-    do: Path.join([".github", "workflows", "test.yml.eex"])
+    do: Path.join(["variants", "api", ".github", "workflows", "test.yml.eex"])
 
   def github_action_template_path(%Project{api_project?: false}),
     do: Path.join(["variants", "web", ".github", "workflows", "test.yml.eex"])
