@@ -53,8 +53,8 @@ jobs:
     
     strategy:
       matrix:
-        variant: [web, api]
         project_type: [standard_project, custom_module_and_otp_project, api_project]
+        variant: [web, api]
     
     services:
       db:
