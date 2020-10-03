@@ -54,7 +54,7 @@ jobs:
     strategy:
       matrix:
         variant: [web, api]
-        project_type: [standard, custom_module_and_otp, api_project]
+        project_type: [standard_project, custom_module_and_otp_project, api_project]
     
     services:
       db:
@@ -114,11 +114,11 @@ jobs:
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
         
       - name: Create standard project
-        if: ${{ matrix.project_type == 'standard' }}
+        if: ${{ matrix.project_type == 'standard_project' }}
         run: make create_project PROJECT_PATH=${{ matrix.variant }}_project
       
       - name: Create custom project
-        if: ${{ matrix.project_type == 'custom_module_and_otp' }}
+        if: ${{ matrix.project_type == 'custom_module_and_otp_project' }}
         run: make create_project PROJECT_PATH=${{ matrix.variant }}_project OPTIONS="--module=CustomModule --app=custom_app"
         
       - name: Create API project
