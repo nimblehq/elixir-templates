@@ -54,6 +54,7 @@ jobs:
     strategy:
       matrix:
         variant: [web, api]
+        project_type: [standard, custom_module_and_otp, api_project]
     
     services:
       db:
@@ -112,37 +113,56 @@ jobs:
       - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
         
-      - name: Create project
-        run: make create_project VARIANT=${{ matrix.variant }}
+      - name: Create standard project
+        if: ${{ matrix.project_type == 'standard' }}
+        run: make create_project PROJECT_PATH=${{ matrix.variant }}_project
       
+      - name: Create custom project
+        if: ${{ matrix.project_type == 'custom_module_and_otp' }}
+        run: make create_project PROJECT_PATH=${{ matrix.variant }}_project OPTIONS="--module=CustomModule --app=custom_app"
+        
+      - name: Create API project
+        if: ${{ matrix.project_type == 'api_project' && matrix.variant == 'api' }}
+        run: make create_project PROJECT_PATH=api_project OPTIONS="--no-html --no-webpack"
+        
       - name: Apply template
-        run: make apply_template VARIANT=${{ matrix.variant }}
+        if: ${{ matrix.project_type != 'api_project' }}
+        run: make apply_template PROJECT_PATH=${{ matrix.variant }}_project VARIANT=${{ matrix.variant }}
+        
+      - name: Apply template to API project
+        if: ${{ matrix.project_type == 'api_project' && matrix.variant == 'api' }}
+        run: make apply_template PROJECT_PATH=api_project VARIANT=api
       
       - name: Run mix ecto.create
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
         run: cd ${{ matrix.variant }}_project && mix ecto.create
         env:
           MIX_ENV: test
           DB_HOST: localhost
       
       - name: Run mix ecto.migrate
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
         run: cd ${{ matrix.variant }}_project && mix ecto.migrate
         env:
           MIX_ENV: test
           DB_HOST: localhost
           
       - name: Run mix compile
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
         run: cd ${{ matrix.variant }}_project && mix compile --warnings-as-errors
         env:
           MIX_ENV: test
           DB_HOST: localhost
       
       - name: Run mix codebase
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
         run: cd ${{ matrix.variant }}_project && mix codebase
         env:
           MIX_ENV: test
           DB_HOST: localhost
         
       - name: Run mix test
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
         run: cd ${{ matrix.variant }}_project && mix coverage
         env:
           MIX_ENV: test
