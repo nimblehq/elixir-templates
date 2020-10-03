@@ -30,6 +30,8 @@ defmodule Nimble.Phx.Gen.Template.Template do
       if generate_github_action?(),
         do: Addons.Github.apply(project, %{github_action: true})
     end
+
+    project
   end
 
   def variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)
