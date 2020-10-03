@@ -23,8 +23,11 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
       api_project?: opts[:api] === true,
       otp_app: Mix.Phoenix.otp_app(),
       base_module: Mix.Phoenix.base(),
-      web_module: inspect(Module.concat(["#{Mix.Phoenix.base()}Web"])),
-      web_test_path: Mix.Phoenix.web_test_path(Mix.Phoenix.otp_app())
+      base_path: "lib/" <> Atom.to_string(Mix.Phoenix.otp_app()),
+      base_test_path: "test/" <> Atom.to_string(Mix.Phoenix.otp_app()),
+      web_module: Mix.Phoenix.base() <> "Web",
+      web_path: "lib/" <> Atom.to_string(Mix.Phoenix.otp_app()) <> "_web",
+      web_test_path: "test/" <> Atom.to_string(Mix.Phoenix.otp_app()) <> "_web"
     }
     |> Template.apply()
   end
