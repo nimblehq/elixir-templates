@@ -21,7 +21,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
       end)
     end
 
-    test "injects mix dependency", %{
+    test "injects credo to mix dependency", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -30,10 +30,10 @@ defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
-            defp deps do
-              [
-                {:credo, \"~> 1.4\", [only: [:dev, :test], runtime: false]},
-          """
+                   defp deps do
+                     [
+                       {:credo, \"~> 1.4\", [only: [:dev, :test], runtime: false]},
+                 """
         end)
       end)
     end
