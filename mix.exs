@@ -34,7 +34,6 @@ defmodule NimblePhxGenTemplate.MixProject do
 
   defp aliases do
     [
-      codebase: ["format --check-formatted"],
       codebase: ["format --check-formatted"]
     ]
   end
