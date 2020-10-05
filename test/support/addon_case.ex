@@ -6,6 +6,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   using do
     quote do
       alias Nimble.Phx.Gen.Template.Addons
+      alias Nimble.Phx.Gen.Template.Hex.PackageMock
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
       # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3

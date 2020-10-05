@@ -18,6 +18,12 @@ defmodule Nimble.Phx.Gen.Template.Addon do
 
       def do_apply(%Project{} = project, opts) when is_map(opts), do: project
 
+      defp package_version(package) do
+        "~> " <> hex_package().get_latest_version(package)
+      end
+
+      defp hex_package, do: Application.get_env(:nimble_phx_gen_template, :hex_package)
+
       defoverridable do_apply: 2
     end
   end

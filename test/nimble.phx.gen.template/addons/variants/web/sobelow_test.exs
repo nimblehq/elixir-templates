@@ -19,6 +19,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.SobelowTest do
       project: project,
       test_project_path: test_project_path
     } do
+      PackageMock |> expect(:get_latest_version, fn -> "~> 0.8" end)
+
       in_test_project(test_project_path, fn ->
         Addons.Web.Sobelow.apply(project)
 

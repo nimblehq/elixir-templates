@@ -1,10 +1,6 @@
 defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
   use Nimble.Phx.Gen.Template.Addon
 
-  @versions %{
-    ex_machina: "~> 2.4"
-  }
-
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
@@ -30,7 +26,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
   end
 
   defp inject_mix_dependency(%Project{} = project) do
-    Generator.inject_mix_dependency({:ex_machina, @versions.ex_machina, only: :test})
+    Generator.inject_mix_dependency({:ex_machina, package_version(:ex_machina), only: :test})
 
     project
   end

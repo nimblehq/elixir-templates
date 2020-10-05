@@ -1,10 +1,6 @@
 defmodule Nimble.Phx.Gen.Template.Addons.Credo do
   use Nimble.Phx.Gen.Template.Addon
 
-  @versions %{
-    credo: "~> 1.4"
-  }
-
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
@@ -26,7 +22,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Credo do
 
   defp inject_mix_dependency(project) do
     Generator.inject_mix_dependency(
-      {:credo, @versions.credo, only: [:dev, :test], runtime: false}
+      {:credo, package_version(:credo), only: [:dev, :test], runtime: false}
     )
 
     project

@@ -1,10 +1,6 @@
 defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
   use Nimble.Phx.Gen.Template.Addon
 
-  @versions %{
-    excoveralls: "~> 0.12.2"
-  }
-
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
@@ -31,7 +27,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
   end
 
   defp inject_mix_dependency(project) do
-    Generator.inject_mix_dependency({:excoveralls, @versions.excoveralls, only: :test})
+    Generator.inject_mix_dependency({:excoveralls, package_version(:excoveralls), only: :test})
 
     project
   end
