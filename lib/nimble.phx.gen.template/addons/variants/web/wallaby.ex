@@ -2,9 +2,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
   use Nimble.Phx.Gen.Template.Addon
 
   @versions %{
-    wallaby: "~> 0.26.2",
-    otp_version: "23.0.2",
-    elixir_version: "1.10.4"
+    wallaby: "~> 0.26.2"
   }
 
   @impl true
@@ -37,49 +35,16 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
   defp edit_files(%Project{} = project) do
     project
     |> inject_mix_dependency
-    |> edit_mix
     |> edit_test_helper
     |> edit_endpoint
     |> edit_test_config
     |> edit_gitignore
-    |> edit_assets_package
 
     project
   end
 
   defp inject_mix_dependency(%Project{} = project) do
     Generator.inject_mix_dependency({:wallaby, @versions.wallaby, only: :test, runtime: false})
-
-    project
-  end
-
-  defp edit_mix(%Project{} = project) do
-    Generator.inject_content(
-      "mix.exs",
-      """
-        defp aliases do
-          [
-      """,
-      """
-            "assets.compile": &compile_assets/1,
-      """
-    )
-
-    Generator.replace_content(
-      "mix.exs",
-      """
-        end
-      end
-      """,
-      """
-        end
-
-        defp compile_assets(_) do
-          Mix.shell().cmd("npm run --prefix assets build:dev", quiet: true)
-        end
-      end
-      """
-    )
 
     project
   end
@@ -156,21 +121,6 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
 
       # tmp
       **/tmp/
-      """
-    )
-
-    project
-  end
-
-  defp edit_assets_package(%Project{} = project) do
-    Generator.replace_content(
-      "assets/package.json",
-      """
-          "watch": "webpack --mode development --watch"
-      """,
-      """
-          "watch": "webpack --mode development --watch",
-          "build:dev": "webpack --mode development"
       """
     )
 

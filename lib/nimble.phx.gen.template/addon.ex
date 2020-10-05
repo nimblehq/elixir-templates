@@ -10,13 +10,13 @@ defmodule Nimble.Phx.Gen.Template.Addon do
 
       alias Nimble.Phx.Gen.Template.{Generator, Project}
 
-      def apply(%Project{} = project, opts \\ %{}) do
+      def apply(%Project{} = project, opts \\ %{}) when is_map(opts) do
         Generator.print_log("* applying ", inspect(__MODULE__))
 
         do_apply(project, opts)
       end
 
-      def do_apply(%Project{} = project, opts), do: project
+      def do_apply(%Project{} = project, opts) when is_map(opts), do: project
 
       defoverridable do_apply: 2
     end

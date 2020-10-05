@@ -4,6 +4,7 @@ defmodule Nimble.Phx.Gen.Template.Web.Template do
 
   def apply(%Project{} = project) do
     project
+    |> Web.Assets.apply()
     |> Web.Sobelow.apply()
     |> Web.Wallaby.apply()
 
