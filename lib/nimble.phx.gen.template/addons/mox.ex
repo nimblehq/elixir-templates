@@ -25,7 +25,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Mox do
   end
 
   defp inject_mix_dependency(project) do
-    Generator.inject_mix_dependency({:mox, package_version(:mox), only: :test})
+    Generator.inject_mix_dependency({:mox, latest_package_version(:mox), only: :test})
 
     project
   end

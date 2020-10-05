@@ -22,7 +22,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Credo do
 
   defp inject_mix_dependency(project) do
     Generator.inject_mix_dependency(
-      {:credo, package_version(:credo), only: [:dev, :test], runtime: false}
+      {:credo, latest_package_version(:credo), only: [:dev, :test], runtime: false}
     )
 
     project

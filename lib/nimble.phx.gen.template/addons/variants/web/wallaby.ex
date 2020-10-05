@@ -41,7 +41,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
 
   defp inject_mix_dependency(%Project{} = project) do
     Generator.inject_mix_dependency(
-      {:wallaby, package_version(:wallaby), only: :test, runtime: false}
+      {:wallaby, latest_package_version(:wallaby), only: :test, runtime: false}
     )
 
     project

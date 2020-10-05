@@ -22,7 +22,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Sobelow do
 
   defp inject_mix_dependency(%Project{} = project) do
     Generator.inject_mix_dependency(
-      {:sobelow, package_version(:sobelow), only: [:dev, :test], runtime: false}
+      {:sobelow, latest_package_version(:sobelow), only: [:dev, :test], runtime: false}
     )
 
     project

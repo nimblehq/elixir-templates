@@ -1,3 +1,3 @@
 defmodule Nimble.Phx.Gen.Template.Hex.PackageBehaviour do
-  @callback get_latest_version(String.t()) :: String.t()
+  @callback get_latest_version(atom()) :: String.t()
 end

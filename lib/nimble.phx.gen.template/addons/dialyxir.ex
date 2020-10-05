@@ -4,7 +4,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Dialyxir do
   @impl true
   def do_apply(%Project{} = project, _opts) do
     Generator.inject_mix_dependency(
-      {:dialyxir, package_version(:dialyxir), only: [:dev], runtime: false}
+      {:dialyxir, latest_package_version(:dialyxir), only: [:dev], runtime: false}
     )
 
     project

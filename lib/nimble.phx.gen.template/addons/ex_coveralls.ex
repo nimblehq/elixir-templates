@@ -27,7 +27,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
   end
 
   defp inject_mix_dependency(project) do
-    Generator.inject_mix_dependency({:excoveralls, package_version(:excoveralls), only: :test})
+    Generator.inject_mix_dependency(
+      {:excoveralls, latest_package_version(:excoveralls), only: :test}
+    )
 
     project
   end

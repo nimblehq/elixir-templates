@@ -3,6 +3,7 @@ defmodule Nimble.Phx.Gen.Template.Hex.Package do
 
   @behaviour Nimble.Phx.Gen.Template.Hex.PackageBehaviour
 
+  @impl true
   def get_latest_version(package) do
     {:ok, package_info} = HexClient.get("packages/#{package}")
 
