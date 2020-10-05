@@ -3,8 +3,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.SobelowTest do
 
   setup %{project: project, test_project_path: test_project_path} do
     in_test_project(test_project_path, fn ->
-      Addons.TestEnv.apply(project, %{})
-      Addons.Credo.apply(project, %{})
+      Addons.TestEnv.apply(project)
+      Addons.Credo.apply(project)
     end)
 
     {:ok, project: Nimble.Phx.Gen.Template.Project.info(), test_project_path: test_project_path}
@@ -16,7 +16,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.SobelowTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Sobelow.apply(project, %{})
+        Addons.Web.Sobelow.apply(project)
 
         assert_file(".sobelow-conf")
       end)
@@ -27,7 +27,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.SobelowTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Sobelow.apply(project, %{})
+        Addons.Web.Sobelow.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -41,7 +41,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.SobelowTest do
 
     test "adds sobelow codebase alias", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Sobelow.apply(project, %{})
+        Addons.Web.Sobelow.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """

@@ -3,7 +3,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
 
   setup %{project: project, test_project_path: test_project_path} do
     in_test_project(test_project_path, fn ->
-      Addons.TestEnv.apply(project, %{})
+      Addons.TestEnv.apply(project)
     end)
 
     {:ok, project: Nimble.Phx.Gen.Template.Project.info(), test_project_path: test_project_path}
@@ -15,7 +15,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Credo.apply(project, %{})
+        Addons.Credo.apply(project)
 
         assert_file(".credo.exs")
       end)
@@ -26,7 +26,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Credo.apply(project, %{})
+        Addons.Credo.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -40,7 +40,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
 
     test "adds credo codebase alias", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        Addons.Credo.apply(project, %{})
+        Addons.Credo.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """

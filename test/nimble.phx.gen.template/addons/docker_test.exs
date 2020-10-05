@@ -7,7 +7,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Docker.apply(project, %{})
+        Addons.Docker.apply(project)
 
         assert_file("docker-compose.dev.yml", fn file ->
           assert file =~ """

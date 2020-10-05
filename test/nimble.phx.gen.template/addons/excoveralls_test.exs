@@ -7,7 +7,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoverallsTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project, %{})
+        Addons.ExCoveralls.apply(project)
 
         assert_file("coveralls.json")
       end)
@@ -18,7 +18,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoverallsTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project, %{})
+        Addons.ExCoveralls.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -32,7 +32,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoverallsTest do
 
     test "sets ExCoveralls tool", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project, %{})
+        Addons.ExCoveralls.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -51,7 +51,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoverallsTest do
 
     test "adds coverage alias", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project, %{})
+        Addons.ExCoveralls.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """

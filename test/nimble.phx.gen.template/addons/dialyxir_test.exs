@@ -7,7 +7,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.DialyxirTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Dialyxir.apply(project, %{})
+        Addons.Dialyxir.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
