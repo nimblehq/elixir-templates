@@ -7,7 +7,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.MoxTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Mox.apply(project, {})
+        Addons.Mox.apply(project, %{})
 
         assert_file("test/support/mock.ex")
       end)
@@ -18,7 +18,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.MoxTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Mox.apply(project, {})
+        Addons.Mox.apply(project, %{})
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -32,7 +32,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.MoxTest do
 
     test "updates test/test_helper.exs", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        Addons.Mox.apply(project, {})
+        Addons.Mox.apply(project, %{})
 
         assert_file("test/test_helper.exs", fn file ->
           assert file =~ """
