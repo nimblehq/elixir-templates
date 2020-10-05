@@ -75,17 +75,23 @@ jobs:
       - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
         
+      # Y - in response to Override the existing ${PROJECT_DIRECTORY}?
+      # Y - in response to Fetch and install dependencies?
       - name: Create standard project
         if: ${{ matrix.project_type == 'standard_project' }}
-        run: make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }}
+        run: printf "Y\nY\n" | make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }}
       
+      # Y - in response to Override the existing ${PROJECT_DIRECTORY}?
+      # Y - in response to Fetch and install dependencies?
       - name: Create custom project
         if: ${{ matrix.project_type == 'custom_module_and_otp_project' }}
-        run: make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} OPTIONS="--module=CustomModule --app=custom_app"
+        run: printf "Y\nY\n" | make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} OPTIONS="--module=CustomModule --app=custom_app"
         
+      # Y - in response to Override the existing ${PROJECT_DIRECTORY}?
+      # Y - in response to Fetch and install dependencies?
       - name: Create API project
         if: ${{ matrix.project_type == 'api_project' && matrix.variant == 'api' }}
-        run: make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} OPTIONS="--no-html --no-webpack"
+        run: printf "Y\nY\n" | make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} OPTIONS="--no-html --no-webpack"
         
       - name: Apply template
         if: ${{ matrix.project_type != 'api_project' }}
