@@ -5,12 +5,16 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
 
   using do
     quote do
+      import Mox
+
       alias Nimble.Phx.Gen.Template.Addons
-      alias Nimble.Phx.Gen.Template.Hex.PackageMock
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
       # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3
       defp in_test_project(test_project_path, function), do: File.cd!(test_project_path, function)
+
+      # Make sure mocks are verified when the test exits
+      setup :verify_on_exit!
 
       defp assert_file(path),
         do: assert(File.regular?(path), "Expected #{path} to exist, but does not")
@@ -19,6 +23,11 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
         assert_file(path)
         match.(File.read!(path))
       end
+
+      defp mock_latest_package_version(package, version),
+        do:
+          Nimble.Phx.Gen.Template.Hex.PackageMock
+          |> expect(:get_latest_version, fn package -> version end)
     end
   end
 

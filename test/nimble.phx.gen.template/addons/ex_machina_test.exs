@@ -1,6 +1,12 @@
 defmodule Nimble.Phx.Gen.Template.Addons.ExMachinaTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
+  setup %{project: project, test_project_path: test_project_path} do
+    mock_latest_package_version(:ex_machina, "2.4")
+
+    {:ok, project: project, test_project_path: test_project_path}
+  end
+
   describe "#apply/2" do
     test "copies the test/support/factory.ex", %{
       project: project,
