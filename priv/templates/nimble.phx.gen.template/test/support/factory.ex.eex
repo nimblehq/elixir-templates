@@ -4,7 +4,7 @@ defmodule <%= base_module %>.Factory do
   # Define your factories
   # def user_factory do
   #   %User{
-  #     email: sequence(:email, &"test-#{&1}@omise.co")
+  #     email: sequence(:email, &"test-#{&1}@example.com")
   #   }
   # end
 end
