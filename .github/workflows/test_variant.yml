@@ -7,7 +7,7 @@ env:
   ELIXIR_VERSION: 1.10.4
   PHOENIX_VERSION: 1.5.5
   NODE_VERSION: 12
-  PROJECT_PATH: "/sample_project"
+  PROJECT_DIRECTORY: "sample_project"
 
 jobs:   
   variant_test:
@@ -77,55 +77,55 @@ jobs:
         
       - name: Create standard project
         if: ${{ matrix.project_type == 'standard_project' }}
-        run: make create_project PROJECT_PATH=${{ env.PROJECT_PATH }}
+        run: make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }}
       
       - name: Create custom project
         if: ${{ matrix.project_type == 'custom_module_and_otp_project' }}
-        run: make create_project PROJECT_PATH=${{ env.PROJECT_PATH }} OPTIONS="--module=CustomModule --app=custom_app"
+        run: make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} OPTIONS="--module=CustomModule --app=custom_app"
         
       - name: Create API project
         if: ${{ matrix.project_type == 'api_project' && matrix.variant == 'api' }}
-        run: make create_project PROJECT_PATH=${{ env.PROJECT_PATH }} OPTIONS="--no-html --no-webpack"
+        run: make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} OPTIONS="--no-html --no-webpack"
         
       - name: Apply template
         if: ${{ matrix.project_type != 'api_project' }}
-        run: make apply_template PROJECT_PATH=${{ env.PROJECT_PATH }} VARIANT=${{ matrix.variant }}
+        run: make apply_template PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} VARIANT=${{ matrix.variant }}
         
       - name: Apply template to API project
         if: ${{ matrix.project_type == 'api_project' && matrix.variant == 'api' }}
-        run: make apply_template PROJECT_PATH=${{ env.PROJECT_PATH }} VARIANT=api
+        run: make apply_template PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} VARIANT=api
       
       - name: Run mix ecto.create
         if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
-        run: cd ${{ env.PROJECT_PATH }} && mix ecto.create
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix ecto.create
         env:
           MIX_ENV: test
           DB_HOST: localhost
       
       - name: Run mix ecto.migrate
         if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
-        run: cd ${{ env.PROJECT_PATH }} && mix ecto.migrate
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix ecto.migrate
         env:
           MIX_ENV: test
           DB_HOST: localhost
           
       - name: Run mix compile
         if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
-        run: cd ${{ env.PROJECT_PATH }} && mix compile --warnings-as-errors
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix compile --warnings-as-errors
         env:
           MIX_ENV: test
           DB_HOST: localhost
       
       - name: Run mix codebase
         if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
-        run: cd ${{ env.PROJECT_PATH }} && mix codebase
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix codebase
         env:
           MIX_ENV: test
           DB_HOST: localhost
         
       - name: Run mix test
         if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
-        run: cd ${{ env.PROJECT_PATH }} && mix coverage
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix coverage
         env:
           MIX_ENV: test
           DB_HOST: localhost
