@@ -42,9 +42,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
     end)
 
     if mock_latest_package_versions = context[:mock_latest_package_versions] do
-      Enum.each(mock_latest_package_versions, fn mock_version ->
-        mock_latest_package_version(mock_version)
-      end)
+      Enum.each(mock_latest_package_versions, &mock_latest_package_version(&1))
     end
 
     if required_addons = context[:required_addons] do
