@@ -6,7 +6,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
       Addons.TestEnv.apply(project)
     end)
 
-    {:ok, project: Nimble.Phx.Gen.Template.Project.info(), test_project_path: test_project_path}
+    {:ok, project: project, test_project_path: test_project_path}
   end
 
   describe "#apply/2" do

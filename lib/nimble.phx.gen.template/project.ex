@@ -1,6 +1,4 @@
 defmodule Nimble.Phx.Gen.Template.Project do
-  alias Nimble.Phx.Gen.Template.Project
-
   defstruct otp_app: nil,
             base_module: nil,
             base_path: nil,
@@ -11,7 +9,7 @@ defmodule Nimble.Phx.Gen.Template.Project do
             api_project?: nil
 
   def info(opts \\ %{}) do
-    %Project{
+    %__MODULE__{
       api_project?: opts[:api] === true,
       otp_app: Mix.Phoenix.otp_app(),
       base_module: Mix.Phoenix.base(),
