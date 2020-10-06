@@ -58,9 +58,8 @@ defmodule Nimble.Phx.Gen.Template.Generator do
           [
       """,
       Enum.map(dependencies, fn dependency ->
-        "      " <> inspect(dependency) <> ","
+        "      " <> inspect(dependency) <> ",\n"
       end)
-      |> Enum.join("\n")
     )
   end
 
@@ -71,7 +70,7 @@ defmodule Nimble.Phx.Gen.Template.Generator do
         defp deps do
           [
       """,
-      "      " <> inspect(dependency) <> "," <> "\n"
+      "      " <> inspect(dependency) <> ",\n"
     )
   end
 
