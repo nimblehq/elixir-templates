@@ -48,7 +48,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   defp create_test_project(test_project_path),
     do:
       Mix.shell().cmd(
-        "printf \"N\n\" | make create_project PROJECT_PATH=#{test_project_path} > /dev/null"
+        "printf \"N\n\" | make create_project PROJECT_DIRECTORY=#{test_project_path} > /dev/null"
       )
 
   defp parent_test_project_path do

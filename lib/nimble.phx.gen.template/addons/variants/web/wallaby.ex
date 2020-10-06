@@ -118,6 +118,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
       """
       /_build/
 
+      # tmp
       **/tmp/
       """
     )

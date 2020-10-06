@@ -5,7 +5,7 @@ install_phoenix:
 	printf "Y\n" | mix archive.install hex phx_new ${PHOENIX_VERSION}
 
 create_project:
-	mix phx.new ${PROJECT_PATH} ${OPTIONS}
+	mix phx.new ${PROJECT_DIRECTORY} ${OPTIONS}
 
 # Y - in response to Will you host this project on Github?
 # Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
