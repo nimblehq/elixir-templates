@@ -4,13 +4,13 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Assets do
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
-    |> edit_files
+    |> edit_files()
   end
 
   defp edit_files(%Project{} = project) do
     project
-    |> edit_mix
-    |> edit_assets_package
+    |> edit_mix()
+    |> edit_assets_package()
 
     project
   end

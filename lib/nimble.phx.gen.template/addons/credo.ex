@@ -8,7 +8,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Credo do
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
-    |> copy_files
+    |> copy_files()
     |> edit_files()
   end
 
@@ -20,8 +20,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Credo do
 
   defp edit_files(%Project{} = project) do
     project
-    |> inject_mix_dependency
-    |> edit_mix
+    |> inject_mix_dependency()
+    |> edit_mix()
   end
 
   defp inject_mix_dependency(project) do

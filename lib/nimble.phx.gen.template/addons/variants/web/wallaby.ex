@@ -8,8 +8,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
-    |> copy_files
-    |> edit_files
+    |> copy_files()
+    |> edit_files()
   end
 
   defp copy_files(
@@ -34,11 +34,11 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
 
   defp edit_files(%Project{} = project) do
     project
-    |> inject_mix_dependency
-    |> edit_test_helper
-    |> edit_endpoint
-    |> edit_test_config
-    |> edit_gitignore
+    |> inject_mix_dependency()
+    |> edit_test_helper()
+    |> edit_endpoint()
+    |> edit_test_config()
+    |> edit_gitignore()
 
     project
   end

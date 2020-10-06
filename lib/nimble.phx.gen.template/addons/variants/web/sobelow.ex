@@ -8,8 +8,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Sobelow do
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
-    |> copy_files
-    |> edit_files
+    |> copy_files()
+    |> edit_files()
   end
 
   defp copy_files(%Project{} = project) do
@@ -20,8 +20,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Sobelow do
 
   defp edit_files(%Project{} = project) do
     project
-    |> inject_mix_dependency
-    |> edit_mix
+    |> inject_mix_dependency()
+    |> edit_mix()
   end
 
   defp inject_mix_dependency(%Project{} = project) do

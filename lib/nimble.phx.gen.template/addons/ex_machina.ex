@@ -8,7 +8,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
-    |> copy_files
+    |> copy_files()
     |> edit_files()
   end
 
@@ -22,9 +22,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
 
   defp edit_files(%Project{} = project) do
     project
-    |> inject_mix_dependency
-    |> edit_test_helper
-    |> import_factory
+    |> inject_mix_dependency()
+    |> edit_test_helper()
+    |> import_factory()
 
     project
   end
