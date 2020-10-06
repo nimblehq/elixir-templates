@@ -35,9 +35,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
 
     if required_addons = context[:required_addons] do
       File.cd!(test_project_path, fn ->
-        Enum.each(required_addons, fn required_addon ->
-          Module.safe_concat([Addons, required_addon]).apply(project)
-        end)
+        Enum.each(required_addons, &Module.safe_concat([Addons, &1]).apply(project))
       end)
     end
 
