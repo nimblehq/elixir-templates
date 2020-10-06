@@ -2,7 +2,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.SobelowTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
   describe "#apply/2" do
-    @describetag pre_setup: [:TestEnv, :Credo]
+    @describetag required_addons: [:TestEnv, :Credo]
 
     test "copies the .sobelow-conf", %{
       project: project,

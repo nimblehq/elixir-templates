@@ -34,10 +34,10 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
       File.rm_rf!(parent_test_project_path)
     end)
 
-    if context[:pre_setup] do
+    if required_addons = context[:required_addons] do
       File.cd!(test_project_path, fn ->
-        Enum.each(context[:pre_setup], fn pre_setup_addon ->
-          Module.safe_concat([Addons, pre_setup_addon]).apply(project)
+        Enum.each(required_addons, fn required_addon ->
+          Module.safe_concat([Addons, required_addon]).apply(project)
         end)
       end)
     end
