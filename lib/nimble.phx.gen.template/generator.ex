@@ -19,13 +19,14 @@ defmodule Nimble.Phx.Gen.Template.Generator do
         {:error, _} -> Mix.raise(~s[Can't read #{file}])
       end
 
-    with :error <- split_with_self(file_content, anchor) do
-      Mix.raise(~s[Could not find #{anchor} in #{file_path}])
-    else
+    case split_with_self(file_content, anchor) do
       [left, _middle, right] ->
         print_log("* replacing ", Path.relative_to_cwd(file_path))
 
         File.write!(file, [left, content, right])
+
+      :error ->
+        Mix.raise(~s[Could not find #{anchor} in #{file_path}])
     end
   end
 
@@ -38,13 +39,14 @@ defmodule Nimble.Phx.Gen.Template.Generator do
         {:error, _} -> Mix.raise(~s[Can't read #{file}])
       end
 
-    with :error <- split_with_self(file_content, anchor) do
-      Mix.raise(~s[Could not find #{anchor} in #{file_path}])
-    else
+    case split_with_self(file_content, anchor) do
       [left, middle, right] ->
         print_log("* injecting ", Path.relative_to_cwd(file_path))
 
         File.write!(file, [left, middle, content, right])
+
+      :error ->
+        Mix.raise(~s[Could not find #{anchor} in #{file_path}])
     end
   end
 
