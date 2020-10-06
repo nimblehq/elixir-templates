@@ -1,0 +1,13 @@
+defmodule <%= web_module %>.FeatureCase do
+  use ExUnit.CaseTemplate
+
+  using do
+    quote do
+      use Wallaby.Feature
+
+      import <%= base_module %>.Factory
+
+      alias <%= web_module %>.Router.Helpers, as: Routes
+    end
+  end
+end

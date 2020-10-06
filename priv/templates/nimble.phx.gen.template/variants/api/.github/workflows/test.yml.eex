@@ -1,0 +1,67 @@
+name: "Tests"
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: <%= inspect otp_version %>
+          elixir-version: <%= inspect elixir_version %>
+
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile
+        run: mix compile --warnings-as-errors
+        env:
+          MIX_ENV: test
+
+      - name: Create database
+        run: mix ecto.create
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+
+      - name: Migrate database
+        run: mix ecto.migrate
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+
+      - name: Run codebase check
+        run: mix codebase
+
+      - name: Run Tests
+        run: mix coverage
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost

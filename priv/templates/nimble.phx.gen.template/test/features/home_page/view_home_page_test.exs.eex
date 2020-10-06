@@ -1,0 +1,11 @@
+defmodule <%= web_module %>.HomePage.ViewHomePageTest do
+  use <%= web_module %>.FeatureCase
+
+  feature "view home page", %{session: session} do
+    session
+    |> visit(Routes.page_path(<%= web_module %>.Endpoint, :index))
+
+    session
+    |> assert_has(Query.text("Welcome to Phoenix!"))
+  end
+end
