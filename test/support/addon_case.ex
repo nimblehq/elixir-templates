@@ -56,8 +56,8 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
     {:ok, project: project, test_project_path: test_project_path}
   end
 
-  defp mock_latest_package_version({package, version}),
-    do: PackageMock |> expect(:get_latest_version, fn package -> version end)
+  defp mock_latest_package_version({_package, version}),
+    do: PackageMock |> expect(:get_latest_version, fn _package -> version end)
 
   defp create_test_project(test_project_path) do
     # N - in response to Fetch and install dependencies?
