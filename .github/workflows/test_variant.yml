@@ -1,0 +1,131 @@
+name: "Test variants"
+
+on: pull_request
+
+env:
+  OTP_VERSION: 23.0.2
+  ELIXIR_VERSION: 1.10.4
+  PHOENIX_VERSION: 1.5.5
+  NODE_VERSION: 12
+  PROJECT_PATH: "sample_project"
+
+jobs:   
+  variant_test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        project_type: [standard_project, custom_module_and_otp_project, api_project]
+        variant: [web, api]
+    
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+    
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
+      
+      - name: npm packages cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
+            **/yarn.lock
+            **/node_modules
+          key: ${{ runner.os }}-npm-packages-${{ hashFiles('**/package.json*') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-packages-
+              
+      - name: Install Dependencies
+        run: mix deps.get
+      
+      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
+        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+        
+      - name: Create standard project
+        if: ${{ matrix.project_type == 'standard_project' }}
+        run: make create_project PROJECT_PATH=${{ env.PROJECT_PATH }}
+      
+      - name: Create custom project
+        if: ${{ matrix.project_type == 'custom_module_and_otp_project' }}
+        run: make create_project PROJECT_PATH=${{ env.PROJECT_PATH }} OPTIONS="--module=CustomModule --app=custom_app"
+        
+      - name: Create API project
+        if: ${{ matrix.project_type == 'api_project' && matrix.variant == 'api' }}
+        run: make create_project PROJECT_PATH=${{ env.PROJECT_PATH }} OPTIONS="--no-html --no-webpack"
+        
+      - name: Apply template
+        if: ${{ matrix.project_type != 'api_project' }}
+        run: make apply_template PROJECT_PATH=${{ env.PROJECT_PATH }} VARIANT=${{ matrix.variant }}
+        
+      - name: Apply template to API project
+        if: ${{ matrix.project_type == 'api_project' && matrix.variant == 'api' }}
+        run: make apply_template PROJECT_PATH=${{ env.PROJECT_PATH }} VARIANT=api
+      
+      - name: Run mix ecto.create
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
+        run: cd ${{ env.PROJECT_PATH }} && mix ecto.create
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      
+      - name: Run mix ecto.migrate
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
+        run: cd ${{ env.PROJECT_PATH }} && mix ecto.migrate
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+          
+      - name: Run mix compile
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
+        run: cd ${{ env.PROJECT_PATH }} && mix compile --warnings-as-errors
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      
+      - name: Run mix codebase
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
+        run: cd ${{ env.PROJECT_PATH }} && mix codebase
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+        
+      - name: Run mix test
+        if: ${{ matrix.project_type != 'api_project' && matrix.variant != 'web' }}
+        run: cd ${{ env.PROJECT_PATH }} && mix coverage
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
