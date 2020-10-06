@@ -19,7 +19,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
 
     {opts, _params} = parse_opts(args)
 
-    Template.apply(Project.info(opts))
+    Template.apply(Project.new(opts))
   end
 
   defp parse_opts(args) do

@@ -8,7 +8,7 @@ defmodule Nimble.Phx.Gen.Template.Project do
             web_test_path: nil,
             api_project?: nil
 
-  def info(opts \\ %{}) do
+  def new(opts \\ %{}) do
     %__MODULE__{
       api_project?: opts[:api] === true,
       otp_app: Mix.Phoenix.otp_app(),

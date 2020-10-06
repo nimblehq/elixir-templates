@@ -29,7 +29,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
       File.rm_rf!(parent_test_project_path)
     end)
 
-    {:ok, project: Nimble.Phx.Gen.Template.Project.info(), test_project_path: test_project_path}
+    {:ok, project: Nimble.Phx.Gen.Template.Project.new(), test_project_path: test_project_path}
   end
 
   defp create_test_project(test_project_path),
