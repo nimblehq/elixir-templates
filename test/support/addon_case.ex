@@ -45,11 +45,12 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
     {:ok, project: project, test_project_path: test_project_path}
   end
 
-  defp create_test_project(test_project_path),
-    do:
-      Mix.shell().cmd(
-        "printf \"N\n\" | make create_project PROJECT_DIRECTORY=#{test_project_path} > /dev/null"
-      )
+  defp create_test_project(test_project_path) do
+    # N - in response to Fetch and install dependencies?
+    Mix.shell().cmd(
+      "printf \"N\n\" | make create_project PROJECT_DIRECTORY=#{test_project_path} > /dev/null"
+    )
+  end
 
   defp parent_test_project_path do
     :crypto.strong_rand_bytes(20)
