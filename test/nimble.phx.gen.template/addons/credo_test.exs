@@ -1,13 +1,7 @@
 defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
-  setup %{project: project, test_project_path: test_project_path} do
-    in_test_project(test_project_path, fn ->
-      Addons.TestEnv.apply(project)
-    end)
-
-    {:ok, project: project, test_project_path: test_project_path}
-  end
+  @moduletag pre_setup: [:TestEnv]
 
   describe "#apply/2" do
     test "copies the .credo.exs", %{

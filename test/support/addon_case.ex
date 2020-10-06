@@ -1,6 +1,9 @@
 defmodule Nimble.Phx.Gen.Template.AddonCase do
   use ExUnit.CaseTemplate
 
+  alias Nimble.Phx.Gen.Template.Project
+  alias Nimble.Phx.Gen.Template.Addons
+
   using do
     quote do
       alias Nimble.Phx.Gen.Template.Addons
@@ -19,7 +22,9 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
     end
   end
 
-  setup do
+  setup context do
+    project = Project.new()
+
     parent_test_project_path = Path.join(tmp_path(), parent_test_project_path())
     test_project_path = Path.join(parent_test_project_path, "/nimble_phx_gen_template")
 
@@ -29,7 +34,15 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
       File.rm_rf!(parent_test_project_path)
     end)
 
-    {:ok, project: Nimble.Phx.Gen.Template.Project.new(), test_project_path: test_project_path}
+    if context[:pre_setup] do
+      File.cd!(test_project_path, fn ->
+        Enum.each(context[:pre_setup], fn pre_setup_addon ->
+          Module.safe_concat([Addons, pre_setup_addon]).apply(project)
+        end)
+      end)
+    end
+
+    {:ok, project: project, test_project_path: test_project_path}
   end
 
   defp create_test_project(test_project_path),
