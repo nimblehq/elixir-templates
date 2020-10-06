@@ -1,13 +1,9 @@
 defmodule Nimble.Phx.Gen.Template.Addons.ExCoverallsTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
-  setup %{project: project, test_project_path: test_project_path} do
-    mock_latest_package_version(:excoveralls, "0.12.2")
-
-    {:ok, project: project, test_project_path: test_project_path}
-  end
-
   describe "#apply/2" do
+    @describetag mock_latest_package_versions: [{:excoveralls, "0.12.2"}]
+
     test "copies the coveralls.json", %{
       project: project,
       test_project_path: test_project_path

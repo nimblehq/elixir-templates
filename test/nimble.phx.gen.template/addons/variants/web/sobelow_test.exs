@@ -1,16 +1,8 @@
 defmodule Nimble.Phx.Gen.Template.Addons.Web.SobelowTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
-  import Mox
-
-  setup %{project: project, test_project_path: test_project_path} do
-    mock_latest_package_version(:credo, "0.26.2")
-    mock_latest_package_version(:sobelow, "0.8")
-
-    {:ok, project: project, test_project_path: test_project_path}
-  end
-
   describe "#apply/2" do
+    @describetag mock_latest_package_versions: [{:credo, "0.26.2"}, {:sobelow, "0.8"}]
     @describetag required_addons: [:TestEnv, :Credo]
 
     test "copies the .sobelow-conf", %{

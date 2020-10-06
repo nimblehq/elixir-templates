@@ -1,13 +1,9 @@
 defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
-  setup %{project: project, test_project_path: test_project_path} do
-    mock_latest_package_version(:wallaby, "0.26.2")
-
-    {:ok, project: project, test_project_path: test_project_path}
-  end
-
   describe "#apply/2" do
+    @describetag mock_latest_package_versions: [{:wallaby, "0.26.2"}]
+
     test "copies the test/support/feature_case.ex", %{
       project: project,
       test_project_path: test_project_path

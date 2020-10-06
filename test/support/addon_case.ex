@@ -1,7 +1,10 @@
 defmodule Nimble.Phx.Gen.Template.AddonCase do
   use ExUnit.CaseTemplate
 
+  import Mox
+
   alias Nimble.Phx.Gen.Template.{Project, Addons}
+  alias Nimble.Phx.Gen.Template.Hex.PackageMock
 
   using do
     quote do
@@ -23,11 +26,6 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
         assert_file(path)
         match.(File.read!(path))
       end
-
-      defp mock_latest_package_version(package, version),
-        do:
-          Nimble.Phx.Gen.Template.Hex.PackageMock
-          |> expect(:get_latest_version, fn package -> version end)
     end
   end
 
@@ -43,6 +41,12 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
       File.rm_rf!(parent_test_project_path)
     end)
 
+    if mock_latest_package_versions = context[:mock_latest_package_versions] do
+      Enum.each(mock_latest_package_versions, fn mock_version ->
+        mock_latest_package_version(mock_version)
+      end)
+    end
+
     if required_addons = context[:required_addons] do
       File.cd!(test_project_path, fn ->
         Enum.each(required_addons, &Module.safe_concat([Addons, &1]).apply(project))
@@ -51,6 +55,9 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
 
     {:ok, project: project, test_project_path: test_project_path}
   end
+
+  defp mock_latest_package_version({package, version}),
+    do: PackageMock |> expect(:get_latest_version, fn package -> version end)
 
   defp create_test_project(test_project_path) do
     # N - in response to Fetch and install dependencies?

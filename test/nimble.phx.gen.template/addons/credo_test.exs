@@ -1,13 +1,8 @@
 defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
-  setup %{project: project, test_project_path: test_project_path} do
-    mock_latest_package_version(:credo, "1.4")
-
-    {:ok, project: project, test_project_path: test_project_path}
-  end
-
   describe "#apply/2" do
+    @describetag mock_latest_package_versions: [{:credo, "1.4"}]
     @describetag required_addons: [:TestEnv]
 
     test "copies the .credo.exs", %{

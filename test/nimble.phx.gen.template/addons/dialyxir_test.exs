@@ -1,13 +1,9 @@
 defmodule Nimble.Phx.Gen.Template.Addons.DialyxirTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
-  setup %{project: project, test_project_path: test_project_path} do
-    mock_latest_package_version(:dialyxir, "1.0")
-
-    {:ok, project: project, test_project_path: test_project_path}
-  end
-
   describe "#apply/2" do
+    @describetag mock_latest_package_versions: [{:dialyxir, "1.0"}]
+
     test "injects dialyxir to mix dependency", %{
       project: project,
       test_project_path: test_project_path
