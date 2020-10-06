@@ -1,8 +1,7 @@
 defmodule Nimble.Phx.Gen.Template.AddonCase do
   use ExUnit.CaseTemplate
 
-  alias Nimble.Phx.Gen.Template.Project
-  alias Nimble.Phx.Gen.Template.Addons
+  alias Nimble.Phx.Gen.Template.{Project, Addons}
 
   using do
     quote do
