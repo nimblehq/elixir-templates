@@ -7,4 +7,17 @@ defmodule Nimble.Phx.Gen.Template.Project do
             web_path: nil,
             web_test_path: nil,
             api_project?: nil
+
+  def new(opts \\ %{}) do
+    %__MODULE__{
+      api_project?: opts[:api] === true,
+      otp_app: Mix.Phoenix.otp_app(),
+      base_module: Mix.Phoenix.base(),
+      base_path: "lib/" <> Atom.to_string(Mix.Phoenix.otp_app()),
+      base_test_path: "test/" <> Atom.to_string(Mix.Phoenix.otp_app()),
+      web_module: Mix.Phoenix.base() <> "Web",
+      web_path: "lib/" <> Atom.to_string(Mix.Phoenix.otp_app()) <> "_web",
+      web_test_path: "test/" <> Atom.to_string(Mix.Phoenix.otp_app()) <> "_web"
+    }
+  end
 end

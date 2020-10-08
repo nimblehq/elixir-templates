@@ -27,3 +27,5 @@ nimble_phx_gen_template-*.tar
 # Ignore folder information and IDE-specific files
 .DS_Store
 .idea/*
+
+**/tmp

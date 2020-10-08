@@ -5,6 +5,7 @@ on: pull_request
 env:
   OTP_VERSION: 23.0.2
   ELIXIR_VERSION: 1.10.4
+  PHOENIX_VERSION: 1.5.5
 
 jobs:
   unit_test:
@@ -32,7 +33,10 @@ jobs:
 
       - name: Install Dependencies
         run: mix deps.get
-
+        
+      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
+        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+        
       - name: Compile
         run: mix compile --warnings-as-errors
         env:

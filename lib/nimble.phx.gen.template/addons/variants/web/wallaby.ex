@@ -53,7 +53,6 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
     Generator.replace_content(
       "test/test_helper.exs",
       """
-
       ExUnit.start()
       Ecto.Adapters.SQL.Sandbox.mode(#{base_module}.Repo, :manual)
       """,

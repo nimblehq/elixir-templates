@@ -19,17 +19,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
 
     {opts, _params} = parse_opts(args)
 
-    %Project{
-      api_project?: opts[:api] === true,
-      otp_app: Mix.Phoenix.otp_app(),
-      base_module: Mix.Phoenix.base(),
-      base_path: "lib/" <> Atom.to_string(Mix.Phoenix.otp_app()),
-      base_test_path: "test/" <> Atom.to_string(Mix.Phoenix.otp_app()),
-      web_module: Mix.Phoenix.base() <> "Web",
-      web_path: "lib/" <> Atom.to_string(Mix.Phoenix.otp_app()) <> "_web",
-      web_test_path: "test/" <> Atom.to_string(Mix.Phoenix.otp_app()) <> "_web"
-    }
-    |> Template.apply()
+    Template.apply(Project.new(opts))
   end
 
   defp parse_opts(args) do
