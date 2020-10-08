@@ -1,8 +1,13 @@
 name: "Tests"
+
 on: pull_request
 
+env:
+  OTP_VERSION: 23.0.2
+  ELIXIR_VERSION: 1.10.4
+
 jobs:
-  test:
+  unit_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,8 +17,8 @@ jobs:
 
       - uses: actions/setup-elixir@v1
         with:
-          otp-version: "23.0.2"
-          elixir-version: "1.10.4"
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
 
       - name: Cache Elixir build
         uses: actions/cache@v2

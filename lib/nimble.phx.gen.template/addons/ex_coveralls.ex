@@ -27,6 +27,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
     project
     |> inject_mix_dependency()
     |> edit_mix()
+    |> edit_web_router()
   end
 
   defp inject_mix_dependency(project) do
@@ -61,6 +62,51 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
       """,
       """
             coverage: ["coveralls.html --raise"],
+      """
+    )
+
+    project
+  end
+
+  defp edit_web_router(%Project{} = project) do
+    project
+    |> ignore_ex_coverall_on_api_pipeline()
+    |> ignore_ex_coverall_on_live_dashboard()
+  end
+
+  defp ignore_ex_coverall_on_api_pipeline(%Project{web_path: web_path} = project) do
+    Generator.replace_content(
+      "#{web_path}/router.ex",
+      """
+        pipeline :api do
+          plug :accepts, ["json"]
+        end
+      """,
+      """
+        # coveralls-ignore-start
+        pipeline :api do
+          plug :accepts, ["json"]
+        end
+
+        # coveralls-ignore-stop
+      """
+    )
+
+    project
+  end
+
+  defp ignore_ex_coverall_on_live_dashboard(
+         %Project{web_path: web_path, web_module: web_module} = project
+       ) do
+    Generator.replace_content(
+      "#{web_path}/router.ex",
+      """
+            live_dashboard "/dashboard", metrics: #{web_module}.Telemetry
+      """,
+      """
+            # coveralls-ignore-start
+            live_dashboard "/dashboard", metrics: #{web_module}.Telemetry
+            # coveralls-ignore-stop
       """
     )
 
