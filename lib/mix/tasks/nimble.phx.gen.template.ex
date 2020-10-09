@@ -19,6 +19,8 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
 
     {opts, _params} = parse_opts(args)
 
+    {:ok, _} = Application.ensure_all_started(:httpoison)
+
     Template.apply(Project.new(opts))
   end
 

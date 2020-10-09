@@ -1,10 +1,6 @@
 defmodule Nimble.Phx.Gen.Template.Addons.Mox do
   use Nimble.Phx.Gen.Template.Addon
 
-  @versions %{
-    mox: "~> 1.0.0"
-  }
-
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
@@ -29,7 +25,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Mox do
   end
 
   defp inject_mix_dependency(project) do
-    Generator.inject_mix_dependency({:mox, @versions.mox, only: :test})
+    Generator.inject_mix_dependency({:mox, latest_package_version(:mox), only: :test})
 
     project
   end

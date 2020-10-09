@@ -2,6 +2,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.MoxTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
   describe "#apply/2" do
+    @describetag mock_latest_package_versions: [{:mox, "1.0.0"}]
+
     test "copies the test/support/mock.ex", %{
       project: project,
       test_project_path: test_project_path

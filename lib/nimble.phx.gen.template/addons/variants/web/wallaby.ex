@@ -1,10 +1,6 @@
 defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
   use Nimble.Phx.Gen.Template.Addon
 
-  @versions %{
-    wallaby: "~> 0.26.2"
-  }
-
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
@@ -44,7 +40,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Wallaby do
   end
 
   defp inject_mix_dependency(%Project{} = project) do
-    Generator.inject_mix_dependency({:wallaby, @versions.wallaby, only: :test, runtime: false})
+    Generator.inject_mix_dependency(
+      {:wallaby, latest_package_version(:wallaby), only: :test, runtime: false}
+    )
 
     project
   end

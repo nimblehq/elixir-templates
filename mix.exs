@@ -28,7 +28,9 @@ defmodule NimblePhxGenTemplate.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.5.5"},
-      {:jason, "~> 1.2.2"}
+      {:jason, "~> 1.2.2"},
+      {:httpoison, "~> 1.7.0"},
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 
