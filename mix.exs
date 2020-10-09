@@ -30,13 +30,14 @@ defmodule NimblePhxGenTemplate.MixProject do
       {:phoenix, "~> 1.5.5"},
       {:jason, "~> 1.2.2"},
       {:httpoison, "~> 1.7.0"},
-      {:mox, "~> 1.0", only: :test}
+      {:mox, "~> 1.0", only: :test},
+      {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false}
     ]
   end
 
   defp aliases do
     [
-      codebase: ["format --check-formatted"]
+      codebase: ["format --check-formatted", "credo --strict"]
     ]
   end
 end

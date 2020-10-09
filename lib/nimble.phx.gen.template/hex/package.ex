@@ -1,7 +1,7 @@
 defmodule Nimble.Phx.Gen.Template.Hex.Package do
-  alias Nimble.Phx.Gen.Template.Hex.HexClient
-
   @behaviour Nimble.Phx.Gen.Template.Hex.PackageBehaviour
+
+  alias Nimble.Phx.Gen.Template.Hex.HexClient
 
   @impl true
   def get_latest_version(package) do

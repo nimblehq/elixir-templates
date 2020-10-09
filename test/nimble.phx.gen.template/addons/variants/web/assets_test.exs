@@ -1,10 +1,10 @@
-defmodule Nimble.Phx.Gen.Template.Addons.Web.AssetsTest do
+defmodule Nimble.Phx.Gen.Template.AddonsWeb.AssetsTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
   describe "#apply/2" do
     test "adds assets.compile alias", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Assets.apply(project)
+        AddonsWeb.Assets.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -21,7 +21,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.AssetsTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Assets.apply(project)
+        AddonsWeb.Assets.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
