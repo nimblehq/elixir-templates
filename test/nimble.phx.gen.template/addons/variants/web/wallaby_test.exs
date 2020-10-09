@@ -1,4 +1,4 @@
-defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
+defmodule Nimble.Phx.Gen.Template.AddonsWeb.WallabyTest do
   use Nimble.Phx.Gen.Template.AddonCase
 
   describe "#apply/2" do
@@ -9,7 +9,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Wallaby.apply(project)
+        AddonsWeb.Wallaby.apply(project)
 
         assert_file("test/support/feature_case.ex", fn file ->
           assert file =~ """
@@ -36,7 +36,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Wallaby.apply(project)
+        AddonsWeb.Wallaby.apply(project)
 
         assert_file("test/nimble_phx_gen_template_web/features/home_page/view_home_page_test.exs")
       end)
@@ -47,7 +47,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Wallaby.apply(project)
+        AddonsWeb.Wallaby.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -64,7 +64,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Wallaby.apply(project)
+        AddonsWeb.Wallaby.apply(project)
 
         assert_file("test/test_helper.exs", fn file ->
           assert file =~ """
@@ -84,7 +84,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Wallaby.apply(project)
+        AddonsWeb.Wallaby.apply(project)
 
         assert_file("lib/nimble_phx_gen_template_web/endpoint.ex", fn file ->
           assert file =~ """
@@ -103,7 +103,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Wallaby.apply(project)
+        AddonsWeb.Wallaby.apply(project)
 
         assert_file("config/test.exs", fn file ->
           assert file =~ """
@@ -128,7 +128,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Web.Wallaby.apply(project)
+        AddonsWeb.Wallaby.apply(project)
 
         assert_file(".gitignore", fn file ->
           assert file =~ "**/tmp/"

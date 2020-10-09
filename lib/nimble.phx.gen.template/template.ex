@@ -1,7 +1,7 @@
 defmodule Nimble.Phx.Gen.Template.Template do
-  alias Nimble.Phx.Gen.Template.{Project, Addons}
   alias Nimble.Phx.Gen.Template.Api.Template, as: ApiTemplate
   alias Nimble.Phx.Gen.Template.Web.Template, as: WebTemplate
+  alias Nimble.Phx.Gen.Template.{Addons, Project}
 
   def apply(%Project{} = project) do
     project

@@ -3,14 +3,16 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
 
   import Mox
 
-  alias Nimble.Phx.Gen.Template.{Project, Addons}
+  alias Nimble.Phx.Gen.Template.Addons.Web, as: AddonsWeb
   alias Nimble.Phx.Gen.Template.Hex.PackageMock
+  alias Nimble.Phx.Gen.Template.{Addons, Project}
 
   using do
     quote do
       import Mox
 
       alias Nimble.Phx.Gen.Template.Addons
+      alias Nimble.Phx.Gen.Template.Addons.Web, as: AddonsWeb
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
       # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3
@@ -55,7 +57,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   end
 
   defp mock_latest_package_version({_package, version}),
-    do: PackageMock |> expect(:get_latest_version, fn _package -> version end)
+    do: expect(PackageMock, :get_latest_version, fn _package -> version end)
 
   defp create_test_project(test_project_path) do
     # N - in response to Fetch and install dependencies?
@@ -64,6 +66,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
     )
   end
 
+  # credo:disable-for-lines:71 Credo.Check.Refactor.PipeChainStart
   defp parent_test_project_path do
     :crypto.strong_rand_bytes(20)
     |> Base.url_encode64(padding: false)
