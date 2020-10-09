@@ -41,7 +41,7 @@ defmodule Nimble.Phx.Gen.Template.AddonsWeb.SobelowTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"format --check-formatted\", \"credo\", \"sobelow --config\"],
+                       codebase: [\"format --check-formatted\", \"credo --strict\", \"sobelow --config\"],
                  """
         end)
       end)

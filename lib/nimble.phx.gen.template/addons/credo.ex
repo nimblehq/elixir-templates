@@ -35,7 +35,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Credo do
             codebase: ["format --check-formatted"],
       """,
       """
-            codebase: ["format --check-formatted", "credo"],
+            codebase: ["format --check-formatted", "credo --strict"],
       """
     )
 
