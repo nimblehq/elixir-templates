@@ -25,5 +25,22 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnvTest do
         end)
       end)
     end
+
+    test "creates alias Ecto.Adapters.SQL.Sandbox in test support case", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.TestEnv.apply(project)
+
+        Enum.each(["channel_case", "conn_case", "data_case"], fn support_case_name ->
+          assert_file("test/support/" <> support_case_name <> ".ex", fn file ->
+            assert file =~ "alias Ecto.Adapters.SQL.Sandbox"
+            assert file =~ "Sandbox.checkout(#{project.base_module}.Repo)"
+            assert file =~ "Sandbox.mode(#{project.base_module}.Repo, {:shared, self()})"
+          end)
+        end)
+      end)
+    end
   end
 end
