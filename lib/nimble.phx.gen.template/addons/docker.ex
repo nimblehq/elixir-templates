@@ -15,6 +15,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Docker do
       base_module: base_module
     )
 
+    Mix.shell().cmd("chmod +x bin/start.sh")
+
     project
   end
 end
