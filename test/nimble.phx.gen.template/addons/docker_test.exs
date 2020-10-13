@@ -11,7 +11,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
 
         assert_file("docker-compose.dev.yml", fn file ->
           assert file =~ """
-                 version: "3.2"
+                 version: "3.8"
 
                  services:
                    db:
@@ -22,6 +22,59 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
                        - POSTGRES_DB=nimble_phx_gen_template_dev
                      ports:
                        - "5432:5432"
+                 """
+        end)
+      end)
+    end
+
+    test "copies the docker-compose.yml", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Docker.apply(project)
+
+        assert_file("docker-compose.yml")
+      end)
+    end
+
+    test "copies the .dockerignore", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Docker.apply(project)
+
+        assert_file(".dockerignore")
+      end)
+    end
+
+    test "copies the Dockerfile", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Docker.apply(project)
+
+        assert_file("Dockerfile", fn file ->
+          assert file =~
+                   "COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/nimble_phx_gen_template ./"
+        end)
+      end)
+    end
+
+    test "copies the bin/start.sh", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Docker.apply(project)
+
+        assert_file("bin/start.sh", fn file ->
+          assert file =~ """
+                 bin/nimble_phx_gen_template eval "NimblePhxGenTemplate.ReleaseTasks.migrate()"
+
+                 bin/nimble_phx_gen_template start
                  """
         end)
       end)

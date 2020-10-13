@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  build:
+    build:
+      context: .
+      cache_from:
+        - <%= otp_app %>-build
+      target: build
+    image: <%= otp_app %>-build
+
+  app:
+    build:
+      context: .
+      cache_from:
+        - <%= otp_app %>-build
+        - <%= otp_app %>
+      target: app
+    image: <%= otp_app %>

@@ -28,6 +28,9 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
         assert_file(path)
         match.(File.read!(path))
       end
+
+      defp refute_file(path),
+        do: refute(File.regular?(path), "Expected #{path} does not exist, but it does")
     end
   end
 
@@ -66,7 +69,6 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
     )
   end
 
-  # credo:disable-for-lines:71 Credo.Check.Refactor.PipeChainStart
   defp parent_test_project_path do
     :crypto.strong_rand_bytes(20)
     |> Base.url_encode64(padding: false)
