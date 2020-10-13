@@ -14,6 +14,7 @@ defmodule Nimble.Phx.Gen.Template.Template do
   # Common setup for both API and Web projects
   defp common_setup(%Project{} = project) do
     project
+    |> Addons.ElixirVersion.apply()
     |> Addons.Makefile.apply()
     |> Addons.Docker.apply()
     |> Addons.TestEnv.apply()

@@ -7,20 +7,23 @@ Project repository template to set up all public Phoenix projects at [Nimble](ht
 ```elixir
 def deps do
   [
-    {:nimble_phx_gen_template, git: "https://github.com/nimblehq/elixir-templates", branch: "master"}
+    {:nimble_phx_gen_template, git: "https://github.com/nimblehq/elixir-templates", branch: "master", only: :dev}
   ]
 end
 ```
 
-Then run `mix deps.get` to install NimblePhxGenTemplate
+Then run `mix do deps.get, deps.compile` to install NimblePhxGenTemplate
 
 ## Usage
 
 ```
 mix nimble.phx.gen.template -v # Print the version
-mix nimble.phx.gen.template --web # Apply the Web template to a Phoenix project
-mix nimble.phx.gen.template --api # Apply the API template to a Phoenix project
+mix nimble.phx.gen.template --web # Apply the Web template
+mix nimble.phx.gen.template --api # Apply the API template
 ```
+## Requirements
+
+NimblePhxGenTemplate has been developed and actively tested with Elixir 1.11+, Erlang/OTP 23.1+ and Phoenix 1.5+. Running NimblePhxGenTemplate currently requires Elixir 1.11+, Erlang/OTP 23.1+ and Phoenix 1.5+.
 
 ## License
 
