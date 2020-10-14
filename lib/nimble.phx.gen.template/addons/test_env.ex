@@ -6,6 +6,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
     project
     |> edit_mix()
     |> edit_test_config()
+    |> edit_test_support_cases()
   end
 
   defp edit_mix(project) do
@@ -31,6 +32,50 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
       """,
       """
         hostname: System.get_env("DB_HOST") || "localhost",
+      """
+    )
+
+    project
+  end
+
+  defp edit_test_support_cases(project) do
+    project
+    |> edit_test_support_case("channel_case")
+    |> edit_test_support_case("conn_case")
+    |> edit_test_support_case("data_case")
+  end
+
+  defp edit_test_support_case(project, support_case_name) do
+    support_case_path = "test/support/" <> support_case_name <> ".ex"
+
+    Generator.inject_content(
+      support_case_path,
+      """
+        use ExUnit.CaseTemplate
+      """,
+      """
+
+        alias Ecto.Adapters.SQL.Sandbox
+      """
+    )
+
+    Generator.replace_content(
+      support_case_path,
+      """
+          :ok = Ecto.Adapters.SQL.Sandbox.checkout(#{project.base_module}.Repo)
+      """,
+      """
+          :ok = Sandbox.checkout(#{project.base_module}.Repo)
+      """
+    )
+
+    Generator.replace_content(
+      support_case_path,
+      """
+        Ecto.Adapters.SQL.Sandbox.mode(#{project.base_module}.Repo, {:shared, self()})
+      """,
+      """
+        Sandbox.mode(#{project.base_module}.Repo, {:shared, self()})
       """
     )
 
