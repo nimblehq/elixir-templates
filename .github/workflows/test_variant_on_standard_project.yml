@@ -1,0 +1,133 @@
+name: "Test variant on standard project"
+
+on: push
+
+env:
+  OTP_VERSION: 23.1.1
+  ELIXIR_VERSION: 1.11.0
+  PHOENIX_VERSION: 1.5.5
+  NODE_VERSION: 12
+  PROJECT_DIRECTORY: "sample_project"
+
+jobs:   
+  unit_test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        variant: [web, api]
+    
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+    
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
+      
+      - name: npm packages cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
+            **/yarn.lock
+            **/node_modules
+          key: ${{ runner.os }}-npm-packages-${{ hashFiles('**/package.json*') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-packages-
+              
+      - name: Install Dependencies
+        run: mix deps.get
+      
+      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
+        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+        
+      # Y - in response to Fetch and install dependencies?
+      - name: Create project
+        run: printf "Y\n" | make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }}
+      
+      - name: Apply template
+        run: make apply_template PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} VARIANT=${{ matrix.variant }}
+      
+      #######    
+      
+      - name: Install Dependencies
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix deps.get
+        
+      - name: Run mix compile
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix compile --warnings-as-errors
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      
+      - name: Install node module
+        if: ${{ matrix.variant == 'web' }}
+        run: cd ${{ env.PROJECT_DIRECTORY }} && npm --prefix assets install
+
+      - name: Compile assets
+        if: ${{ matrix.variant == 'web' }}
+        run: cd ${{ env.PROJECT_DIRECTORY }} && npm run --prefix assets build:dev
+          
+      - name: Run mix ecto.create
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix ecto.create
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      
+      - name: Run mix ecto.migrate
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix ecto.migrate
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      
+      - name: Run mix codebase
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix codebase
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+        
+      - name: Run mix test
+        run: cd ${{ env.PROJECT_DIRECTORY }} && mix coverage
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: wallaby_screenshots
+          path: ${{ env.PROJECT_DIRECTORY }}/tmp/wallaby_screenshots/
+      
+      - run: rm -rf ${{ env.PROJECT_DIRECTORY }}
