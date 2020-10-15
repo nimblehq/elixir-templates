@@ -8,20 +8,28 @@ defmodule Nimble.Phx.Gen.Template.Addons.ElixirVersion do
     |> edit_files()
   end
 
-  defp copy_files(project) do
-    Generator.copy_file([{:text, ".tool-versions", ".tool-versions"}])
+  defp copy_files(
+         %Project{
+           elixir_asdf_version: elixir_asdf_version,
+           erlang_asdf_version: erlang_asdf_version
+         } = project
+       ) do
+    Generator.copy_file([{:eex, ".tool-versions.eex", ".tool-versions"}],
+      elixir_asdf_version: elixir_asdf_version,
+      erlang_asdf_version: erlang_asdf_version
+    )
 
     project
   end
 
-  defp edit_files(project) do
+  defp edit_files(%Project{elixir_mix_version: elixir_mix_version} = project) do
     Generator.replace_content(
       "mix.exs",
       """
             elixir: "~> 1.7",
       """,
       """
-            elixir: "~> 1.11",
+            elixir: "~> #{elixir_mix_version}",
       """
     )
 
