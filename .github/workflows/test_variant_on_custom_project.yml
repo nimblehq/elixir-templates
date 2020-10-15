@@ -1,4 +1,4 @@
-name: "Test variant on custom project"
+name: "Test variant on custom Web project"
 
 on: push
 
@@ -7,7 +7,6 @@ env:
   ELIXIR_VERSION: 1.11.0
   PHOENIX_VERSION: 1.5.5
   NODE_VERSION: 12
-  PROJECT_DIRECTORY: "sample_project"
 
 jobs:   
   unit_test:
@@ -68,66 +67,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-packages-
               
-      - name: Install Dependencies
-        run: mix deps.get
-      
-      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
-        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
-      
-      # Y - in response to Fetch and install dependencies?
-      - name: Create project
-        run: printf "Y\n" | make create_project PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} OPTIONS="--module=CustomModule --app=custom_app"
-        
-      - name: Apply template
-        run: make apply_template PROJECT_DIRECTORY=${{ env.PROJECT_DIRECTORY }} VARIANT=${{ matrix.variant }}
-      
-      #######    
-      
-      - name: Install Dependencies
-        run: cd ${{ env.PROJECT_DIRECTORY }} && mix deps.get
-        
-      - name: Run mix compile
-        run: cd ${{ env.PROJECT_DIRECTORY }} && mix compile --warnings-as-errors
-        env:
-          MIX_ENV: test
-          DB_HOST: localhost
-      
-      - name: Install node module
-        if: ${{ matrix.variant == 'web' }}
-        run: cd ${{ env.PROJECT_DIRECTORY }} && npm --prefix assets install
-
-      - name: Compile assets
-        if: ${{ matrix.variant == 'web' }}
-        run: cd ${{ env.PROJECT_DIRECTORY }} && npm run --prefix assets build:dev
-        
-      - name: Run mix ecto.create
-        run: cd ${{ env.PROJECT_DIRECTORY }} && mix ecto.create
-        env:
-          MIX_ENV: test
-          DB_HOST: localhost
-      
-      - name: Run mix ecto.migrate
-        run: cd ${{ env.PROJECT_DIRECTORY }} && mix ecto.migrate
-        env:
-          MIX_ENV: test
-          DB_HOST: localhost        
-      
-      - name: Run mix codebase
-        run: cd ${{ env.PROJECT_DIRECTORY }} && mix codebase
-        env:
-          MIX_ENV: test
-          DB_HOST: localhost
-        
-      - name: Run mix test
-        run: cd ${{ env.PROJECT_DIRECTORY }} && mix coverage
-        env:
-          MIX_ENV: test
-          DB_HOST: localhost
-      
-      - uses: actions/upload-artifact@v2
-        if: ${{ failure() }}
+      - uses: nimblehq/elixir-templates@bug/fix-github-action
         with:
-          name: wallaby_screenshots
-          path: ${{ env.PROJECT_DIRECTORY }}/tmp/wallaby_screenshots/
-        
-      - run: rm -rf ${{ env.PROJECT_DIRECTORY }}
+          new_project_options: '--module=CustomModule --app=custom_app'
+          variant: ${{ matrix.variant }}
