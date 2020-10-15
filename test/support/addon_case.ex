@@ -70,7 +70,8 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   end
 
   defp parent_test_project_path do
-    :crypto.strong_rand_bytes(20)
+    20
+    |> :crypto.strong_rand_bytes()
     |> Base.url_encode64(padding: false)
     |> String.downcase()
   end

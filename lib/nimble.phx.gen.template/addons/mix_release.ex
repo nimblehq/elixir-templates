@@ -72,7 +72,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.MixRelease do
          %Project{otp_app: otp_app, base_module: base_module, base_path: base_path} = project
        ) do
     prod_secret_content =
-      File.read!(@prod_secret_path)
+      @prod_secret_path
+      |> File.read!()
       |> remove_last_new_line()
       |> String.replace("\n  ", "\n    ")
       |> String.replace("\n\n", "\n\n  ")
