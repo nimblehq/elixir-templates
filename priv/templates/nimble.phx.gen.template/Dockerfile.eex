@@ -1,4 +1,4 @@
-FROM hexpm/elixir:1.11.0-erlang-23.1.1-alpine-3.12.0 AS build
+FROM <%= docker_build_base_image %> AS build
 
 # install build dependencies
 RUN apk add --no-cache build-base npm git && \
@@ -32,18 +32,22 @@ COPY lib lib
 RUN mix do compile, release
 
 # prepare release image
-FROM alpine:3.12.0 AS app
+FROM <%= docker_app_base_image %> AS app
+
 RUN apk add --no-cache openssl ncurses-libs
+
+# Setup non-root user
+RUN addgroup -S app_group && \
+    adduser -s /bin/sh -G app_group -D <%= otp_app %> && \
+    chown <%= otp_app %>:app_group /app
 
 WORKDIR /app
 
-RUN chown nobody:nobody /app
-
-USER nobody:nobody
-
-COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/<%= otp_app %> ./
+COPY --from=build --chown=<%= otp_app %>:app_group /app/_build/prod/rel/<%= otp_app %> ./
 COPY bin/start.sh ./bin/start.sh
 
 ENV HOME=/app
+
+USER <%= otp_app %>
 
 CMD bin/start.sh

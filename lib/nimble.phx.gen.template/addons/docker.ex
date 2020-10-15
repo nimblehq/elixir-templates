@@ -2,7 +2,15 @@ defmodule Nimble.Phx.Gen.Template.Addons.Docker do
   use Nimble.Phx.Gen.Template.Addon
 
   @impl true
-  def do_apply(%Project{otp_app: otp_app, base_module: base_module} = project, _opts) do
+  def do_apply(
+        %Project{
+          otp_app: otp_app,
+          base_module: base_module,
+          docker_build_base_image: docker_build_base_image,
+          docker_app_base_image: docker_app_base_image
+        } = project,
+        _opts
+      ) do
     Generator.copy_file(
       [
         {:eex, "docker-compose.dev.yml.eex", "docker-compose.dev.yml"},
@@ -12,7 +20,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.Docker do
         {:text, ".dockerignore", ".dockerignore"}
       ],
       otp_app: otp_app,
-      base_module: base_module
+      base_module: base_module,
+      docker_build_base_image: docker_build_base_image,
+      docker_app_base_image: docker_app_base_image
     )
 
     Mix.shell().cmd("chmod +x bin/start.sh")
