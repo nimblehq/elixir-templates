@@ -10,13 +10,13 @@ defmodule Nimble.Phx.Gen.Template.Addons.ElixirVersion do
 
   defp copy_files(
          %Project{
-           elixir_asdf_version: elixir_asdf_version,
-           erlang_asdf_version: erlang_asdf_version
+           erlang_asdf_version: erlang_asdf_version,
+           elixir_asdf_version: elixir_asdf_version
          } = project
        ) do
     Generator.copy_file([{:eex, ".tool-versions.eex", ".tool-versions"}],
-      elixir_asdf_version: elixir_asdf_version,
-      erlang_asdf_version: erlang_asdf_version
+      erlang_asdf_version: erlang_asdf_version,
+      elixir_asdf_version: elixir_asdf_version
     )
 
     project

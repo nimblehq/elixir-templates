@@ -1,8 +1,10 @@
 defmodule Nimble.Phx.Gen.Template.Project do
+  # Erlang versions: asdf list all erlang
+  # Elixir versions: asdf list all elixir
   @default_versions %{
-    elixir_mix_version: "1.11",
+    erlang_asdf_version: "23.1.1",
     elixir_asdf_version: "1.11.0-otp-23",
-    erlang_asdf_version: "23.1.1"
+    elixir_mix_version: "1.11"
   }
 
   defstruct otp_app: nil,
@@ -13,9 +15,9 @@ defmodule Nimble.Phx.Gen.Template.Project do
             web_path: nil,
             web_test_path: nil,
             api_project?: nil,
-            elixir_mix_version: @default_versions[:elixir_mix_version],
+            erlang_asdf_version: @default_versions[:erlang_asdf_version],
             elixir_asdf_version: @default_versions[:elixir_asdf_version],
-            erlang_asdf_version: @default_versions[:erlang_asdf_version]
+            elixir_mix_version: @default_versions[:elixir_mix_version]
 
   def new(opts \\ %{}) do
     %__MODULE__{
