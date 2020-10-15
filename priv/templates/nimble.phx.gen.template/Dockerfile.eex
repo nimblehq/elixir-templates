@@ -36,12 +36,12 @@ FROM <%= docker_app_base_image %> AS app
 
 RUN apk add --no-cache openssl ncurses-libs
 
+WORKDIR /app
+
 # Setup non-root user
 RUN addgroup -S app_group && \
     adduser -s /bin/sh -G app_group -D <%= otp_app %> && \
     chown <%= otp_app %>:app_group /app
-
-WORKDIR /app
 
 COPY --from=build --chown=<%= otp_app %>:app_group /app/_build/prod/rel/<%= otp_app %> ./
 COPY bin/start.sh ./bin/start.sh
