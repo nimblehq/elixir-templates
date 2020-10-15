@@ -60,6 +60,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
           assert file =~ "FROM hexpm/elixir:1.11.0-erlang-23.1.1-alpine-3.12.0 AS build"
           assert file =~ "FROM alpine:3.12.0 AS app"
           assert file =~ "adduser -s /bin/sh -G app_group -D nimble_phx_gen_template &&"
+
           assert file =~
                    "COPY --from=build --chown=nimble_phx_gen_template:app_group /app/_build/prod/rel/nimble_phx_gen_template ./"
         end)
