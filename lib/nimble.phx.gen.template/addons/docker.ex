@@ -4,6 +4,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Docker do
   @impl true
   def do_apply(
         %Project{
+          api_project?: api_project?,
           otp_app: otp_app,
           base_module: base_module,
           docker_build_base_image: docker_build_base_image,
@@ -22,7 +23,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Docker do
       otp_app: otp_app,
       base_module: base_module,
       docker_build_base_image: docker_build_base_image,
-      docker_app_base_image: docker_app_base_image
+      docker_app_base_image: docker_app_base_image,
+      web_project?: !api_project?
     )
 
     Mix.shell().cmd("chmod +x bin/start.sh")

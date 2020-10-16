@@ -59,6 +59,10 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
         assert_file("Dockerfile", fn file ->
           assert file =~ "FROM hexpm/elixir:1.11.1-erlang-23.1.1-alpine-3.12.0 AS build"
           assert file =~ "FROM alpine:3.12.0 AS app"
+
+          assert file =~
+                   "RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error"
+
           assert file =~ "adduser -s /bin/sh -G app_group -D app_user &&"
           assert file =~ "USER app_user"
 
@@ -81,6 +85,24 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
 
                  bin/nimble_phx_gen_template start
                  """
+        end)
+      end)
+    end
+  end
+
+  describe "#apply/2 with api_project" do
+    test "copies the Dockerfile", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: true}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Docker.apply(project)
+
+        assert_file("Dockerfile", fn file ->
+          refute file =~
+                   "RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error"
         end)
       end)
     end
