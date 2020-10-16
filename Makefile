@@ -1,4 +1,4 @@
-.PHONY: install_phoenix create_project apply_template
+.PHONY: install_phoenix create_project apply_template remove_nimble_phx_gen_template
 
 # Y - in response to Are you sure you want to install "phx_new-${PHOENIX_VERSION}.ez"?
 install_phoenix:
@@ -19,3 +19,7 @@ apply_template:
 	mix deps.get && \
 	mix format && \
 	printf "Y\nY\nY\nY\n" | mix nimble.phx.gen.template --${VARIANT}
+
+remove_nimble_phx_gen_template:
+	cd ${PROJECT_DIRECTORY} && \
+	sed -i -e 's/{:nimble_phx_gen_template, path: "..\/"},//' mix.exs
