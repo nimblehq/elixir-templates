@@ -3,7 +3,7 @@ defmodule Nimble.Phx.Gen.Template.Project do
   # Elixir versions: asdf list all elixir
   @default_versions %{
     erlang_asdf_version: "23.1.1",
-    elixir_asdf_version: "1.11.0-otp-23",
+    elixir_asdf_version: "1.11.1-otp-23",
     elixir_mix_version: "1.11"
   }
 
