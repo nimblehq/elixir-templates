@@ -9,7 +9,7 @@ defmodule Nimble.Phx.Gen.Template.Project do
 
   # Elixir image tags: https://hub.docker.com/r/hexpm/elixir/tags
   @docker_base_images %{
-    build: "hexpm/elixir:1.11.0-erlang-23.1.1-alpine-3.12.0",
+    build: "hexpm/elixir:1.11.1-erlang-23.1.1-alpine-3.12.0",
     app: "alpine:3.12.0"
   }
 
