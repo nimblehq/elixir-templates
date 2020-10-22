@@ -43,7 +43,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
               
-      - uses: nimblehq/elixir-templates@feature/releases
+      - uses: nimblehq/elixir-templates@composite_1.0
         with:
           new_project_options: '--no-html --no-webpack'
           variant: 'api'
