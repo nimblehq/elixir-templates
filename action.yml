@@ -63,5 +63,9 @@ runs:
         MIX_ENV: test
         DB_HOST: localhost
     
+    - name: Build release app
+      run: cd sample_project && docker-compose build
+      shell: bash
+        
     - run: rm -rf sample_project
       shell: bash

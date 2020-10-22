@@ -17,6 +17,7 @@ defmodule Nimble.Phx.Gen.Template.Template do
     |> Addons.ElixirVersion.apply()
     |> Addons.Makefile.apply()
     |> Addons.Docker.apply()
+    |> Addons.MixRelease.apply()
     |> Addons.TestEnv.apply()
     |> Addons.Credo.apply()
     |> Addons.Dialyxir.apply()

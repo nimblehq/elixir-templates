@@ -30,6 +30,10 @@ defmodule Nimble.Phx.Gen.Template.Generator do
     end
   end
 
+  def delete_content(file_path, anchor) do
+    replace_content(file_path, anchor, "")
+  end
+
   def inject_content(file_path, anchor, content) do
     file = Path.join([file_path])
 

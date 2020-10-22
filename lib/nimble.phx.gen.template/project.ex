@@ -7,6 +7,12 @@ defmodule Nimble.Phx.Gen.Template.Project do
     elixir_mix_version: "1.11"
   }
 
+  # Elixir image tags: https://hub.docker.com/r/hexpm/elixir/tags
+  @docker_base_images %{
+    build: "hexpm/elixir:1.11.1-erlang-23.1.1-alpine-3.12.0",
+    app: "alpine:3.12.0"
+  }
+
   defstruct otp_app: nil,
             base_module: nil,
             base_path: nil,
@@ -17,7 +23,9 @@ defmodule Nimble.Phx.Gen.Template.Project do
             api_project?: nil,
             erlang_asdf_version: @default_versions[:erlang_asdf_version],
             elixir_asdf_version: @default_versions[:elixir_asdf_version],
-            elixir_mix_version: @default_versions[:elixir_mix_version]
+            elixir_mix_version: @default_versions[:elixir_mix_version],
+            docker_build_base_image: @docker_base_images[:build],
+            docker_app_base_image: @docker_base_images[:app]
 
   def new(opts \\ %{}) do
     %__MODULE__{
