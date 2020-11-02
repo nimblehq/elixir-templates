@@ -1,0 +1,15 @@
+_build
+.elixir_ls
+.github
+.gitignore
+.dockerignore
+assets/node_modules
+deps
+docker-compose.yml
+docker-compose.dev.yml
+dockerfile
+README.md
+cover
+**/tmp/
+doc
+/priv/static/

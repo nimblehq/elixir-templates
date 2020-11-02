@@ -1,0 +1,15 @@
+{
+  "skip_files": [
+    "lib/mix",
+    "lib/<%= otp_app %>/application.ex",
+    "lib/<%= otp_app %>/release_tasks.ex",
+    "lib/<%= otp_app %>_web.ex",
+    "lib/<%= otp_app %>_mail.ex",
+    "lib/<%= otp_app %>_web/endpoint.ex",
+    "lib/<%= otp_app %>_web/views/error_helpers.ex",
+    "test/support"
+  ],
+  "coverage_options": {
+    "minimum_coverage": <%= minimum_coverage %>
+  }
+}

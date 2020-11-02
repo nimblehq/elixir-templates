@@ -1,0 +1,5 @@
+#!/bin/sh
+
+bin/<%= otp_app %> eval "<%= base_module %>.ReleaseTasks.migrate()"
+
+bin/<%= otp_app %> start

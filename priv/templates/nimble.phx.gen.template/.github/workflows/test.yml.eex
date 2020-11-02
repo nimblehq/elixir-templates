@@ -1,0 +1,92 @@
+name: "Tests"
+on: pull_request
+
+env:
+  OTP_VERSION: <%= inspect otp_version %>
+  ELIXIR_VERSION: <%= inspect elixir_version %>
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      <%= if web_project? do %>
+      - name: Cache Node npm
+        uses: actions/cache@v2
+        with:
+          path: assets/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      <% end %>
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile
+        run: mix compile --warnings-as-errors
+        env:
+          MIX_ENV: test
+      <%= if web_project? do %>
+      - name: Install node module
+        run: npm --prefix assets install
+
+      - name: Compile assets
+        run: npm run --prefix assets build:dev
+      <% end %>
+      - name: Create database
+        run: mix ecto.create
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+
+      - name: Migrate database
+        run: mix ecto.migrate
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+
+      - name: Run codebase check
+        run: mix codebase
+
+      - name: Run Tests
+        run: mix coverage
+        env:
+          MIX_ENV: test
+          DB_HOST: localhost
+      <%= if web_project? do %>
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: wallaby_screenshots
+          path: tmp/wallaby_screenshots/
+      <% end %>
