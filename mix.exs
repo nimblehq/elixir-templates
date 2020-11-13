@@ -4,12 +4,15 @@ defmodule NimblePhxGenTemplate.MixProject do
   def project do
     [
       app: :nimble_phx_gen_template,
-      version: "0.1.0",
+      version: "2.0.0",
+      description: "Project repository template to set up all public Phoenix projects at Nimble",
       elixir: "~> 1.11",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+      package: package(),
+      source_url: "https://github.com/nimblehq/elixir-templates"
     ]
   end
 
@@ -31,13 +34,21 @@ defmodule NimblePhxGenTemplate.MixProject do
       {:jason, "~> 1.2.2"},
       {:httpoison, "~> 1.7.0"},
       {:mox, "~> 1.0", only: :test},
-      {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.23.0", only: :dev, runtime: false}
     ]
   end
 
   defp aliases do
     [
       codebase: ["format --check-formatted", "credo --strict"]
+    ]
+  end
+
+  defp package do
+    [
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/nimblehq/elixir-templates"}
     ]
   end
 end
