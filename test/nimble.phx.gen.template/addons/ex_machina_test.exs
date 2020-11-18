@@ -32,6 +32,21 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachinaTest do
       end)
     end
 
+    test "adds test/factories to elixirc_paths", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.ExMachina.apply(project)
+
+        assert_file("mix.exs", fn file ->
+          assert file =~ """
+                 defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
+                 """
+        end)
+      end)
+    end
+
     test "updates test/test_helper.exs", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
         Addons.ExMachina.apply(project)

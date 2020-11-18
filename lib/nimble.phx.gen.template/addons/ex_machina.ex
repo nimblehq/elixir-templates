@@ -19,6 +19,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
   defp edit_files(%Project{} = project) do
     project
     |> inject_mix_dependency()
+    |> edit_mix_elixirc_paths()
     |> edit_test_helper()
     |> import_factory()
 
@@ -27,6 +28,20 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
 
   defp inject_mix_dependency(%Project{} = project) do
     Generator.inject_mix_dependency({:ex_machina, latest_package_version(:ex_machina), only: :test})
+
+    project
+  end
+
+  def edit_mix_elixirc_paths(%Project{} = project) do
+    Generator.replace_content(
+      "mix.exs",
+      """
+      defp elixirc_paths(:test), do: ["lib", "test/support"]
+      """,
+      """
+      defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
+      """
+    )
 
     project
   end
