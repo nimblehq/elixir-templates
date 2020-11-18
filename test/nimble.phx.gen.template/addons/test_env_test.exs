@@ -34,7 +34,10 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnvTest do
         Addons.TestEnv.apply(project)
 
         assert_file(".formatter.exs", fn file ->
-          assert file =~ "\n\tline_length: 100,"
+          assert file =~ """
+                 [
+                   line_length: 100,
+                 """
         end)
       end)
     end

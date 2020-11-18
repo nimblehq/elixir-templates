@@ -43,7 +43,13 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
     Generator.inject_content(
       ".formatter.exs",
       "[",
-      "\n\tline_length: 100,"
+      String.slice(
+        """
+
+          line_length: 100,
+        """,
+        0..-2
+      )
     )
 
     project
