@@ -33,7 +33,7 @@ defmodule NimblePhxGenTemplate.MixProject do
       {:phoenix, "~> 1.5.5"},
       {:jason, "~> 1.2.2"},
       {:httpoison, "~> 1.7.0"},
-      {:mox, "~> 1.0", only: :test},
+      {:mimic, "~> 1.3.1", only: :test},
       {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.23.0", only: :dev, runtime: false}
     ]
