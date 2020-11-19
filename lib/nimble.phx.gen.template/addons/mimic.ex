@@ -3,8 +3,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Mimic do
 
   @impl true
   def do_apply(%Project{} = project, _opts) do
-    project
-    |> edit_files()
+    edit_files(project)
   end
 
   defp edit_files(%Project{} = project) do
