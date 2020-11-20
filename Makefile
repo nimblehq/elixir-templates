@@ -10,6 +10,7 @@ create_project:
 # Y - in response to Will you host this project on Github?
 # Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
 # Y - in response to Do you want to generate the Github Action workflow?
+# Y - in Would you like to add the Oban addon?
 # Y - in response to Fetch and install dependencies?
 apply_template:
 	cd ${PROJECT_DIRECTORY} && \
@@ -18,7 +19,7 @@ apply_template:
 	rm nimble_phx_gen_template.txt && \
 	mix deps.get && \
 	mix format && \
-	printf "Y\nY\nY\nY\n" | mix nimble.phx.gen.template --${VARIANT}
+	printf "Y\nY\nY\nY\nY\n" | mix nimble.phx.gen.template --${VARIANT}
 
 remove_nimble_phx_gen_template:
 	cd ${PROJECT_DIRECTORY} && \
