@@ -17,12 +17,13 @@ defmodule Nimble.Phx.Gen.Template.AddonsWeb.CoreJSTest do
       end)
     end
 
-    test "adds core-js into app.js", %{project: project, test_project_path: test_project_path} do
+    test "imports core-js into app.js", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
         AddonsWeb.CoreJS.apply(project)
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~ """
+                 # CoreJS
                  import "core-js/stable"
                  import "regenerator-runtime/runtime"
                  """

@@ -36,6 +36,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.CoreJS do
       import "phoenix_html"
       """,
       """
+      # CoreJS
       import "core-js/stable"
       import "regenerator-runtime/runtime"
 
