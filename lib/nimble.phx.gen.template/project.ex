@@ -2,14 +2,14 @@ defmodule Nimble.Phx.Gen.Template.Project do
   # Erlang versions: asdf list all erlang
   # Elixir versions: asdf list all elixir
   @default_versions %{
-    erlang_asdf_version: "23.1.2",
+    erlang_asdf_version: "23.1.4",
     elixir_asdf_version: "1.11.2-otp-23",
     elixir_mix_version: "1.11"
   }
 
   # Elixir image tags: https://hub.docker.com/r/hexpm/elixir/tags
   @docker_base_images %{
-    build: "hexpm/elixir:1.11.2-erlang-23.1.2-alpine-3.12.1",
+    build: "hexpm/elixir:1.11.2-erlang-23.1.4-alpine-3.12.1",
     app: "alpine:3.12.1"
   }
 
