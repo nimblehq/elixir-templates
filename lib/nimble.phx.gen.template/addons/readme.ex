@@ -4,25 +4,27 @@ defmodule Nimble.Phx.Gen.Template.Addons.Readme do
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
-    |> delete_default_readme_file()
+    |> delete_files()
     |> copy_files()
   end
 
-  def delete_default_readme_file(project) do
-    Generator.delete_file("README.md")
+  def delete_files(project) do
+    File.rm("README.md")
 
     project
   end
 
   defp copy_files(
          %Project{
+           api_project?: api_project?,
            erlang_asdf_version: erlang_asdf_version,
            elixir_mix_version: elixir_mix_version
          } = project
        ) do
     Generator.copy_file([{:eex, "README.md.eex", "README.md"}],
       erlang_version: erlang_asdf_version,
-      elixir_version: elixir_mix_version
+      elixir_version: elixir_mix_version,
+      web_project?: !api_project?
     )
 
     project

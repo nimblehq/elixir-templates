@@ -10,10 +10,6 @@ defmodule Nimble.Phx.Gen.Template.Generator do
     )
   end
 
-  def delete_file(file_path) do
-    File.rm(file_path)
-  end
-
   def replace_content(file_path, anchor, content) do
     file = Path.join([file_path])
 

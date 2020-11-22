@@ -31,26 +31,23 @@
   ```sh
   mix deps.get
   ```
-
+<%= if web_project? do %>
 * Install Node dependencies:
 
   ```sh
   npm install --prefix assets
   ```
-
+<% end %>
 * Setup the databases:
 
   ```sh
   mix ecto.setup
   ```
 
-* Run the Phoenix app
+* Start the Phoenix app
 
   ```sh
   iex -S mix phx.server
-  
-  # or just
-  mix phx.server
   ```
 
 ### Test
@@ -60,3 +57,17 @@
   ```sh
   mix test 
   ```
+
+### Code Format
+
+* Run all lint:
+
+  ```sh
+  mix codebase 
+  ```
+
+### Build Docker Production Image
+
+```sh
+docker-compose build
+```
