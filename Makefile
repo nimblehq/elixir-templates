@@ -12,6 +12,13 @@ create_project:
 # Y - in response to Do you want to generate the Github Action workflow?
 # Y - in response to Would you like to add the Oban addon?
 # Y - in response to Fetch and install dependencies?
+common_addon_prompts = "Y\nY\nY\nY\nY\n"
+
+# Y - in response to Would you like to add the CoreJS addon?
+web_addon_prompts = "Y\n"
+
+api_addon_prompts = ""
+
 apply_template:
 	cd ${PROJECT_DIRECTORY} && \
 	echo '{:nimble_phx_gen_template, path: "../", only: :dev, runtime: false},' > nimble_phx_gen_template.txt && \
@@ -19,7 +26,12 @@ apply_template:
 	rm nimble_phx_gen_template.txt && \
 	mix deps.get && \
 	mix format && \
-	printf "Y\nY\nY\nY\nY\n" | mix nimble.phx.gen.template --${VARIANT}
+	if [ $(VARIANT) = web ]; then \
+		printf "${common_addon_prompts}${web_addon_prompts}" | mix nimble.phx.gen.template --web; \
+	elif [ $(VARIANT) = api ]; then \
+		printf "${common_addon_prompts}${api_addon_prompts}" | mix nimble.phx.gen.template --api; \
+	fi;
+	
 
 remove_nimble_phx_gen_template:
 	cd ${PROJECT_DIRECTORY} && \
