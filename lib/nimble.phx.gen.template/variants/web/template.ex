@@ -1,7 +1,8 @@
 defmodule Nimble.Phx.Gen.Template.Web.Template do
+  import Nimble.Phx.Gen.Template.Template, only: [install_addon_prompt?: 1]
+
   alias Nimble.Phx.Gen.Template.Addons.Web
   alias Nimble.Phx.Gen.Template.Project
-  alias Nimble.Phx.Gen.Template.Template, as: MainTemplate
 
   def apply(%Project{} = project) do
     project
@@ -9,7 +10,7 @@ defmodule Nimble.Phx.Gen.Template.Web.Template do
     |> Web.Sobelow.apply()
     |> Web.Wallaby.apply()
 
-    if MainTemplate.install_addon_prompt?("CoreJS"), do: Web.CoreJS.apply()
+    if install_addon_prompt?("CoreJS"), do: Web.CoreJS.apply(project)
 
     project
   end
