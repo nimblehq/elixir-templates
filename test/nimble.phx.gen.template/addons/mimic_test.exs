@@ -21,7 +21,10 @@ defmodule Nimble.Phx.Gen.Template.Addons.MimicTest do
       end)
     end
 
-    test "stats the mimic in test/test_helper.exs", %{project: project, test_project_path: test_project_path} do
+    test "stats the mimic in test/test_helper.exs", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
       in_test_project(test_project_path, fn ->
         Addons.Mimic.apply(project)
 
