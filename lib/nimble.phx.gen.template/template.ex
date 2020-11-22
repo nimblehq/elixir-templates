@@ -11,6 +11,9 @@ defmodule Nimble.Phx.Gen.Template.Template do
     if Mix.shell().yes?("\nFetch and install dependencies?"), do: Mix.shell().cmd("mix deps.get")
   end
 
+  def install_addon_prompt?(addon),
+    do: Mix.shell().yes?("\nWould you like to add the #{addon} addon?")
+
   # Common setup for both API and Web projects
   defp common_setup(%Project{} = project) do
     project
@@ -51,7 +54,4 @@ defmodule Nimble.Phx.Gen.Template.Template do
 
   defp generate_github_action?(),
     do: Mix.shell().yes?("\nDo you want to generate the Github Action workflow?")
-
-  defp install_addon_prompt?(addon),
-    do: Mix.shell().yes?("\nWould you like to add the #{addon} addon?")
 end
