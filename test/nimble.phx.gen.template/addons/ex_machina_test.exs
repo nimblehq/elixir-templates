@@ -32,7 +32,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachinaTest do
       end)
     end
 
-    test "adds test/factories to elixirc_paths", %{
+    test "adds test/factories into elixirc_paths", %{
       project: project,
       test_project_path: test_project_path
     } do
