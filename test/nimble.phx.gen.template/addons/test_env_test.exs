@@ -26,7 +26,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnvTest do
       end)
     end
 
-    test "sets line_length: 100 to .formatter.exs", %{
+    test "sets line_length to 100 in .formatter.exs", %{
       project: project,
       test_project_path: test_project_path
     } do
