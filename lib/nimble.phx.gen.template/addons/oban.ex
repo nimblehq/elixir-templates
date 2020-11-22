@@ -9,12 +9,12 @@ defmodule Nimble.Phx.Gen.Template.Addons.Oban do
   end
 
   defp copy_files(%Project{base_module: base_module} = project) do
-    migration_prefix = Calendar.strftime(DateTime.utc_now(), "%Y%m%d%I%M%S")
+    migrate_version = Calendar.strftime(DateTime.utc_now(), "%Y%m%d%I%M%S")
 
     Generator.copy_file(
       [
         {:eex, "priv/repo/migrations/add_oban_jobs_table.exs.eex",
-         "priv/repo/migrations/#{migration_prefix}_add_oban_jobs_table.exs"}
+         "priv/repo/migrations/#{migrate_version}_add_oban_jobs_table.exs"}
       ],
       base_module: base_module
     )
