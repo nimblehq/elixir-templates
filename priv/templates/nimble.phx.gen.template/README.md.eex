@@ -14,7 +14,7 @@
 
   - [asdf](https://github.com/asdf-vm/asdf) Erlang & Elixir
 
-### Docker
+### Development
 
 * Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
 
@@ -23,8 +23,6 @@
   ```sh
   make docker_setup
   ```
-
-### Development
 
 * Install Elixir dependencies:
 
@@ -50,15 +48,11 @@
   iex -S mix phx.server
   ```
 
-### Test
-
 * Run all tests:
 
   ```sh
   mix test 
   ```
-
-### Code Format
 
 * Run all lint:
 
@@ -66,8 +60,10 @@
   mix codebase 
   ```
 
-### Build Docker Production Image
+### Production
 
-```sh
-docker-compose build
-```
+* Buidl Docker image
+
+  ```sh
+  docker-compose build
+  ```
