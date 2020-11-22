@@ -6,6 +6,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Oban do
     project
     |> copy_files()
     |> edit_files()
+    |> create_folders()
   end
 
   defp copy_files(%Project{base_module: base_module} = project) do
@@ -28,6 +29,12 @@ defmodule Nimble.Phx.Gen.Template.Addons.Oban do
     |> edit_application_ex
     |> edit_config
     |> edit_test_config
+
+    project
+  end
+
+  defp create_folders(%Project{otp_app: otp_app} = project) do
+    File.mkdir("lib/" <> Atom.to_string(otp_app) <> "_worker")
 
     project
   end

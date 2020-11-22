@@ -51,7 +51,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ObanTest do
       end)
     end
 
-    test "adds Oban configuration to application.ex", %{
+    test "adds Oban configuration into the application.ex", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -73,7 +73,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ObanTest do
       end)
     end
 
-    test "adds Oban configuration to config/config.exs", %{
+    test "adds Oban configuration into the config/config.exs", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -91,7 +91,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ObanTest do
       end)
     end
 
-    test "adds Oban configuration to config/test.exs", %{
+    test "adds Oban configuration into the config/test.exs", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -103,6 +103,17 @@ defmodule Nimble.Phx.Gen.Template.Addons.ObanTest do
                  config :nimble_phx_gen_template, Oban, crontab: false, queues: false, plugins: false
                  """
         end)
+      end)
+    end
+
+    test "creates the worker folder", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Oban.apply(project)
+
+        assert(File.dir?("lib/nimble_phx_gen_template_worker")) == true
       end)
     end
   end
