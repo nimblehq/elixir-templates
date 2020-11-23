@@ -23,7 +23,7 @@ defmodule Nimble.Phx.Gen.Template.AddonsWeb.CoreJSTest do
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~ """
-                 # CoreJS
+                 // CoreJS
                  import "core-js/stable"
                  import "regenerator-runtime/runtime"
                  """

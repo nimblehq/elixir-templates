@@ -11,13 +11,15 @@ create_project:
 # Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
 # Y - in response to Do you want to generate the Github Action workflow?
 # Y - in response to Would you like to add the Oban addon?
-# Y - in response to Fetch and install dependencies?
-common_addon_prompts = "Y\nY\nY\nY\nY\n"
+common_addon_prompts = Y\nY\nY\nY\n
 
 # Y - in response to Would you like to add the CoreJS addon?
-web_addon_prompts = "Y\n"
+web_addon_prompts = Y\n
 
-api_addon_prompts = ""
+api_addon_prompts = 
+
+# Y - in response to Fetch and install dependencies?
+suffix_addon_prompts = Y\n
 
 apply_template:
 	cd ${PROJECT_DIRECTORY} && \
@@ -27,9 +29,9 @@ apply_template:
 	mix deps.get && \
 	mix format && \
 	if [ $(VARIANT) = web ]; then \
-		printf "${common_addon_prompts}${web_addon_prompts}" | mix nimble.phx.gen.template --web; \
+		printf "${common_addon_prompts}${web_addon_prompts}${suffix_addon_prompts}" | mix nimble.phx.gen.template --web; \
 	elif [ $(VARIANT) = api ]; then \
-		printf "${common_addon_prompts}${api_addon_prompts}" | mix nimble.phx.gen.template --api; \
+		printf "${common_addon_prompts}${api_addon_prompts}${suffix_addon_prompts}" | mix nimble.phx.gen.template --api; \
 	fi;
 	
 
