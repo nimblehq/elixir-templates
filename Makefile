@@ -33,7 +33,6 @@ apply_template:
 	elif [ $(VARIANT) = api ]; then \
 		printf "${common_addon_prompts}${api_addon_prompts}${suffix_addon_prompts}" | mix nimble.phx.gen.template --api; \
 	fi;
-	
 
 remove_nimble_phx_gen_template:
 	cd ${PROJECT_DIRECTORY} && \
