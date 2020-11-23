@@ -21,12 +21,12 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{api_project?: api_project?} = project, opts)
+  def do_apply(%Project{web_project?: web_project?} = project, opts)
       when is_map_key(opts, :github_action) do
     binding = [
       otp_version: @versions.otp_version,
       elixir_version: @versions.elixir_version,
-      web_project?: !api_project?
+      web_project?: web_project?
     ]
 
     files = [

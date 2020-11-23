@@ -17,6 +17,8 @@ web_addon_prompts =
 
 api_addon_prompts = 
 
+live_addon_prompts = 
+
 # Y - in response to Fetch and install dependencies?
 post_setup_addon_prompts = Y\n
 
@@ -31,6 +33,8 @@ apply_template:
 		printf "${common_addon_prompts}${web_addon_prompts}${post_setup_addon_prompts}" | mix nimble.phx.gen.template --web; \
 	elif [ $(VARIANT) = api ]; then \
 		printf "${common_addon_prompts}${api_addon_prompts}${post_setup_addon_prompts}" | mix nimble.phx.gen.template --api; \
+	elif [ $(VARIANT) = live ]; then \
+		printf "${common_addon_prompts}${web_addon_prompts}${live_addon_prompts}${post_setup_addon_prompts}" | mix nimble.phx.gen.template --live; \
 	fi;
 
 remove_nimble_phx_gen_template:
