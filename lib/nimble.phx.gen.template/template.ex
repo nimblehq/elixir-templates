@@ -41,8 +41,12 @@ defmodule Nimble.Phx.Gen.Template.Template do
   end
 
   defp variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)
-  defp variant_setup(%Project{live_project?: true} = project), do: LiveTemplate.apply(project)
-  defp variant_setup(%Project{web_project?: true} = project), do: WebTemplate.apply(project)
+
+  defp variant_setup(%Project{web_project?: true, live_project?: false} = project),
+    do: WebTemplate.apply(project)
+
+  defp variant_setup(%Project{web_project?: true, live_project?: true} = project),
+    do: LiveTemplate.apply(project)
 
   defp host_on_github?(), do: Mix.shell().yes?("\nWill you host this project on Github?")
 
