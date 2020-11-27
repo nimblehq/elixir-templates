@@ -60,10 +60,11 @@ All files are located under `test/` folder.
 
 ##### 2.1/ Variant
 
-NimblePhxGenTemplate is supporting 2 variants:  
+NimblePhxGenTemplate is supporting 3 variants:  
 
 - API
 - Web
+- Live
 
 ##### 2.2/ Phoenix project
 
@@ -96,8 +97,8 @@ Putting it all together, it is 8 variant test cases.
 - Applying the `API variant` to a `Custom API project`
 - Applying the `Web variant` to a `Standard Web project`
 - Applying the `Web variant` to a `Custom Web project`
-- Applying the `Web variant` to a `Standard LiveView project`
-- Applying the `Web variant` to a `Custom LiveView project`
+- Applying the `Live variant` to a `Standard LiveView project`
+- Applying the `Live variant` to a `Custom LiveView project`
 
 ### Release
 

@@ -1,4 +1,4 @@
-name: "Test Web variant on custom LiveView project"
+name: "Test Live variant on standard LiveView project"
 
 on: push
 
@@ -45,5 +45,5 @@ jobs:
               
       - uses: nimblehq/elixir-templates@composite_1.1
         with:
-          new_project_options: '--live --module=CustomModule --app=custom_app'
+          new_project_options: '--live'
           variant: 'live'
