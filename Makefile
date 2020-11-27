@@ -18,7 +18,7 @@ web_addon_prompts =
 api_addon_prompts = 
 
 # Y - in response to Fetch and install dependencies?
-suffix_addon_prompts = Y\n
+post_setup_addon_prompts = Y\n
 
 apply_template:
 	cd ${PROJECT_DIRECTORY} && \
@@ -28,9 +28,9 @@ apply_template:
 	mix deps.get && \
 	mix format && \
 	if [ $(VARIANT) = web ]; then \
-		printf "${common_addon_prompts}${web_addon_prompts}${suffix_addon_prompts}" | mix nimble.phx.gen.template --web; \
+		printf "${common_addon_prompts}${web_addon_prompts}${post_setup_addon_prompts}" | mix nimble.phx.gen.template --web; \
 	elif [ $(VARIANT) = api ]; then \
-		printf "${common_addon_prompts}${api_addon_prompts}${suffix_addon_prompts}" | mix nimble.phx.gen.template --api; \
+		printf "${common_addon_prompts}${api_addon_prompts}${post_setup_addon_prompts}" | mix nimble.phx.gen.template --api; \
 	fi;
 
 remove_nimble_phx_gen_template:
