@@ -13,8 +13,7 @@ create_project:
 # Y - in response to Would you like to add the Oban addon?
 common_addon_prompts = Y\nY\nY\nY\n
 
-# Y - in response to Would you like to add the CoreJS addon?
-web_addon_prompts = Y\n
+web_addon_prompts = 
 
 api_addon_prompts = 
 
