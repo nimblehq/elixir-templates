@@ -6,6 +6,7 @@ env:
   OTP_VERSION: 23.1.1
   ELIXIR_VERSION: 1.11.1
   PHOENIX_VERSION: 1.5.5
+  NODE_VERSION: 12
 
 jobs:   
   unit_test:
@@ -32,6 +33,10 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
+        
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ env.NODE_VERSION }}
           
       - name: Cache Elixir build
         uses: actions/cache@v2
@@ -42,6 +47,21 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-mix-
+             
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
+      
+      - name: npm packages cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
+            **/yarn.lock
+            **/node_modules
+          key: ${{ runner.os }}-npm-packages-${{ hashFiles('**/package.json*') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-packages-
               
       - uses: nimblehq/elixir-templates@composite_1.1
         with:
