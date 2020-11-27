@@ -7,7 +7,7 @@ Project repository template to set up all public Phoenix projects at [Nimble](ht
 ```elixir
 def deps do
   [
-    {:nimble_phx_gen_template, "~> 2.0.0", only: :dev}
+    {:nimble_phx_gen_template, "~> 2.0.0", only: :dev, runtime: false}
   ]
 end
 ```
