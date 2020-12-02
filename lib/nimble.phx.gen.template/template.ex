@@ -23,6 +23,7 @@ defmodule Nimble.Phx.Gen.Template.Template do
     |> Addons.Dialyxir.apply()
     |> Addons.ExCoveralls.apply()
     |> Addons.ExMachina.apply()
+    |> Addons.Mimic.apply()
 
     if host_on_github?() do
       if generate_github_template?(),
