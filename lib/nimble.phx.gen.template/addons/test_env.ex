@@ -5,6 +5,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
   def do_apply(%Project{} = project, _opts) do
     project
     |> edit_mix()
+    |> edit_formatter_exs()
     |> edit_test_config()
     |> edit_test_support_cases()
   end
@@ -33,6 +34,22 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
       """
         hostname: System.get_env("DB_HOST") || "localhost",
       """
+    )
+
+    project
+  end
+
+  defp edit_formatter_exs(project) do
+    Generator.inject_content(
+      ".formatter.exs",
+      "[",
+      String.slice(
+        """
+
+          line_length: 100,
+        """,
+        0..-2
+      )
     )
 
     project

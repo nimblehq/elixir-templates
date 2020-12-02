@@ -26,9 +26,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExMachina do
   end
 
   defp inject_mix_dependency(%Project{} = project) do
-    Generator.inject_mix_dependency(
-      {:ex_machina, latest_package_version(:ex_machina), only: :test}
-    )
+    Generator.inject_mix_dependency({:ex_machina, latest_package_version(:ex_machina), only: :test})
 
     project
   end
