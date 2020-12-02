@@ -1,25 +1,20 @@
 defmodule Nimble.Phx.Gen.Template.AddonCase do
   use ExUnit.CaseTemplate
 
-  import Mox
+  use Mimic
 
   alias Nimble.Phx.Gen.Template.Addons.Web, as: AddonsWeb
-  alias Nimble.Phx.Gen.Template.Hex.PackageMock
   alias Nimble.Phx.Gen.Template.{Addons, Project}
+  alias Nimble.Phx.Gen.Template.Hex.Package
 
   using do
     quote do
-      import Mox
-
       alias Nimble.Phx.Gen.Template.Addons
       alias Nimble.Phx.Gen.Template.Addons.Web, as: AddonsWeb
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
       # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3
       defp in_test_project(test_project_path, function), do: File.cd!(test_project_path, function)
-
-      # Make sure mocks are verified when the test exits
-      setup :verify_on_exit!
 
       defp assert_file(path),
         do: assert(File.regular?(path), "Expected #{path} to exist, but does not")
@@ -60,7 +55,7 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   end
 
   defp mock_latest_package_version({_package, version}),
-    do: expect(PackageMock, :get_latest_version, fn _package -> version end)
+    do: expect(Package, :get_latest_version, fn _package -> version end)
 
   defp create_test_project(test_project_path) do
     # N - in response to Fetch and install dependencies?
