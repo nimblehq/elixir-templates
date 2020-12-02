@@ -1,1 +1,0 @@
-# Define the mock module here, eg: Mox.defmock(<%= base_module %>.HttpAdapterMock, for: HTTPoison.Base)
