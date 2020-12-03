@@ -6,7 +6,7 @@ env:
   OTP_VERSION: 23.1.4
   ELIXIR_VERSION: 1.11.2
   PHOENIX_VERSION: 1.5.7
-  NODE_VERSION: 12
+  NODE_VERSION: 14
 
 jobs:   
   unit_test:
