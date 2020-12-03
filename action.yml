@@ -24,8 +24,12 @@ runs:
       run: make apply_template PROJECT_DIRECTORY=sample_project VARIANT=${{ inputs.variant }}
       shell: bash
 
-    - name: Install Dependencies
+    - name: Install Elixir Dependencies
       run: cd sample_project && mix deps.get
+      shell: bash
+      
+    - name: Install Node Dependencies
+      run: cd sample_project && npm install --prefix assets
       shell: bash
       
     - name: Run mix compile

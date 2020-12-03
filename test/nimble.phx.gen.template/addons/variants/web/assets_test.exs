@@ -32,5 +32,20 @@ defmodule Nimble.Phx.Gen.Template.AddonsWeb.AssetsTest do
         end)
       end)
     end
+
+    test "adds build:dev script into package.json", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        AddonsWeb.Assets.apply(project)
+
+        assert_file("assets/package.json", fn file ->
+          assert file =~ """
+                     "build:dev": "webpack --mode development"
+                 """
+        end)
+      end)
+    end
   end
 end
