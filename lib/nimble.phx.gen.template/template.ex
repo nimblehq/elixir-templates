@@ -15,6 +15,7 @@ defmodule Nimble.Phx.Gen.Template.Template do
   defp common_setup(%Project{} = project) do
     project
     |> Addons.ElixirVersion.apply()
+    |> Addons.Readme.apply()
     |> Addons.Makefile.apply()
     |> Addons.Docker.apply()
     |> Addons.MixRelease.apply()
