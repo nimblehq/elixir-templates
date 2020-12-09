@@ -52,10 +52,6 @@ jobs:
       - name: Install Dependencies
         run: mix deps.get
 
-      - name: Compile
-        run: mix compile --warnings-as-errors
-        env:
-          MIX_ENV: test
       <%= if web_project? do %>
       - name: Install node module
         run: npm --prefix assets install
@@ -79,7 +75,7 @@ jobs:
         run: mix codebase
 
       - name: Run Tests
-        run: mix coverage
+        run: mix do compile --warnings-as-errors, coverage
         env:
           MIX_ENV: test
           DB_HOST: localhost

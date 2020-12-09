@@ -41,7 +41,7 @@ defmodule NimblePhxGenTemplate.MixProject do
 
   defp aliases do
     [
-      codebase: ["format --check-formatted", "credo --strict"]
+      codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"]
     ]
   end
 

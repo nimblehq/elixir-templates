@@ -31,14 +31,7 @@ runs:
     - name: Install Node Dependencies
       run: cd sample_project && npm install --prefix assets
       shell: bash
-      
-    - name: Run mix compile
-      run: cd sample_project && mix compile --warnings-as-errors
-      shell: bash
-      env:
-        MIX_ENV: test
-        DB_HOST: localhost
-      
+
     - name: Run mix ecto.create
       run: cd sample_project && mix ecto.create
       shell: bash
@@ -61,7 +54,7 @@ runs:
         DB_HOST: localhost
       
     - name: Run mix test
-      run: cd sample_project && mix coverage
+      run: cd sample_project && mix do compile --warnings-as-errors, coverage
       shell: bash
       env:
         MIX_ENV: test

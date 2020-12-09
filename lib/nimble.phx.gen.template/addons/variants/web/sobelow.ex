@@ -32,10 +32,15 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.Sobelow do
     Generator.replace_content(
       "mix.exs",
       """
-            codebase: ["format --check-formatted", "credo --strict"],
+            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
       """,
       """
-            codebase: ["format --check-formatted", "credo --strict", "sobelow --config"],
+            codebase: [
+              "deps.unlock --check-unused",
+              "format --check-formatted",
+              "credo --strict",
+              "sobelow --config"
+            ],
       """
     )
 

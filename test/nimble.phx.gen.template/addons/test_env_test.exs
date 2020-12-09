@@ -20,7 +20,22 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnvTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"format --check-formatted\"],
+                       codebase: [\"deps.unlock --check-unused\", \"format --check-formatted\"],
+                 """
+        end)
+      end)
+    end
+
+    test "adds `Code.put_compiler_option(:warnings_as_errors, true)` into `test/test_helper.exs`",
+         %{project: project, test_project_path: test_project_path} do
+      in_test_project(test_project_path, fn ->
+        Addons.TestEnv.apply(project)
+
+        assert_file("test/test_helper.exs", fn file ->
+          assert file =~ """
+                 Code.put_compiler_option(:warnings_as_errors, true)
+
+                 ExUnit.start()
                  """
         end)
       end)
