@@ -36,16 +36,11 @@ jobs:
         
       - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
-        
-      - name: Compile
-        run: mix compile --warnings-as-errors
-        env:
-          MIX_ENV: test
       
       - name: Run codebase check
         run: mix codebase
           
       - name: Run Tests
-        run: mix test
+        run: mix do compile --warnings-as-errors, test
         env:
           MIX_ENV: test

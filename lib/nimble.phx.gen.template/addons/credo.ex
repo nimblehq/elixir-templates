@@ -32,10 +32,10 @@ defmodule Nimble.Phx.Gen.Template.Addons.Credo do
     Generator.replace_content(
       "mix.exs",
       """
-            codebase: ["format --check-formatted"],
+            codebase: ["deps.unlock --check-unused", "format --check-formatted"],
       """,
       """
-            codebase: ["format --check-formatted", "credo --strict"],
+            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
       """
     )
 
