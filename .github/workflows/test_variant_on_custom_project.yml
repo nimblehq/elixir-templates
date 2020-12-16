@@ -3,9 +3,9 @@ name: "Test variant on custom Web project"
 on: push
 
 env:
-  OTP_VERSION: 23.1.1
-  ELIXIR_VERSION: 1.11.1
-  PHOENIX_VERSION: 1.5.5
+  OTP_VERSION: 23.1.4
+  ELIXIR_VERSION: 1.11.2
+  PHOENIX_VERSION: 1.5.7
   NODE_VERSION: 12
 
 jobs:   
@@ -67,7 +67,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-packages-
               
-      - uses: nimblehq/elixir-templates@composite_1.0
+      - uses: nimblehq/elixir-templates@composite_1.1
         with:
           new_project_options: '--module=CustomModule --app=custom_app'
           variant: ${{ matrix.variant }}

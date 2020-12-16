@@ -1,20 +1,27 @@
-name: "Test template"
+name: "Publish to Hex.pm"
 
-on: push
+on:
+  workflow_run:
+    workflows:
+      - Test template
+    branches:
+      - master
+    types:
+      - completed
+  workflow_dispatch:
 
 env:
   OTP_VERSION: 23.1.4
   ELIXIR_VERSION: 1.11.2
-  PHOENIX_VERSION: 1.5.7
 
-jobs:
-  unit_test:
+jobs:   
+  publish:
     runs-on: ubuntu-latest
-
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
       - uses: actions/setup-elixir@v1
         with:
@@ -33,14 +40,8 @@ jobs:
 
       - name: Install Dependencies
         run: mix deps.get
-        
-      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
-        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
-      
-      - name: Run codebase check
-        run: mix codebase
-          
-      - name: Run Tests
-        run: mix do compile --warnings-as-errors, test
+
+      - name: Publish to Hex.pm
+        run: mix hex.publish --yes
         env:
-          MIX_ENV: test
+          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}

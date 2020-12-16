@@ -41,7 +41,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.CredoTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"format --check-formatted\", \"credo --strict\"],
+                       codebase: [\"deps.unlock --check-unused\", \"format --check-formatted\", \"credo --strict\"],
                  """
         end)
       end)

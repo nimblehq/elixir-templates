@@ -96,7 +96,7 @@
         {Credo.Check.Readability.AliasOrder, []},
         {Credo.Check.Readability.FunctionNames, []},
         {Credo.Check.Readability.LargeNumbers, []},
-        {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 120]},
+        {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 100]},
         {Credo.Check.Readability.ModuleAttributeNames, []},
         {Credo.Check.Readability.ModuleDoc, false},
         {Credo.Check.Readability.ModuleNames, []},
@@ -156,7 +156,11 @@
         #
         # Controversial and experimental checks (opt-in, just replace `false` with `[]`)
         #
-        {Credo.Check.Readability.StrictModuleLayout, []},
+        {Credo.Check.Readability.StrictModuleLayout,
+         [
+           order:
+             ~w/shortdoc moduledoc behaviour use import alias require module_attribute defstruct callback/a
+         ]},
         {Credo.Check.Consistency.MultiAliasImportRequireUse, []},
         {Credo.Check.Consistency.UnusedVariableNames, false},
         {Credo.Check.Design.DuplicatedCode, []},

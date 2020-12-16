@@ -4,10 +4,12 @@ Project repository template to set up all public Phoenix projects at [Nimble](ht
 
 ## Installation
 
+NimblePhxGenTemplate is published on Hex. Add it to your list of dependencies in `mix.exs`:
+
 ```elixir
 def deps do
   [
-    {:nimble_phx_gen_template, git: "https://github.com/nimblehq/elixir-templates", branch: "master", only: :dev}
+    {:nimble_phx_gen_template, "~> 2.1.0", only: :dev, runtime: false}
   ]
 end
 ```
@@ -93,6 +95,16 @@ Putting it all together, it is 6 variant test cases.
 - Applying the `API variant` to a `Custom API project`
 - Applying the `Web variant` to a `Standard Web project`
 - Applying the `Web variant` to a `Custom Web project`
+
+### Release
+
+Set the `HEX_API_KEY` as a Github secret (skip this step if it has been done).
+
+The release process follows the [Git flow](https://nimblehq.co/compass/development/version-control/#releases-).
+
+Once a `release/<version number>` is created, to publish the new version to Hex.pm, the version number in the `mix.ex` file needs to be updated on the release branch before merging.
+
+Once the release branch is merged into the `master` branch, Github Action will automatically publish the template to https://hex.pm/packages/nimble_phx_gen_template.
 
 ## License
 

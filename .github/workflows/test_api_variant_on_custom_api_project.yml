@@ -3,9 +3,9 @@ name: "Test API variant on custom API project"
 on: push
 
 env:
-  OTP_VERSION: 23.1.1
-  ELIXIR_VERSION: 1.11.1
-  PHOENIX_VERSION: 1.5.5
+  OTP_VERSION: 23.1.4
+  ELIXIR_VERSION: 1.11.2
+  PHOENIX_VERSION: 1.5.7
 
 jobs:   
   unit_test:
@@ -43,7 +43,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
               
-      - uses: nimblehq/elixir-templates@composite_1.0
+      - uses: nimblehq/elixir-templates@composite_1.1
         with:
           new_project_options: '--no-html --no-webpack --module=CustomModule --app=custom_app'
           variant: 'api'

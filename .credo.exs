@@ -96,7 +96,7 @@
         {Credo.Check.Readability.AliasOrder, []},
         {Credo.Check.Readability.FunctionNames, []},
         {Credo.Check.Readability.LargeNumbers, []},
-        {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 120]},
+        {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 100]},
         {Credo.Check.Readability.ModuleAttributeNames, []},
         {Credo.Check.Readability.ModuleDoc, false},
         {Credo.Check.Readability.ModuleNames, []},
@@ -136,7 +136,7 @@
         {Credo.Check.Warning.IExPry, []},
         {Credo.Check.Warning.IoInspect, []},
         {Credo.Check.Warning.LazyLogging, []},
-        {Credo.Check.Warning.MixEnv, false},
+        {Credo.Check.Warning.MixEnv, []},
         {Credo.Check.Warning.OperationOnSameValues, []},
         {Credo.Check.Warning.OperationWithConstantResult, []},
         {Credo.Check.Warning.RaiseInsideRescue, []},
@@ -156,7 +156,11 @@
         #
         # Controversial and experimental checks (opt-in, just replace `false` with `[]`)
         #
-        {Credo.Check.Readability.StrictModuleLayout, []},
+        {Credo.Check.Readability.StrictModuleLayout,
+         [
+           order:
+             ~w/shortdoc moduledoc behaviour use import alias require module_attribute defstruct callback/a
+         ]},
         {Credo.Check.Consistency.MultiAliasImportRequireUse, []},
         {Credo.Check.Consistency.UnusedVariableNames, []},
         {Credo.Check.Design.DuplicatedCode, []},

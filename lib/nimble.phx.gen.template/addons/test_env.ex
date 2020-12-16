@@ -5,6 +5,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
   def do_apply(%Project{} = project, _opts) do
     project
     |> edit_mix()
+    |> edit_formatter_exs()
+    |> edit_test_helper()
     |> edit_test_config()
     |> edit_test_support_cases()
   end
@@ -17,7 +19,23 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
           [
       """,
       """
-            codebase: ["format --check-formatted"],
+            codebase: ["deps.unlock --check-unused", "format --check-formatted"],
+      """
+    )
+
+    project
+  end
+
+  defp edit_test_helper(%Project{} = project) do
+    Generator.replace_content(
+      "test/test_helper.exs",
+      """
+      ExUnit.start()
+      """,
+      """
+      Code.put_compiler_option(:warnings_as_errors, true)
+
+      ExUnit.start()
       """
     )
 
@@ -33,6 +51,22 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
       """
         hostname: System.get_env("DB_HOST") || "localhost",
       """
+    )
+
+    project
+  end
+
+  defp edit_formatter_exs(project) do
+    Generator.inject_content(
+      ".formatter.exs",
+      "[",
+      String.slice(
+        """
+
+          line_length: 100,
+        """,
+        0..-2
+      )
     )
 
     project
