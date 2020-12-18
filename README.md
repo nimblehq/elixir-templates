@@ -22,6 +22,7 @@ Then run `mix do deps.get, deps.compile` to install NimblePhxGenTemplate
 mix nimble.phx.gen.template -v # Print the version
 mix nimble.phx.gen.template --web # Apply the Web template
 mix nimble.phx.gen.template --api # Apply the API template
+mix nimble.phx.gen.template --live # Apply the LiveView template
 ```
 ## Requirements
 
@@ -61,10 +62,11 @@ All files are located under `test/` folder.
 
 ##### 2.1/ Variant
 
-NimblePhxGenTemplate is supporting 2 variants:  
+NimblePhxGenTemplate is supporting 3 variants:  
 
 - API
 - Web
+- Live
 
 ##### 2.2/ Phoenix project
 
@@ -80,14 +82,16 @@ Aside from that, it could also be a Custom project, which contains the custom OT
 - `mix phx.new AppName --app=custom_otp_app_name`
 - `mix phx.new AppName --module=CustomModuleName --app=custom_otp_app_name`
 
-So it ends up with 4 project types:
+So it ends up with 6 project types:
 
 - Standard Web project (`mix phx.new AppName`)
 - Custom Web project (`mix phx.new AppName --module=CustomModuleName --app=custom_otp_app_name`)
 - Standard API project (`mix phx.new AppName --no-html --no-webpack`)
 - Custom API project (`mix phx.new AppName --no-html --no-webpack --module=CustomModuleName --app=custom_otp_app_name`)
+- Standard LiveView project (`mix phx.new AppName --live`)
+- Custom LiveView project (`mix phx.new AppName --live --module=CustomModuleName --app=custom_otp_app_name`)
 
-Putting it all together, it is 6 variant test cases.
+Putting it all together, it is 8 variant test cases.
 
 - Applying the `API variant` to a `Standard Web project`
 - Applying the `API variant` to a `Custom Web project`
@@ -95,6 +99,8 @@ Putting it all together, it is 6 variant test cases.
 - Applying the `API variant` to a `Custom API project`
 - Applying the `Web variant` to a `Standard Web project`
 - Applying the `Web variant` to a `Custom Web project`
+- Applying the `Live variant` to a `Standard LiveView project`
+- Applying the `Live variant` to a `Custom LiveView project`
 
 ### Release
 

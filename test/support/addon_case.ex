@@ -30,7 +30,9 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   end
 
   setup context do
-    project = Project.new()
+    # Set Web Project as default, switch to either API or Live Project in each test case
+    # eg: project = %{project | api_project?: true, web_project?: false}
+    project = Project.new(web: true)
 
     parent_test_project_path = Path.join(tmp_path(), parent_test_project_path())
     test_project_path = Path.join(parent_test_project_path, "/nimble_phx_gen_template")

@@ -95,7 +95,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
       project: project,
       test_project_path: test_project_path
     } do
-      project = %{project | api_project?: true}
+      project = %{project | api_project?: true, web_project?: false}
 
       in_test_project(test_project_path, fn ->
         Addons.Docker.apply(project)

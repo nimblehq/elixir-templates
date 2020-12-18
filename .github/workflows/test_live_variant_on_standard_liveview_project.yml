@@ -1,4 +1,4 @@
-name: "Test variant on custom Web project"
+name: "Test Live variant on standard LiveView project"
 
 on: push
 
@@ -11,10 +11,6 @@ env:
 jobs:   
   unit_test:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        variant: [web, api]
     
     services:
       db:
@@ -37,7 +33,7 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
-    
+          
       - uses: actions/setup-node@v2-beta
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -51,7 +47,7 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-mix-
-      
+           
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
@@ -69,5 +65,5 @@ jobs:
               
       - uses: nimblehq/elixir-templates@composite_1.1
         with:
-          new_project_options: '--module=CustomModule --app=custom_app'
-          variant: ${{ matrix.variant }}
+          new_project_options: '--live'
+          variant: 'live'

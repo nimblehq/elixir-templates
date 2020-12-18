@@ -14,17 +14,30 @@ defmodule Nimble.Phx.Gen.Template.Addons.Web.CoreJS do
     project
   end
 
-  def edit_package_json(project) do
-    Generator.replace_content(
-      "assets/package.json",
-      """
-          "phoenix_html": "file:../deps/phoenix_html"
-      """,
-      """
-          "phoenix_html": "file:../deps/phoenix_html",
-          "core-js": "^3.7.0"
-      """
-    )
+  def edit_package_json(%Project{live_project?: live_project?} = project) do
+    if live_project? do
+      Generator.replace_content(
+        "assets/package.json",
+        """
+            "phoenix_html": "file:../deps/phoenix_html",
+        """,
+        """
+            "phoenix_html": "file:../deps/phoenix_html",
+            "core-js": "^3.7.0",
+        """
+      )
+    else
+      Generator.replace_content(
+        "assets/package.json",
+        """
+            "phoenix_html": "file:../deps/phoenix_html"
+        """,
+        """
+            "phoenix_html": "file:../deps/phoenix_html",
+            "core-js": "^3.7.0"
+        """
+      )
+    end
 
     project
   end

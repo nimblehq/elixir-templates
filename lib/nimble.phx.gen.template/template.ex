@@ -1,5 +1,6 @@
 defmodule Nimble.Phx.Gen.Template.Template do
   alias Nimble.Phx.Gen.Template.Api.Template, as: ApiTemplate
+  alias Nimble.Phx.Gen.Template.Live.Template, as: LiveTemplate
   alias Nimble.Phx.Gen.Template.Web.Template, as: WebTemplate
   alias Nimble.Phx.Gen.Template.{Addons, Project}
 
@@ -40,7 +41,12 @@ defmodule Nimble.Phx.Gen.Template.Template do
   end
 
   defp variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)
-  defp variant_setup(%Project{api_project?: false} = project), do: WebTemplate.apply(project)
+
+  defp variant_setup(%Project{web_project?: true, live_project?: false} = project),
+    do: WebTemplate.apply(project)
+
+  defp variant_setup(%Project{web_project?: true, live_project?: true} = project),
+    do: LiveTemplate.apply(project)
 
   defp host_on_github?(), do: Mix.shell().yes?("\nWill you host this project on Github?")
 
