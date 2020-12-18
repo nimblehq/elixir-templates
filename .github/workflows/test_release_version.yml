@@ -1,6 +1,9 @@
 name: "Test Release version"
 
-on: push
+on:
+  pull_request:
+    branches:
+      - 'release/**'
 
 env:
   OTP_VERSION: 23.1.4
