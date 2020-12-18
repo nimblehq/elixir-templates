@@ -6,3 +6,4 @@ Mimic.copy(Calendar)
 Mimic.copy(Nimble.Phx.Gen.Template.Hex.Package)
 
 ExUnit.start()
+ExUnit.configure(exclude: :release_version)
