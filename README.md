@@ -9,7 +9,7 @@ NimblePhxGenTemplate is published on Hex. Add it to your list of dependencies in
 ```elixir
 def deps do
   [
-    {:nimble_phx_gen_template, "~> 2.1.0", only: :dev, runtime: false}
+    {:nimble_phx_gen_template, "~> 2.2.0", only: :dev, runtime: false}
   ]
 end
 ```
