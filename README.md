@@ -4,7 +4,7 @@ Project repository template to set up all public Phoenix projects at [Nimble](ht
 
 ## Installation
 
-### Generate a fresh new Phoenix project by using [mix phx.new](https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html)
+### Generate a new Phoenix project by using [mix phx.new](https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html)
 
 ```bash
 mix phx.new ...
@@ -23,7 +23,7 @@ end
 
 Then run `mix do deps.get, deps.compile` to install NimblePhxGenTemplate.
 
-*Note:* NimblePhxGenTemplate is only working on a fresh new Phoenix project, applying NimblePhxGenTemplate to an existing Phoenix project might doesn't work as expected.
+*Note:* NimblePhxGenTemplate is only working on a new Phoenix project, applying NimblePhxGenTemplate to an existing Phoenix project might doesn't work as expected.
 
 ## Usage
 
