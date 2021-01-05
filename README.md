@@ -4,17 +4,26 @@ Project repository template to set up all public Phoenix projects at [Nimble](ht
 
 ## Installation
 
-NimblePhxGenTemplate is published on Hex. Add it to your list of dependencies in `mix.exs`:
+### Generate a new Phoenix project by using [mix phx.new](https://hexdocs.pm/phoenix/Mix.Tasks.Phx.New.html)
+
+```bash
+mix phx.new ...
+```
+
+### Adding `nimble_phx_gen_template` into `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:nimble_phx_gen_template, "~> 2.2.0", only: :dev, runtime: false}
+    {:nimble_phx_gen_template, "~> 2.2.0", only: :dev, runtime: false},
+    ...
   ]
 end
 ```
 
-Then run `mix do deps.get, deps.compile` to install NimblePhxGenTemplate
+Then run `mix do deps.get, deps.compile` to install NimblePhxGenTemplate.
+
+*Note:* NimblePhxGenTemplate is only working on a new Phoenix project, applying NimblePhxGenTemplate to an existing Phoenix project might not work as expected.
 
 ## Usage
 
