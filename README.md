@@ -21,7 +21,9 @@ def deps do
 end
 ```
 
-Then run `mix do deps.get, deps.compile` to install NimblePhxGenTemplate
+Then run `mix do deps.get, deps.compile` to install NimblePhxGenTemplate.
+
+*Note:* NimblePhxGenTemplate is only working on a fresh new Phoenix project, applying NimblePhxGenTemplate to an existing Phoenix project might doesn't work as expected.
 
 ## Usage
 
