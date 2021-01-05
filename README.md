@@ -23,7 +23,7 @@ end
 
 Then run `mix do deps.get, deps.compile` to install NimblePhxGenTemplate.
 
-*Note:* NimblePhxGenTemplate is only working on a new Phoenix project, applying NimblePhxGenTemplate to an existing Phoenix project might doesn't work as expected.
+*Note:* NimblePhxGenTemplate is only working on a new Phoenix project, applying NimblePhxGenTemplate to an existing Phoenix project might not work as expected.
 
 ## Usage
 
