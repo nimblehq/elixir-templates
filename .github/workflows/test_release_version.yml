@@ -1,7 +1,7 @@
 name: "Test Release version"
 
 on:
-  pull_request:
+  push:
     branches:
       - 'release/**'
 
