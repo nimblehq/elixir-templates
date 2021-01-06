@@ -19,11 +19,15 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
     project
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files(%Project{live_project?: live_project?} = project) do
     project
     |> inject_mix_dependency()
     |> edit_mix()
     |> edit_web_router()
+
+    if live_project?, do: edit_page_live(project)
+
+    project
   end
 
   defp inject_mix_dependency(project) do
@@ -60,6 +64,21 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
       """,
       """
             coverage: ["coveralls.html --raise"],
+      """
+    )
+
+    project
+  end
+
+  defp edit_page_live(%Project{web_path: web_path, web_module: web_module} = project) do
+    Generator.replace_content(
+      "#{web_path}/live/page_live.ex",
+      """
+      defmodule #{web_module}.PageLive do
+      """,
+      """
+      # coveralls-ignore-start
+      defmodule #{web_module}.PageLive do
       """
     )
 

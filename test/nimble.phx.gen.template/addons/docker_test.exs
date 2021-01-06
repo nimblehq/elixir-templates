@@ -57,7 +57,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
         Addons.Docker.apply(project)
 
         assert_file("Dockerfile", fn file ->
-          assert file =~ "FROM hexpm/elixir:1.11.2-erlang-23.1.4-alpine-3.12.1 AS build"
+          assert file =~ "FROM hexpm/elixir:1.11.3-erlang-23.1.5-alpine-3.12.1 AS build"
           assert file =~ "FROM alpine:3.12.1 AS app"
 
           assert file =~
@@ -95,7 +95,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
       project: project,
       test_project_path: test_project_path
     } do
-      project = %{project | api_project?: true}
+      project = %{project | api_project?: true, web_project?: false}
 
       in_test_project(test_project_path, fn ->
         Addons.Docker.apply(project)

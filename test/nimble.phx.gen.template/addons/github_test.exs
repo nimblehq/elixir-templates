@@ -30,7 +30,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.GithubTest do
       project: project,
       test_project_path: test_project_path
     } do
-      project = %{project | api_project?: true}
+      project = %{project | api_project?: true, web_project?: false}
 
       in_test_project(test_project_path, fn ->
         Addons.Github.apply(project, %{github_action: true})
