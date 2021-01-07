@@ -3,7 +3,7 @@ name: "Test variant on standard Web project"
 on: push
 
 env:
-  OTP_VERSION: 23.1.5
+  OTP_VERSION: 23.2.1
   ELIXIR_VERSION: 1.11.3
   PHOENIX_VERSION: 1.5.7
   NODE_VERSION: 14
