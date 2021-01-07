@@ -30,7 +30,7 @@ defmodule NimblePhxGenTemplate.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix, "~> 1.5.5"},
+      {:phoenix, "~> 1.5.7"},
       {:jason, "~> 1.2.2"},
       {:httpoison, "~> 1.7.0"},
       {:mimic, "~> 1.3.1", only: :test},
