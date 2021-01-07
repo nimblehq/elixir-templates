@@ -1,4 +1,4 @@
-.PHONY: install_phoenix create_project apply_template remove_nimble_phx_gen_template
+.PHONY: install_phoenix create_project apply_template remove_nimble_elixir_template
 
 # Y - in response to Are you sure you want to install "phx_new-${PHOENIX_VERSION}.ez"?
 install_phoenix:
@@ -24,19 +24,19 @@ post_setup_addon_prompts = Y\n
 
 apply_template:
 	cd ${PROJECT_DIRECTORY} && \
-	echo '{:nimble_phx_gen_template, path: "../", only: :dev, runtime: false},' > nimble_phx_gen_template.txt && \
-	sed -i -e '/{:phoenix, "~> /r nimble_phx_gen_template.txt' mix.exs && \
-	rm nimble_phx_gen_template.txt && \
+	echo '{:nimble_elixir_template, path: "../", only: :dev, runtime: false},' > nimble_elixir_template.txt && \
+	sed -i -e '/{:phoenix, "~> /r nimble_elixir_template.txt' mix.exs && \
+	rm nimble_elixir_template.txt && \
 	mix deps.get && \
 	mix format && \
 	if [ $(VARIANT) = web ]; then \
-		printf "${common_addon_prompts}${web_addon_prompts}${post_setup_addon_prompts}" | mix nimble.phx.gen.template --web; \
+		printf "${common_addon_prompts}${web_addon_prompts}${post_setup_addon_prompts}" | mix nimble.elixir.template --web; \
 	elif [ $(VARIANT) = api ]; then \
-		printf "${common_addon_prompts}${api_addon_prompts}${post_setup_addon_prompts}" | mix nimble.phx.gen.template --api; \
+		printf "${common_addon_prompts}${api_addon_prompts}${post_setup_addon_prompts}" | mix nimble.elixir.template --api; \
 	elif [ $(VARIANT) = live ]; then \
-		printf "${common_addon_prompts}${web_addon_prompts}${live_addon_prompts}${post_setup_addon_prompts}" | mix nimble.phx.gen.template --live; \
+		printf "${common_addon_prompts}${web_addon_prompts}${live_addon_prompts}${post_setup_addon_prompts}" | mix nimble.elixir.template --live; \
 	fi;
 
-remove_nimble_phx_gen_template:
+remove_nimble_elixir_template:
 	cd ${PROJECT_DIRECTORY} && \
-	sed -i -e 's/{:nimble_phx_gen_template, path: "..\/"},//' mix.exs
+	sed -i -e 's/{:nimble_elixir_template, path: "..\/"},//' mix.exs

@@ -1,11 +1,11 @@
-defmodule NimblePhxGenTemplate.MixProject do
+defmodule Nimble.Elixir.Template.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :nimble_phx_gen_template,
+      app: :nimble_elixir_template,
       version: "2.2.0",
-      description: "Project repository template to set up all public Phoenix projects at Nimble",
+      description: "Project repository template to set up all public Elixir/Phoenix projects at Nimble",
       elixir: "~> 1.11.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
