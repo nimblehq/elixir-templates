@@ -28,6 +28,8 @@ Then run `mix do deps.get, deps.compile` to install Nimble.Elixir.Template.
 ## Usage
 
 ```
+mix help nimble.elixir.template # Print help
+
 mix nimble.elixir.template -v # Print the version
 mix nimble.elixir.template --web # Apply the Web template
 mix nimble.elixir.template --api # Apply the API template

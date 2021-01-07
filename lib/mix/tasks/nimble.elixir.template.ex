@@ -1,6 +1,15 @@
 defmodule Mix.Tasks.Nimble.Elixir.Template do
   @shortdoc "Apply Nimble's Elixir/Phoenix template"
 
+  @moduledoc """
+  Apply Nimble's Elixir/Phoenix template
+
+    mix nimble.elixir.template -v # Print the version
+    mix nimble.elixir.template --web # Apply the Web template
+    mix nimble.elixir.template --api # Apply the API template
+    mix nimble.elixir.template --live # Apply the LiveView template
+  """
+
   use Mix.Task
 
   alias Nimble.Elixir.Template.{Project, Template}
