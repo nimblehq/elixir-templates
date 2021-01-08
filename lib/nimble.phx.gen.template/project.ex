@@ -1,17 +1,8 @@
 defmodule Nimble.Phx.Gen.Template.Project do
-  # Erlang versions: asdf list all erlang
-  # Elixir versions: asdf list all elixir
-  @default_versions %{
-    erlang_asdf_version: "23.2.1",
-    elixir_asdf_version: "1.11.3-otp-23",
-    elixir_mix_version: "1.11.3"
-  }
+  @elixir_version "1.11.3"
+  @erlang_version "23.2.1"
 
-  # Elixir image tags: https://hub.docker.com/r/hexpm/elixir/tags
-  @docker_base_images %{
-    build: "hexpm/elixir:1.11.3-erlang-23.2.1-alpine-3.12.1",
-    app: "alpine:3.12.1"
-  }
+  @alpine_version "3.12.1"
 
   defstruct otp_app: nil,
             base_module: nil,
@@ -23,11 +14,13 @@ defmodule Nimble.Phx.Gen.Template.Project do
             api_project?: false,
             web_project?: false,
             live_project?: false,
-            erlang_asdf_version: @default_versions[:erlang_asdf_version],
-            elixir_asdf_version: @default_versions[:elixir_asdf_version],
-            elixir_mix_version: @default_versions[:elixir_mix_version],
-            docker_build_base_image: @docker_base_images[:build],
-            docker_app_base_image: @docker_base_images[:app]
+            elixir_mix_version: @elixir_version,
+            erlang_asdf_version: @erlang_version,
+            elixir_asdf_version:
+              "#{@elixir_version}-otp-#{@erlang_version |> String.split(".") |> List.first()}",
+            docker_build_base_image:
+              "hexpm/elixir:#{@elixir_version}-erlang-#{@erlang_version}-alpine-#{@alpine_version}",
+            docker_app_base_image: "alpine:#{@alpine_version}"
 
   def new(opts \\ %{}) do
     %__MODULE__{
