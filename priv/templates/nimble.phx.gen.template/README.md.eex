@@ -8,7 +8,7 @@
 
 ### Erlang & Elixir
 
-* Erlang <%= erlang_version %>+ and Elixir <%= elixir_version %>+
+* Erlang <%= erlang_version %> and Elixir <%= elixir_version %>
 
 * Recommended version manager.
 

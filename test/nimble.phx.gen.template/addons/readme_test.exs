@@ -11,7 +11,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ReadmeTest do
 
         assert_file("README.md", fn file ->
           assert file =~ """
-                 Erlang 23.1.5+ and Elixir 1.11+
+                 Erlang 23.2.1 and Elixir 1.11.3
                  """
 
           assert file =~ """
@@ -38,7 +38,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ReadmeTest do
 
         assert_file("README.md", fn file ->
           assert file =~ """
-                 Erlang 23.1.5+ and Elixir 1.11+
+                 Erlang 23.2.1 and Elixir 1.11.3
                  """
 
           refute file =~ """

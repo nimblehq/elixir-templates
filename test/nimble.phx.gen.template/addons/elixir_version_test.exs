@@ -11,7 +11,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ElixirVersionTest do
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """
-                 erlang 23.1.5
+                 erlang 23.2.1
                  elixir 1.11.3-otp-23
                  """
         end)
@@ -26,7 +26,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ElixirVersionTest do
         Addons.ElixirVersion.apply(project)
 
         assert_file("mix.exs", fn file ->
-          assert file =~ "elixir: \"~> 1.11\","
+          assert file =~ "elixir: \"~> 1.11.3\","
         end)
       end)
     end

@@ -6,7 +6,7 @@ defmodule NimblePhxGenTemplate.MixProject do
       app: :nimble_phx_gen_template,
       version: "2.2.0",
       description: "Project repository template to set up all public Phoenix projects at Nimble",
-      elixir: "~> 1.11",
+      elixir: "~> 1.11.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -30,7 +30,7 @@ defmodule NimblePhxGenTemplate.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix, "~> 1.5.5"},
+      {:phoenix, "~> 1.5.7"},
       {:jason, "~> 1.2.2"},
       {:httpoison, "~> 1.7.0"},
       {:mimic, "~> 1.3.1", only: :test},

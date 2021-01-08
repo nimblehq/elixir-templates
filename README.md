@@ -35,7 +35,15 @@ mix nimble.phx.gen.template --live # Apply the LiveView template
 ```
 ## Requirements
 
-NimblePhxGenTemplate has been developed and actively tested with Elixir 1.11+, Erlang/OTP 23.1+ and Phoenix 1.5+. Running NimblePhxGenTemplate currently requires Elixir 1.11+, Erlang/OTP 23.1+ and Phoenix 1.5+.
+NimblePhxGenTemplate has been developed and actively tested with:
+- Elixir 1.11.3
+- Erlang/OTP 23.2.1
+- Phoenix 1.5.7
+
+Running NimblePhxGenTemplate currently requires:
+- Elixir 1.11.3
+- Erlang/OTP 23.2.1
+- Phoenix 1.5.7
 
 ## Contributing
 
@@ -123,7 +131,7 @@ Once the release branch is merged into the `master` branch, Github Action will a
 
 ## License
 
-This project is Copyright (c) 2014-2020 Nimble. It is free software,
+This project is Copyright (c) 2014-2021 Nimble. It is free software,
 and may be redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: /LICENSE
