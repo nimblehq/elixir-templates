@@ -14,8 +14,8 @@ defmodule Nimble.Phx.Gen.Template.Project do
             api_project?: false,
             web_project?: false,
             live_project?: false,
-            elixir_mix_version: @elixir_version,
-            erlang_asdf_version: @erlang_version,
+            elixir_version: @elixir_version,
+            erlang_version: @erlang_version,
             elixir_asdf_version:
               "#{@elixir_version}-otp-#{@erlang_version |> String.split(".") |> List.first()}",
             docker_build_base_image:

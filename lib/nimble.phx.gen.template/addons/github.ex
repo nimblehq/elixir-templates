@@ -1,11 +1,6 @@
 defmodule Nimble.Phx.Gen.Template.Addons.Github do
   use Nimble.Phx.Gen.Template.Addon
 
-  @versions %{
-    otp_version: "23.0.2",
-    elixir_version: "1.10.4"
-  }
-
   @impl true
   def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_template) do
     files = [
@@ -21,11 +16,18 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{web_project?: web_project?} = project, opts)
+  def do_apply(
+        %Project{
+          web_project?: web_project?,
+          erlang_version: erlang_version,
+          elixir_version: elixir_version
+        } = project,
+        opts
+      )
       when is_map_key(opts, :github_action) do
     binding = [
-      otp_version: @versions.otp_version,
-      elixir_version: @versions.elixir_version,
+      erlang_version: erlang_version,
+      elixir_version: elixir_version,
       web_project?: web_project?
     ]
 

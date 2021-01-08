@@ -17,18 +17,5 @@ defmodule Nimble.Phx.Gen.Template.Addons.ElixirVersionTest do
         end)
       end)
     end
-
-    test "changes the minimum Elixir version", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        Addons.ElixirVersion.apply(project)
-
-        assert_file("mix.exs", fn file ->
-          assert file =~ "elixir: \"~> 1.11.3\","
-        end)
-      end)
-    end
   end
 end

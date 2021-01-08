@@ -1,8 +1,9 @@
 name: "Tests"
+
 on: pull_request
 
 env:
-  OTP_VERSION: <%= inspect otp_version %>
+  OTP_VERSION: <%= inspect erlang_version %>
   ELIXIR_VERSION: <%= inspect elixir_version %>
 
 jobs:

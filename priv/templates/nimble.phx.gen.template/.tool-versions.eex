@@ -1,3 +1,3 @@
 # Configuration file for https://github.com/asdf-vm/asdf
-erlang <%= erlang_asdf_version %>
+erlang <%= erlang_version %>
 elixir <%= elixir_asdf_version %>
