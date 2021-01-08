@@ -20,7 +20,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
         %Project{
           web_project?: web_project?,
           erlang_version: erlang_version,
-          elixir_version: elixir_version
+          elixir_version: elixir_version,
+          node_version: node_version
         } = project,
         opts
       )
@@ -28,6 +29,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
     binding = [
       erlang_version: erlang_version,
       elixir_version: elixir_version,
+      node_version: node_version,
       web_project?: web_project?
     ]
 

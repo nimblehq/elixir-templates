@@ -2,5 +2,5 @@ defmodule <%= base_module %>.Factory do
   use ExMachina.Ecto, repo: <%= base_module %>.Repo
 
   # Define your factories in /test/factories and declare it here,
-  # eg: `use <%base_module %>.Accounts.UserFactory`
+  # eg: `use <%= base_module %>.Accounts.UserFactory`
 end

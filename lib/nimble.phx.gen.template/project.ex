@@ -1,6 +1,7 @@
 defmodule Nimble.Phx.Gen.Template.Project do
   @elixir_version "1.11.3"
   @erlang_version "23.2.1"
+  @node_version "14"
 
   @alpine_version "3.12.1"
 
@@ -16,6 +17,7 @@ defmodule Nimble.Phx.Gen.Template.Project do
             live_project?: false,
             elixir_version: @elixir_version,
             erlang_version: @erlang_version,
+            node_version: @node_version,
             elixir_asdf_version:
               "#{@elixir_version}-otp-#{@erlang_version |> String.split(".") |> List.first()}",
             docker_build_base_image:
