@@ -28,6 +28,20 @@ defmodule Nimble.Phx.Gen.Template.Addons.Credo do
     project
   end
 
+  defp edit_mix(%Project{mix_project?: true} = project) do
+    Generator.replace_content(
+      "mix.exs",
+      """
+            codebase: ["deps.unlock --check-unused", "format --check-formatted"]
+      """,
+      """
+            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"]
+      """
+    )
+
+    project
+  end
+
   defp edit_mix(project) do
     Generator.replace_content(
       "mix.exs",

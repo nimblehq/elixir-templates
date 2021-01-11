@@ -1,12 +1,32 @@
 defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
-  @shortdoc "Generates Nimble's Phoenix template"
+  @shortdoc "Apply Nimble's Elixir/Phoenix template"
+  @moduledoc """
+  #{@shortdoc}
+
+  - Hex package: https://hex.pm/packages/nimble_phx_gen_template
+  - Github: https://github.com/nimblehq/elixir-templates
+
+  # Usage
+
+  - mix nimble.phx.gen.template -v # Print the version
+
+  ## Phoenix application
+
+  - mix nimble.phx.gen.template --api # Apply the Phoenix API template
+  - mix nimble.phx.gen.template --live # Apply the Phoenix LiveView template
+  - mix nimble.phx.gen.template --web # Apply the Phoenix Web template
+
+  ## Non-Phoenix application
+
+  - mix nimble.phx.gen.template --mix # Apply the Mix template
+  """
 
   use Mix.Task
 
   alias Nimble.Phx.Gen.Template.{Project, Template}
 
   @version Mix.Project.config()[:version]
-  @variants [api: :boolean, web: :boolean, live: :boolean]
+  @variants [api: :boolean, web: :boolean, live: :boolean, mix: :boolean]
 
   def run([args]) when args in ~w(-v --version) do
     Mix.shell().info("Nimble.Phx.Gen.Template v#{@version}")

@@ -20,6 +20,14 @@ defmodule Nimble.Phx.Gen.Template.Addons.ReadmeTest do
                    npm install --prefix assets
                    ```
                  """
+
+          assert file =~ """
+                 * Start the Phoenix app
+
+                   ```sh
+                   iex -S mix phx.server
+                   ```
+                 """
         end)
       end)
     end
@@ -30,8 +38,42 @@ defmodule Nimble.Phx.Gen.Template.Addons.ReadmeTest do
       project: project,
       test_project_path: test_project_path
     } do
-      project = %{project | api_project?: true}
+      project = %{project | api_project?: true, web_project?: false}
 
+      in_test_project(test_project_path, fn ->
+        Addons.Readme.apply(project)
+
+        assert_file("README.md", fn file ->
+          assert file =~ "Erlang 23.2.1"
+          assert file =~ "Elixir 1.11.3"
+
+          refute file =~ """
+                 * Install Node dependencies:
+
+                   ```sh
+                   npm install --prefix assets
+                   ```
+                 """
+
+          assert file =~ """
+                 * Start the Phoenix app
+
+                   ```sh
+                   iex -S mix phx.server
+                   ```
+                 """
+        end)
+      end)
+    end
+  end
+
+  describe "#apply/2 with mix_project" do
+    @describetag mix_project?: true
+
+    test "copies the README.md", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
       in_test_project(test_project_path, fn ->
         Addons.Readme.apply(project)
 
@@ -44,6 +86,14 @@ defmodule Nimble.Phx.Gen.Template.Addons.ReadmeTest do
 
                    ```sh
                    npm install --prefix assets
+                   ```
+                 """
+
+          refute file =~ """
+                 * Start the Phoenix app
+
+                   ```sh
+                   iex -S mix phx.server
                    ```
                  """
         end)

@@ -8,13 +8,28 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExCoveralls do
     |> edit_files()
   end
 
-  defp copy_files(%Project{otp_app: otp_app} = project) do
+  defp copy_files(%Project{otp_app: otp_app, mix_project?: mix_project?} = project) do
     binding = [
       otp_app: otp_app,
       minimum_coverage: 100
     ]
 
-    Generator.copy_file([{:eex, "coveralls.json.eex", "coveralls.json"}], binding)
+    template_file_path =
+      if mix_project? do
+        "coveralls.json.mix.eex"
+      else
+        "coveralls.json.eex"
+      end
+
+    Generator.copy_file([{:eex, template_file_path, "coveralls.json"}], binding)
+
+    project
+  end
+
+  defp edit_files(%Project{mix_project?: true} = project) do
+    project
+    |> inject_mix_dependency()
+    |> edit_mix()
 
     project
   end

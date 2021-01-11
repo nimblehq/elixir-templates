@@ -12,12 +12,16 @@ NimblePhxGenTemplate has been developed and actively tested with the below envir
 
 ## Installation
 
-*Note:* NimblePhxGenTemplate only works on a _new_ Phoenix project, applying it to an existing Phoenix project might not work as expected.
+*Note:* NimblePhxGenTemplate only works on a _new_ Phoenix/Mix project, applying it to an existing Phoenix/Mix project might not work as expected.
 
-Step 1: Generate a new Phoenix project
+Step 1: Generate a new project
 
 ```bash
+# New Phoenix project
 mix phx.new awesome_project
+
+# New Mix project
+mix new awesome_project
 ```
 
 Step 2: Add `nimble_phx_gen_template` dependency to `mix.exs`:
@@ -41,11 +45,18 @@ mix do deps.get, deps.compile
 
 ## Usage
 
-```
-mix nimble.phx.gen.template -v      # Print the version
+```bash
+mix help nimble.phx.gen.template # Print help
+
+mix nimble.phx.gen.template -v # Print the version
+
+# Phoenix application
 mix nimble.phx.gen.template --web   # Apply the Web template
 mix nimble.phx.gen.template --api   # Apply the API template
 mix nimble.phx.gen.template --live  # Apply the LiveView template
+
+# Non-Phoenix application
+mix nimble.phx.gen.template --mix # Apply the Mix template
 ```
 
 ## Running tests
@@ -72,6 +83,12 @@ All test files are located under `test/` directory.
 │   │   │   │   └── api
 │   │   │   │   │   ├── ...
 │   │   │   │   │   └── api_addon_test.exs
+│   │   │   │   └── live
+│   │   │   │   │   ├── ...
+│   │   │   │   │   └── live_addon_test.exs
+│   │   │   │   └── mix
+│   │   │   │   │   ├── ...
+│   │   │   │   │   └── mix_addon_test.exs
 │   │   │   │   └── web
 │   │   │   │   │   ├── ...
 │   │   │   │   │   └── web_addon_test.exs
@@ -81,11 +98,12 @@ All test files are located under `test/` directory.
 
 #### 2.1/ Variant
 
-NimblePhxGenTemplate supports 3 variants:  
+NimblePhxGenTemplate supports 4 variants:  
 
 - API
-- Web
 - Live
+- Web
+- Mix
 
 #### 2.2/ Phoenix project
 
@@ -95,6 +113,12 @@ The Phoenix project could be either a Web or API project.
 
 ```bash
 mix phx.new awesome_project
+```
+
+- LiveView project is including HTML and Webpack configuration.
+
+```bash
+mix phx.new awesome_project --live
 ```
 
 - API variant does NOT support HTML and Webpack configuration.
@@ -140,6 +164,29 @@ Putting it all together, there are 8 variants of test cases.
 - Applying the `Web variant` to a `Custom Web project`
 - Applying the `Live variant` to a `Standard LiveView project`
 - Applying the `Live variant` to a `Custom LiveView project`
+
+##### 2.2/ Mix project
+
+The Mix project could be either a Standard project or a Custom project.
+
+- `mix new awesome_project`
+- `mix new awesome_project --module=CustomModuleName`
+- `mix new awesome_project --app=custom_otp_app_name`
+- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
+
+Each project could be include the `supervision tree` or not.
+
+- `mix new awesome_project`
+- `mix new awesome_project --sup`
+- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
+- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name --sup`
+
+Putting it all together, it will has 4 variant test cases.
+
+- Applying the `Mix variant` to a `Standard Mix project`
+- Applying the `Mix variant` to a `Custom Mix project`
+- Applying the `Mix variant` to a `Standard Mix project with the --sup option`
+- Applying the `Mix variant` to a `Custom Mix project with the --sup option`
 
 ### Release
 

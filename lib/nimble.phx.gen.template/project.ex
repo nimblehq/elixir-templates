@@ -24,7 +24,8 @@ defmodule Nimble.Phx.Gen.Template.Project do
             # Variants
             api_project?: false,
             live_project?: false,
-            web_project?: false
+            web_project?: false,
+            mix_project?: false
 
   def new(opts \\ %{}) do
     %__MODULE__{
@@ -37,7 +38,8 @@ defmodule Nimble.Phx.Gen.Template.Project do
       web_test_path: "test/" <> Atom.to_string(otp_app()) <> "_web",
       api_project?: api_project?(opts),
       web_project?: web_project?(opts),
-      live_project?: live_project?(opts)
+      live_project?: live_project?(opts),
+      mix_project?: mix_project?(opts),
     }
   end
 
@@ -46,6 +48,8 @@ defmodule Nimble.Phx.Gen.Template.Project do
   defp web_project?(opts), do: opts[:web] === true || opts[:live] === true
 
   defp live_project?(opts), do: opts[:live] === true
+
+  defp mix_project?(opts), do: opts[:mix] === true
 
   defp otp_app(), do: Mix.Phoenix.otp_app()
 

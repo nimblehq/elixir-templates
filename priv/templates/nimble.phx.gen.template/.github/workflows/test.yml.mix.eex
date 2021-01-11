@@ -1,0 +1,42 @@
+name: "Tests"
+
+on: pull_request
+
+env:
+  OTP_VERSION: <%= inspect erlang_version %>
+  ELIXIR_VERSION: <%= inspect elixir_version %>
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Run codebase check
+        run: mix codebase
+
+      - name: Run Tests
+        run: mix do compile --warnings-as-errors, coverage
+        env:
+          MIX_ENV: test

@@ -7,7 +7,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install Dependencies 
+    - name: Install Elixir Dependencies 
       run: mix deps.get
       shell: bash
     
@@ -16,12 +16,12 @@ runs:
       shell: bash
     
       # Y - in response to Fetch and install dependencies?
-    - name: Create project
-      run: printf "Y\n" | make create_project PROJECT_DIRECTORY=sample_project OPTIONS="${{ inputs.new_project_options }}"
+    - name: Create Phoenix project
+      run: printf "Y\n" | make create_phoenix_project PROJECT_DIRECTORY=sample_project OPTIONS="${{ inputs.new_project_options }}"
       shell: bash
     
-    - name: Apply template
-      run: make apply_template PROJECT_DIRECTORY=sample_project VARIANT=${{ inputs.variant }}
+    - name: Apply Phoenix template
+      run: make apply_phoenix_template PROJECT_DIRECTORY=sample_project VARIANT=${{ inputs.variant }}
       shell: bash
 
     - name: Install Elixir Dependencies

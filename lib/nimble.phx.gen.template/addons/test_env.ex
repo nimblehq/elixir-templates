@@ -2,6 +2,14 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
   use Nimble.Phx.Gen.Template.Addon
 
   @impl true
+  def do_apply(%Project{mix_project?: true} = project, _opts) do
+    project
+    |> edit_mix()
+    |> edit_formatter_exs()
+    |> edit_test_helper()
+  end
+
+  @impl true
   def do_apply(%Project{} = project, _opts) do
     project
     |> edit_mix()
@@ -9,6 +17,42 @@ defmodule Nimble.Phx.Gen.Template.Addons.TestEnv do
     |> edit_test_helper()
     |> edit_test_config()
     |> edit_test_support_cases()
+  end
+
+  defp edit_mix(%Project{mix_project?: true} = project) do
+    Generator.replace_content(
+      "mix.exs",
+      """
+            deps: deps()
+      """,
+      """
+            elixirc_paths: elixirc_paths(Mix.env()),
+            aliases: aliases(),
+            deps: deps()
+      """
+    )
+
+    Generator.replace_content(
+      "mix.exs",
+      """
+        # Run "mix help deps" to learn about dependencies.
+      """,
+      """
+        defp aliases do
+          [
+            codebase: ["deps.unlock --check-unused", "format --check-formatted"]
+          ]
+        end
+
+        # Specifies which paths to compile per environment.
+        defp elixirc_paths(:test), do: ["lib", "test/support"]
+        defp elixirc_paths(_), do: ["lib"]
+
+        # Run "mix help deps" to learn about dependencies.
+      """
+    )
+
+    project
   end
 
   defp edit_mix(project) do
