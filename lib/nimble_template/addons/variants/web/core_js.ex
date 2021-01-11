@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.Web.CoreJS do
-  use Nimble.Template.Addon
+defmodule NimbleTemplate.Addons.Web.CoreJS do
+  use NimbleTemplate.Addon
 
   @impl true
   def do_apply(%Project{} = project, _opts) do

@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Hex.Package do
-  alias Nimble.Template.Hex.HexClient
+defmodule NimbleTemplate.Hex.Package do
+  alias NimbleTemplate.Hex.HexClient
 
   def get_latest_version(package) do
     {:ok, package_info} = HexClient.get("packages/#{package}")

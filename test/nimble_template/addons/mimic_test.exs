@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.MimicTest do
-  use Nimble.Template.AddonCase
+defmodule NimbleTemplate.Addons.MimicTest do
+  use NimbleTemplate.AddonCase
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:mimic, "1.3.1"}]

@@ -1,5 +1,5 @@
-defmodule Nimble.Template.AddonsWeb.CoreJSTest do
-  use Nimble.Template.AddonCase
+defmodule NimbleTemplate.AddonsWeb.CoreJSTest do
+  use NimbleTemplate.AddonCase
 
   describe "#apply/2" do
     test "adds core-js into package.json", %{

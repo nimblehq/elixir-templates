@@ -1,7 +1,7 @@
-defmodule Nimble.Template.ReleaseVersionTest do
+defmodule NimbleTemplate.ReleaseVersionTest do
   use ExUnit.Case, async: true
 
-  alias Nimble.Template.Hex.Package
+  alias NimbleTemplate.Hex.Package
 
   @tag :release_version
   test "the new version is greater than the hex version" do

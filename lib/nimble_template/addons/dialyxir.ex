@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.Dialyxir do
-  use Nimble.Template.Addon
+defmodule NimbleTemplate.Addons.Dialyxir do
+  use NimbleTemplate.Addon
 
   @impl true
   def do_apply(%Project{} = project, _opts) do

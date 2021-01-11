@@ -1,5 +1,5 @@
-defmodule Nimble.Template.AddonsWeb.WallabyTest do
-  use Nimble.Template.AddonCase
+defmodule NimbleTemplate.AddonsWeb.WallabyTest do
+  use NimbleTemplate.AddonCase
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:wallaby, "0.26.2"}]

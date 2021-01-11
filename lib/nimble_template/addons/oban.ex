@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.Oban do
-  use Nimble.Template.Addon
+defmodule NimbleTemplate.Addons.Oban do
+  use NimbleTemplate.Addon
 
   @impl true
   def do_apply(%Project{} = project, _opts) do

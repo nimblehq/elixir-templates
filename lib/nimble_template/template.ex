@@ -1,9 +1,9 @@
-defmodule Nimble.Template.Template do
-  alias Nimble.Template.Api.Template, as: ApiTemplate
-  alias Nimble.Template.Live.Template, as: LiveTemplate
-  alias Nimble.Template.Mix.Template, as: MixTemplate
-  alias Nimble.Template.Web.Template, as: WebTemplate
-  alias Nimble.Template.{Addons, Project}
+defmodule NimbleTemplate.Template do
+  alias NimbleTemplate.Api.Template, as: ApiTemplate
+  alias NimbleTemplate.Live.Template, as: LiveTemplate
+  alias NimbleTemplate.Mix.Template, as: MixTemplate
+  alias NimbleTemplate.Web.Template, as: WebTemplate
+  alias NimbleTemplate.{Addons, Project}
 
   def apply(%Project{mix_project?: true} = project) do
     MixTemplate.apply(project)

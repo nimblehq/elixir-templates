@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.TestEnv do
-  use Nimble.Template.Addon
+defmodule NimbleTemplate.Addons.TestEnv do
+  use NimbleTemplate.Addon
 
   @impl true
   def do_apply(%Project{mix_project?: true} = project, _opts) do

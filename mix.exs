@@ -1,4 +1,4 @@
-defmodule Nimble.Template.MixProject do
+defmodule NimbleTemplate.MixProject do
   use Mix.Project
 
   def project do

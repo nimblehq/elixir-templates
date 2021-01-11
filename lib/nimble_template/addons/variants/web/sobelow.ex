@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.Web.Sobelow do
-  use Nimble.Template.Addon
+defmodule NimbleTemplate.Addons.Web.Sobelow do
+  use NimbleTemplate.Addon
 
   @impl true
   def do_apply(%Project{} = project, _opts) do

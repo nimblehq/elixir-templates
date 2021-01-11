@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.ElixirVersion do
-  use Nimble.Template.Addon
+defmodule NimbleTemplate.Addons.ElixirVersion do
+  use NimbleTemplate.Addon
 
   @impl true
   def do_apply(

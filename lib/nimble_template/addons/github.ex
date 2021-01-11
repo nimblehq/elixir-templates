@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.Github do
-  use Nimble.Template.Addon
+defmodule NimbleTemplate.Addons.Github do
+  use NimbleTemplate.Addon
 
   @impl true
   def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_template) do

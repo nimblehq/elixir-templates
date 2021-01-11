@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addon do
-  alias Nimble.Template.{Addon, Project}
+defmodule NimbleTemplate.Addon do
+  alias NimbleTemplate.{Addon, Project}
 
   @callback apply(%Project{}, %{}) :: %Project{}
   @callback do_apply(%Project{}, %{}) :: %Project{}
@@ -8,8 +8,8 @@ defmodule Nimble.Template.Addon do
     quote location: :keep, bind_quoted: [opts: opts] do
       @behaviour Addon
 
-      alias Nimble.Template.{Generator, Project}
-      alias Nimble.Template.Hex.Package
+      alias NimbleTemplate.{Generator, Project}
+      alias NimbleTemplate.Hex.Package
 
       def apply(%Project{} = project, opts \\ %{}) when is_map(opts) do
         Generator.print_log("* applying ", inspect(__MODULE__))

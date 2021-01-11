@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.TestEnvTest do
-  use Nimble.Template.AddonCase
+defmodule NimbleTemplate.Addons.TestEnvTest do
+  use NimbleTemplate.AddonCase
 
   describe "#apply/2" do
     test "injects the DB_HOST ENV", %{project: project, test_project_path: test_project_path} do

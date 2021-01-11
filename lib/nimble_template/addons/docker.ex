@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.Docker do
-  use Nimble.Template.Addon
+defmodule NimbleTemplate.Addons.Docker do
+  use NimbleTemplate.Addon
 
   @impl true
   def do_apply(

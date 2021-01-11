@@ -1,16 +1,16 @@
-defmodule Nimble.Template.AddonCase do
+defmodule NimbleTemplate.AddonCase do
   use ExUnit.CaseTemplate
 
   use Mimic
 
-  alias Nimble.Template.Addons.Web, as: AddonsWeb
-  alias Nimble.Template.{Addons, Project}
-  alias Nimble.Template.Hex.Package
+  alias NimbleTemplate.Addons.Web, as: AddonsWeb
+  alias NimbleTemplate.{Addons, Project}
+  alias NimbleTemplate.Hex.Package
 
   using do
     quote do
-      alias Nimble.Template.Addons
-      alias Nimble.Template.Addons.Web, as: AddonsWeb
+      alias NimbleTemplate.Addons
+      alias NimbleTemplate.Addons.Web, as: AddonsWeb
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
       # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3

@@ -1,6 +1,6 @@
-defmodule Nimble.Template.Web.Template do
-  alias Nimble.Template.Addons.Web
-  alias Nimble.Template.Project
+defmodule NimbleTemplate.Web.Template do
+  alias NimbleTemplate.Addons.Web
+  alias NimbleTemplate.Project
 
   def apply(%Project{} = project) do
     project

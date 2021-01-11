@@ -1,6 +1,6 @@
-defmodule Nimble.Template.Live.Template do
-  alias Nimble.Template.Project
-  alias Nimble.Template.Web.Template, as: WebTemplate
+defmodule NimbleTemplate.Live.Template do
+  alias NimbleTemplate.Project
+  alias NimbleTemplate.Web.Template, as: WebTemplate
 
   def apply(%Project{} = project) do
     WebTemplate.apply(project)

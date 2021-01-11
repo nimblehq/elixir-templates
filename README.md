@@ -4,7 +4,7 @@ Phoenix template for projects at [Nimble](https://nimblehq.co/).
 
 ## Prerequisites
 
-NimblePhxGenTemplate has been developed and actively tested with the below environment:
+NimbleTemplate has been developed and actively tested with the below environment:
 
 - Elixir 1.11.4
 - Erlang/OTP 23.3
@@ -12,7 +12,7 @@ NimblePhxGenTemplate has been developed and actively tested with the below envir
 
 ## Installation
 
-*Note:* NimblePhxGenTemplate only works on a _new_ Phoenix/Mix project, applying it to an existing Phoenix/Mix project might not work as expected.
+*Note:* NimbleTemplate only works on a _new_ Phoenix/Mix project, applying it to an existing Phoenix/Mix project might not work as expected.
 
 Step 1: Generate a new project
 
@@ -37,7 +37,7 @@ end
 
 Step 3: Fetch and install dependencies
 
-Run this command in the root of the project directory to install NimblePhxGenTemplate.
+Run this command in the root of the project directory to install NimbleTemplate.
 
 ```bash
 mix do deps.get, deps.compile
@@ -56,12 +56,12 @@ mix nimble_template --api   # Apply the API template
 mix nimble_template --live  # Apply the LiveView template
 
 # Non-Phoenix application
-mix nimble.template.gen --mix # Apply the Mix template
+mix nimble_template.gen --mix # Apply the Mix template
 ```
 
 ## Running tests
 
-NimblePhxGenTemplate uses Github Action as the CI, the workflow files locate under [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
+NimbleTemplate uses Github Action as the CI, the workflow files locate under [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
 
 There are 2 types of test **Template test** and **Variant test**
 
@@ -98,7 +98,7 @@ All test files are located under `test/` directory.
 
 #### 2.1/ Variant
 
-NimblePhxGenTemplate supports 4 variants:  
+NimbleTemplate supports 4 variants:  
 
 - API
 - Live

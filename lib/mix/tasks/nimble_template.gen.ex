@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Nimble.Template.Gen do
+defmodule Mix.Tasks.NimbleTemplate.Gen do
   @shortdoc "Apply Nimble's Elixir/Phoenix template"
 
   @moduledoc """
@@ -9,31 +9,31 @@ defmodule Mix.Tasks.Nimble.Template.Gen do
 
   # Usage
 
-  - mix nimble.template.gen -v # Print the version
+  - mix nimble_template.gen -v # Print the version
 
   ### Phoenix application
 
-  - mix nimble.template.gen --api # Apply the Phoenix API template
-  - mix nimble.template.gen --live # Apply the Phoenix LiveView template
-  - mix nimble.template.gen --web # Apply the Phoenix Web template
+  - mix nimble_template.gen --api # Apply the Phoenix API template
+  - mix nimble_template.gen --live # Apply the Phoenix LiveView template
+  - mix nimble_template.gen --web # Apply the Phoenix Web template
 
   ### Non-Phoenix application
 
-  - mix nimble.template.gen --mix # Apply the Mix template
+  - mix nimble_template.gen --mix # Apply the Mix template
   """
 
   use Mix.Task
 
-  alias Nimble.Template.{Project, Template}
+  alias NimbleTemplate.{Project, Template}
 
   @version Mix.Project.config()[:version]
   @variants [api: :boolean, web: :boolean, live: :boolean, mix: :boolean]
 
-  def run([args]) when args in ~w(-v --version), do: Mix.shell().info("Nimble.Template v#{@version}")
+  def run([args]) when args in ~w(-v --version), do: Mix.shell().info("NimbleTemplate v#{@version}")
 
   def run(args) do
     if Mix.Project.umbrella?() do
-      Mix.raise("mix nimble.template.gen can only be run inside an application directory")
+      Mix.raise("mix nimble_template.gen can only be run inside an application directory")
     end
 
     {opts, _params} = parse_opts(args)

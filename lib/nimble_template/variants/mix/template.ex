@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Mix.Template do
-  import Nimble.Template.Template,
+defmodule NimbleTemplate.Mix.Template do
+  import NimbleTemplate.Template,
     only: [
       host_on_github?: 0,
       generate_github_template?: 0,
@@ -7,7 +7,7 @@ defmodule Nimble.Template.Mix.Template do
       install_addon_prompt?: 1
     ]
 
-  alias Nimble.Template.{Addons, Project}
+  alias NimbleTemplate.{Addons, Project}
 
   def apply(%Project{} = project) do
     project

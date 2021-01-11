@@ -1,3 +1,3 @@
-defmodule Nimble.Template.HttpClient.HttpAdapter do
+defmodule NimbleTemplate.HttpClient.HttpAdapter do
   use HTTPoison.Base
 end

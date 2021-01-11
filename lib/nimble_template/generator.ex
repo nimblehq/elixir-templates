@@ -1,4 +1,4 @@
-defmodule Nimble.Template.Generator do
+defmodule NimbleTemplate.Generator do
   @template_resource "priv/templates/nimble_template"
 
   def copy_file(files, binding \\ []) do

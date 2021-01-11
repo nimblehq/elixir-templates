@@ -1,5 +1,5 @@
-defmodule Nimble.Template.AddonsWeb.SobelowTest do
-  use Nimble.Template.AddonCase
+defmodule NimbleTemplate.AddonsWeb.SobelowTest do
+  use NimbleTemplate.AddonCase
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:credo, "0.26.2"}, {:sobelow, "0.8"}]

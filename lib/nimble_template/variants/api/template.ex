@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Api.Template do
-  alias Nimble.Template.Project
+defmodule NimbleTemplate.Api.Template do
+  alias NimbleTemplate.Project
 
   def apply(%Project{} = project) do
     project

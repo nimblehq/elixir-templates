@@ -1,4 +1,4 @@
-defmodule Nimble.Phx.Gen.Template.Project do
+defmodule NimbleTemplate.Project do
   @elixir_version "1.11.4"
   @erlang_version "23.3"
   @node_version "14"

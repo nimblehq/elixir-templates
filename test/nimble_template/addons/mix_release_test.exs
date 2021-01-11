@@ -1,5 +1,5 @@
-defmodule Nimble.Template.Addons.MixReleaseTest do
-  use Nimble.Template.AddonCase
+defmodule NimbleTemplate.Addons.MixReleaseTest do
+  use NimbleTemplate.AddonCase
 
   describe "#apply/2" do
     test "deletes the import_config \"prod.secret.exs\" in config/prod.exs", %{
