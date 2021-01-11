@@ -60,8 +60,8 @@ runs:
         MIX_ENV: test
         DB_HOST: localhost
     
-    - name: Remove nimble_phx_gen_template
-      run: make remove_nimble_phx_gen_template PROJECT_DIRECTORY=sample_project
+    - name: Remove nimble_template
+      run: make remove_nimble_template PROJECT_DIRECTORY=sample_project
       shell: bash
       
     - name: Build release app

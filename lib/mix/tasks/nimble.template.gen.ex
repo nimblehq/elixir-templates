@@ -24,13 +24,12 @@ defmodule Mix.Tasks.Nimble.Template.Gen do
 
   use Mix.Task
 
-  alias Nimble.Phx.Gen.Template.{Project, Template}
+  alias Nimble.Template.{Project, Template}
 
   @version Mix.Project.config()[:version]
   @variants [api: :boolean, web: :boolean, live: :boolean, mix: :boolean]
 
-  def run([args]) when args in ~w(-v --version),
-    do: Mix.shell().info("Nimble.Phx.Gen.Template v#{@version}")
+  def run([args]) when args in ~w(-v --version), do: Mix.shell().info("Nimble.Template v#{@version}")
 
   def run(args) do
     if Mix.Project.umbrella?() do

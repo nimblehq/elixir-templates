@@ -24,12 +24,12 @@ mix phx.new awesome_project
 mix new awesome_project
 ```
 
-Step 2: Add `nimble_phx_gen_template` dependency to `mix.exs`:
+Step 2: Add `nimble_template` dependency to `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:nimble_phx_gen_template, "~> 2.2.0", only: :dev, runtime: false},
+    {:nimble_template, "~> 2.2.0", only: :dev, runtime: false},
     # other dependencies ...
   ]
 end
@@ -46,17 +46,17 @@ mix do deps.get, deps.compile
 ## Usage
 
 ```bash
-mix help nimble.phx.gen.template # Print help
+mix help nimble_template # Print help
 
-mix nimble.phx.gen.template -v # Print the version
+mix nimble_template -v # Print the version
 
 # Phoenix application
-mix nimble.phx.gen.template --web   # Apply the Web template
-mix nimble.phx.gen.template --api   # Apply the API template
-mix nimble.phx.gen.template --live  # Apply the LiveView template
+mix nimble_template --web   # Apply the Web template
+mix nimble_template --api   # Apply the API template
+mix nimble_template --live  # Apply the LiveView template
 
 # Non-Phoenix application
-mix nimble.phx.gen.template --mix # Apply the Mix template
+mix nimble.template.gen --mix # Apply the Mix template
 ```
 
 ## Running tests
@@ -75,7 +75,7 @@ All test files are located under `test/` directory.
 ├── ...
 ├── test
 │   ├── ...
-│   ├── nimble.phx.gen.template
+│   ├── nimble_template
 │   │   └── addons
 │   │   │   ├── ...
 │   │   │   ├── common_addon_test.exs
@@ -196,7 +196,7 @@ The release process follows the [Git flow](https://nimblehq.co/compass/developme
 
 Once a `release/<version number>` is created, to publish the new version to Hex.pm, the version number in the `mix.ex` file needs to be updated on the release branch before merging.
 
-Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_phx_gen_template](https://hex.pm/packages/nimble_phx_gen_template).
+Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
 
 
 ## Contributing
