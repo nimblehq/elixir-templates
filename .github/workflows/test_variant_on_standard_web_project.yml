@@ -67,7 +67,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-packages-
               
-      - uses: nimblehq/elixir-templates@composite_1.2
+      - uses: nimblehq/elixir-templates@composite_1.3
         with:
           new_project_options: ''
           variant: ${{ matrix.variant }}
