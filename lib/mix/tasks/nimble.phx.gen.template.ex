@@ -1,5 +1,6 @@
 defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
   @shortdoc "Apply Nimble's Elixir/Phoenix template"
+
   @moduledoc """
   #{@shortdoc}
 
