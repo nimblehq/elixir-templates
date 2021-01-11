@@ -1,25 +1,25 @@
-defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
+defmodule Mix.Tasks.Nimble.Template.Gen do
   @shortdoc "Apply Nimble's Elixir/Phoenix template"
 
   @moduledoc """
   #{@shortdoc}
 
-  - Hex package: https://hex.pm/packages/nimble_phx_gen_template
+  - Hex package: https://hex.pm/packages/nimble_template
   - Github: https://github.com/nimblehq/elixir-templates
 
   # Usage
 
-  - mix nimble.phx.gen.template -v # Print the version
+  - mix nimble.template.gen -v # Print the version
 
   ### Phoenix application
 
-  - mix nimble.phx.gen.template --api # Apply the Phoenix API template
-  - mix nimble.phx.gen.template --live # Apply the Phoenix LiveView template
-  - mix nimble.phx.gen.template --web # Apply the Phoenix Web template
+  - mix nimble.template.gen --api # Apply the Phoenix API template
+  - mix nimble.template.gen --live # Apply the Phoenix LiveView template
+  - mix nimble.template.gen --web # Apply the Phoenix Web template
 
   ### Non-Phoenix application
 
-  - mix nimble.phx.gen.template --mix # Apply the Mix template
+  - mix nimble.template.gen --mix # Apply the Mix template
   """
 
   use Mix.Task
@@ -34,7 +34,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
 
   def run(args) do
     if Mix.Project.umbrella?() do
-      Mix.raise("mix nimble.phx.gen.template can only be run inside an application directory")
+      Mix.raise("mix nimble.template.gen can only be run inside an application directory")
     end
 
     {opts, _params} = parse_opts(args)
