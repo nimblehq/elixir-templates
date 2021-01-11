@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Web.Template do
+  @moduledoc false
+
   alias NimbleTemplate.Addons.Web
   alias NimbleTemplate.Project
 

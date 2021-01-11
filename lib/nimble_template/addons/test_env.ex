@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Addons.TestEnv do
+  @moduledoc false
+
   use NimbleTemplate.Addon
 
   @impl true

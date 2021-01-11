@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Mix.Template do
+  @moduledoc false
+
   import NimbleTemplate.Template,
     only: [
       host_on_github?: 0,

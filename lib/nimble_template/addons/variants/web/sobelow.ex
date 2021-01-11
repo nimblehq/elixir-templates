@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Addons.Web.Sobelow do
+  @moduledoc false
+
   use NimbleTemplate.Addon
 
   @impl true

@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Addons.Mimic do
+  @moduledoc false
+
   use NimbleTemplate.Addon
 
   @impl true

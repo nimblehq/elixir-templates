@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Addons.Web.Wallaby do
+  @moduledoc false
+
   use NimbleTemplate.Addon
 
   @impl true

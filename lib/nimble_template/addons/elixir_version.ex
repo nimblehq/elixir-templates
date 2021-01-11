@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Addons.ElixirVersion do
+  @moduledoc false
+
   use NimbleTemplate.Addon
 
   @impl true

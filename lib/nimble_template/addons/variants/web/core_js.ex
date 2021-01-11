@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Addons.Web.CoreJS do
+  @moduledoc false
+
   use NimbleTemplate.Addon
 
   @impl true

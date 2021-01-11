@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Addons.ExCoveralls do
+  @moduledoc false
+
   use NimbleTemplate.Addon
 
   @impl true

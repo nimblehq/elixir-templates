@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Hex.HexClient do
+  @moduledoc false
+
   alias NimbleTemplate.HttpClient.HttpAdapter
 
   @base_url "https://hex.pm/api/"

@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Template do
+  @moduledoc false
+
   alias NimbleTemplate.Api.Template, as: ApiTemplate
   alias NimbleTemplate.Live.Template, as: LiveTemplate
   alias NimbleTemplate.Mix.Template, as: MixTemplate

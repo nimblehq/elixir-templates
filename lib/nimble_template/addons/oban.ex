@@ -1,4 +1,6 @@
 defmodule NimbleTemplate.Addons.Oban do
+  @moduledoc false
+
   use NimbleTemplate.Addon
 
   @impl true
