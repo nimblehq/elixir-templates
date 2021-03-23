@@ -39,6 +39,12 @@ Run this command in the root of project directory to install NimblePhxGenTemplat
 mix do deps.get, deps.compile
 ```
 
+Step 4: Run migrate
+
+```bash
+mix ecto.migrate
+```
+
 ## Usage
 
 ```
