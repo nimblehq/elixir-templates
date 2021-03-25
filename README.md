@@ -6,8 +6,8 @@ Phoenix template for projects at [Nimble](https://nimblehq.co/).
 
 NimblePhxGenTemplate has been developed and actively tested with the below environment:
 
-- Elixir 1.11.3
-- Erlang/OTP 23.2.1
+- Elixir 1.11.4
+- Erlang/OTP 23.3
 - Phoenix 1.5.7
 
 ## Installation
@@ -173,4 +173,3 @@ See [our other projects][community] or [hire our team][hire] to help build your 
 
 [community]: https://github.com/nimblehq
 [hire]: https://nimblehq.co
-

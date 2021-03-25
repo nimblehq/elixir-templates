@@ -1,9 +1,9 @@
 defmodule Nimble.Phx.Gen.Template.Project do
-  @elixir_version "1.11.3"
-  @erlang_version "23.2.1"
+  @elixir_version "1.11.4"
+  @erlang_version "23.3"
   @node_version "14"
 
-  @alpine_version "3.12.1"
+  @alpine_version "3.13.2"
 
   defstruct base_module: nil,
             base_path: nil,

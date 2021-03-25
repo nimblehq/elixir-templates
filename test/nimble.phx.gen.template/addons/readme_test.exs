@@ -10,8 +10,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.ReadmeTest do
         Addons.Readme.apply(project)
 
         assert_file("README.md", fn file ->
-          assert file =~ "Erlang 23.2.1"
-          assert file =~ "Elixir 1.11.3"
+          assert file =~ "Erlang 23.3"
+          assert file =~ "Elixir 1.11.4"
 
           assert file =~ """
                  * Install Node dependencies:
@@ -36,8 +36,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.ReadmeTest do
         Addons.Readme.apply(project)
 
         assert_file("README.md", fn file ->
-          assert file =~ "Erlang 23.2.1"
-          assert file =~ "Elixir 1.11.3"
+          assert file =~ "Erlang 23.3"
+          assert file =~ "Elixir 1.11.4"
 
           refute file =~ """
                  * Install Node dependencies:
