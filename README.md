@@ -17,7 +17,7 @@ NimblePhxGenTemplate has been developed and actively tested with the below envir
 Step 1: Generate a new Phoenix project
 
 ```bash
-mix phx.new hello_elixir
+mix phx.new awesome_project
 ```
 
 Step 2: Add `nimble_phx_gen_template` dependency to `mix.exs`:
@@ -94,20 +94,20 @@ The Phoenix project could be either a Web project or API project.
 - Web variant supports HTML and Webpack configuration.
 
 ```bash
-mix phx.new your_app_name
+mix phx.new awesome_project
 ```
 
 - API variant does NOT support HTML and Webpack configuration.
 
 ```bash
-mix phx.new your_app_name --no-html --no-webpack
+mix phx.new awesome_project --no-html --no-webpack
 ```
 
 - Custom project variant allow us to modify the app name or module name.
 
 ```bash
 # Use CustomModuleName
-mix phx.new your_app_name --module=CustomModuleName
+mix phx.new awesome_project --module=CustomModuleName
 
 # Use custom otp app name
 mix phx.new AppName --app=custom_otp_app_name
@@ -117,12 +117,12 @@ mix phx.new AppName --module=CustomModuleName --app=custom_otp_app_name
 
 So it ends up with 6 project types:
 
-- Standard Web project (`mix phx.new your_app_name`)
-- Custom Web project (`mix phx.new your_app_name --module=CustomModuleName --app=custom_otp_app_name`)
-- Standard API project (`mix phx.new your_app_name --no-html --no-webpack`)
-- Custom API project (`mix phx.new your_app_name --no-html --no-webpack --module=CustomModuleName --app=custom_otp_app_name`)
-- Standard LiveView project (`mix phx.new your_app_name --live`)
-- Custom LiveView project (`mix phx.new your_app_name --live --module=CustomModuleName --app=custom_otp_app_name`)
+- Standard Web project (`mix phx.new awesome_project`)
+- Custom Web project (`mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name`)
+- Standard API project (`mix phx.new awesome_project --no-html --no-webpack`)
+- Custom API project (`mix phx.new awesome_project --no-html --no-webpack --module=CustomModuleName --app=custom_otp_app_name`)
+- Standard LiveView project (`mix phx.new awesome_project --live`)
+- Custom LiveView project (`mix phx.new awesome_project --live --module=CustomModuleName --app=custom_otp_app_name`)
 
 Putting it all together, there are 8 variants test cases.
 
