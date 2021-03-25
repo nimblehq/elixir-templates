@@ -5,37 +5,39 @@ defmodule Nimble.Phx.Gen.Template.Project do
 
   @alpine_version "3.12.1"
 
-  defstruct otp_app: nil,
-            base_module: nil,
+  defstruct base_module: nil,
             base_path: nil,
             base_test_path: nil,
+            otp_app: nil,
             web_module: nil,
             web_path: nil,
             web_test_path: nil,
-            api_project?: false,
-            web_project?: false,
-            live_project?: false,
-            elixir_version: @elixir_version,
-            erlang_version: @erlang_version,
-            node_version: @node_version,
-            elixir_asdf_version:
-              "#{@elixir_version}-otp-#{@erlang_version |> String.split(".") |> List.first()}",
+            # Dependency Versions
+            docker_app_base_image: "alpine:#{@alpine_version}",
             docker_build_base_image:
               "hexpm/elixir:#{@elixir_version}-erlang-#{@erlang_version}-alpine-#{@alpine_version}",
-            docker_app_base_image: "alpine:#{@alpine_version}"
+            elixir_version: @elixir_version,
+            elixir_asdf_version:
+              "#{@elixir_version}-otp-#{@erlang_version |> String.split(".") |> List.first()}",
+            erlang_version: @erlang_version,
+            node_version: @node_version,
+            # Variants
+            api_project?: false,
+            live_project?: false,
+            web_project?: false
 
   def new(opts \\ %{}) do
     %__MODULE__{
-      api_project?: api_project?(opts),
-      web_project?: web_project?(opts),
-      live_project?: live_project?(opts),
-      otp_app: otp_app(),
       base_module: base_module(),
       base_path: "lib/" <> Atom.to_string(otp_app()),
       base_test_path: "test/" <> Atom.to_string(otp_app()),
+      otp_app: otp_app(),
       web_module: base_module() <> "Web",
       web_path: "lib/" <> Atom.to_string(otp_app()) <> "_web",
-      web_test_path: "test/" <> Atom.to_string(otp_app()) <> "_web"
+      web_test_path: "test/" <> Atom.to_string(otp_app()) <> "_web",
+      api_project?: api_project?(opts),
+      web_project?: web_project?(opts),
+      live_project?: live_project?(opts)
     }
   end
 
