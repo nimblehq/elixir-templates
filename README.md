@@ -33,7 +33,7 @@ end
 
 Step 3: Fetch and install dependencies
 
-Run this command in the root of project directory to install NimblePhxGenTemplate.
+Run this command in the root of the project directory to install NimblePhxGenTemplate.
 
 ```bash
 mix do deps.get, deps.compile
@@ -57,7 +57,7 @@ There are 2 types of test **Template test** and **Variant test**
 
 ### 1/ Template test
 
-All files are located under `test/` directory.
+All test files are located under `test/` directory.
 
 ```
 .
@@ -81,7 +81,7 @@ All files are located under `test/` directory.
 
 #### 2.1/ Variant
 
-NimblePhxGenTemplate is supporting 3 variants:  
+NimblePhxGenTemplate supports 3 variants:  
 
 - API
 - Web
@@ -89,7 +89,7 @@ NimblePhxGenTemplate is supporting 3 variants:
 
 #### 2.2/ Phoenix project
 
-The Phoenix project could be either a Web project or API project.
+The Phoenix project could be either a Web or API project.
 
 - Web variant supports HTML and Webpack configuration.
 
@@ -109,22 +109,28 @@ mix phx.new awesome_project --no-html --no-webpack
 # Use CustomModuleName
 mix phx.new awesome_project --module=CustomModuleName
 
-# Use custom otp app name
-mix phx.new AppName --app=custom_otp_app_name
+# Use custom OTP app name
+mix phx.new awesome_project --app=custom_otp_app_name
+
 # Use custom module and app name
-mix phx.new AppName --module=CustomModuleName --app=custom_otp_app_name
+mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name
 ```
 
 So it ends up with 6 project types:
 
-- Standard Web project (`mix phx.new awesome_project`)
-- Custom Web project (`mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name`)
-- Standard API project (`mix phx.new awesome_project --no-html --no-webpack`)
-- Custom API project (`mix phx.new awesome_project --no-html --no-webpack --module=CustomModuleName --app=custom_otp_app_name`)
-- Standard LiveView project (`mix phx.new awesome_project --live`)
-- Custom LiveView project (`mix phx.new awesome_project --live --module=CustomModuleName --app=custom_otp_app_name`)
+Web project 
+- Standard (`mix phx.new awesome_project`)
+- Custom (`mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name`)
 
-Putting it all together, there are 8 variants test cases.
+API project
+- Standard (`mix phx.new awesome_project --no-html --no-webpack`)
+- Custom (`mix phx.new awesome_project --no-html --no-webpack --module=CustomModuleName --app=custom_otp_app_name`)
+
+LiveView project
+- Standard (`mix phx.new awesome_project --live`)
+- Custom (`mix phx.new awesome_project --live --module=CustomModuleName --app=custom_otp_app_name`)
+
+Putting it all together, there are 8 variants of test cases.
 
 - Applying the `API variant` to a `Standard Web project`
 - Applying the `API variant` to a `Custom Web project`
@@ -148,7 +154,7 @@ Once the release branch is merged into the `master` branch, Github Action automa
 
 ## Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues). 
+Contributions, issues, and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues). 
 
 ## License
 
