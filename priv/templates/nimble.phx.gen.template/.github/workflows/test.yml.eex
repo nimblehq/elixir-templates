@@ -33,7 +33,7 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
       <%= if web_project? do %>
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ env.NODE_VERSION }}
       <% end %>
