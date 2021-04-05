@@ -48,6 +48,7 @@ defmodule NimbleTemplate.Template do
     |> Addons.Dialyxir.apply()
     |> Addons.ExCoveralls.apply()
     |> Addons.ExMachina.apply()
+    |> Addons.ExVCR.apply()
     |> Addons.Mimic.apply()
 
     if host_on_github?() do
