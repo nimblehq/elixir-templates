@@ -124,5 +124,5 @@ defmodule NimbleTemplate.Generator do
     end
   end
 
-  defp create_keep_file(_, _), do: :ok
+  defp create_keep_file(_path, _touch_directory), do: :ok
 end
