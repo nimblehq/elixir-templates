@@ -57,8 +57,8 @@ defmodule Nimble.Phx.Gen.Template.Addons.DockerTest do
         Addons.Docker.apply(project)
 
         assert_file("Dockerfile", fn file ->
-          assert file =~ "FROM hexpm/elixir:1.11.3-erlang-23.2.1-alpine-3.12.1 AS build"
-          assert file =~ "FROM alpine:3.12.1 AS app"
+          assert file =~ "FROM hexpm/elixir:1.11.4-erlang-23.3-alpine-3.13.2 AS build"
+          assert file =~ "FROM alpine:3.13.2 AS app"
 
           assert file =~
                    "RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error"

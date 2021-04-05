@@ -6,7 +6,7 @@ defmodule NimblePhxGenTemplate.MixProject do
       app: :nimble_phx_gen_template,
       version: "2.2.1",
       description: "Project repository template to set up all public Phoenix projects at Nimble",
-      elixir: "~> 1.11.3",
+      elixir: "~> 1.11.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),

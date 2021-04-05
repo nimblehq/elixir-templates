@@ -8,11 +8,15 @@
 
 ### Erlang & Elixir
 
-* Erlang <%= erlang_version %> and Elixir <%= elixir_version %>
+* Erlang <%= erlang_version %>
+
+* Elixir <%= elixir_version %>
 
 * Recommended version manager.
 
-  - [asdf](https://github.com/asdf-vm/asdf) Erlang & Elixir
+  - [asdf](https://github.com/asdf-vm/asdf)
+  - [asdf-erlang](https://github.com/asdf-vm/asdf-erlang)
+  - [asdf-elixir](https://github.com/asdf-vm/asdf-elixir)
 
 ### Development
 
@@ -58,6 +62,12 @@
 
   ```sh
   mix codebase 
+  ```
+  
+* Test coverage:
+
+  ```sh
+  mix coverage 
   ```
 
 ### Production

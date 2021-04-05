@@ -11,22 +11,9 @@ defmodule Nimble.Phx.Gen.Template.Addons.ElixirVersionTest do
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """
-                 erlang 23.2.1
-                 elixir 1.11.3-otp-23
+                 erlang 23.3
+                 elixir 1.11.4-otp-23
                  """
-        end)
-      end)
-    end
-
-    test "changes the minimum Elixir version", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        Addons.ElixirVersion.apply(project)
-
-        assert_file("mix.exs", fn file ->
-          assert file =~ "elixir: \"~> 1.11.3\","
         end)
       end)
     end

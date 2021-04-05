@@ -17,13 +17,13 @@ defmodule Nimble.Phx.Gen.Template.Addons.Readme do
   defp copy_files(
          %Project{
            api_project?: api_project?,
-           erlang_asdf_version: erlang_asdf_version,
-           elixir_mix_version: elixir_mix_version
+           erlang_version: erlang_version,
+           elixir_version: elixir_version
          } = project
        ) do
     Generator.copy_file([{:eex, "README.md.eex", "README.md"}],
-      erlang_version: erlang_asdf_version,
-      elixir_version: elixir_mix_version,
+      erlang_version: erlang_version,
+      elixir_version: elixir_version,
       web_project?: !api_project?
     )
 

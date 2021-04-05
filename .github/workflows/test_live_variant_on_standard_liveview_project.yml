@@ -3,8 +3,8 @@ name: "Test Live variant on standard LiveView project"
 on: push
 
 env:
-  OTP_VERSION: 23.2.1
-  ELIXIR_VERSION: 1.11.3
+  OTP_VERSION: 23.3
+  ELIXIR_VERSION: 1.11.4
   PHOENIX_VERSION: 1.5.7
   NODE_VERSION: 14
 
@@ -34,7 +34,7 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
           
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ env.NODE_VERSION }}
           
