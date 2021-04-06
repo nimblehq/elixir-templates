@@ -120,7 +120,7 @@ defmodule NimbleTemplate.Generator do
         :ok
 
       {:error, reason} ->
-        Mix.raise(~s[Failed to create keep file at #{path} reason: #{Atom.to_string(reason)}])
+        Mix.raise(~s[Failed to create .keep file at #{path}, reason: #{Atom.to_string(reason)}])
     end
   end
 

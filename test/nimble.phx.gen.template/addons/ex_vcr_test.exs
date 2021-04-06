@@ -4,7 +4,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.ExVCRTest do
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:exvcr, "0.12.2"}]
 
-    test "injects exvcr to mix dependency", %{
+    test "injects ExVCR to mix dependency", %{
       project: project,
       test_project_path: test_project_path
     } do

@@ -48,7 +48,6 @@ defmodule NimbleTemplate.Template do
     |> Addons.Dialyxir.apply()
     |> Addons.ExCoveralls.apply()
     |> Addons.ExMachina.apply()
-    |> Addons.ExVCR.apply()
     |> Addons.Mimic.apply()
 
     if host_on_github?() do
@@ -60,6 +59,7 @@ defmodule NimbleTemplate.Template do
     end
 
     if install_addon_prompt?("Oban"), do: Addons.Oban.apply(project)
+    if install_addon_prompt?("ExVCR"), do: Addons.ExVCR.apply(project)
 
     project
   end
