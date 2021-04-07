@@ -3,8 +3,8 @@ name: "Test Mix variant on custom Mix project"
 on: push
 
 env:
-  OTP_VERSION: 23.2.1
-  ELIXIR_VERSION: 1.11.3
+  OTP_VERSION: 23.3
+  ELIXIR_VERSION: 1.11.4
 
 jobs:   
   unit_test:
@@ -15,7 +15,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: actions/setup-elixir@v1
+      - uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
