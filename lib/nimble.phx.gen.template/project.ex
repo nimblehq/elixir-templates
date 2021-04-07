@@ -39,7 +39,7 @@ defmodule Nimble.Phx.Gen.Template.Project do
       api_project?: api_project?(opts),
       web_project?: web_project?(opts),
       live_project?: live_project?(opts),
-      mix_project?: mix_project?(opts),
+      mix_project?: mix_project?(opts)
     }
   end
 
