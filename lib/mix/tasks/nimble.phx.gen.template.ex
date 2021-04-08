@@ -11,13 +11,13 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
 
   - mix nimble.phx.gen.template -v # Print the version
 
-  ## Phoenix application
+  ### Phoenix application
 
   - mix nimble.phx.gen.template --api # Apply the Phoenix API template
   - mix nimble.phx.gen.template --live # Apply the Phoenix LiveView template
   - mix nimble.phx.gen.template --web # Apply the Phoenix Web template
 
-  ## Non-Phoenix application
+  ### Non-Phoenix application
 
   - mix nimble.phx.gen.template --mix # Apply the Mix template
   """
@@ -29,9 +29,7 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
   @version Mix.Project.config()[:version]
   @variants [api: :boolean, web: :boolean, live: :boolean, mix: :boolean]
 
-  def run([args]) when args in ~w(-v --version) do
-    Mix.shell().info("Nimble.Phx.Gen.Template v#{@version}")
-  end
+  def run([args]) when args in ~w(-v --version), do: Mix.shell().info("Nimble.Phx.Gen.Template v#{@version}")
 
   def run(args) do
     if Mix.Project.umbrella?() do
