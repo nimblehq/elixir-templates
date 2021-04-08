@@ -1,5 +1,7 @@
-defmodule Nimble.Phx.Gen.Template.Addons.ExVCR do
-  use Nimble.Phx.Gen.Template.Addon
+defmodule NimbleTemplate.Addons.ExVCR do
+  @moduledoc false
+
+  use NimbleTemplate.Addon
 
   @cassette_directory "test/support/fixtures/vcr_cassettes"
 

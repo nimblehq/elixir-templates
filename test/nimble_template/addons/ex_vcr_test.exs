@@ -1,5 +1,5 @@
-defmodule Nimble.Phx.Gen.Template.Addons.ExVCRTest do
-  use Nimble.Phx.Gen.Template.AddonCase
+defmodule NimbleTemplate.Addons.ExVCRTest do
+  use NimbleTemplate.AddonCase
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:exvcr, "0.12.2"}]
