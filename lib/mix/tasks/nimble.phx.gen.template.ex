@@ -29,7 +29,8 @@ defmodule Mix.Tasks.Nimble.Phx.Gen.Template do
   @version Mix.Project.config()[:version]
   @variants [api: :boolean, web: :boolean, live: :boolean, mix: :boolean]
 
-  def run([args]) when args in ~w(-v --version), do: Mix.shell().info("Nimble.Phx.Gen.Template v#{@version}")
+  def run([args]) when args in ~w(-v --version),
+    do: Mix.shell().info("Nimble.Phx.Gen.Template v#{@version}")
 
   def run(args) do
     if Mix.Project.umbrella?() do
