@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.DialyxirTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:dialyxir, "1.0"}]

@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.CredoTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:credo, "1.4"}]

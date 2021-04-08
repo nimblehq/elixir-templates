@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.ReadmeTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
     test "copies the README.md", %{

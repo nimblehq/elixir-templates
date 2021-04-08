@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.ElixirVersionTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
     test "copies the .tool-versions", %{
