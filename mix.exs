@@ -4,8 +4,8 @@ defmodule NimbleTemplate.MixProject do
   def project do
     [
       app: :nimble_template,
-      version: "2.2.1",
-      description: "Project repository template to set up all public Phoenix projects at Nimble",
+      version: "3.0.0",
+      description: "Project repository template to set up all public Phoenix/Mix projects at Nimble - https://nimblehq.co/",
       elixir: "~> 1.11.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
