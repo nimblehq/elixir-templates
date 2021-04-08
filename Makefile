@@ -14,7 +14,8 @@ create_mix_project:
 # Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
 # Y - in response to Do you want to generate the Github Action workflow?
 # Y - in response to Would you like to add the Oban addon?
-common_addon_prompts = Y\nY\nY\nY\n
+# Y - in response to Would you like to add the ExVCR addon?
+common_addon_prompts = Y\nY\nY\nY\nY\n
 
 web_addon_prompts = 
 

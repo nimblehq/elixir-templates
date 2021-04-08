@@ -59,6 +59,7 @@ defmodule NimbleTemplate.Template do
     end
 
     if install_addon_prompt?("Oban"), do: Addons.Oban.apply(project)
+    if install_addon_prompt?("ExVCR"), do: Addons.ExVCR.apply(project)
 
     project
   end

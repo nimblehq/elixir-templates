@@ -56,6 +56,19 @@ defmodule NimbleTemplate.Generator do
     end
   end
 
+  def append_content(file_path, content) do
+    file = Path.join([file_path])
+
+    file_content =
+      case File.read(file) do
+        {:ok, bin} -> bin
+        {:error, _} -> Mix.raise(~s[Can't read #{file}])
+      end
+
+    print_log("* appending ", Path.relative_to_cwd(file_path))
+    File.write!(file, [file_content, content])
+  end
+
   def inject_mix_dependency(dependencies) when is_list(dependencies) do
     inject_content(
       "mix.exs",
@@ -80,6 +93,18 @@ defmodule NimbleTemplate.Generator do
     )
   end
 
+  def make_directory(path, touch_directory \\ true) do
+    case File.mkdir_p(path) do
+      :ok ->
+        :ok
+
+      {:error, reason} ->
+        Mix.raise(~s[Failed to make directory #{path} reason: #{Atom.to_string(reason)}])
+    end
+
+    create_keep_file(path, touch_directory)
+  end
+
   def print_log(prefix, content \\ ""), do: Mix.shell().info([:green, prefix, :reset, content])
 
   defp split_with_self(contents, text) do
@@ -88,4 +113,16 @@ defmodule NimbleTemplate.Generator do
       [_] -> :error
     end
   end
+
+  defp create_keep_file(path, true) do
+    case File.touch("#{path}/.keep") do
+      :ok ->
+        :ok
+
+      {:error, reason} ->
+        Mix.raise(~s[Failed to create .keep file at #{path}, reason: #{Atom.to_string(reason)}])
+    end
+  end
+
+  defp create_keep_file(_path, _touch_directory), do: :ok
 end
