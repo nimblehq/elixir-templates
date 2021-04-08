@@ -19,6 +19,7 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
   def do_apply(
         %Project{
           web_project?: web_project?,
+          mix_project?: mix_project?,
           erlang_version: erlang_version,
           elixir_version: elixir_version,
           node_version: node_version
@@ -33,8 +34,15 @@ defmodule Nimble.Phx.Gen.Template.Addons.Github do
       web_project?: web_project?
     ]
 
+    template_file_path =
+      if mix_project? do
+        ".github/workflows/test.yml.mix.eex"
+      else
+        ".github/workflows/test.yml.eex"
+      end
+
     files = [
-      {:eex, ".github/workflows/test.yml.eex", ".github/workflows/test.yml"}
+      {:eex, template_file_path, ".github/workflows/test.yml"}
     ]
 
     Generator.copy_file(files, binding)

@@ -16,15 +16,23 @@ defmodule Nimble.Phx.Gen.Template.Addons.Readme do
 
   defp copy_files(
          %Project{
-           api_project?: api_project?,
+           web_project?: web_project?,
+           mix_project?: mix_project?,
            erlang_version: erlang_version,
            elixir_version: elixir_version
          } = project
        ) do
-    Generator.copy_file([{:eex, "README.md.eex", "README.md"}],
+    template_file_path =
+      if mix_project? do
+        "README.md.mix.eex"
+      else
+        "README.md.eex"
+      end
+
+    Generator.copy_file([{:eex, template_file_path, "README.md"}],
       erlang_version: erlang_version,
       elixir_version: elixir_version,
-      web_project?: !api_project?
+      web_project?: web_project?
     )
 
     project

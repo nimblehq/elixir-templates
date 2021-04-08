@@ -1,4 +1,4 @@
-defmodule NimblePhxGenTemplate.MixProject do
+defmodule Nimble.Phx.Gen.Template.MixProject do
   use Mix.Project
 
   def project do
