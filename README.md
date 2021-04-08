@@ -1,11 +1,12 @@
 ## Introduction
 
-Phoenix template for projects at [Nimble](https://nimblehq.co/).
+Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).
 
 ## Prerequisites
 
 NimbleTemplate has been developed and actively tested with the below environment:
 
+- Mix 1.11.4
 - Elixir 1.11.4
 - Erlang/OTP 23.3
 - Phoenix 1.5.7
