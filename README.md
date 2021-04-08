@@ -46,14 +46,14 @@ mix do deps.get, deps.compile
 ## Usage
 
 ```bash
-mix help nimble_template # Print help
+mix help nimble_template.gen # Print help
 
-mix nimble_template -v # Print the version
+mix nimble_template.gen -v # Print the version
 
 # Phoenix application
-mix nimble_template --web   # Apply the Web template
-mix nimble_template --api   # Apply the API template
-mix nimble_template --live  # Apply the LiveView template
+mix nimble_template.gen --web   # Apply the Web template
+mix nimble_template.gen --api   # Apply the API template
+mix nimble_template.gen --live  # Apply the LiveView template
 
 # Non-Phoenix application
 mix nimble_template.gen --mix # Apply the Mix template

@@ -9,6 +9,7 @@ defmodule Mix.Tasks.NimbleTemplate.Gen do
 
   # Usage
 
+  - mix help nimble_template.gen # Print help
   - mix nimble_template.gen -v # Print the version
 
   ### Phoenix application
