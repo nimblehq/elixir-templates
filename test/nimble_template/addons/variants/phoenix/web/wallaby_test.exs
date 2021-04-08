@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.AddonsWeb.WallabyTest do
+defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do

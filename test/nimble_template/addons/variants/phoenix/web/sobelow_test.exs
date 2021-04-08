@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.AddonsWeb.SobelowTest do
+defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do

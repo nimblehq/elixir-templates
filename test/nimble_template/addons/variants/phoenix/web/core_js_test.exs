@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.AddonsWeb.CoreJSTest do
+defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do

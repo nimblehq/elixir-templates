@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.AddonsWeb.AssetsTest do
+defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
