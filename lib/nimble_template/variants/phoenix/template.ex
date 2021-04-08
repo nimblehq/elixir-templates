@@ -42,6 +42,8 @@ defmodule NimbleTemplate.Phoenix.Template do
         do: Addons.Github.apply(project, %{github_action: true})
     end
 
+    Addons.ExUnit.apply(project)
+
     if install_addon_prompt?("Oban"), do: Addons.Oban.apply(project)
     if install_addon_prompt?("ExVCR"), do: Addons.ExVCR.apply(project)
 

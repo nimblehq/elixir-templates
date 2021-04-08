@@ -28,6 +28,8 @@ defmodule NimbleTemplate.Mix.Template do
         do: Addons.Github.apply(project, %{github_action: true})
     end
 
+    Addons.ExUnit.apply(project)
+
     if install_addon_prompt?("Mimic"), do: Addons.Mimic.apply(project)
 
     project
