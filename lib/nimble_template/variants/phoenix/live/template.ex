@@ -1,8 +1,8 @@
 defmodule NimbleTemplate.Phoenix.Live.Template do
   @moduledoc false
 
-  alias NimbleTemplate.Project
   alias NimbleTemplate.Phoenix.Web.Template, as: WebTemplate
+  alias NimbleTemplate.Project
 
   def apply(%Project{} = project) do
     WebTemplate.apply(project)
