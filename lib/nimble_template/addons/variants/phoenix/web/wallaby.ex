@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Web.Wallaby do
+defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
   @moduledoc false
 
   use NimbleTemplate.Addon

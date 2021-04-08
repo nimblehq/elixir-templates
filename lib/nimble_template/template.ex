@@ -3,7 +3,7 @@ defmodule NimbleTemplate.Template do
 
   alias NimbleTemplate.Mix.Template, as: MixTemplate
   alias NimbleTemplate.Phoenix.Template, as: PhoenixTemplate
-  alias NimbleTemplate.{Addons, Project}
+  alias NimbleTemplate.Project
 
   def apply(%Project{mix_project?: true} = project) do
     MixTemplate.apply(project)

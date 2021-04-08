@@ -3,14 +3,14 @@ defmodule NimbleTemplate.AddonCase do
 
   use Mimic
 
-  alias NimbleTemplate.Addons.Web, as: AddonsWeb
+  alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
   alias NimbleTemplate.{Addons, Project}
   alias NimbleTemplate.Hex.Package
 
   using do
     quote do
       alias NimbleTemplate.Addons
-      alias NimbleTemplate.Addons.Web, as: AddonsWeb
+      alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
       # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3

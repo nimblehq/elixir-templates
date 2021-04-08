@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Web.Sobelow do
+defmodule NimbleTemplate.Addons.Phoenix.Web.Sobelow do
   @moduledoc false
 
   use NimbleTemplate.Addon

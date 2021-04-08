@@ -9,9 +9,9 @@ defmodule NimbleTemplate.Phoenix.Template do
       install_addon_prompt?: 1
     ]
 
-  alias NimbleTemplate.Api.Template, as: ApiTemplate
-  alias NimbleTemplate.Live.Template, as: LiveTemplate
-  alias NimbleTemplate.Web.Template, as: WebTemplate
+  alias NimbleTemplate.Phoenix.Api.Template, as: ApiTemplate
+  alias NimbleTemplate.Phoenix.Live.Template, as: LiveTemplate
+  alias NimbleTemplate.Phoenix.Web.Template, as: WebTemplate
   alias NimbleTemplate.{Addons, Project}
 
   def apply(%Project{} = project) do
