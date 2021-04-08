@@ -1,18 +1,19 @@
 ## Introduction
 
-Phoenix template for projects at [Nimble](https://nimblehq.co/).
+Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).
 
 ## Prerequisites
 
-NimblePhxGenTemplate has been developed and actively tested with the below environment:
+NimbleTemplate has been developed and actively tested with the below environment:
 
+- Mix 1.11.4
 - Elixir 1.11.4
 - Erlang/OTP 23.3
 - Phoenix 1.5.7
 
 ## Installation
 
-*Note:* NimblePhxGenTemplate only works on a _new_ Phoenix/Mix project, applying it to an existing Phoenix/Mix project might not work as expected.
+*Note:* NimbleTemplate only works on a _new_ Phoenix/Mix project, applying it to an existing Phoenix/Mix project might not work as expected.
 
 Step 1: Generate a new project
 
@@ -24,12 +25,12 @@ mix phx.new awesome_project
 mix new awesome_project
 ```
 
-Step 2: Add `nimble_phx_gen_template` dependency to `mix.exs`:
+Step 2: Add `nimble_template` dependency to `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:nimble_phx_gen_template, "~> 2.2.0", only: :dev, runtime: false},
+    {:nimble_template, "~> 3.0", only: :dev, runtime: false},
     # other dependencies ...
   ]
 end
@@ -37,7 +38,7 @@ end
 
 Step 3: Fetch and install dependencies
 
-Run this command in the root of the project directory to install NimblePhxGenTemplate.
+Run this command in the root of the project directory to install NimbleTemplate.
 
 ```bash
 mix do deps.get, deps.compile
@@ -46,22 +47,22 @@ mix do deps.get, deps.compile
 ## Usage
 
 ```bash
-mix help nimble.phx.gen.template # Print help
+mix help nimble_template.gen # Print help
 
-mix nimble.phx.gen.template -v # Print the version
+mix nimble_template.gen -v # Print the version
 
 # Phoenix application
-mix nimble.phx.gen.template --web   # Apply the Web template
-mix nimble.phx.gen.template --api   # Apply the API template
-mix nimble.phx.gen.template --live  # Apply the LiveView template
+mix nimble_template.gen --web   # Apply the Web template
+mix nimble_template.gen --api   # Apply the API template
+mix nimble_template.gen --live  # Apply the LiveView template
 
 # Non-Phoenix application
-mix nimble.phx.gen.template --mix # Apply the Mix template
+mix nimble_template.gen --mix # Apply the Mix template
 ```
 
 ## Running tests
 
-NimblePhxGenTemplate uses Github Action as the CI, the workflow files locate under [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
+NimbleTemplate uses Github Action as the CI, the workflow files locate under [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
 
 There are 2 types of test **Template test** and **Variant test**
 
@@ -75,7 +76,7 @@ All test files are located under `test/` directory.
 ├── ...
 ├── test
 │   ├── ...
-│   ├── nimble.phx.gen.template
+│   ├── nimble_template
 │   │   └── addons
 │   │   │   ├── ...
 │   │   │   ├── common_addon_test.exs
@@ -98,7 +99,7 @@ All test files are located under `test/` directory.
 
 #### 2.1/ Variant
 
-NimblePhxGenTemplate supports 4 variants:  
+NimbleTemplate supports 4 variants:  
 
 - API
 - Live
@@ -196,7 +197,7 @@ The release process follows the [Git flow](https://nimblehq.co/compass/developme
 
 Once a `release/<version number>` is created, to publish the new version to Hex.pm, the version number in the `mix.ex` file needs to be updated on the release branch before merging.
 
-Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_phx_gen_template](https://hex.pm/packages/nimble_phx_gen_template).
+Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
 
 
 ## Contributing

@@ -43,7 +43,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
               
-      - uses: nimblehq/elixir-templates@composite_1.2
+      - uses: nimblehq/elixir-templates@composite_1.3
         with:
           new_project_options: '--no-html --no-webpack --module=CustomModule --app=custom_app'
           variant: 'api'
