@@ -31,7 +31,7 @@ defmodule NimbleTemplate.Template do
   def install_addon_prompt?(addon),
     do: Mix.shell().yes?("\nWould you like to add the #{addon} addon?")
 
-  defp fetch_and_install_dependencies() do
-    if Mix.shell().yes?("\nFetch and install dependencies?"), do: Mix.shell().cmd("mix deps.get")
-  end
+  defp fetch_and_install_dependencies(),
+    do:
+      if(Mix.shell().yes?("\nFetch and install dependencies?"), do: Mix.shell().cmd("mix deps.get"))
 end
