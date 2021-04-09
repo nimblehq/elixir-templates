@@ -1,10 +1,31 @@
+<h1 align="center"> NimblePhxGenTemplate </h1>
+<p>
+  <img alt="Version" src="https://github.com/nimblehq/elixir-templates/actions/workflows/test_template.yml/badge.svg" />
+</p>
+
+> A Library for initialize new Phoenix projects
+
 ## Introduction
 
-Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).
+NimblePhxGenTemplate is a library for initializing new Phoenix projects at [Nimble](https://nimblehq.co/). It saves us a lot of time on the installation and configuration of new Phoenix projects.
+
+It supports for linting, testing, and much more, so developers can focus on core feature of the application. 
+
+## Features
+
+Libraries:
+- [wallaby](https://hex.pm/packages/wallaby): Concurrent feature tests for Elixir.
+- [sobelow](https://hex.pm/packages/sobelow): Security-focused static analysis for the Phoenix framework.
+- [oban](https://hex.pm/packages/oban): Robust job processing, backed by modern PostgreSQL.
+- [mimic](https://hex.pm/packages/mimic): Mocks for Elixir functions
+- [ex_machina](https://hex.pm/packages/ex_machina): A factory library by the creators of FactoryBot (née FactoryGirl)
+- [excoveralls](https://hex.pm/packages/excoveralls): Coverage report tool for Elixir with coveralls.io integration.
+- [dialyxir](https://hex.pm/packages/dialyxir): Mix tasks to simplify use of Dialyzer in Elixir projects.
+- [credo](https://hex.pm/packages/credo): A static code analysis tool with a focus on code consistency and teaching.
 
 ## Prerequisites
 
-NimbleTemplate has been developed and actively tested with the below environment:
+**NimblePhxGenTemplate** has been developed and actively tested with the below environment:
 
 - Mix 1.11.4
 - Elixir 1.11.4
@@ -42,6 +63,22 @@ Run this command in the root of the project directory to install NimbleTemplate.
 
 ```bash
 mix do deps.get, deps.compile
+```
+
+Step 4: Up and running the Phoenix 
+
+Run this command and verify your local website is successfully installed.
+
+```bash
+mix do deps.get, deps.compile
+```
+
+Step 5:
+
+After the project initialized and ran successfully, please remove `nimble_phx_gen_template` in the `mix.exs` file. Then run this command:
+
+```
+mix deps.clean --unused --unlock 
 ```
 
 ## Usage
