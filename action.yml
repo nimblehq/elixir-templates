@@ -38,10 +38,6 @@ runs:
       run: cd sample_project && npm install --prefix assets
       shell: bash
 
-    - name: Compile assets
-      run: cd sample_project && npm run build:dev --prefix assets
-      shell: bash
-
     - name: Run mix ecto.create
       run: cd sample_project && mix ecto.create
       shell: bash
