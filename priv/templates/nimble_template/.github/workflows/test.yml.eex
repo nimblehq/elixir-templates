@@ -71,7 +71,7 @@ jobs:
       
       <%= if web_project? do %>
       - name: Install node module
-        run: npm install --prefix assets
+        run: npm --prefix assets install
 
       - name: Compile assets
         run: npm run --prefix assets build:dev
