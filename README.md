@@ -13,15 +13,16 @@ It supports for linting, testing, and much more, so developers can focus on core
 
 ## Features
 
-Libraries:
-- [wallaby](https://hex.pm/packages/wallaby): Concurrent feature tests for Elixir.
-- [sobelow](https://hex.pm/packages/sobelow): Security-focused static analysis for the Phoenix framework.
-- [oban](https://hex.pm/packages/oban): Robust job processing, backed by modern PostgreSQL.
-- [mimic](https://hex.pm/packages/mimic): Mocks for Elixir functions
-- [ex_machina](https://hex.pm/packages/ex_machina): A factory library by the creators of FactoryBot (née FactoryGirl)
-- [excoveralls](https://hex.pm/packages/excoveralls): Coverage report tool for Elixir with coveralls.io integration.
-- [dialyxir](https://hex.pm/packages/dialyxir): Mix tasks to simplify use of Dialyzer in Elixir projects.
+Supporting libraries:
+
 - [credo](https://hex.pm/packages/credo): A static code analysis tool with a focus on code consistency and teaching.
+- [dialyxir](https://hex.pm/packages/dialyxir): Mix tasks to simplify use of Dialyzer in Elixir projects.
+- [ex_machina](https://hex.pm/packages/ex_machina): A factory library by the creators of FactoryBot (née FactoryGirl).
+- [excoveralls](https://hex.pm/packages/excoveralls): Coverage report tool for Elixir with coveralls.io integration.
+- [mimic](https://hex.pm/packages/mimic): Mocks for Elixir functions.
+- [oban](https://hex.pm/packages/oban): Robust job processing, backed by modern PostgreSQL.
+- [sobelow](https://hex.pm/packages/sobelow): Security-focused static analysis for the Phoenix framework.
+- [wallaby](https://hex.pm/packages/wallaby): Concurrent feature tests for elixir.
 
 ## Prerequisites
 
