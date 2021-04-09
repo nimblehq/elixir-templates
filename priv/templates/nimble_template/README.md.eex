@@ -37,7 +37,7 @@
 * Install Node dependencies:
 
   ```sh
-  npm install --prefix assets
+  npm --prefix assets install
   ```
 <% end %>
 * Setup the databases:

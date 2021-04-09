@@ -35,7 +35,7 @@ runs:
         MIX_ENV: test
       
     - name: Install Node Dependencies
-      run: cd sample_project && npm install --prefix assets
+      run: cd sample_project && npm --prefix assets install
       shell: bash
 
     - name: Run mix ecto.create
