@@ -6,7 +6,7 @@ services:
       context: .
       cache_from:
         - <%= otp_app %>-build
-      target: build
+      target: builder
     image: <%= otp_app %>-build
 
   app:
