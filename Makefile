@@ -37,7 +37,8 @@ apply_phoenix_template:
 	echo '{:nimble_template, path: "../", only: :dev, runtime: false},' > nimble_template.txt && \
 	sed -i -e '/{:phoenix, "~> /r nimble_template.txt' mix.exs && \
 	rm nimble_template.txt && \
-	mix deps.get && \
+	export MIX_ENV=dev && \
+	mix do deps.get, deps.compile && \
 	mix format && \
 	if [ $(VARIANT) = web ]; then \
 		printf "${common_addon_prompts}${web_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --web; \
@@ -52,7 +53,8 @@ apply_mix_template:
 	echo '{:nimble_template, path: "../", only: :dev, runtime: false}' > nimble_template.txt && \
 	sed -i -e '/# {:dep_from_git, /r nimble_template.txt' mix.exs && \
 	rm nimble_template.txt && \
-	mix deps.get && \
+	export MIX_ENV=dev && \
+	mix do deps.get, deps.compile && \
 	mix format && \
 	printf "${mix_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --mix; \
 
