@@ -40,11 +40,11 @@ apply_phoenix_template:
 	MIX_ENV=dev mix do deps.get, deps.compile && \
 	mix format && \
 	if [ $(VARIANT) = web ]; then \
-		printf "${common_addon_prompts}${web_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --web; \
+		printf "${common_addon_prompts}${web_addon_prompts}${post_setup_addon_prompts}" | MIX_ENV=dev mix nimble_template.gen --web; \
 	elif [ $(VARIANT) = api ]; then \
-		printf "${common_addon_prompts}${api_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --api; \
+		printf "${common_addon_prompts}${api_addon_prompts}${post_setup_addon_prompts}" | MIX_ENV=dev mix nimble_template.gen --api; \
 	elif [ $(VARIANT) = live ]; then \
-		printf "${common_addon_prompts}${web_addon_prompts}${live_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --live; \
+		printf "${common_addon_prompts}${web_addon_prompts}${live_addon_prompts}${post_setup_addon_prompts}" | MIX_ENV=dev mix nimble_template.gen --live; \
 	fi;
 	
 apply_mix_template:
@@ -54,7 +54,7 @@ apply_mix_template:
 	rm nimble_template.txt && \
 	MIX_ENV=dev mix do deps.get, deps.compile && \
 	mix format && \
-	printf "${mix_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --mix; \
+	printf "${mix_addon_prompts}${post_setup_addon_prompts}" | MIX_ENV=dev mix nimble_template.gen --mix; \
 
 remove_nimble_template:
 	cd ${PROJECT_DIRECTORY} && \
