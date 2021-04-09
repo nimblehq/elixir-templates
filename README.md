@@ -71,7 +71,7 @@ Step 4: Up and running the Phoenix
 Run this command and verify your local website is successfully installed.
 
 ```bash
-mix do deps.get, deps.compile
+mix phx.server
 ```
 
 Step 5:
