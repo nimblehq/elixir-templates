@@ -26,7 +26,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
         assert_file("mix.exs", fn file ->
           assert file =~ """
                    defp compile_assets(_) do
-                     Mix.shell().cmd("npm run --prefix assets build:dev", quiet: true)
+                     Mix.shell().cmd("npm run build:dev --prefix assets", quiet: true)
                    end
                  """
         end)

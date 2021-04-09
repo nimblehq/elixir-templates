@@ -38,7 +38,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
         end
 
         defp compile_assets(_) do
-          Mix.shell().cmd("npm run --prefix assets build:dev", quiet: true)
+          Mix.shell().cmd("npm run build:dev --prefix assets", quiet: true)
         end
       end
       """

@@ -63,8 +63,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
 
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "assets/node_modules"
-          refute file =~ "npm --prefix assets install"
-          refute file =~ "npm run --prefix assets build:dev"
+          refute file =~ "npm install --prefix assets"
+          refute file =~ "npm run build:dev --prefix assets"
           refute file =~ "wallaby_screenshots"
         end)
       end)
@@ -81,8 +81,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
 
         assert_file(".github/workflows/test.yml", fn file ->
           assert file =~ "assets/node_modules"
-          assert file =~ "npm --prefix assets install"
-          assert file =~ "npm run --prefix assets build:dev"
+          assert file =~ "npm install --prefix assets"
+          assert file =~ "npm run build:dev --prefix assets"
           assert file =~ "wallaby_screenshots"
         end)
       end)
@@ -116,8 +116,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
 
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "assets/node_modules"
-          refute file =~ "npm --prefix assets install"
-          refute file =~ "npm run --prefix assets build:dev"
+          refute file =~ "npm install --prefix assets"
+          refute file =~ "npm run build:dev --prefix assets"
           refute file =~ "wallaby_screenshots"
         end)
       end)
