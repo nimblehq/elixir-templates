@@ -48,7 +48,7 @@ RUN addgroup -g 1000 appuser && \
 		adduser -u 1000 -G appuser -g appuser -s /bin/sh -D appuser && \
 		chown 1000:1000 /opt/app
 
-COPY --from=builder --chown=app_user:app_group /app/_build/prod/rel/<%= otp_app %> ./
+COPY --from=builder --chown=1000:1000 /app/_build/prod/rel/<%= otp_app %> ./
 COPY bin/start.sh ./bin/start.sh
 
 USER app_user

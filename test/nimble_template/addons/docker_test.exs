@@ -76,7 +76,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
           assert file =~ "USER app_user"
 
           assert file =~
-                   "COPY --from=builder --chown=app_user:app_group /app/_build/prod/rel/nimble_template ./"
+                   "COPY --from=builder --chown=1000:1000 /app/_build/prod/rel/nimble_template ./"
         end)
       end)
     end
