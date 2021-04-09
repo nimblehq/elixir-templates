@@ -17,7 +17,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  * Install Node dependencies:
 
                    ```sh
-                   npm --prefix assets install
+                   npm install --prefix assets
                    ```
                  """
 
@@ -51,7 +51,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  * Install Node dependencies:
 
                    ```sh
-                   npm --prefix assets install
+                   npm install --prefix assets
                    ```
                  """
 
@@ -85,7 +85,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  * Install Node dependencies:
 
                    ```sh
-                   npm --prefix assets install
+                   npm install --prefix assets
                    ```
                  """
 
