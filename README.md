@@ -66,37 +66,45 @@ Run this command in the root of the project directory to install NimbleTemplate.
 mix do deps.get, deps.compile
 ```
 
-Step 4: Up and running the Phoenix 
+After the Nimbletemplate is installed, you can continue with the Usage section below.
 
-Run this command and verify your local website is successfully installed.
+## Usage
+
+Base on the project needs, please choose run appropriate command below:
+
+### Phoenix application
+```bash
+# Phoenix application
+mix nimble_template.gen --web   # Apply the Web template
+mix nimble_template.gen --api   # Apply the API template
+mix nimble_template.gen --live  # Apply the LiveView template
+```
+### Non-Phoenix application
+```bash
+mix nimble_template.gen --mix # Apply the Mix template
+```
+
+### Other commands:
+```bash
+mix help nimble_template.gen # Print help
+
+mix nimble_template.gen -v # Print the version
+```
+
+Run this command and verify your local Phoenix project is ready.
 
 ```bash
 mix phx.server
 ```
 
-Step 5:
+*Note:* 
 
-After the project initialized and ran successfully, please remove `nimble_phx_gen_template` in the `mix.exs` file. Then run this command:
+After the project initialized successfully, please remove `nimble_phx_gen_template` in the `mix.exs` file. Then run this command:
 
 ```
 mix deps.clean --unused --unlock 
 ```
 
-## Usage
-
-```bash
-mix help nimble_template.gen # Print help
-
-mix nimble_template.gen -v # Print the version
-
-# Phoenix application
-mix nimble_template.gen --web   # Apply the Web template
-mix nimble_template.gen --api   # Apply the API template
-mix nimble_template.gen --live  # Apply the LiveView template
-
-# Non-Phoenix application
-mix nimble_template.gen --mix # Apply the Mix template
-```
 
 ## Running tests
 
