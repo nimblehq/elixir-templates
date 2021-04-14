@@ -6,6 +6,8 @@ env:
   OTP_VERSION: <%= inspect erlang_version %>
   ELIXIR_VERSION: <%= inspect elixir_version %>
   NODE_VERSION: <%= inspect node_version %>
+  MIX_ENV: test
+  DB_HOST: localhost
 
 jobs:
   test:
@@ -24,6 +26,11 @@ jobs:
           --health-retries 5
 
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
@@ -57,7 +64,10 @@ jobs:
       <% end %>
       - name: Install Dependencies
         run: mix deps.get
-
+      
+      - name: Compile dependencies
+        run: mix compile --warnings-as-errors --all-warnings
+      
       <%= if web_project? do %>
       - name: Install node module
         run: npm --prefix assets install
@@ -67,24 +77,15 @@ jobs:
       <% end %>
       - name: Create database
         run: mix ecto.create
-        env:
-          MIX_ENV: test
-          DB_HOST: localhost
 
       - name: Migrate database
         run: mix ecto.migrate
-        env:
-          MIX_ENV: test
-          DB_HOST: localhost
 
       - name: Run codebase check
         run: mix codebase
 
       - name: Run Tests
-        run: mix do compile --warnings-as-errors, coverage
-        env:
-          MIX_ENV: test
-          DB_HOST: localhost
+        run: mix coverage
       <%= if web_project? do %>
       - uses: actions/upload-artifact@v2
         if: ${{ failure() }}

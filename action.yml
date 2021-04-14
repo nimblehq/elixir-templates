@@ -27,6 +27,12 @@ runs:
     - name: Install Elixir Dependencies
       run: cd sample_project && mix deps.get
       shell: bash
+
+    - name: Compile dependencies
+      run: cd sample_project && mix compile --warnings-as-errors --all-warnings
+      shell: bash
+      env:
+        MIX_ENV: test
       
     - name: Install Node Dependencies
       run: cd sample_project && npm install --prefix assets
@@ -52,9 +58,9 @@ runs:
       env:
         MIX_ENV: test
         DB_HOST: localhost
-      
+
     - name: Run mix test
-      run: cd sample_project && mix do compile --warnings-as-errors, coverage
+      run: cd sample_project && mix coverage
       shell: bash
       env:
         MIX_ENV: test

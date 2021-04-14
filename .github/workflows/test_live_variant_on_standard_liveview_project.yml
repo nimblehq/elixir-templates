@@ -25,6 +25,11 @@ jobs:
           --health-retries 5
         
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
@@ -47,23 +52,17 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-mix-
-           
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
       
-      - name: npm packages cache
+      - name: Cache Node npm
         uses: actions/cache@v2
         with:
           path: |
-            ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
-            **/yarn.lock
             **/node_modules
-          key: ${{ runner.os }}-npm-packages-${{ hashFiles('**/package.json*') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-npm-packages-
+            ${{ runner.os }}-node-
               
-      - uses: nimblehq/elixir-templates@composite_1.3
+      - uses: nimblehq/elixir-templates@composite_1.4
         with:
           new_project_options: '--live'
           variant: 'live'
