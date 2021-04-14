@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.ExCoverallsTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:excoveralls, "0.12.2"}]

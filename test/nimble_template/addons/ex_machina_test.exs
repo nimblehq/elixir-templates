@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.ExMachinaTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:ex_machina, "2.4"}]

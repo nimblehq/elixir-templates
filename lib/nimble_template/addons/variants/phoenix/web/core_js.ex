@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Web.CoreJS do
+defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
   @moduledoc false
 
   use NimbleTemplate.Addon

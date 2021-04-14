@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.ObanTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
   use Mimic
 
   describe "#apply/2" do

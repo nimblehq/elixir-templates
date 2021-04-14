@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.DockerTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
     test "copies the docker-compose.dev.yml", %{

@@ -1,5 +1,5 @@
-defmodule NimbleTemplate.AddonsWeb.AssetsTest do
-  use NimbleTemplate.AddonCase
+defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
     test "adds assets.compile alias", %{project: project, test_project_path: test_project_path} do

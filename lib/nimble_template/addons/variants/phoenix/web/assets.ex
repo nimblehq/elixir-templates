@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Web.Assets do
+defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
   @moduledoc false
 
   use NimbleTemplate.Addon

@@ -1,5 +1,5 @@
 defmodule NimbleTemplate.Addons.GithubTest do
-  use NimbleTemplate.AddonCase
+  use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2 with github_template option" do
     test "copies the .github/ISSUE_TEMPLATE.md", %{

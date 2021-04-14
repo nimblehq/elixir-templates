@@ -81,18 +81,19 @@ All test files are located under `test/` directory.
 │   │   │   ├── ...
 │   │   │   ├── common_addon_test.exs
 │   │   │   └── variants
-│   │   │   │   └── api
-│   │   │   │   │   ├── ...
-│   │   │   │   │   └── api_addon_test.exs
-│   │   │   │   └── live
-│   │   │   │   │   ├── ...
-│   │   │   │   │   └── live_addon_test.exs
 │   │   │   │   └── mix
 │   │   │   │   │   ├── ...
 │   │   │   │   │   └── mix_addon_test.exs
-│   │   │   │   └── web
-│   │   │   │   │   ├── ...
-│   │   │   │   │   └── web_addon_test.exs
+│   │   │   │   └── phoenix
+│   │   │   │   │   └── api
+│   │   │   │   │   │   ├── ...
+│   │   │   │   │   │   └── api_addon_test.exs
+│   │   │   │   │   └── live
+│   │   │   │   │   │   ├── ...
+│   │   │   │   │   │   └── live_addon_test.exs
+│   │   │   │   │   └── web
+│   │   │   │   │   │   ├── ...
+│   │   │   │   │   │   └── web_addon_test.exs
 ```
 
 ### 2/ Variant test
