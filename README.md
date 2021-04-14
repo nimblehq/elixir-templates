@@ -1,13 +1,14 @@
-<h1 align="center"> NimblePhxGenTemplate </h1>
-<p>
-  <img alt="Version" src="https://github.com/nimblehq/elixir-templates/actions/workflows/test_template.yml/badge.svg" />
-</p>
+# NimbleTemplate
+
+[![Test template](https://github.com/nimblehq/elixir-templates/actions/workflows/test_template.yml/badge.svg?branch=develop)](https://github.com/nimblehq/elixir-templates/actions/workflows/test_template.yml)
+
 
 > A Library for initialize new Phoenix projects
 
 ## Introduction
 
-NimblePhxGenTemplate is a library for initializing new Phoenix projects at [Nimble](https://nimblehq.co/). It saves us a lot of time on the installation and configuration of new Phoenix projects.
+NimbleTemplate is a library for initializing new Phoenix projects at [Nimble](https://nimblehq.co/). 
+It saves us a lot of time on the installation and configuration of new Phoenix projects.
 
 It supports for linting, testing, and much more, so developers can focus on core feature of the application. 
 
@@ -26,7 +27,7 @@ Supporting libraries:
 
 ## Prerequisites
 
-**NimblePhxGenTemplate** has been developed and actively tested with the below environment:
+**NimbleTemplate** has been developed and actively tested with the below environment:
 
 - Mix 1.11.4
 - Elixir 1.11.4
@@ -66,11 +67,11 @@ Run this command in the root of the project directory to install NimbleTemplate.
 mix do deps.get, deps.compile
 ```
 
-After the Nimbletemplate is installed, you can continue with the Usage section below.
+After the NimbleTemplate is installed, you can continue with the Usage section below.
 
 ## Usage
 
-Base on the project needs, please choose run appropriate command below:
+Base on the project type, we could choose to run one of the command below for generating the appropriate code structure.
 
 ### Phoenix application
 ```bash
@@ -91,7 +92,7 @@ mix help nimble_template.gen # Print help
 mix nimble_template.gen -v # Print the version
 ```
 
-Run this command and verify your local Phoenix project is ready.
+Start up your local server and verify project is ready.
 
 ```bash
 mix phx.server
@@ -99,12 +100,12 @@ mix phx.server
 
 *Note:* 
 
-After the project initialized successfully, please remove `nimble_phx_gen_template` in the `mix.exs` file. Then run this command:
+After the source code initialized successfully by the NimbleTemplate, please remove `nimble_template` in the `mix.exs` 
+file to keep your source clean.
 
 ```
 mix deps.clean --unused --unlock 
 ```
-
 
 ## Running tests
 
@@ -155,7 +156,7 @@ NimbleTemplate supports 4 variants:
 
 #### 2.2/ Phoenix project
 
-The Phoenix project could be either a Web or API project.
+The Phoenix project could be either a **Web** or **API** project.
 
 - Web variant supports HTML and Webpack configuration.
 
