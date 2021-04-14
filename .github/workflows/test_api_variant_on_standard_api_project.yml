@@ -24,6 +24,11 @@ jobs:
           --health-retries 5
         
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
@@ -43,7 +48,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
               
-      - uses: nimblehq/elixir-templates@composite_1.3
+      - uses: nimblehq/elixir-templates@composite_1.4
         with:
           new_project_options: '--no-html --no-webpack'
           variant: 'api'

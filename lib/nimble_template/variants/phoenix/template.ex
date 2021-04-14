@@ -18,6 +18,10 @@ defmodule NimbleTemplate.Phoenix.Template do
     project
     |> common_setup()
     |> variant_setup()
+
+    Addons.ExUnit.apply(project)
+
+    project
   end
 
   defp common_setup(%Project{} = project) do

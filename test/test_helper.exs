@@ -5,5 +5,5 @@ Code.put_compiler_option(:warnings_as_errors, true)
 Mimic.copy(Calendar)
 Mimic.copy(NimbleTemplate.Hex.Package)
 
-ExUnit.start()
+ExUnit.start(capture_log: true)
 ExUnit.configure(exclude: :release_version)

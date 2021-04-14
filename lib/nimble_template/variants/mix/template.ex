@@ -30,6 +30,8 @@ defmodule NimbleTemplate.Mix.Template do
 
     if install_addon_prompt?("Mimic"), do: Addons.Mimic.apply(project)
 
+    Addons.ExUnit.apply(project)
+
     project
   end
 end
