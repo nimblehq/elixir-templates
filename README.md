@@ -156,27 +156,27 @@ NimbleTemplate supports 4 variants:
 
 #### 2.2/ Phoenix project
 
-The Phoenix project could be either a **Web** or **API** project.
+The Phoenix project could be one of **Web**, **API**, or **Live View**.
 
-- Web variant supports HTML and Webpack configuration.
+- *Web variant* supports HTML and Webpack configuration.
 
 ```bash
 mix phx.new awesome_project
 ```
 
-- LiveView project is including HTML and Webpack configuration.
+- *LiveView variant* supports for LiveView assets and configuration. 
 
 ```bash
 mix phx.new awesome_project --live
 ```
 
-- API variant does NOT support HTML and Webpack configuration.
+- *API variant* does NOT generate HTML views and Webpack files.
 
 ```bash
 mix phx.new awesome_project --no-html --no-webpack
 ```
 
-- Custom project variant allow us to modify the app name or module name.
+- *Custom project variant* allow us to modify the app name or module name.
 
 ```bash
 # Use CustomModuleName
