@@ -31,11 +31,11 @@ defmodule NimbleTemplate.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.5.7"},
-      {:jason, "~> 1.2.2"},
-      {:httpoison, "~> 1.7.0"},
-      {:mimic, "~> 1.3.1", only: :test},
-      {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.23.0", only: :dev, runtime: false}
+      {:jason, "~> 1.2"},
+      {:httpoison, "~> 1.7"},
+      {:mimic, "~> 1.3", only: :test},
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.23", only: :dev, runtime: false}
     ]
   end
 
