@@ -62,7 +62,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
                  ARG ERLANG_IMAGE_VERSION=23.3
                  ARG RELEASE_IMAGE_VERSION=3.13.2
 
-                 FROM hexpm/elixir:${ELIXIR_IMAGE_VERSION}-erlang-${ERLANG_IMAGE_VERSION}-alpine-${RELEASE_IMAGE_VERSION} AS builder
+                 FROM hexpm/elixir:${ELIXIR_IMAGE_VERSION}-erlang-${ERLANG_IMAGE_VERSION}-alpine-${RELEASE_IMAGE_VERSION} AS build
                  """
 
           assert file =~ "FROM alpine:${RELEASE_IMAGE_VERSION} AS app"
@@ -79,7 +79,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
           assert file =~ "USER app_user"
 
           assert file =~
-                   "COPY --from=builder --chown=1000:1000 /app/_build/prod/rel/nimble_template ./"
+                   "COPY --from=build --chown=1000:1000 /app/_build/prod/rel/nimble_template ./"
         end)
       end)
     end

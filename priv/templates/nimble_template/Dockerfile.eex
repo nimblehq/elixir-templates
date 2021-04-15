@@ -2,7 +2,7 @@ ARG ELIXIR_IMAGE_VERSION=<%= elixir_version %>
 ARG ERLANG_IMAGE_VERSION=<%= erlang_version %>
 ARG RELEASE_IMAGE_VERSION=<%= alpine_version %>
 
-FROM hexpm/elixir:${ELIXIR_IMAGE_VERSION}-erlang-${ERLANG_IMAGE_VERSION}-alpine-${RELEASE_IMAGE_VERSION} AS builder
+FROM hexpm/elixir:${ELIXIR_IMAGE_VERSION}-erlang-${ERLANG_IMAGE_VERSION}-alpine-${RELEASE_IMAGE_VERSION} AS build
 
 RUN apk update && \
     apk upgrade --no-cache && \
@@ -48,7 +48,7 @@ RUN addgroup -g 1000 appuser && \
 		adduser -u 1000 -G appuser -g appuser -s /bin/sh -D appuser && \
 		chown 1000:1000 /opt/app
 
-COPY --from=builder --chown=1000:1000 /app/_build/prod/rel/<%= otp_app %> ./
+COPY --from=build --chown=1000:1000 /app/_build/prod/rel/<%= otp_app %> ./
 COPY bin/start.sh ./bin/start.sh
 
 USER app_user
