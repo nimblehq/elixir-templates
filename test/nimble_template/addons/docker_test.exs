@@ -67,10 +67,13 @@ defmodule NimbleTemplate.Addons.DockerTest do
 
           assert file =~ "FROM alpine:${RELEASE_IMAGE_VERSION} AS app"
 
-          assert file =~ "RUN cd assets"
-          assert file =~ "npm ci --progress=false --no-audit --loglevel=error"
-          assert file =~ "npm run deploy"
-          assert file =~ "mix phx.digest"
+          assert file =~ """
+                 RUN cd assets && \\
+                 \t\tnpm ci --progress=false --no-audit --loglevel=error && \\
+                 \t\tnpm run deploy && \\
+                 \t\tcd - && \\
+                 \t\tmix phx.digest
+                 """
 
           assert file =~ "adduser -u 1000 -G appuser -g appuser -s /bin/sh -D appuser"
           assert file =~ "USER app_user"
@@ -110,10 +113,13 @@ defmodule NimbleTemplate.Addons.DockerTest do
         Addons.Docker.apply(project)
 
         assert_file("Dockerfile", fn file ->
-          refute file =~ "RUN cd assets"
-          refute file =~ "npm ci --progress=false --no-audit --loglevel=error"
-          refute file =~ "npm run deploy"
-          refute file =~ "mix phx.digest"
+          refute file =~ """
+                 RUN cd assets && \\
+                 \t\tnpm ci --progress=false --no-audit --loglevel=error && \\
+                 \t\tnpm run deploy && \\
+                 \t\tcd - && \\
+                 \t\tmix phx.digest
+                 """
         end)
       end)
     end
