@@ -1,0 +1,79 @@
+[![Build Status](CI_BADGE_URL goes here)](REPO_URL goes here)
+
+## Introduction
+
+> *App introduction goes here ...*
+
+## Project Setup
+
+### Erlang & Elixir
+
+* Erlang <%= erlang_version %>
+
+* Elixir <%= elixir_version %>
+
+* Recommended version manager.
+
+  - [asdf](https://github.com/asdf-vm/asdf)
+  - [asdf-erlang](https://github.com/asdf-vm/asdf-erlang)
+  - [asdf-elixir](https://github.com/asdf-vm/asdf-elixir)
+
+### Development
+
+* Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+
+* Setup and boot the Docker containers:
+
+  ```sh
+  make docker_setup
+  ```
+
+* Install Elixir dependencies:
+
+  ```sh
+  mix deps.get
+  ```
+<%= if web_project? do %>
+* Install Node dependencies:
+
+  ```sh
+  npm install --prefix assets
+  ```
+<% end %>
+* Setup the databases:
+
+  ```sh
+  mix ecto.setup
+  ```
+
+* Start the Phoenix app
+
+  ```sh
+  iex -S mix phx.server
+  ```
+
+* Run all tests:
+
+  ```sh
+  mix test 
+  ```
+
+* Run all lint:
+
+  ```sh
+  mix codebase 
+  ```
+  
+* Test coverage:
+
+  ```sh
+  mix coverage 
+  ```
+
+### Production
+
+* Buidl Docker image
+
+  ```sh
+  docker-compose build
+  ```

@@ -1,0 +1,49 @@
+name: "Tests"
+
+on: pull_request
+
+env:
+  OTP_VERSION: <%= inspect erlang_version %>
+  ELIXIR_VERSION: <%= inspect elixir_version %>
+  MIX_ENV: test
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: erlef/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+      
+      - name: Compile dependencies
+        run: mix compile --warnings-as-errors --all-warnings
+      
+      - name: Run codebase check
+        run: mix codebase
+
+      - name: Run Tests
+        run: mix coverage

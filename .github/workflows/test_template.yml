@@ -3,15 +3,21 @@ name: "Test template"
 on: push
 
 env:
-  OTP_VERSION: 23.2.1
-  ELIXIR_VERSION: 1.11.3
+  OTP_VERSION: 23.3
+  ELIXIR_VERSION: 1.11.4
   PHOENIX_VERSION: 1.5.7
+  MIX_ENV: test
 
 jobs:
   unit_test:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
@@ -33,7 +39,10 @@ jobs:
 
       - name: Install Dependencies
         run: mix deps.get
-        
+
+      - name: Compile dependencies
+        run: mix compile --warnings-as-errors --all-warnings
+
       - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
       
@@ -41,6 +50,4 @@ jobs:
         run: mix codebase
           
       - name: Run Tests
-        run: mix do compile --warnings-as-errors, test
-        env:
-          MIX_ENV: test
+        run: mix test

@@ -7,7 +7,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install Dependencies 
+    - name: Install Elixir Dependencies 
       run: mix deps.get
       shell: bash
     
@@ -16,17 +16,23 @@ runs:
       shell: bash
     
       # Y - in response to Fetch and install dependencies?
-    - name: Create project
-      run: printf "Y\n" | make create_project PROJECT_DIRECTORY=sample_project OPTIONS="${{ inputs.new_project_options }}"
+    - name: Create Phoenix project
+      run: printf "Y\n" | make create_phoenix_project PROJECT_DIRECTORY=sample_project OPTIONS="${{ inputs.new_project_options }}"
       shell: bash
     
-    - name: Apply template
-      run: make apply_template PROJECT_DIRECTORY=sample_project VARIANT=${{ inputs.variant }}
+    - name: Apply Phoenix template
+      run: make apply_phoenix_template PROJECT_DIRECTORY=sample_project VARIANT=${{ inputs.variant }}
       shell: bash
 
     - name: Install Elixir Dependencies
       run: cd sample_project && mix deps.get
       shell: bash
+
+    - name: Compile dependencies
+      run: cd sample_project && mix compile --warnings-as-errors --all-warnings
+      shell: bash
+      env:
+        MIX_ENV: test
       
     - name: Install Node Dependencies
       run: cd sample_project && npm install --prefix assets
@@ -52,16 +58,16 @@ runs:
       env:
         MIX_ENV: test
         DB_HOST: localhost
-      
+
     - name: Run mix test
-      run: cd sample_project && mix do compile --warnings-as-errors, coverage
+      run: cd sample_project && mix coverage
       shell: bash
       env:
         MIX_ENV: test
         DB_HOST: localhost
     
-    - name: Remove nimble_phx_gen_template
-      run: make remove_nimble_phx_gen_template PROJECT_DIRECTORY=sample_project
+    - name: Remove nimble_template
+      run: make remove_nimble_template PROJECT_DIRECTORY=sample_project
       shell: bash
       
     - name: Build release app

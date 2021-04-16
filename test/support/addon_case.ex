@@ -1,16 +1,16 @@
-defmodule Nimble.Phx.Gen.Template.AddonCase do
+defmodule NimbleTemplate.AddonCase do
   use ExUnit.CaseTemplate
 
   use Mimic
 
-  alias Nimble.Phx.Gen.Template.Addons.Web, as: AddonsWeb
-  alias Nimble.Phx.Gen.Template.{Addons, Project}
-  alias Nimble.Phx.Gen.Template.Hex.Package
+  alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
+  alias NimbleTemplate.{Addons, Project}
+  alias NimbleTemplate.Hex.Package
 
   using do
     quote do
-      alias Nimble.Phx.Gen.Template.Addons
-      alias Nimble.Phx.Gen.Template.Addons.Web, as: AddonsWeb
+      alias NimbleTemplate.Addons
+      alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
       # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3
@@ -30,14 +30,21 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   end
 
   setup context do
-    # Set Web Project as default, switch to either API or Live Project in each test case
-    # eg: project = %{project | api_project?: true, web_project?: false}
-    project = Project.new(web: true)
-
     parent_test_project_path = Path.join(tmp_path(), parent_test_project_path())
-    test_project_path = Path.join(parent_test_project_path, "/nimble_phx_gen_template")
+    test_project_path = Path.join(parent_test_project_path, "/nimble_template")
 
-    create_test_project(test_project_path)
+    project =
+      if context[:mix_project?] == true do
+        create_mix_test_project(test_project_path)
+
+        Project.new(mix: true)
+      else
+        create_phoenix_test_project(test_project_path)
+
+        # Set Web Project as default, switch to either API or Live Project in each test case
+        # eg: project = %{project | api_project?: true, web_project?: false}
+        Project.new(web: true)
+      end
 
     on_exit(fn ->
       File.rm_rf!(parent_test_project_path)
@@ -59,10 +66,17 @@ defmodule Nimble.Phx.Gen.Template.AddonCase do
   defp mock_latest_package_version({_package, version}),
     do: expect(Package, :get_latest_version, fn _package -> version end)
 
-  defp create_test_project(test_project_path) do
+  defp create_phoenix_test_project(test_project_path) do
     # N - in response to Fetch and install dependencies?
     Mix.shell().cmd(
-      "printf \"N\n\" | make create_project PROJECT_DIRECTORY=#{test_project_path} > /dev/null"
+      "printf \"N\n\" | make create_phoenix_project PROJECT_DIRECTORY=#{test_project_path} > /dev/null"
+    )
+  end
+
+  defp create_mix_test_project(test_project_path) do
+    # N - in response to Fetch and install dependencies?
+    Mix.shell().cmd(
+      "printf \"N\n\" | make create_mix_project PROJECT_DIRECTORY=#{test_project_path} > /dev/null"
     )
   end
 

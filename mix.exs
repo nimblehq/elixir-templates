@@ -1,12 +1,12 @@
-defmodule NimblePhxGenTemplate.MixProject do
+defmodule NimbleTemplate.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :nimble_phx_gen_template,
-      version: "2.2.1",
-      description: "Project repository template to set up all public Phoenix projects at Nimble",
-      elixir: "~> 1.11.3",
+      app: :nimble_template,
+      version: "3.0.0",
+      description: "Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).",
+      elixir: "~> 1.11.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -30,12 +30,12 @@ defmodule NimblePhxGenTemplate.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix, "~> 1.5.7"},
-      {:jason, "~> 1.2.2"},
-      {:httpoison, "~> 1.7.0"},
-      {:mimic, "~> 1.3.1", only: :test},
-      {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.23.0", only: :dev, runtime: false}
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.23", only: :dev, runtime: false},
+      {:httpoison, "~> 1.7"},
+      {:jason, "~> 1.2"},
+      {:mimic, "~> 1.3", only: :test},
+      {:phoenix, "~> 1.5.7"}
     ]
   end
 
