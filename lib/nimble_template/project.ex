@@ -1,11 +1,10 @@
 defmodule NimbleTemplate.Project do
   @moduledoc false
 
+  @alpine_version "3.13.2"
   @elixir_version "1.11.4"
   @erlang_version "23.3"
   @node_version "14"
-
-  @alpine_version "3.13.2"
 
   defstruct base_module: nil,
             base_path: nil,
@@ -15,9 +14,7 @@ defmodule NimbleTemplate.Project do
             web_path: nil,
             web_test_path: nil,
             # Dependency Versions
-            docker_app_base_image: "alpine:#{@alpine_version}",
-            docker_build_base_image:
-              "hexpm/elixir:#{@elixir_version}-erlang-#{@erlang_version}-alpine-#{@alpine_version}",
+            alpine_version: @alpine_version,
             elixir_version: @elixir_version,
             elixir_asdf_version:
               "#{@elixir_version}-otp-#{@erlang_version |> String.split(".") |> List.first()}",

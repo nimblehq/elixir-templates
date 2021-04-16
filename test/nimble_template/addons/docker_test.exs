@@ -57,17 +57,29 @@ defmodule NimbleTemplate.Addons.DockerTest do
         Addons.Docker.apply(project)
 
         assert_file("Dockerfile", fn file ->
-          assert file =~ "FROM hexpm/elixir:1.11.4-erlang-23.3-alpine-3.13.2 AS build"
-          assert file =~ "FROM alpine:3.13.2 AS app"
+          assert file =~ """
+                 ARG ELIXIR_IMAGE_VERSION=1.11.4
+                 ARG ERLANG_IMAGE_VERSION=23.3
+                 ARG RELEASE_IMAGE_VERSION=3.13.2
 
-          assert file =~
-                   "RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error"
+                 FROM hexpm/elixir:${ELIXIR_IMAGE_VERSION}-erlang-${ERLANG_IMAGE_VERSION}-alpine-${RELEASE_IMAGE_VERSION} AS build
+                 """
 
-          assert file =~ "adduser -s /bin/sh -G app_group -D app_user &&"
+          assert file =~ "FROM alpine:${RELEASE_IMAGE_VERSION} AS app"
+
+          assert file =~ """
+                 RUN cd assets && \\
+                 \t\tnpm ci --progress=false --no-audit --loglevel=error && \\
+                 \t\tnpm run deploy && \\
+                 \t\tcd - && \\
+                 \t\tmix phx.digest
+                 """
+
+          assert file =~ "adduser -u 1000 -G appuser -g appuser -s /bin/sh -D appuser"
           assert file =~ "USER app_user"
 
           assert file =~
-                   "COPY --from=build --chown=app_user:app_group /app/_build/prod/rel/nimble_template ./"
+                   "COPY --from=build --chown=1000:1000 /app/_build/prod/rel/nimble_template ./"
         end)
       end)
     end
@@ -101,8 +113,13 @@ defmodule NimbleTemplate.Addons.DockerTest do
         Addons.Docker.apply(project)
 
         assert_file("Dockerfile", fn file ->
-          refute file =~
-                   "RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error"
+          refute file =~ """
+                 RUN cd assets && \\
+                 \t\tnpm ci --progress=false --no-audit --loglevel=error && \\
+                 \t\tnpm run deploy && \\
+                 \t\tcd - && \\
+                 \t\tmix phx.digest
+                 """
         end)
       end)
     end

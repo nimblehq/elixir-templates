@@ -9,8 +9,9 @@ defmodule NimbleTemplate.Addons.Docker do
           web_project?: web_project?,
           otp_app: otp_app,
           base_module: base_module,
-          docker_build_base_image: docker_build_base_image,
-          docker_app_base_image: docker_app_base_image
+          alpine_version: alpine_version,
+          elixir_version: elixir_version,
+          erlang_version: erlang_version
         } = project,
         _opts
       ) do
@@ -24,8 +25,9 @@ defmodule NimbleTemplate.Addons.Docker do
       ],
       otp_app: otp_app,
       base_module: base_module,
-      docker_build_base_image: docker_build_base_image,
-      docker_app_base_image: docker_app_base_image,
+      alpine_version: alpine_version,
+      elixir_version: elixir_version,
+      erlang_version: erlang_version,
       web_project?: web_project?
     )
 
