@@ -36,7 +36,7 @@ defmodule NimbleTemplate.Addons.Oban do
   end
 
   defp create_folders(%Project{otp_app: otp_app} = project) do
-    File.mkdir("lib/" <> Atom.to_string(otp_app) <> "_worker")
+    Generator.make_directory("lib/" <> Atom.to_string(otp_app) <> "_worker")
 
     project
   end
