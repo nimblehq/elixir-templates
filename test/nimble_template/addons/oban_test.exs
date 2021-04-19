@@ -106,14 +106,14 @@ defmodule NimbleTemplate.Addons.ObanTest do
       end)
     end
 
-    test "creates the worker folder", %{
+    test "creates the worker folder with .keep file", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
         Addons.Oban.apply(project)
 
-        assert(File.dir?("lib/nimble_template_worker")) == true
+        assert(File.exists?("lib/nimble_template_worker/.keep")) == true
       end)
     end
   end
