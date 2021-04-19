@@ -18,12 +18,13 @@ Supporting libraries:
 
 - [credo](https://hex.pm/packages/credo): A static code analysis tool with a focus on code consistency and teaching.
 - [dialyxir](https://hex.pm/packages/dialyxir): Mix tasks to simplify use of Dialyzer in Elixir projects.
+- [exvcr](https://hex.pm/packages/exvcr): HTTP request/response recording library for Elixir, inspired by VCR.
 - [ex_machina](https://hex.pm/packages/ex_machina): A factory library by the creators of FactoryBot (née FactoryGirl).
 - [excoveralls](https://hex.pm/packages/excoveralls): Coverage report tool for Elixir with coveralls.io integration.
 - [mimic](https://hex.pm/packages/mimic): Mocks for Elixir functions.
 - [oban](https://hex.pm/packages/oban): Robust job processing, backed by modern PostgreSQL.
 - [sobelow](https://hex.pm/packages/sobelow): Security-focused static analysis for the Phoenix framework.
-- [wallaby](https://hex.pm/packages/wallaby): Concurrent feature tests for elixir.
+- [wallaby](https://hex.pm/packages/wallaby): Concurrent feature tests for Elixir.
 
 ## Prerequisites
 
