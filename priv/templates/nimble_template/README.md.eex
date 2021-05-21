@@ -72,7 +72,7 @@
 
 ### Production
 
-* Buidl Docker image
+* Build Docker image
 
   ```sh
   docker-compose build
