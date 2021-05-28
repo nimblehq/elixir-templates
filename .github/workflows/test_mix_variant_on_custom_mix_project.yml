@@ -1,4 +1,4 @@
-name: "Test Mix variant on custom Mix project"
+name: Test Mix variant on custom Mix project
 
 on: push
 
@@ -9,6 +9,7 @@ env:
 
 jobs:
   unit_test:
+    - name: Test Mix variant on custom Mix project
     runs-on: ubuntu-latest
 
     steps:
@@ -17,11 +18,13 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: erlef/setup-elixir@v1
+      - name: Setup Elixir
+        uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
