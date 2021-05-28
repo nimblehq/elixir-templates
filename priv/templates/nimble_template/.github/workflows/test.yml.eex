@@ -37,7 +37,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name Setup Elixir
+      - name: Setup Elixir
         uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
