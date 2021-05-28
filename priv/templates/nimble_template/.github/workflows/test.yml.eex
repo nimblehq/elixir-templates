@@ -42,14 +42,12 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
-
       <%= if web_project? do %>
       - name: Setup Node
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ env.NODE_VERSION }}
       <% end %>
-
       - name: Cache Elixir build
         uses: actions/cache@v2
         with:
@@ -59,7 +57,6 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-mix-
-
       <%= if web_project? do %>
       - name: Cache Node npm
         uses: actions/cache@v2
@@ -69,7 +66,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       <% end %>
-
       - name: Install Dependencies
         run: mix deps.get
 
@@ -83,7 +79,6 @@ jobs:
       - name: Compile assets
         run: npm run --prefix assets build:dev
       <% end %>
-
       - name: Create database
         run: mix ecto.create
 
@@ -102,6 +97,7 @@ jobs:
         with:
           name: code_coverage
           path: cover/
+
       <%= if web_project? do %>
       - name: Upload Wallaby Screenshots Artifact
         uses: actions/upload-artifact@v2
