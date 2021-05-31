@@ -14,7 +14,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
           assert file =~ "Elixir 1.11.4"
 
           assert file =~ """
-                 * Install Node dependencies:
+                 - Install Node dependencies:
 
                    ```sh
                    npm install --prefix assets
@@ -22,7 +22,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  """
 
           assert file =~ """
-                 * Start the Phoenix app
+                 - Start the Phoenix app
 
                    ```sh
                    iex -S mix phx.server
@@ -48,7 +48,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
           assert file =~ "Elixir 1.11.4"
 
           refute file =~ """
-                 * Install Node dependencies:
+                 - Install Node dependencies:
 
                    ```sh
                    npm install --prefix assets
@@ -56,7 +56,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  """
 
           assert file =~ """
-                 * Start the Phoenix app
+                 - Start the Phoenix app
 
                    ```sh
                    iex -S mix phx.server
@@ -82,7 +82,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
           assert file =~ "Elixir 1.11.4"
 
           refute file =~ """
-                 * Install Node dependencies:
+                 - Install Node dependencies:
 
                    ```sh
                    npm install --prefix assets
@@ -90,7 +90,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  """
 
           refute file =~ """
-                 * Start the Phoenix app
+                 - Start the Phoenix app
 
                    ```sh
                    iex -S mix phx.server
