@@ -8,11 +8,11 @@
 
 ### Erlang & Elixir
 
-* Erlang <%= erlang_version %>
+- Erlang <%= erlang_version %>
 
-* Elixir <%= elixir_version %>
+- Elixir <%= elixir_version %>
 
-* Recommended version manager.
+- Recommended version manager.
 
   - [asdf](https://github.com/asdf-vm/asdf)
   - [asdf-erlang](https://github.com/asdf-vm/asdf-erlang)
@@ -20,25 +20,25 @@
 
 ### Development
 
-* Install Elixir dependencies:
+- Install Elixir dependencies:
 
   ```sh
   mix deps.get
   ```
 
-* Run all tests:
+- Run all tests:
 
   ```sh
   mix test 
   ```
 
-* Run all lint:
+- Run all lint:
 
   ```sh
   mix codebase 
   ```
 
-* Test coverage:
+- Test coverage:
 
   ```sh
   mix coverage 
