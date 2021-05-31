@@ -9,7 +9,7 @@ env:
 
 jobs:
   unit_test:
-    - name: Test Mix variant on standard Mix project
+    name: Test Mix variant on standard Mix project
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +17,7 @@ jobs:
         uses: styfle/cancel-workflow-action@0.8.0
         with:
           access_token: ${{ github.token }}
-      
+
       - name: Checkout repository
         uses: actions/checkout@v2
         with:

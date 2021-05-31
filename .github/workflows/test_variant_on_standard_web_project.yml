@@ -10,7 +10,7 @@ env:
 
 jobs:
   unit_test:
-    - name: Test variant on standard Web project
+    name: Test variant on standard Web project
     runs-on: ubuntu-latest
 
     strategy:

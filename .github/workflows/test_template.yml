@@ -10,7 +10,7 @@ env:
 
 jobs:
   unit_test:
-    - name: Test template
+    name: Test template
     runs-on: ubuntu-latest
 
     steps:
