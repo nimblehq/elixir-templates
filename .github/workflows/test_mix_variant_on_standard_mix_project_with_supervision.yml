@@ -9,7 +9,7 @@ env:
 
 jobs:
   unit_test:
-    - name: Test Mix variant on standard Mix project with --sup option
+    name: Test Mix variant on standard Mix project with --sup option
     runs-on: ubuntu-latest
 
     steps:

@@ -10,7 +10,7 @@ env:
 
 jobs:
   unit_test:
-    - name: Test Live variant on custom LiveView project
+    name: Test Live variant on custom LiveView project
     runs-on: ubuntu-latest
 
     services:

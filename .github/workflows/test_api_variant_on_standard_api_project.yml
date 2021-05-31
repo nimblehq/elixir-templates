@@ -9,7 +9,7 @@ env:
 
 jobs:
   unit_test:
-    - name: Test API variant on standard API project
+    name: Test API variant on standard API project
     runs-on: ubuntu-latest
 
     services:
