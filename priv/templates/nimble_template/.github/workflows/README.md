@@ -23,7 +23,7 @@ Please refer to the following sections for usage instruction.
 - Making some configuration changes to make the app ready for Heroku (read more in the [official documentation](https://hexdocs.pm/phoenix/heroku.html#making-our-project-ready-for-heroku)) that: 
   tell Phoenix to use Heroku URL and enforce the SSL usage. Also, bind to the port requested by Heroku in the `$PORT` environment variable.
 
-  Find the url line in your `config/prod.exs`: 
+  Find the `url` configuration in your `config/prod.exs`: 
   ```elixir
   url: [host: "example.com", port: 80],
   ```
@@ -33,13 +33,13 @@ Please refer to the following sections for usage instruction.
   url: [scheme: "https", host: System.get_env("HOST_URL"), port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   ```
-  Then open up the `config/prod.secret.exs` and uncomment the `# ssl: true`
+  Enable SSL for production environment by uncomment it in the file `config/prod.secret.exs`:
   ```elixir
   config :gscraper_web, GscraperWeb.Repo,
     ssl: true,
     ...  
   ```
-  if you plan on using websockets, then we will need to decrease the timeout for the websocket transport in `lib/hello_web/endpoint.ex`. 
+  If you plan on using WebSockets, the timeout for the WebSocket transport needs to be decreased in `lib/hello_web/endpoint.ex`. 
   ```elixir
   socket "/socket", HelloWeb.UserSocket,
     websocket: [timeout: 45_000],
