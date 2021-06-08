@@ -26,7 +26,10 @@ defmodule NimbleTemplate.Template do
       )
 
   def generate_github_action?(),
-    do: Mix.shell().yes?("\nDo you want to generate the Github Action workflow?")
+    do:
+      Mix.shell().yes?(
+        "\nDo you want to generate these Github Action workflows: Test and Deploy to Heroku?"
+      )
 
   def install_addon_prompt?(addon),
     do: Mix.shell().yes?("\nWould you like to add the #{addon} addon?")
