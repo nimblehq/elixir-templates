@@ -6,9 +6,9 @@ Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).
 
 NimbleTemplate has been developed and actively tested with the below environment:
 
-- Mix 1.11.4
-- Elixir 1.11.4
-- Erlang/OTP 23.3
+- Mix 1.12.1
+- Elixir 1.12.1
+- Erlang/OTP 24.0.1
 - Phoenix 1.5.7
 
 ## Installation
