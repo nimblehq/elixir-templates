@@ -3,15 +3,15 @@ name: "Test Live variant on custom LiveView project"
 on: push
 
 env:
-  OTP_VERSION: 23.3
-  ELIXIR_VERSION: 1.11.4
+  OTP_VERSION: 24.0.1
+  ELIXIR_VERSION: 1.12.1
   PHOENIX_VERSION: 1.5.7
   NODE_VERSION: 14
 
-jobs:   
+jobs:
   unit_test:
     runs-on: ubuntu-latest
-    
+
     services:
       db:
         image: postgres:12.3
@@ -23,7 +23,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        
+
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.8.0
@@ -38,11 +38,11 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
-        
+
       - uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ env.NODE_VERSION }}
-          
+
       - name: Cache Elixir build
         uses: actions/cache@v2
         with:
@@ -52,7 +52,7 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-mix-
-      
+
       - name: Cache Node npm
         uses: actions/cache@v2
         with:
@@ -61,7 +61,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-              
+
       - uses: nimblehq/elixir-templates@composite_1.4
         with:
           new_project_options: '--live --module=CustomModule --app=custom_app'

@@ -3,11 +3,11 @@ name: "Test Mix variant on standard Mix project"
 on: push
 
 env:
-  OTP_VERSION: 23.3
-  ELIXIR_VERSION: 1.11.4
+  OTP_VERSION: 24.0.1
+  ELIXIR_VERSION: 1.12.1
   MIX_ENV: test
 
-jobs:   
+jobs:
   unit_test:
     runs-on: ubuntu-latest
 
@@ -25,7 +25,7 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
-          
+
       - name: Cache Elixir build
         uses: actions/cache@v2
         with:
@@ -35,7 +35,7 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-mix-
-      
+
       - name: Create Mix project
         run: make create_mix_project PROJECT_DIRECTORY=sample_project OPTIONS=""
 
@@ -44,12 +44,12 @@ jobs:
 
       - name: Install Elixir Dependencies
         run: cd sample_project && mix deps.get
-      
+
       - name: Compile dependencies
         run: cd sample_project && mix compile --warnings-as-errors --all-warnings
-      
+
       - name: Run mix codebase
         run: cd sample_project && mix codebase
-        
+
       - name: Run mix test
         run: cd sample_project && mix test
