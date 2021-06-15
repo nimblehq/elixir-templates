@@ -1,8 +1,8 @@
 defmodule NimbleTemplate.Project do
   @moduledoc false
 
-  @alpine_version "3.13.2"
-  @elixir_version "1.11.4"
+  @alpine_version "3.13.3"
+  @elixir_version "1.12.1"
   @erlang_version "23.3"
   @node_version "14"
 
