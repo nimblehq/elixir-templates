@@ -47,3 +47,10 @@ jobs:
 
       - name: Run Tests
         run: mix coverage
+        
+      - name: Upload Code Coverage Artifacts 
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: code_coverage
+          path: cover/
