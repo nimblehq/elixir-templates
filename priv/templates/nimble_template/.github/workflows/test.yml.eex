@@ -86,8 +86,16 @@ jobs:
 
       - name: Run Tests
         run: mix coverage
+      
+      - name: Upload Code Coverage Artifact
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: code_coverage
+          path: cover/
       <%= if web_project? do %>
-      - uses: actions/upload-artifact@v2
+      - name: Upload Wallaby Screenshots Artifact
+        uses: actions/upload-artifact@v2
         if: ${{ failure() }}
         with:
           name: wallaby_screenshots
