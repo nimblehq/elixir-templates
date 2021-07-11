@@ -36,16 +36,20 @@ defmodule NimbleTemplate.Addons.Github do
       web_project?: web_project?
     ]
 
-    template_file_path =
-      if mix_project? do
-        ".github/workflows/test.yml.mix.eex"
-      else
-        ".github/workflows/test.yml.eex"
-      end
-
-    files = [
-      {:eex, template_file_path, ".github/workflows/test.yml"}
-    ]
+    files =
+      [{:text, ".github/workflows/README.md", ".github/workflows/README.md"}] ++
+        if mix_project? do
+          [
+            {:eex, ".github/workflows/test.yml.mix.eex", ".github/workflows/test.yml"},
+            {:eex, ".github/workflows/deploy_heroku.yml.mix.eex",
+             ".github/workflows/deploy_heroku.yml"}
+          ]
+        else
+          [
+            {:eex, ".github/workflows/test.yml.eex", ".github/workflows/test.yml"},
+            {:eex, ".github/workflows/deploy_heroku.yml.eex", ".github/workflows/deploy_heroku.yml"}
+          ]
+        end
 
     Generator.copy_file(files, binding)
 
