@@ -123,4 +123,32 @@ defmodule NimbleTemplate.Addons.GithubTest do
       end)
     end
   end
+
+  describe "#apply/2 with github_wiki option" do
+    test "copies the .github/workflows/publish_wiki.yml", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_wiki: true})
+
+        assert_file(".github/workflows/publish_wiki.yml")
+      end)
+    end
+  end
+
+  describe "#apply/2 with mix_project and github_wiki option" do
+    @describetag mix_project?: true
+
+    test "copies the .github/workflows/publish_wiki.yml", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_wiki: true})
+
+        assert_file(".github/workflows/publish_wiki.yml")
+      end)
+    end
+  end
 end

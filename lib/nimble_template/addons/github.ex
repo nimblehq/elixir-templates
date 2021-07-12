@@ -51,4 +51,14 @@ defmodule NimbleTemplate.Addons.Github do
 
     project
   end
+
+  @impl true
+  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_wiki) do
+    template_file_path = ".github/workflows/publish_wiki.yml.eex"
+    file_path = ".github/workflows/publish_wiki.yml"
+
+    Generator.copy_file([{:text, template_file_path, file_path}])
+
+    project
+  end
 end
