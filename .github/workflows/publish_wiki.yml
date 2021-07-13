@@ -1,0 +1,32 @@
+name: "Publish documentation to Github Wiki"
+
+on:
+ push:
+    branches:
+      - develop
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Publish to Wiki
+        uses: docker://decathlon/wiki-page-creator-action:latest
+        env:
+          ACTION_MAIL: devops@zipmex.com
+          ACTION_NAME: github-deploy
+          GH_PAT: ${{ secrets.GH_TOKEN }}
+          OWNER: zipmex
+          REPO_NAME: zipmex-marketplace-backend
+          MD_FOLDER: .github/wiki
+          SKIP_MD: README.md
