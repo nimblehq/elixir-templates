@@ -2,22 +2,18 @@
 
 [![Test template](https://github.com/nimblehq/elixir-templates/actions/workflows/test_template.yml/badge.svg?branch=develop)](https://github.com/nimblehq/elixir-templates/actions/workflows/test_template.yml)
 
-
-> A Library for initialize new Phoenix projects
-
+> A Library for initializing new Phoenix/Mix projects.
+ 
 ## Introduction
 
-NimbleTemplate is a library for initializing new Phoenix projects at [Nimble](https://nimblehq.co/). 
-It saves us a lot of time on the installation and configuration of new Phoenix projects.
-
-It supports for linting, testing, and much more, so developers can focus on core feature of the application. 
+**NimbleTemplate** is a library for initializing new Phoenix/Mix projects at [Nimble](https://nimblehq.co/). It speeds up the start of a new project by preloaded with some essential libraries, addons and, best practices.
 
 ## Features
 
-Supporting libraries:
+Libraries:
 
 - [credo](https://hex.pm/packages/credo): A static code analysis tool with a focus on code consistency and teaching.
-- [dialyxir](https://hex.pm/packages/dialyxir): Mix tasks to simplify use of Dialyzer in Elixir projects.
+- [dialyxir](https://hex.pm/packages/dialyxir): Mix tasks to simplify the usage of Dialyzer in Elixir projects.
 - [exvcr](https://hex.pm/packages/exvcr): HTTP request/response recording library for Elixir, inspired by VCR.
 - [ex_machina](https://hex.pm/packages/ex_machina): A factory library by the creators of FactoryBot (née FactoryGirl).
 - [excoveralls](https://hex.pm/packages/excoveralls): Coverage report tool for Elixir with coveralls.io integration.
@@ -25,6 +21,10 @@ Supporting libraries:
 - [oban](https://hex.pm/packages/oban): Robust job processing, backed by modern PostgreSQL.
 - [sobelow](https://hex.pm/packages/sobelow): Security-focused static analysis for the Phoenix framework.
 - [wallaby](https://hex.pm/packages/wallaby): Concurrent feature tests for Elixir.
+
+Addons:
+
+- Docker
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Supporting libraries:
 
 ## Installation
 
-*Note:* NimbleTemplate only works on a _new_ Phoenix/Mix project, applying it to an existing Phoenix/Mix project might not work as expected.
+*Note:* NimbleTemplate only works on a _new_ Phoenix/Mix project, applying it to an existing one might not work as expected.
 
 Step 1: Generate a new project
 
@@ -72,48 +72,45 @@ After the NimbleTemplate is installed, you can continue with the Usage section b
 
 ## Usage
 
-Base on the project type, we could choose to run one of the command below for generating the appropriate code structure.
+Base on the project type, we could choose to run one of the commands below for generating the appropriate code structure.
 
 ### Phoenix application
+
 ```bash
-# Phoenix application
 mix nimble_template.gen --web   # Apply the Web template
 mix nimble_template.gen --api   # Apply the API template
 mix nimble_template.gen --live  # Apply the LiveView template
 ```
+
 ### Non-Phoenix application
+
 ```bash
 mix nimble_template.gen --mix # Apply the Mix template
 ```
 
-### Other commands:
+### Other commands
+
 ```bash
 mix help nimble_template.gen # Print help
 
 mix nimble_template.gen -v # Print the version
 ```
 
-Start up your local server and verify project is ready.
+*Note:*
+
+Once the NimbleTemplate has been applied, you could remove it out from your mix dependency.
+
+By remove the `nimble_template` line in `mix.exs`. Then run the following command:
 
 ```bash
-mix phx.server
-```
-
-*Note:* 
-
-After the source code initialized successfully by the NimbleTemplate, please remove `nimble_template` in the `mix.exs` 
-file to keep your source clean.
-
-```
 mix deps.clean --unused --unlock 
 ```
 
 ## Running tests
 
-NimbleTemplate uses Github Action as the CI, the workflow files locate under [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
+**NimbleTemplate** uses Github Action as the CI, the workflow files locate under [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
 
 There are 2 types of test **Template test** and **Variant test**
-
 
 ### 1/ Template test
 
@@ -165,7 +162,7 @@ The Phoenix project could be one of **Web**, **API**, or **Live View**.
 mix phx.new awesome_project
 ```
 
-- *LiveView variant* supports for LiveView assets and configuration. 
+- *LiveView variant* supports LiveView assets and configuration.
 
 ```bash
 mix phx.new awesome_project --live
@@ -177,7 +174,7 @@ mix phx.new awesome_project --live
 mix phx.new awesome_project --no-html --no-webpack
 ```
 
-- *Custom project variant* allow us to modify the app name or module name.
+- *Custom project variant* allows us to modify the app name or module name.
 
 ```bash
 # Use CustomModuleName
@@ -224,14 +221,14 @@ The Mix project could be either a Standard project or a Custom project.
 - `mix new awesome_project --app=custom_otp_app_name`
 - `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
 
-Each project could be include the `supervision tree` or not.
+Each project could be included the `supervision tree` or not.
 
 - `mix new awesome_project`
 - `mix new awesome_project --sup`
 - `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
 - `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name --sup`
 
-Putting it all together, it will has 4 variant test cases.
+Putting it all together, it has 4 variant test cases.
 
 - Applying the `Mix variant` to a `Standard Mix project`
 - Applying the `Mix variant` to a `Custom Mix project`
@@ -248,14 +245,13 @@ Once a `release/<version number>` is created, to publish the new version to Hex.
 
 Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
 
-
 ## Contributing
 
-Contributions, issues, and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues). 
+Contributions, issues, and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues).
 
 ## License
 
-This project is Copyright (c) 2014 and onwards. It is free software, and may be redistributed under the terms specified in the [LICENSE] file.
+This project is Copyright (c) 2014 and onwards. It is free software and may be redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: /LICENSE
 
