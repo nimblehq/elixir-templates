@@ -4,3 +4,5 @@ _build/
 assets
 priv
 cover/
+.github/
+README.md
