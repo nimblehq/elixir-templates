@@ -11,8 +11,8 @@ on:
   workflow_dispatch:
 
 env:
-  OTP_VERSION: 24.0.1
-  ELIXIR_VERSION: 1.12.1
+  OTP_VERSION: 24.0.4
+  ELIXIR_VERSION: 1.12.2
 
 jobs:
   publish:

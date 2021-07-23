@@ -3,8 +3,8 @@ name: "Test Mix variant on standard Mix project with --sup option"
 on: push
 
 env:
-  OTP_VERSION: 24.0.1
-  ELIXIR_VERSION: 1.12.1
+  OTP_VERSION: 24.0.4
+  ELIXIR_VERSION: 1.12.2
   MIX_ENV: test
 
 jobs:

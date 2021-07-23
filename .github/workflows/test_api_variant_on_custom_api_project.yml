@@ -3,8 +3,8 @@ name: "Test API variant on custom API project"
 on: push
 
 env:
-  OTP_VERSION: 24.0.1
-  ELIXIR_VERSION: 1.12.1
+  OTP_VERSION: 24.0.4
+  ELIXIR_VERSION: 1.12.2
   PHOENIX_VERSION: 1.5.7
 
 jobs:
