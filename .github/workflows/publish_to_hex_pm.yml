@@ -30,7 +30,7 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
-      - name: Setup Elixir
+      - name: Set up Elixir
         uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
