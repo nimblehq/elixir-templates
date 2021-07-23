@@ -38,13 +38,15 @@ FROM alpine:${RELEASE_IMAGE_VERSION} AS app
 
 RUN apk update && \
     apk add --no-cache \
+    libstdc++ \
+    libgcc \
     bash \
     openssl-dev
 
 WORKDIR /opt/app
 EXPOSE 4000
 
-RUN addgroup -g 1000 appuser && \ 
+RUN addgroup -g 1000 appuser && \
 		adduser -u 1000 -G appuser -g appuser -s /bin/sh -D appuser && \
 		chown 1000:1000 /opt/app
 
