@@ -5,7 +5,9 @@ defmodule NimbleTemplate.Phoenix.Template do
     only: [
       host_on_github?: 0,
       generate_github_template?: 0,
-      generate_github_action?: 0,
+      generate_github_workflows_readme?: 0,
+      generate_github_action_test?: 0,
+      generate_github_action_deploy_heroku?: 0,
       install_addon_prompt?: 1
     ]
 
@@ -38,18 +40,25 @@ defmodule NimbleTemplate.Phoenix.Template do
     |> Addons.ExMachina.apply()
     |> Addons.Mimic.apply()
 
-    if host_on_github?() do
-      if generate_github_template?(),
-        do: Addons.Github.apply(project, %{github_template: true})
-
-      if generate_github_action?(),
-        do: Addons.Github.apply(project, %{github_action: true})
-    end
-
+    if host_on_github?(), do: github_addons_setup(project)
     if install_addon_prompt?("Oban"), do: Addons.Oban.apply(project)
     if install_addon_prompt?("ExVCR"), do: Addons.ExVCR.apply(project)
 
     project
+  end
+
+  defp github_addons_setup(%Project{} = project) do
+    if generate_github_template?(),
+      do: Addons.Github.apply(project, %{github_template: true})
+
+    if generate_github_workflows_readme?(),
+      do: Addons.Github.apply(project, %{github_workflows_readme: true})
+
+    if generate_github_action_test?(),
+      do: Addons.Github.apply(project, %{github_action_test: true})
+
+    if generate_github_action_deploy_heroku?(),
+      do: Addons.Github.apply(project, %{github_action_deploy_heroku: true})
   end
 
   defp variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)

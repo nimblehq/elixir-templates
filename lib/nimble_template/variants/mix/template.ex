@@ -5,7 +5,8 @@ defmodule NimbleTemplate.Mix.Template do
     only: [
       host_on_github?: 0,
       generate_github_template?: 0,
-      generate_github_action?: 0,
+      generate_github_workflows_readme?: 0,
+      generate_github_action_test?: 0,
       install_addon_prompt?: 1
     ]
 
@@ -24,8 +25,11 @@ defmodule NimbleTemplate.Mix.Template do
       if generate_github_template?(),
         do: Addons.Github.apply(project, %{github_template: true})
 
-      if generate_github_action?(),
-        do: Addons.Github.apply(project, %{github_action: true})
+      if generate_github_workflows_readme?(),
+        do: Addons.Github.apply(project, %{github_workflows_readme: true})
+
+      if generate_github_action_test?(),
+        do: Addons.Github.apply(project, %{github_action_test: true})
     end
 
     if install_addon_prompt?("Mimic"), do: Addons.Mimic.apply(project)

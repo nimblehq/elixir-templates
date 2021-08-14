@@ -11,11 +11,13 @@ create_mix_project:
 	mix new ${PROJECT_DIRECTORY} ${OPTIONS}
 
 # Y - in response to Will you host this project on Github?
-# Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
-# Y - in response to Do you want to generate the Github Action workflow?
+# Y - in response to Do you want to generate the Github Issue & Pull request templates?
+# Y - in response to Do you want to generate the .github/.workflow/README file?
+# Y - in response to Do you want to generate the Github Action workflows: Test?
+# Y - in response to Do you want to generate the Github Action workflows: Deploy to Heroku?
 # Y - in response to Would you like to add the Oban addon?
 # Y - in response to Would you like to add the ExVCR addon?
-common_addon_prompts = Y\nY\nY\nY\nY\n
+common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\n
 
 web_addon_prompts = 
 
@@ -24,10 +26,11 @@ api_addon_prompts =
 live_addon_prompts = 
 
 # Y - in response to Will you host this project on Github?
-# Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
-# Y - in response to Do you want to generate the Github Action workflow?
+# Y - in response to Do you want to generate the Github Issue & Pull request templates
+# Y - in response to Do you want to generate the .github/.workflow/README file?
+# Y - in response to Do you want to generate the Github Action workflow: Test?
 # Y - in response to Would you like to add the Mimic addon?
-mix_addon_prompts = Y\nY\nY\nY\n
+mix_addon_prompts = Y\nYnY\nY\nY\n
 
 # Y - in response to Fetch and install dependencies?
 post_setup_addon_prompts = Y\n

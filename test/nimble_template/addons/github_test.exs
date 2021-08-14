@@ -73,29 +73,35 @@ defmodule NimbleTemplate.Addons.GithubTest do
     end
   end
 
-  describe "#apply/2 with api_project and github_action option" do
-    test "copies the .github/workflows/README.md file", %{
+  describe "#apply/2 with github_workflows_readme option" do
+    test "copies the .github/workflows/README.md", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
+        Addons.Github.apply(project, %{github_workflows_readme: true})
 
         assert_file(".github/workflows/README.md")
       end)
     end
+  end
 
-    test "copies the .github/workflows/deploy_heroku.yml file", %{
+  describe "#apply/2 with mix_project and github_workflows_readme option" do
+    @describetag mix_project?: true
+
+    test "copies the .github/workflows/README.md", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
+        Addons.Github.apply(project, %{github_workflows_readme: true})
 
-        assert_file(".github/workflows/deploy_heroku.yml")
+        assert_file(".github/workflows/README.md")
       end)
     end
+  end
 
+  describe "#apply/2 with api_project and github_action_test option" do
     test "does NOT include the npm setting", %{
       project: project,
       test_project_path: test_project_path
@@ -103,7 +109,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
       project = %{project | api_project?: true, web_project?: false}
 
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
+        Addons.Github.apply(project, %{github_action_test: true})
 
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "assets/node_modules"
@@ -115,35 +121,13 @@ defmodule NimbleTemplate.Addons.GithubTest do
     end
   end
 
-  describe "#apply/2 with web_project and github_action option" do
-    test "copies the .github/workflows/README.md file", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
-
-        assert_file(".github/workflows/README.md")
-      end)
-    end
-
-    test "copies the .github/workflows/deploy_heroku.yml file", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
-
-        assert_file(".github/workflows/deploy_heroku.yml")
-      end)
-    end
-
+  describe "#apply/2 with web_project and github_action_test option" do
     test "includes the npm setting", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
+        Addons.Github.apply(project, %{github_action_test: true})
 
         assert_file(".github/workflows/test.yml", fn file ->
           assert file =~ "assets/node_modules"
@@ -155,37 +139,15 @@ defmodule NimbleTemplate.Addons.GithubTest do
     end
   end
 
-  describe "#apply/2 with mix_project and github_action option" do
+  describe "#apply/2 with mix_project and github_action_test option" do
     @describetag mix_project?: true
-
-    test "copies the .github/workflows/README.md file", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
-
-        assert_file(".github/workflows/README.md")
-      end)
-    end
-
-    test "copies the .github/workflows/deploy_heroku.yml file", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
-
-        assert_file(".github/workflows/deploy_heroku.yml")
-      end)
-    end
 
     test "does NOT include database setting", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
+        Addons.Github.apply(project, %{github_action_test: true})
 
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "postgres"
@@ -200,7 +162,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action: true})
+        Addons.Github.apply(project, %{github_action_test: true})
 
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "assets/node_modules"
@@ -208,6 +170,49 @@ defmodule NimbleTemplate.Addons.GithubTest do
           refute file =~ "npm run --prefix assets build:dev"
           refute file =~ "wallaby_screenshots"
         end)
+      end)
+    end
+  end
+
+  describe "#apply/2 with api_project and github_action_deploy_heroku option" do
+    test "copies the .github/workflows/deploy_heroku.yml file", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: true, web_project?: false}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+        assert_file(".github/workflows/deploy_heroku.yml")
+      end)
+    end
+  end
+
+  describe "#apply/2 with web_project and github_action_deploy_heroku option" do
+    test "copies the .github/workflows/deploy_heroku.yml file", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+        assert_file(".github/workflows/deploy_heroku.yml")
+      end)
+    end
+  end
+
+  describe "#apply/2 with mix_project and github_action_deploy_heroku option" do
+    @describetag mix_project?: true
+
+    test "doest NOT copy the .github/workflows/deploy_heroku.yml file", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: false})
+
+        refute_file(".github/workflows/deploy_heroku.yml")
       end)
     end
   end
