@@ -23,6 +23,17 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/PULL_REQUEST_TEMPLATE.md")
       end)
     end
+
+    test "copies the .github/PULL_REQUEST_TEMPLATE/RELEASE_TEMPLATE.md", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_template: true})
+
+        assert_file(".github/PULL_REQUEST_TEMPLATE/RELEASE_TEMPLATE.md")
+      end)
+    end
   end
 
   describe "#apply/2 with mix_project and github_template option" do
@@ -47,6 +58,17 @@ defmodule NimbleTemplate.Addons.GithubTest do
         Addons.Github.apply(project, %{github_template: true})
 
         assert_file(".github/PULL_REQUEST_TEMPLATE.md")
+      end)
+    end
+
+    test "copies the .github/PULL_REQUEST_TEMPLATE/RELEASE_TEMPLATE.md", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_template: true})
+
+        assert_file(".github/PULL_REQUEST_TEMPLATE/RELEASE_TEMPLATE.md")
       end)
     end
   end

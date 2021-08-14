@@ -9,7 +9,9 @@ defmodule NimbleTemplate.Addons.Github do
       {:text, Path.join([".github", "ISSUE_TEMPLATE.md"]),
        Path.join([".github", "ISSUE_TEMPLATE.md"])},
       {:text, Path.join([".github", "PULL_REQUEST_TEMPLATE.md"]),
-       Path.join([".github", "PULL_REQUEST_TEMPLATE.md"])}
+       Path.join([".github", "PULL_REQUEST_TEMPLATE.md"])},
+      {:text, Path.join([".github", "PULL_REQUEST_TEMPLATE", "RELEASE_TEMPLATE.md"]),
+        Path.join([".github", "PULL_REQUEST_TEMPLATE", "RELEASE_TEMPLATE.md"])}
     ]
 
     Generator.copy_file(files)

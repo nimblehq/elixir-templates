@@ -22,7 +22,7 @@ defmodule NimbleTemplate.Template do
   def generate_github_template?(),
     do:
       Mix.shell().yes?(
-        "\nDo you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?"
+        "\nDo you want to generate the Github Issue & Pull request templates?"
       )
 
   def generate_github_action?(),
