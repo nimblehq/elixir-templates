@@ -2,7 +2,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag mock_latest_package_versions: [{:wallaby, "0.26.2"}]
+    @describetag mock_latest_package_versions: [{:wallaby, "0.26.2"}, {:tesla, "1.4.3"}]
 
     test "copies the test/support/feature_case.ex", %{
       project: project,
@@ -54,6 +54,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
                    defp deps do
                      [
                        {:wallaby, \"~> 0.26.2\", [only: :test, runtime: false]},
+                       {:tesla, \"~> 1.4.3\", [override: true]},
                  """
         end)
       end)

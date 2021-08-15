@@ -41,10 +41,22 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
     project
   end
 
+  # Wallaby internally depends on -> web_driver_client -> tesla -> (mime ~> 1.0)
+  # see: https://github.com/teamon/tesla/blob/d0e742e621447fb565d480eb82804b147b785604/mix.exs#L55
+  # But when initializing a new Phoenix project,
+  # it depends -> Plug -> (mime, "~> 1.0 or ~> 2.0"}) and uses v2.0 by default
+  # see: https://github.com/elixir-plug/plug/blob/cdb3005210603ffdb3c252d7ade23faec91357d5/mix.exs#L44
+  # thus resulting in a conflict of Mime version
+  # here, this method must explicitly specifies Tesla as a dependency
+  # and allow it to override the exising mime version in mix.lock
   defp inject_mix_dependency(%Project{} = project) do
-    Generator.inject_mix_dependency(
-      {:wallaby, latest_package_version(:wallaby), only: :test, runtime: false}
-    )
+    # TODO: remove `tesla` as a dependency & the command `mix deps.update mime` when Tesla updates mime dependency to v2
+    Generator.inject_mix_dependency([
+      {:wallaby, latest_package_version(:wallaby), only: :test, runtime: false},
+      {:tesla, latest_package_version(:tesla), override: true}
+    ])
+
+    Mix.shell().cmd("mix deps.update mime")
 
     project
   end
