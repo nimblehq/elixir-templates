@@ -1,13 +1,7 @@
 defmodule NimbleTemplate.Phoenix.Template do
   @moduledoc false
 
-  import NimbleTemplate.Template,
-    only: [
-      host_on_github?: 0,
-      generate_github_template?: 0,
-      generate_github_action?: 0,
-      install_addon_prompt?: 1
-    ]
+  import NimbleTemplate.{AddonHelper, GithubHelper}
 
   alias NimbleTemplate.Phoenix.Api.Template, as: ApiTemplate
   alias NimbleTemplate.Phoenix.Live.Template, as: LiveTemplate
