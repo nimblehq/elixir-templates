@@ -1,13 +1,7 @@
 defmodule NimbleTemplate.Mix.Template do
   @moduledoc false
 
-  import NimbleTemplate.Template,
-    only: [
-      host_on_github?: 0,
-      generate_github_template?: 0,
-      generate_github_action?: 0,
-      install_addon_prompt?: 1
-    ]
+  import NimbleTemplate.{AddonHelper, GithubHelper}
 
   alias NimbleTemplate.{Addons, Project}
 
