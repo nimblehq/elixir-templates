@@ -26,8 +26,7 @@ defmodule NimbleTemplate.DependencyHelper do
           [
       """)
 
-    [deps, _tail] =
-      :binary.split(deps_with_tail, "\n    ]\n  end")
+    [deps, _tail] = :binary.split(deps_with_tail, "\n    ]\n  end")
 
     deps
   end
