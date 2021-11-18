@@ -24,4 +24,7 @@ defmodule NimbleTemplate.GithubHelper do
 
   def generate_github_action_deploy_heroku?(),
     do: Mix.shell().yes?("\nDo you want to generate the Github Action workflows: Deploy to Heroku?")
+
+  def generate_github_action_deploy_aws?(),
+    do: Mix.shell().yes?("\nDo you want to generate the Github Action to deploy to AWS ECS?")
 end

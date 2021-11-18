@@ -139,6 +139,14 @@ defmodule NimbleTemplate.Addons.Github do
       Most of the documentation is located in the `.github/wiki` directory, which is published to the [project's Github wiki](https://github.com/[REPO]/wiki).
       """
     )
+    project
+  end
+
+  def do_apply(%Project{} = project, opts) when opts.github_action_deploy_aws_ecs do
+    Generator.copy_file([
+      {:eex, ".github/workflows/deploy_to_aws_ecs.yml.eex",
+       ".github/workflows/deploy_to_aws_ecs.yml"}
+    ])
 
     project
   end
