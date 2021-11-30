@@ -1,19 +1,14 @@
 name: Deploy to Amazon ECS
 
 on:
-  workflow_run:
+  push:
     branches:
+      - main
       - develop
-    types:
-      - completed
-  workflow_dispatch:
 
 env:
-  DOCKER_REGISTRY_HOST: ${{ secrets.ECR_REGISTRY_HOST }}
-  DOCKER_IMAGE: ${{ secrets.STAGING_ECR_REPO }}
-  ECS_CLUSTER: ${{ secrets.STAGING_ECS_CLUSTER }}
-  ECS_SERVICE: ${{ secrets.STAGING_ECS_SERVICE }}
-  BRANCH_TAG: latest
+  ECS_CLUSTER: ${{ secrets.ECS_CLUSTER }}
+  ECS_SERVICE: ${{ secrets.ECS_SERVICE }}
 
 jobs:
   deploy:
@@ -25,14 +20,15 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
-      - uses: actions/checkout@v2.3.4
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -42,12 +38,15 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: $ECR_REPOSITORY
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Log out of Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}
 
       - name: Update Service
         run: aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
