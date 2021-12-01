@@ -46,6 +46,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
       {:wallaby, latest_package_version(:wallaby), only: :test, runtime: false}
     )
 
+    # There is a conflict on `mime` version between Plug and Tesla.
+    # The Tesla team hasn't released a new version to Hex.pm.
+    # TODO: Remove the mime dependency once Tesla team published the new version
+    #       and Wallaby uses that version.
+    Generator.inject_mix_dependency({:mime, "~> 1.0", override: true})
+
     project
   end
 
