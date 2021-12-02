@@ -42,7 +42,7 @@ defmodule NimbleTemplate.Addons.Oban do
   end
 
   defp inject_mix_dependency(project) do
-    Generator.inject_mix_dependency({:oban, latest_package_version(:oban), override: true})
+    Generator.inject_mix_dependency({:oban, latest_package_version(:oban)})
 
     project
   end
