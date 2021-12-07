@@ -35,13 +35,10 @@ runs:
         MIX_ENV: test
 
     - name: Install Node Dependencies
-      run: |
-            cd sample_project 
-            if [ -f assets/package.json ]; then
-              npm install --prefix assets
-            else 
-              echo package.json does not exist, skipping node dependencies installation.
-            fi
+      env: 
+        VARIANT_WITHOUT_NODE: '["api"]'
+      if: contains(fromJson(env.VARIANT_WITHOUT_NODE), inputs.variant) != true
+      run: cd sample_project && npm install --prefix assets
       shell: bash
 
     - name: Run mix ecto.create
