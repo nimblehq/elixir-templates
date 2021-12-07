@@ -35,6 +35,7 @@ runs:
         MIX_ENV: test
       
     - name: Install Node Dependencies
+      if: (test -f sample_project/assets/package.json)
       run: cd sample_project && npm install --prefix assets
       shell: bash
 
