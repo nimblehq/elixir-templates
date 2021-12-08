@@ -36,8 +36,8 @@ runs:
 
     - name: Install Node Dependencies
       env: 
-        VARIANT_WITHOUT_NODE: '["api"]'
-      if: contains(fromJson(env.VARIANT_WITHOUT_NODE), inputs.variant) != true
+        VARIANT_WITH_NODE_DEPENDENCY: '["web", "live"]'
+      if: contains(fromJson(env.VARIANT_WITH_NODE_DEPENDENCY), inputs.variant) == true
       run: cd sample_project && npm install --prefix assets
       shell: bash
 
