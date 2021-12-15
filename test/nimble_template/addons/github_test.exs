@@ -134,14 +134,6 @@ defmodule NimbleTemplate.Addons.GithubTest do
 
         assert_file(".github/workflows/publish_wiki.yml")
 
-        assert_file(".github/wiki/Home.md", fn file ->
-          assert file =~ "Insert information about your project here!"
-        end)
-
-        assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
-        end)
-
         assert_file(".github/wiki/Getting-Started.md", fn file ->
           assert file =~ "Erlang 24.0.4"
           assert file =~ "Elixir 1.12.2"
@@ -162,6 +154,14 @@ defmodule NimbleTemplate.Addons.GithubTest do
                    ```
                  """
         end)
+
+        assert_file(".github/wiki/Home.md", fn file ->
+          assert file =~ "Insert information about your project here!"
+        end)
+
+        assert_file(".github/wiki/_Sidebar.md", fn file ->
+          assert file =~ "Table of Contents"
+        end)
       end)
     end
   end
@@ -175,14 +175,6 @@ defmodule NimbleTemplate.Addons.GithubTest do
         Addons.Github.apply(project, %{github_wiki: true})
 
         assert_file(".github/workflows/publish_wiki.yml")
-
-        assert_file(".github/wiki/Home.md", fn file ->
-          assert file =~ "Insert information about your project here!"
-        end)
-
-        assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
-        end)
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
           assert file =~ "Erlang 24.0.4"
@@ -204,6 +196,14 @@ defmodule NimbleTemplate.Addons.GithubTest do
                    ```
                  """
         end)
+
+        assert_file(".github/wiki/Home.md", fn file ->
+          assert file =~ "Insert information about your project here!"
+        end)
+
+        assert_file(".github/wiki/_Sidebar.md", fn file ->
+          assert file =~ "Table of Contents"
+        end)
       end)
     end
   end
@@ -219,14 +219,6 @@ defmodule NimbleTemplate.Addons.GithubTest do
         Addons.Github.apply(project, %{github_wiki: true})
 
         assert_file(".github/workflows/publish_wiki.yml")
-
-        assert_file(".github/wiki/Home.md", fn file ->
-          assert file =~ "Insert information about your project here!"
-        end)
-
-        assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
-        end)
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
           assert file =~ "Erlang 24.0.4"
@@ -247,6 +239,14 @@ defmodule NimbleTemplate.Addons.GithubTest do
                    iex -S mix phx.server
                    ```
                  """
+        end)
+
+        assert_file(".github/wiki/Home.md", fn file ->
+          assert file =~ "Insert information about your project here!"
+        end)
+
+        assert_file(".github/wiki/_Sidebar.md", fn file ->
+          assert file =~ "Table of Contents"
         end)
       end)
     end
