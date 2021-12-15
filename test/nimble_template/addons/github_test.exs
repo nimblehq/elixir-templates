@@ -125,7 +125,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
   end
 
   describe "#apply/2 with github_wiki option" do
-    test "copies the .github/workflows/publish_wiki.yml", %{
+    test "copies the .github/workflows/publish_wiki.yml and Github Wiki files", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -133,6 +133,77 @@ defmodule NimbleTemplate.Addons.GithubTest do
         Addons.Github.apply(project, %{github_wiki: true})
 
         assert_file(".github/workflows/publish_wiki.yml")
+
+        assert_file(".github/wiki/Home.md", fn file ->
+          assert file =~ "Insert information about your project here!"
+        end)
+
+        assert_file(".github/wiki/_Sidebar.md", fn file ->
+          assert file =~ "Table of Contents"
+        end)
+
+        assert_file(".github/wiki/Getting-Started.md", fn file ->
+          assert file =~ "Erlang 24.0.4"
+          assert file =~ "Elixir 1.12.2"
+
+          assert file =~ """
+                 - Install Node dependencies:
+
+                   ```sh
+                   npm install --prefix assets
+                   ```
+                 """
+
+          assert file =~ """
+                 - Start the Phoenix app
+
+                   ```sh
+                   iex -S mix phx.server
+                   ```
+                 """
+        end)
+      end)
+    end
+  end
+
+  describe "#apply/2 with api_project and github_wiki option" do
+    test "copies the .github/workflows/publish_wiki.yml and Github Wiki files", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_wiki: true})
+
+        assert_file(".github/workflows/publish_wiki.yml")
+
+        assert_file(".github/wiki/Home.md", fn file ->
+          assert file =~ "Insert information about your project here!"
+        end)
+
+        assert_file(".github/wiki/_Sidebar.md", fn file ->
+          assert file =~ "Table of Contents"
+        end)
+
+        assert_file(".github/wiki/Getting-Started.md", fn file ->
+          assert file =~ "Erlang 24.0.4"
+          assert file =~ "Elixir 1.12.2"
+
+          refute file =~ """
+                      - Install Node dependencies:
+
+                        ```sh
+                        npm install --prefix assets
+                        ```
+                 """
+
+          assert file =~ """
+                 - Start the Phoenix app
+
+                   ```sh
+                   iex -S mix phx.server
+                   ```
+                 """
+        end)
       end)
     end
   end
@@ -140,7 +211,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
   describe "#apply/2 with mix_project and github_wiki option" do
     @describetag mix_project?: true
 
-    test "copies the .github/workflows/publish_wiki.yml", %{
+    test "copies the .github/workflows/publish_wiki.yml and Github Wiki files", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -148,6 +219,35 @@ defmodule NimbleTemplate.Addons.GithubTest do
         Addons.Github.apply(project, %{github_wiki: true})
 
         assert_file(".github/workflows/publish_wiki.yml")
+
+        assert_file(".github/wiki/Home.md", fn file ->
+          assert file =~ "Insert information about your project here!"
+        end)
+
+        assert_file(".github/wiki/_Sidebar.md", fn file ->
+          assert file =~ "Table of Contents"
+        end)
+
+        assert_file(".github/wiki/Getting-Started.md", fn file ->
+          assert file =~ "Erlang 24.0.4"
+          assert file =~ "Elixir 1.12.2"
+
+          refute file =~ """
+                      - Install Node dependencies:
+
+                        ```sh
+                        npm install --prefix assets
+                        ```
+                 """
+
+          refute file =~ """
+                 - Start the Phoenix app
+
+                   ```sh
+                   iex -S mix phx.server
+                   ```
+                 """
+        end)
       end)
     end
   end

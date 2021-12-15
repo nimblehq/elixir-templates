@@ -53,11 +53,46 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_wiki) do
-    template_file_path = ".github/workflows/publish_wiki.yml.eex"
-    file_path = ".github/workflows/publish_wiki.yml"
+  def do_apply(
+        %Project{
+          web_project?: web_project?,
+          mix_project?: mix_project?,
+          erlang_version: erlang_version,
+          elixir_version: elixir_version
+        } = project,
+        opts
+      )
+      when is_map_key(opts, :github_wiki) do
+    binding = [
+      web_project?: web_project?,
+      mix_project?: mix_project?,
+      erlang_version: erlang_version,
+      elixir_version: elixir_version
+    ]
 
-    Generator.copy_file([{:text, template_file_path, file_path}])
+    template_workflow_path = ".github/workflows/publish_wiki.yml.eex"
+    workflow_path = ".github/workflows/publish_wiki.yml"
+
+    template_getting_started_path =
+      if mix_project? do
+        ".github/wiki/Getting-Started.md.mix.eex"
+      else
+        ".github/wiki/Getting-Started.md.eex"
+      end
+
+    getting_started_path = ".github/wiki/Getting-Started.md"
+
+    homepage_path = ".github/wiki/Home.md"
+    sidebar_path = ".github/wiki/_Sidebar.md"
+
+    files = [
+      {:text, template_workflow_path, workflow_path},
+      {:text, homepage_path, homepage_path},
+      {:eex, template_getting_started_path, getting_started_path},
+      {:text, sidebar_path, sidebar_path}
+    ]
+
+    Generator.copy_file(files, binding)
 
     project
   end
