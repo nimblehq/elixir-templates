@@ -10,7 +10,7 @@ on:
 env:
   USER_TOKEN: ${{ secrets.GH_TOKEN }}
   USER_NAME: github-wiki-workflow
-  USER_EMAIL: dev@nimblehq.co
+  USER_EMAIL: ${{ secrets.GH_EMAIL }}
   OWNER: ${{ github.event.repository.owner.name }}
   REPOSITORY_NAME: ${{ github.event.repository.name }}
   WIKI_FOLDER: .github/wiki
