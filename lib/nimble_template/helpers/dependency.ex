@@ -19,7 +19,7 @@ defmodule NimbleTemplate.DependencyHelper do
     Generator.replace_content("mix.exs", dependencies, ordered_dependencies)
   end
 
-  def extract_dependencies(contents) do
+  defp extract_dependencies(contents) do
     [_, deps_with_file_footer] =
       :binary.split(contents, """
         defp deps do
