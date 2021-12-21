@@ -69,5 +69,5 @@ jobs:
       - name: Run composite steps
         uses: nimblehq/elixir-templates@composite_1.4
         with:
-          new_project_options: '--live --module=CustomModule --app=custom_app'
+          new_project_options: '--live --module=SampleCustomModule --app=sample_custom_app'
           variant: 'live'

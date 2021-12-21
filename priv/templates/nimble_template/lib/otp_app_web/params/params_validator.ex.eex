@@ -3,8 +3,8 @@ defmodule <%= base_module %>Web.ParamsValidator do
   Helper module for validating given request params with params module
   """
 
-  alias <%= base_module %>Web.Params
   alias Ecto.Changeset
+  alias <%= base_module %>Web.Params
 
   @spec validate(map(), atom(), [{:for, Params.t()}]) ::
           {:ok, map()} | {:error, :invalid_params, Ecto.Changeset.t()}

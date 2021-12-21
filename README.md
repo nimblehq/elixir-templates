@@ -100,7 +100,7 @@ All test files are located under `test/` directory.
 
 #### 2.1/ Variant
 
-NimbleTemplate supports 4 variants:  
+NimbleTemplate supports 4 variants:
 
 - API
 - Live
@@ -132,29 +132,29 @@ mix phx.new awesome_project --no-html --no-webpack
 - Custom project variant allow us to modify the app name or module name.
 
 ```bash
-# Use CustomModuleName
-mix phx.new awesome_project --module=CustomModuleName
+# Use SampleCustomModuleName
+mix phx.new awesome_project --module=SampleCustomModuleName
 
 # Use custom OTP app name
-mix phx.new awesome_project --app=custom_otp_app_name
+mix phx.new awesome_project --app=sample_custom_otp_app_name
 
 # Use custom module and app name
-mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name
+mix phx.new awesome_project --module=SampleCustomModuleName --app=sample_custom_otp_app_name
 ```
 
 So it ends up with 6 project types:
 
-Web project 
+Web project
 - Standard (`mix phx.new awesome_project`)
-- Custom (`mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name`)
+- Custom (`mix phx.new awesome_project --module=SampleCustomModuleName --app=sample_custom_otp_app_name`)
 
 API project
 - Standard (`mix phx.new awesome_project --no-html --no-webpack`)
-- Custom (`mix phx.new awesome_project --no-html --no-webpack --module=CustomModuleName --app=custom_otp_app_name`)
+- Custom (`mix phx.new awesome_project --no-html --no-webpack --module=SampleCustomModuleName --app=sample_custom_otp_app_name`)
 
 LiveView project
 - Standard (`mix phx.new awesome_project --live`)
-- Custom (`mix phx.new awesome_project --live --module=CustomModuleName --app=custom_otp_app_name`)
+- Custom (`mix phx.new awesome_project --live --module=SampleCustomModuleName --app=sample_custom_otp_app_name`)
 
 Putting it all together, there are 8 variants of test cases.
 
@@ -172,16 +172,16 @@ Putting it all together, there are 8 variants of test cases.
 The Mix project could be either a Standard project or a Custom project.
 
 - `mix new awesome_project`
-- `mix new awesome_project --module=CustomModuleName`
-- `mix new awesome_project --app=custom_otp_app_name`
-- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
+- `mix new awesome_project --module=SampleCustomModuleName`
+- `mix new awesome_project --app=sample_custom_otp_app_name`
+- `mix new awesome_project --module=SampleCustomModuleName --app=sample_custom_otp_app_name`
 
 Each project could be include the `supervision tree` or not.
 
 - `mix new awesome_project`
 - `mix new awesome_project --sup`
-- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
-- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name --sup`
+- `mix new awesome_project --module=SampleCustomModuleName --app=sample_custom_otp_app_name`
+- `mix new awesome_project --module=SampleCustomModuleName --app=sample_custom_otp_app_name --sup`
 
 Putting it all together, it will has 4 variant test cases.
 
@@ -203,7 +203,7 @@ Once the release branch is merged into the `master` branch, Github Action automa
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues). 
+Contributions, issues, and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues).
 
 ## License
 

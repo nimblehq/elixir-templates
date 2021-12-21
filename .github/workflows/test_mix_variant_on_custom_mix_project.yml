@@ -40,7 +40,7 @@ jobs:
             ${{ runner.os }}-mix-
 
       - name: Create Mix project
-        run: make create_mix_project PROJECT_DIRECTORY=sample_project OPTIONS="--module=CustomModule --app=custom_app"
+        run: make create_mix_project PROJECT_DIRECTORY=sample_project OPTIONS="--module=CustomModule --app=sample_custom_app"
 
       - name: Apply Mix template
         run: make apply_mix_template PROJECT_DIRECTORY=sample_project
