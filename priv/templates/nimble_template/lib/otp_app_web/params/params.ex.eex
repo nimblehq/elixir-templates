@@ -17,7 +17,7 @@ defmodule <%= base_module %>Web.Params do
 
       @primary_key false
 
-      @behaviour <%= base_module %>.Params
+      @behaviour <%= base_module %>Web.Params
     end
   end
 end
