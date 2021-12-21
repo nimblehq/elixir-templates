@@ -3,16 +3,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ParamsValidation do
 
   use NimbleTemplate.Addon
 
-  def do_apply(%Project{} = project, _opts) do
-    project
-    |> copy_files()
-  end
+  def do_apply(%Project{} = project, _opts), do: copy_files(project)
 
   defp copy_files(
          %Project{
+           base_module: base_module,
            web_module: web_module,
            web_path: web_path,
-           base_module: base_module,
            web_test_path: web_test_path
          } = project
        ) do
