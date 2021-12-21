@@ -13,6 +13,7 @@ defmodule NimbleTemplate.Mix.Template do
     |> Addons.Credo.apply()
     |> Addons.Dialyxir.apply()
     |> Addons.ExCoveralls.apply()
+    |> Addons.Faker.apply()
 
     if host_on_github?() do
       if generate_github_template?(),

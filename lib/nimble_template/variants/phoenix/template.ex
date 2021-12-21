@@ -31,6 +31,7 @@ defmodule NimbleTemplate.Phoenix.Template do
     |> Addons.ExCoveralls.apply()
     |> Addons.ExMachina.apply()
     |> Addons.Mimic.apply()
+    |> Addons.Faker.apply()
 
     if host_on_github?() do
       if generate_github_template?(),
