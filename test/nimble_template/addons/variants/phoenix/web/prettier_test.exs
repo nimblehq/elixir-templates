@@ -35,7 +35,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       end)
     end
 
-    test "copies the .prettierignore and .prettierrc.js", %{
+    test "copies the .prettierignore and .prettierrc", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -43,7 +43,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
         AddonsWeb.Prettier.apply(project)
 
         assert_file(".prettierignore")
-        assert_file(".prettierrc.js")
+        assert_file(".prettierrc")
       end)
     end
   end
