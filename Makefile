@@ -31,8 +31,7 @@ live_addon_prompts =
 # Y - in response to Would you like to add the Mimic addon?
 mix_addon_prompts = Y\nY\nY\nY\nY\n
 
-# Y - in response to Fetch and install dependencies?
-post_setup_addon_prompts = Y\n
+post_setup_addon_prompts = 
 
 apply_phoenix_template:
 	cd ${PROJECT_DIRECTORY} && \

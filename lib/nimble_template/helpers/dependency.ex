@@ -1,10 +1,6 @@
 defmodule NimbleTemplate.DependencyHelper do
   alias NimbleTemplate.Generator
 
-  def fetch_and_install_dependencies,
-    do:
-      if(Mix.shell().yes?("\nFetch and install dependencies?"), do: Mix.shell().cmd("mix deps.get"))
-
   def order_dependencies! do
     file_content = File.read!("mix.exs")
 
