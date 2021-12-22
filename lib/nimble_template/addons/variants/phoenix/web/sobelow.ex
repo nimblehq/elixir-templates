@@ -34,13 +34,19 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Sobelow do
     Generator.replace_content(
       "mix.exs",
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+            codebase: [
+              "deps.unlock --check-unused",
+              "format --check-formatted",
+              "credo --strict",
+              "prettier"
+            ],
       """,
       """
             codebase: [
               "deps.unlock --check-unused",
               "format --check-formatted",
               "credo --strict",
+              "prettier",
               "sobelow --config"
             ],
       """

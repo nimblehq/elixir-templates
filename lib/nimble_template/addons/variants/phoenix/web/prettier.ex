@@ -47,6 +47,21 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
       """
     )
 
+    Generator.replace_content(
+      "mix.exs",
+      """
+            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+      """,
+      """
+            codebase: [
+              "deps.unlock --check-unused",
+              "format --check-formatted",
+              "credo --strict",
+              "prettier"
+            ],
+      """
+    )
+
     project
   end
 
