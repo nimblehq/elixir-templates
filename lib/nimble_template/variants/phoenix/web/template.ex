@@ -8,7 +8,6 @@ defmodule NimbleTemplate.Phoenix.Web.Template do
     project
     |> Web.Assets.apply()
     |> Web.CoreJS.apply()
-    |> Web.TestEnv.apply()
     |> Web.Prettier.apply()
     |> Web.Sobelow.apply()
     |> Web.Wallaby.apply()

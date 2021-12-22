@@ -61,13 +61,21 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
     Generator.replace_content(
       "mix.exs",
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+            codebase: [
+              "deps.unlock --check-unused",
+              "format --check-formatted",
+              "credo --strict",
+              "cmd npm run eslint --prefix assets",
+              "cmd npm run stylelint --prefix assets"
+            ],
       """,
       """
             codebase: [
               "deps.unlock --check-unused",
               "format --check-formatted",
               "credo --strict",
+              "cmd npm run eslint --prefix assets",
+              "cmd npm run stylelint --prefix assets",
               "prettier"
             ],
       """
