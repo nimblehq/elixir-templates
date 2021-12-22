@@ -21,12 +21,12 @@ defmodule NimbleTemplate.DependencyHelper do
 
   defp extract_dependencies(contents) do
     [_, deps_with_file_footer] =
-      :binary.split(contents, """
+      String.split(contents, """
         defp deps do
           [
       """)
 
-    [deps, _footer] = :binary.split(deps_with_file_footer, "\n    ]\n  end")
+    [deps | _footer] = String.split(deps_with_file_footer, "\n    ]\n  end")
 
     deps
   end

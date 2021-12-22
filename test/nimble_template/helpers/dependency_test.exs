@@ -4,8 +4,7 @@ defmodule NimbleTemplate.DependencyTest do
   alias NimbleTemplate.{Addons, DependencyHelper}
 
   describe "order_dependencies!/0" do
-    @describetag mock_latest_package_versions: [{:exvcr, "0.12.2"}]
-    @describetag mock_latest_package_versions: [{:mimic, "1.3.1"}]
+    @describetag mock_latest_package_versions: [{:exvcr, "0.12.2"}, {:mimic, "1.3.1"}]
 
     test "orders dependencies in alphabetical order", %{
       project: project,
