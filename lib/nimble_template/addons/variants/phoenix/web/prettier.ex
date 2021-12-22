@@ -35,6 +35,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
   end
 
   defp edit_mix(%Project{} = project) do
+    project
+    |> add_prettier_aliases()
+    |> add_prettier_into_codebase()
+    |> add_prettier_fix_into_codebase_fix()
+  end
+
+  defp add_prettier_aliases(%Project{} = project) do
     Generator.inject_content(
       "mix.exs",
       """
@@ -47,6 +54,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
       """
     )
 
+    project
+  end
+
+  defp add_prettier_into_codebase(%Project{} = project) do
     Generator.replace_content(
       "mix.exs",
       """
@@ -58,6 +69,31 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
               "format --check-formatted",
               "credo --strict",
               "prettier"
+            ],
+      """
+    )
+
+    project
+  end
+
+  defp add_prettier_fix_into_codebase_fix(%Project{} = project) do
+    Generator.replace_content(
+      "mix.exs",
+      """
+            "codebase.fix": [
+              "deps.clean --unlock --unused",
+              "format",
+              "cmd npm run eslint.fix --prefix assets",
+              "cmd npm run stylelint.fix --prefix assets"
+            ],
+      """,
+      """
+            "codebase.fix": [
+              "deps.clean --unlock --unused",
+              "format",
+              "cmd npm run eslint.fix --prefix assets",
+              "cmd npm run stylelint.fix --prefix assets",
+              "prettier.fix"
             ],
       """
     )

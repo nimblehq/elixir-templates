@@ -39,7 +39,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       end)
     end
 
-    test "adds prettier codebase alias", %{project: project, test_project_path: test_project_path} do
+    test "adds prettier into the codebase alias", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
         AddonsWeb.Prettier.apply(project)
 
@@ -50,6 +50,24 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
                          \"format --check-formatted\",
                          \"credo --strict\",
                          \"prettier\"
+                       ],
+                 """
+        end)
+      end)
+    end
+
+    test "adds prettier.fix into the codebase.fix alias", %{project: project, test_project_path: test_project_path} do
+      in_test_project(test_project_path, fn ->
+        AddonsWeb.Prettier.apply(project)
+
+        assert_file("mix.exs", fn file ->
+          assert file =~ """
+                       "codebase.fix": [
+                         \"deps.clean --unlock --unused\",
+                         \"format\",
+                         \"cmd npm run eslint.fix --prefix assets\",
+                         \"cmd npm run stylelint.fix --prefix assets\",
+                         \"prettier.fix\"
                        ],
                  """
         end)
