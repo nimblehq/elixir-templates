@@ -18,6 +18,7 @@ defmodule NimbleTemplate.Phoenix.Template do
     project
   end
 
+  # credo:disable-for-next-line Credo.Check.Refactor.ABCSize
   defp common_setup(%Project{} = project) do
     project
     |> Addons.ElixirVersion.apply()
