@@ -77,11 +77,12 @@ defmodule NimbleTemplate.Addons.Github do
         ".github/wiki/Getting-Started.md.eex"
       end
 
+    publish_wiki_workflow_path = ".github/workflows/publish_wiki.yml"
     homepage_path = ".github/wiki/Home.md"
     sidebar_path = ".github/wiki/_Sidebar.md"
 
     files = [
-      {:text, ".github/workflows/publish_wiki.yml.eex", ".github/workflows/publish_wiki.yml"},
+      {:text, publish_wiki_workflow_path, publish_wiki_workflow_path},
       {:text, homepage_path, homepage_path},
       {:eex, template_getting_started_path, ".github/wiki/Getting-Started.md"},
       {:text, sidebar_path, sidebar_path}
