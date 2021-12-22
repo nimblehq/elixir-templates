@@ -10,12 +10,14 @@ defmodule NimbleTemplate.Template do
   def apply(%Project{mix_project?: true} = project) do
     MixTemplate.apply(project)
 
+    order_dependencies!()
     fetch_and_install_dependencies()
   end
 
   def apply(%Project{} = project) do
     PhoenixTemplate.apply(project)
 
+    order_dependencies!()
     fetch_and_install_dependencies()
   end
 end
