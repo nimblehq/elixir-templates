@@ -1,0 +1,6 @@
+deps/
+_build/
+.elixir_ls
+assets
+priv
+cover/
