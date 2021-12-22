@@ -21,6 +21,9 @@ defmodule NimbleTemplate.Mix.Template do
 
       if generate_github_action?(),
         do: Addons.Github.apply(project, %{github_action: true})
+
+      if generate_github_wiki?(),
+        do: Addons.Github.apply(project, %{github_wiki: true})
     end
 
     if install_addon_prompt?("Mimic"), do: Addons.Mimic.apply(project)
