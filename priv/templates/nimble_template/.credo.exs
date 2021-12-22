@@ -87,7 +87,7 @@
         # If you don't want TODO comments to cause `mix credo` to fail, just
         # set this value to 0 (zero).
         #
-        {Credo.Check.Design.TagTODO, [exit_status: 2]},
+        {Credo.Check.Design.TagTODO, [exit_status: 0]},
         {Credo.Check.Design.TagFIXME, []},
 
         #
@@ -161,9 +161,9 @@
            order:
              ~w/shortdoc moduledoc behaviour use import alias require module_attribute defstruct callback/a
          ]},
-        {Credo.Check.Consistency.MultiAliasImportRequireUse, []},
+        {Credo.Check.Consistency.MultiAliasImportRequireUse, false},
         {Credo.Check.Consistency.UnusedVariableNames, false},
-        {Credo.Check.Design.DuplicatedCode, []},
+        {Credo.Check.Design.DuplicatedCode, files: %{excluded: ["**/*_test.exs"]}},
         {Credo.Check.Readability.AliasAs, false},
         {Credo.Check.Readability.MultiAlias, false},
         {Credo.Check.Readability.Specs, false},
