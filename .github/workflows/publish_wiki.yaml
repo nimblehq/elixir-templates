@@ -8,9 +8,9 @@ on:
       - develop
 
 env:
-  USER_TOKEN: ${{ secrets.GH_TOKEN }}
+  USER_TOKEN: ${{ secrets.WIKI_ACTION_TOKEN }}
   USER_NAME: github-wiki-workflow
-  USER_EMAIL: devops@zipmex.com
+  USER_EMAIL: dev@nimblhq.co
   OWNER: ${{ github.event.repository.owner.name }}
   REPOSITORY_NAME: ${{ github.event.repository.name }}
   WIKI_FOLDER: .github/wiki
