@@ -67,7 +67,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
 
   defp copy_files(%Project{} = project) do
     Generator.copy_file([{:text, ".prettierignore", ".prettierignore"}])
-    Generator.copy_file([{:eex, ".prettierrc.eex", ".prettierrc"}])
+    Generator.copy_file([{:eex, ".prettierrc.yaml.eex", ".prettierrc.yaml"}])
 
     project
   end
