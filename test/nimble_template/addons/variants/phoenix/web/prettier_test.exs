@@ -29,8 +29,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
           assert file =~ """
                    defp aliases do
                      [
-                       prettier: "cmd ./assets/node_modules/.bin/prettier --write . --color",
-                       prettier.fix: "cmd ./assets/node_modules/.bin/prettier --debug-check . --color",
+                       prettier: "cmd ./assets/node_modules/.bin/prettier --check . --color",
+                       prettier.fix: "cmd ./assets/node_modules/.bin/prettier --write . --color",
                  """
         end)
       end)

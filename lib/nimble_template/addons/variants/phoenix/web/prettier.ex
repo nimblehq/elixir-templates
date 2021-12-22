@@ -42,7 +42,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
           [
       """,
       """
-            prettier: "cmd ./assets/node_modules/.bin/prettier --debug-check . --color",
+            prettier: "cmd ./assets/node_modules/.bin/prettier --check . --color",
             prettier.fix: "cmd ./assets/node_modules/.bin/prettier --write . --color",
       """
     )
