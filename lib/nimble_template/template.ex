@@ -10,24 +10,30 @@ defmodule NimbleTemplate.Template do
   def apply(%Project{mix_project?: true} = project) do
     MixTemplate.apply(project)
 
+    post_apply(project)
+  end
+
+  def apply(%Project{mix_project?: false} = project) do
+    PhoenixTemplate.apply(project)
+
+    post_apply(project)
+  end
+
+  defp post_apply(%Project{mix_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
   end
 
-  def apply(%Project{api_project?: true} = project) do
-    PhoenixTemplate.apply(project)
-
+  defp post_apply(%Project{api_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
   end
 
-  def apply(%Project{web_project?: true} = project) do
-    PhoenixTemplate.apply(project)
-
+  defp post_apply(%Project{web_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
     fetch_and_install_node_dependencies()
-    run_prettier()
+    format_codebase()
   end
 
   defp fetch_and_install_elixir_dependencies() do
@@ -39,7 +45,8 @@ defmodule NimbleTemplate.Template do
     Mix.shell().cmd("npm install --prefix assets")
   end
 
-  defp run_prettier() do
+  defp format_codebase() do
+    # TODO: Change to `mix codebase.fix` on the next PR
     Mix.shell().cmd("mix prettier.fix")
   end
 end
