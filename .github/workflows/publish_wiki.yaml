@@ -1,0 +1,51 @@
+name: Publish Wiki
+
+on:
+  push:
+    paths:
+      - .github/wiki/**
+    branches:
+      - develop
+
+env:
+  USER_TOKEN: ${{ secrets.GH_TOKEN }}
+  USER_NAME: github-wiki-workflow
+  USER_EMAIL: devops@zipmex.com
+  OWNER: ${{ github.event.repository.owner.name }}
+  REPOSITORY_NAME: ${{ github.event.repository.name }}
+  WIKI_FOLDER: .github/wiki
+  TEMP_CLONE_WIKI_FOLDER: tmp_wiki
+
+jobs:
+  publish:
+    name: Publish Wiki
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Pull current wiki content
+        run: |
+          mkdir $TEMP_CLONE_WIKI_FOLDER
+          cd $TEMP_CLONE_WIKI_FOLDER
+          git init
+          git config user.name $USER_NAME
+          git config user.email $USER_EMAIL
+          git pull https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git
+
+      - name: Push new wiki content
+        run: |
+          rsync -av --delete $WIKI_FOLDER/ $TEMP_CLONE_WIKI_FOLDER/ --exclude .git
+          cd $TEMP_CLONE_WIKI_FOLDER
+          git add .
+          git commit -m "Update Wiki content"
+          git push -f --set-upstream https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git master
