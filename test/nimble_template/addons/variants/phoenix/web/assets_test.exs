@@ -76,7 +76,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
       end)
     end
 
-    test "adds build:dev script into package.json", %{
+    test "adds scripts into package.json", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -85,7 +85,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                     "build:dev": "webpack --mode development"
+                     "build:dev": "webpack --mode development",
+                     "stylelint": "stylelint --color ./css",
+                     "stylelint.fix": "stylelint --color --fix ./css",
+                     "eslint": "eslint --color ./",
+                     "eslint.fix": "eslint --color --fix ./"
                  """
         end)
       end)

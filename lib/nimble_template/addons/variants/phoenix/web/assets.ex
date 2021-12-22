@@ -86,7 +86,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
       """,
       """
           "watch": "webpack --mode development --watch",
-          "build:dev": "webpack --mode development"
+          "build:dev": "webpack --mode development",
+          "stylelint": "stylelint --color ./css",
+          "stylelint.fix": "stylelint --color --fix ./css",
+          "eslint": "eslint --color ./",
+          "eslint.fix": "eslint --color --fix ./"
       """
     )
 
