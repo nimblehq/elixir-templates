@@ -3,7 +3,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:credo, "0.26.2"}]
-    @describetag required_addons: [:TestEnv, :Credo, :"Phoenix.Web.Assets"]
+    @describetag required_addons: [:TestEnv, :Credo]
 
     test "adds prettier and prettier-plugin-eex into package.json", %{
       project: project,
@@ -52,8 +52,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
                          \"deps.unlock --check-unused\",
                          \"format --check-formatted\",
                          \"credo --strict\",
-                         \"cmd npm run eslint --prefix assets\",
-                         \"cmd npm run stylelint --prefix assets\",
                          \"prettier\"
                        ],
                  """
@@ -73,8 +71,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
                        "codebase.fix": [
                          \"deps.clean --unlock --unused\",
                          \"format\",
-                         \"cmd npm run eslint.fix --prefix assets\",
-                         \"cmd npm run stylelint.fix --prefix assets\",
                          \"prettier.fix\"
                        ],
                  """

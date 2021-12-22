@@ -44,37 +44,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
       """
     )
 
-    Generator.replace_content(
-      "mix.exs",
-      """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
-      """,
-      """
-            codebase: [
-              "deps.unlock --check-unused",
-              "format --check-formatted",
-              "credo --strict",
-              "cmd npm run eslint --prefix assets",
-              "cmd npm run stylelint --prefix assets"
-            ],
-      """
-    )
-
-    Generator.replace_content(
-      "mix.exs",
-      """
-            "codebase.fix": ["deps.clean --unlock --unused", "format"],
-      """,
-      """
-            "codebase.fix": [
-              "deps.clean --unlock --unused",
-              "format",
-              "cmd npm run eslint.fix --prefix assets",
-              "cmd npm run stylelint.fix --prefix assets"
-            ],
-      """
-    )
-
     project
   end
 
@@ -86,11 +55,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
       """,
       """
           "watch": "webpack --mode development --watch",
-          "build:dev": "webpack --mode development",
-          "stylelint": "stylelint --color ./css",
-          "stylelint.fix": "stylelint --color --fix ./css",
-          "eslint": "eslint --color ./",
-          "eslint.fix": "eslint --color --fix ./"
+          "build:dev": "webpack --mode development"
       """
     )
 
