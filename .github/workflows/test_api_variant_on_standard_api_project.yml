@@ -52,7 +52,7 @@ jobs:
             ${{ runner.os }}-mix-
 
       - name: Run composite steps
-        uses: nimblehq/elixir-templates@composite_1.4
+        uses: nimblehq/elixir-templates@composite_1.5
         with:
           new_project_options: '--no-html --no-webpack'
           variant: 'api'
