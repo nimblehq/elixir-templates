@@ -33,7 +33,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
                    defp aliases do
                      [
                        prettier: "cmd ./assets/node_modules/.bin/prettier --check . --color",
-                       prettier.fix: "cmd ./assets/node_modules/.bin/prettier --write . --color",
+                       "prettier.fix": "cmd ./assets/node_modules/.bin/prettier --write . --color",
                  """
         end)
       end)
