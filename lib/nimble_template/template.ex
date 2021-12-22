@@ -22,11 +22,13 @@ defmodule NimbleTemplate.Template do
   defp post_apply(%Project{mix_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
+    format_codebase()
   end
 
   defp post_apply(%Project{api_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
+    format_codebase()
   end
 
   defp post_apply(%Project{web_project?: true}) do
@@ -46,7 +48,6 @@ defmodule NimbleTemplate.Template do
   end
 
   defp format_codebase() do
-    # TODO: Change to `mix codebase.fix` on the next PR
-    Mix.shell().cmd("mix prettier.fix")
+    Mix.shell().cmd("mix codebase.fix")
   end
 end

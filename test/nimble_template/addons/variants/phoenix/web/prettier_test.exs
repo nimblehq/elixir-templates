@@ -39,7 +39,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       end)
     end
 
-    test "adds prettier into the codebase alias", %{project: project, test_project_path: test_project_path} do
+    test "adds prettier into the codebase alias", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
       in_test_project(test_project_path, fn ->
         AddonsWeb.Prettier.apply(project)
 
@@ -58,7 +61,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       end)
     end
 
-    test "adds prettier.fix into the codebase.fix alias", %{project: project, test_project_path: test_project_path} do
+    test "adds prettier.fix into the codebase.fix alias", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
       in_test_project(test_project_path, fn ->
         AddonsWeb.Prettier.apply(project)
 
