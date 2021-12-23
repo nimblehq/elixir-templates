@@ -62,7 +62,7 @@ mix nimble_template.gen --mix # Apply the Mix template
 
 ## Running tests
 
-Please read the Wiki about testing for more details `elixir-templates`, https://github.com/nimblehq/elixir-templates/wiki.
+The testing documentation is on [Wiki](https://github.com/nimblehq/elixir-templates/wiki)
 
 ### Release
 
@@ -73,7 +73,6 @@ The release process follows the [Git flow](https://nimblehq.co/compass/developme
 Once a `release/<version number>` is created, to publish the new version to Hex.pm, the version number in the `mix.ex` file needs to be updated on the release branch before merging.
 
 Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
-
 
 ## Contributing
 
