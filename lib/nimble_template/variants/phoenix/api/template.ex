@@ -5,8 +5,8 @@ defmodule NimbleTemplate.Phoenix.Api.Template do
   alias NimbleTemplate.Project
 
   def apply(%Project{} = project) do
-    Api.Config.apply(project)
-
     project
+    |> Api.Config.apply()
+    |> Api.ParamsValidation.apply()
   end
 end

@@ -54,5 +54,5 @@ jobs:
       - name: Run composite steps
         uses: nimblehq/elixir-templates@composite_1.5
         with:
-          new_project_options: '--no-html --no-webpack --module=CustomModule --app=custom_app'
+          new_project_options: '--no-html --no-webpack --module=SampleCustomModule --app=sample_custom_app'
           variant: 'api'

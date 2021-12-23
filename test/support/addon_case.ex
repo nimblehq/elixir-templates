@@ -3,6 +3,7 @@ defmodule NimbleTemplate.AddonCase do
 
   use Mimic
 
+  alias NimbleTemplate.Addons.Phoenix.Api, as: AddonsApi
   alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
   alias NimbleTemplate.{Addons, Project}
   alias NimbleTemplate.Hex.Package
