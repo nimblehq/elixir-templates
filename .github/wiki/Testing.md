@@ -1,13 +1,12 @@
-NimbleTemplate uses Github Action as the CI, the workflow files locate under [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
+NimbleTemplate uses Github Actions as the CI, the workflow files are located under the [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
 
-There are 2 types of test **Template test** and **Variant test**
+There are 2 types of tests, **Template tests** and **Variant tests**
 
-
-### 1/ Template test
+## 1/ Template test
 
 All test files are located under `test/` directory.
 
-```
+```text
 .
 ├── ...
 ├── test
@@ -32,40 +31,61 @@ All test files are located under `test/` directory.
 │   │   │   │   │   │   └── web_addon_test.exs
 ```
 
-### 2/ Variant test
-
-#### 2.1/ Variant
+## 2/ Variant test
 
 NimbleTemplate supports 4 variants:
 
+- Mix
+- Web
 - API
 - Live
-- Web
-- Mix
 
-#### 2.2/ Phoenix project
+### 2.1/ Mix project
 
-The Phoenix project could be either a Web or API project.
+A Mix project could be either a Standard project or a Custom project.
 
-- Web variant supports HTML and Webpack configuration.
+- `mix new awesome_project`
+- `mix new awesome_project --module=CustomModuleName`
+- `mix new awesome_project --app=custom_otp_app_name`
+- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
+
+Each project could include a `supervision tree`.
+
+- `mix new awesome_project`
+- `mix new awesome_project --sup`
+- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
+- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name --sup`
+
+Adding it all together, totals to 4 variant test cases.
+
+- Applying the `Mix variant` to a `Standard Mix project`
+- Applying the `Mix variant` to a `Custom Mix project`
+- Applying the `Mix variant` to a `Standard Mix project with the --sup option`
+- Applying the `Mix variant` to a `Custom Mix project with the --sup option`
+
+### 2.2/ Phoenix project
+
+A Phoenix project could be either a Web, LiveView, or API.
+
+- Web variants support HTML and Webpack configuration.
 
 ```bash
 mix phx.new awesome_project
 ```
 
-- LiveView project is including HTML and Webpack configuration.
+- LiveView projects include HTML and Webpack configuration.
 
 ```bash
 mix phx.new awesome_project --live
 ```
 
-- API variant does NOT support HTML and Webpack configuration.
+- API variants do NOT support HTML and Webpack configuration.
 
 ```bash
 mix phx.new awesome_project --no-html --no-webpack
 ```
 
-- Custom project variant allow us to modify the app name or module name.
+- Custom project variants allow us to modify the app name or module name.
 
 ```bash
 # Use CustomModuleName
@@ -81,14 +101,17 @@ mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name
 So it ends up with 6 project types:
 
 Web project
+
 - Standard (`mix phx.new awesome_project`)
 - Custom (`mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name`)
 
 API project
+
 - Standard (`mix phx.new awesome_project --no-html --no-webpack`)
 - Custom (`mix phx.new awesome_project --no-html --no-webpack --module=CustomModuleName --app=custom_otp_app_name`)
 
 LiveView project
+
 - Standard (`mix phx.new awesome_project --live`)
 - Custom (`mix phx.new awesome_project --live --module=CustomModuleName --app=custom_otp_app_name`)
 
@@ -102,26 +125,3 @@ Putting it all together, there are 8 variants of test cases.
 - Applying the `Web variant` to a `Custom Web project`
 - Applying the `Live variant` to a `Standard LiveView project`
 - Applying the `Live variant` to a `Custom LiveView project`
-
-##### 2.2/ Mix project
-
-The Mix project could be either a Standard project or a Custom project.
-
-- `mix new awesome_project`
-- `mix new awesome_project --module=CustomModuleName`
-- `mix new awesome_project --app=custom_otp_app_name`
-- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
-
-Each project could be included the `supervision tree` or not.
-
-- `mix new awesome_project`
-- `mix new awesome_project --sup`
-- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name`
-- `mix new awesome_project --module=CustomModuleName --app=custom_otp_app_name --sup`
-
-Putting it all together, it has 4 variant test cases.
-
-- Applying the `Mix variant` to a `Standard Mix project`
-- Applying the `Mix variant` to a `Custom Mix project`
-- Applying the `Mix variant` to a `Standard Mix project with the --sup option`
-- Applying the `Mix variant` to a `Custom Mix project with the --sup option`
