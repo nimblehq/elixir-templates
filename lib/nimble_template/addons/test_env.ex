@@ -66,6 +66,7 @@ defmodule NimbleTemplate.Addons.TestEnv do
       """,
       """
             codebase: ["deps.unlock --check-unused", "format --check-formatted"],
+            "codebase.fix": ["deps.clean --unlock --unused", "format"],
       """
     )
 
