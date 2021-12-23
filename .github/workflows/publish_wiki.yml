@@ -2,18 +2,18 @@ name: Publish Wiki
 
 on:
   push:
-    paths:
-      - .github/wiki/**
     branches:
       - develop
       - chore/add-template-development-docs
+    paths:
+      - .github/wiki/**
 
 jobs:
   publish:
-    - name: Publish Wiki
-      uses: nimblehq/github-actions-workflows@v0.1.0
-      with:
-        USER_NAME: github-wiki-action
-        USER_EMAIL: dev@nimblehq.co
-      secrets:
-        USER_TOKEN: ${{ secrets.WIKI_ACTION_TOKEN }}
+    name: Publish Wiki
+    uses: nimblehq/github-actions-workflows/.github/workflows/publish_wiki.yml@0.1.0
+    with:
+      USER_NAME: github-wiki-action
+      USER_EMAIL: dev@nimblehq.co
+    secrets:
+      USER_TOKEN: ${{ secrets.GH_WIKI_WORKLOW_TOKEN }}
