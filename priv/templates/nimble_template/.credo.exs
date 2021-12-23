@@ -161,7 +161,7 @@
            order:
              ~w/shortdoc moduledoc behaviour use import alias require module_attribute defstruct callback/a
          ]},
-        {Credo.Check.Consistency.MultiAliasImportRequireUse, false},
+        {Credo.Check.Consistency.MultiAliasImportRequireUse, []},
         {Credo.Check.Consistency.UnusedVariableNames, false},
         {Credo.Check.Design.DuplicatedCode, files: %{excluded: ["**/*_test.exs"]}},
         {Credo.Check.Readability.AliasAs, false},
