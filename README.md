@@ -62,41 +62,6 @@ mix nimble_template.gen --mix # Apply the Mix template
 
 ## Running tests
 
-NimbleTemplate uses Github Action as the CI, the workflow files locate under [.github/workflows/](https://github.com/nimblehq/elixir-templates/tree/develop/.github/workflows) directory.
-
-There are 2 types of test **Template test** and **Variant test**
-
-### 1/ Template test
-
-All test files are located under `test/` directory.
-
-```
-.
-├── ...
-├── test
-│   ├── ...
-│   ├── nimble_template
-│   │   └── addons
-│   │   │   ├── ...
-│   │   │   ├── common_addon_test.exs
-│   │   │   └── variants
-│   │   │   │   └── mix
-│   │   │   │   │   ├── ...
-│   │   │   │   │   └── mix_addon_test.exs
-│   │   │   │   └── phoenix
-│   │   │   │   │   └── api
-│   │   │   │   │   │   ├── ...
-│   │   │   │   │   │   └── api_addon_test.exs
-│   │   │   │   │   └── live
-│   │   │   │   │   │   ├── ...
-│   │   │   │   │   │   └── live_addon_test.exs
-│   │   │   │   │   └── web
-│   │   │   │   │   │   ├── ...
-│   │   │   │   │   │   └── web_addon_test.exs
-```
-
-### 2/ Variant test
-
 Please read the Wiki about testing for more details `elixir-templates`, https://github.com/nimblehq/elixir-templates/wiki.
 
 ### Release
