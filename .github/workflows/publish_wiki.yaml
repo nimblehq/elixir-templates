@@ -6,6 +6,7 @@ on:
       - .github/wiki/**
     branches:
       - develop
+      - chore/add-template-development-docs
 
 env:
   USER_TOKEN: ${{ secrets.WIKI_ACTION_TOKEN }}
