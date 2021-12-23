@@ -1,4 +1,4 @@
-defmodule <%= base_module %>Web.Params do
+defmodule <%= web_module %>.Params do
   @moduledoc """
   Apply to the params module to define params schema with validation.
   """
@@ -17,7 +17,7 @@ defmodule <%= base_module %>Web.Params do
 
       @primary_key false
 
-      @behaviour <%= base_module %>Web.Params
+      @behaviour <%= web_module %>.Params
     end
   end
 end

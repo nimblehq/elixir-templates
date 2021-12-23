@@ -1,10 +1,10 @@
-defmodule <%= base_module %>Web.ParamsValidatorTest do
+defmodule <%= web_module %>.ParamsValidatorTest do
   use <%= base_module %>.DataCase, async: true
 
-  alias <%= base_module %>Web.ParamsValidator
+  alias <%= web_module %>.ParamsValidator
 
   defmodule CreateDeviceParams do
-    use <%= base_module %>Web.Params
+    use <%= web_module %>.Params
 
     embedded_schema do
       field(:device_id, :string)
@@ -25,7 +25,7 @@ defmodule <%= base_module %>Web.ParamsValidatorTest do
   end
 
   defmodule CreateUserParams do
-    use <%= base_module %>Web.Params
+    use <%= web_module %>.Params
 
     embedded_schema do
       field(:name, :string)
