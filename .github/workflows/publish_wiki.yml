@@ -11,7 +11,7 @@ on:
 jobs:
   publish:
     - name: Publish Wiki
-      uses: https://github.com/nimblehq/github-actions-workflows/blob/develop/.github/workflows/publish_wiki.yml@0.1.0
+      uses: nimblehq/github-actions-workflows@v0.1.0
       with:
         USER_NAME: github-wiki-action
         USER_EMAIL: dev@nimblehq.co
