@@ -4,14 +4,13 @@ on:
   push:
     branches:
       - develop
-      - chore/add-template-development-docs
     paths:
       - .github/wiki/**
 
 jobs:
   publish:
     name: Publish Wiki
-    uses: nimblehq/github-actions-workflows/.github/workflows/publish_wiki.yml@e42052106789014fb1f8b722ab02abe4390e3e1d
+    uses: nimblehq/github-actions-workflows/.github/workflows/publish_wiki.yml@0.1.0
     with:
       USER_NAME: github-wiki-action
       USER_EMAIL: dev@nimblehq.co
