@@ -19,21 +19,6 @@ defmodule NimbleTemplate.Template do
     post_apply(project)
   end
 
-  # TODO: move to GihubExtention after rebase
-  def host_on_github?(), do: Mix.shell().yes?("\nWill you host this project on Github?")
-
-  def generate_github_template?(),
-      do: Mix.shell().yes?("\nDo you want to generate the Github Issue & Pull request templates?")
-
-  def generate_github_workflows_readme?(),
-      do: Mix.shell().yes?("\nDo you want to generate the .github/workflows/README file?")
-
-  def generate_github_action_test?(),
-      do: Mix.shell().yes?("\nDo you want to generate the Github Action workflows: Test?")
-
-  def generate_github_action_deploy_heroku?(),
-      do: Mix.shell().yes?("\nDo you want to generate the Github Action workflows: Deploy to Heroku?")
-
   defp post_apply(%Project{mix_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()

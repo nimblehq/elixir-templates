@@ -55,7 +55,7 @@ defmodule NimbleTemplate.Phoenix.Template do
       do: Addons.Github.apply(project, %{github_action_deploy_heroku: true})
 
     if generate_github_wiki?(),
-       do: Addons.Github.apply(project, %{github_wiki: true})
+      do: Addons.Github.apply(project, %{github_wiki: true})
   end
 
   defp variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)
