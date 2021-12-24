@@ -1,4 +1,4 @@
-name: "Tests"
+name: Test
 
 on: pull_request
 
@@ -11,6 +11,7 @@ env:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
 
     services:
@@ -31,16 +32,19 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: erlef/setup-elixir@v1
+      - name: Set up Elixir
+        uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
       <%= if web_project? do %>
-      - uses: actions/setup-node@v2.1.5
+      - name: Set up Node
+        uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ env.NODE_VERSION }}
       <% end %>
@@ -64,10 +68,10 @@ jobs:
       <% end %>
       - name: Install Dependencies
         run: mix deps.get
-      
+
       - name: Compile dependencies
         run: mix compile --warnings-as-errors --all-warnings
-      
+
       <%= if web_project? do %>
       - name: Install node module
         run: npm --prefix assets install
@@ -86,13 +90,14 @@ jobs:
 
       - name: Run Tests
         run: mix coverage
-      
+
       - name: Upload Code Coverage Artifact
         uses: actions/upload-artifact@v2
         if: ${{ failure() }}
         with:
           name: code_coverage
           path: cover/
+
       <%= if web_project? do %>
       - name: Upload Wallaby Screenshots Artifact
         uses: actions/upload-artifact@v2

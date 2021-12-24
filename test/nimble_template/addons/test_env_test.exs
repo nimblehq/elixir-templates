@@ -26,6 +26,18 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
       end)
     end
 
+    test "adds codebase.fix alias", %{project: project, test_project_path: test_project_path} do
+      in_test_project(test_project_path, fn ->
+        Addons.TestEnv.apply(project)
+
+        assert_file("mix.exs", fn file ->
+          assert file =~ """
+                       "codebase.fix": [\"deps.clean --unlock --unused\", \"format\"],
+                 """
+        end)
+      end)
+    end
+
     test "adds `Code.put_compiler_option(:warnings_as_errors, true)` into `test/test_helper.exs`",
          %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->

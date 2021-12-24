@@ -1,4 +1,4 @@
-name: "Test variant on custom Web project"
+name: Test variant on custom Web project
 
 on: push
 
@@ -10,6 +10,7 @@ env:
 
 jobs:
   unit_test:
+    name: Test variant on custom Web project
     runs-on: ubuntu-latest
 
     strategy:
@@ -34,16 +35,19 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: erlef/setup-elixir@v1
+      - name: Set up Elixir
+        uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
 
-      - uses: actions/setup-node@v2.1.5
+      - name: Set up Node
+        uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -66,7 +70,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - uses: nimblehq/elixir-templates@composite_1.4
+      - name: Run composite steps
+        uses: nimblehq/elixir-templates@composite_1.4
         with:
-          new_project_options: '--module=CustomModule --app=custom_app'
+          new_project_options: '--module=SampleCustomModule --app=sample_custom_app'
           variant: ${{ matrix.variant }}

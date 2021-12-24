@@ -1,14 +1,7 @@
 defmodule NimbleTemplate.Mix.Template do
   @moduledoc false
 
-  import NimbleTemplate.Template,
-    only: [
-      host_on_github?: 0,
-      generate_github_template?: 0,
-      generate_github_workflows_readme?: 0,
-      generate_github_action_test?: 0,
-      install_addon_prompt?: 1
-    ]
+  import NimbleTemplate.{AddonHelper, GithubHelper}
 
   alias NimbleTemplate.{Addons, Project}
 
@@ -20,6 +13,7 @@ defmodule NimbleTemplate.Mix.Template do
     |> Addons.Credo.apply()
     |> Addons.Dialyxir.apply()
     |> Addons.ExCoveralls.apply()
+    |> Addons.Faker.apply()
 
     if host_on_github?() do
       if generate_github_template?(),
@@ -30,6 +24,9 @@ defmodule NimbleTemplate.Mix.Template do
 
       if generate_github_action_test?(),
         do: Addons.Github.apply(project, %{github_action_test: true})
+
+      if generate_github_wiki?(),
+        do: Addons.Github.apply(project, %{github_wiki: true})
     end
 
     if install_addon_prompt?("Mimic"), do: Addons.Mimic.apply(project)

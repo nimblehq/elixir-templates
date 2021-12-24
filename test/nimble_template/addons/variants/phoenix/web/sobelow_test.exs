@@ -3,7 +3,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
 
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:credo, "0.26.2"}, {:sobelow, "0.8"}]
-    @describetag required_addons: [:TestEnv, :Credo]
+    @describetag required_addons: [:TestEnv, :Credo, :"Phoenix.Web.Prettier"]
 
     test "copies the .sobelow-conf", %{
       project: project,
@@ -39,12 +39,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
-                   defp aliases do
-                     [
                        codebase: [
                          \"deps.unlock --check-unused\",
                          \"format --check-formatted\",
                          \"credo --strict\",
+                         \"prettier\",
                          \"sobelow --config\"
                        ],
                  """

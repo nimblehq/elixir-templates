@@ -3,6 +3,7 @@ defmodule NimbleTemplate.AddonCase do
 
   use Mimic
 
+  alias NimbleTemplate.Addons.Phoenix.Api, as: AddonsApi
   alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
   alias NimbleTemplate.{Addons, Project}
   alias NimbleTemplate.Hex.Package
@@ -10,6 +11,7 @@ defmodule NimbleTemplate.AddonCase do
   using do
     quote do
       alias NimbleTemplate.Addons
+      alias NimbleTemplate.Addons.Phoenix.Api, as: AddonsApi
       alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode

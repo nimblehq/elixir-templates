@@ -26,7 +26,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-     - name: Setup Elixir
+     - name: Set up Elixir
        uses: erlef/setup-elixir@v1
        with:
          otp-version: ${{ env.OTP_VERSION }}
@@ -44,12 +44,12 @@ jobs:
 
       - name: Install Dependencies
         run: mix deps.get
-        
+
       - name: Compile dependencies
         run: mix compile --warnings-as-errors --all-warnings
-        
+
       - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
-          
+
       - name: Run Tests
         run: mix test --only release_version

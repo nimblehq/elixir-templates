@@ -1,0 +1,37 @@
+### Erlang & Elixir
+
+- Erlang <%= erlang_version %>
+
+- Elixir <%= elixir_version %>
+
+- Recommended version manager.
+
+  - [asdf](https://github.com/asdf-vm/asdf)
+  - [asdf-erlang](https://github.com/asdf-vm/asdf-erlang)
+  - [asdf-elixir](https://github.com/asdf-vm/asdf-elixir)
+
+### Development
+
+- Install Elixir dependencies:
+
+  ```sh
+  mix deps.get
+  ```
+
+- Run all tests:
+
+  ```sh
+  mix test
+  ```
+
+- Run all lint:
+
+  ```sh
+  mix codebase
+  ```
+
+- Test coverage:
+
+  ```sh
+  mix coverage
+  ```

@@ -1,15 +1,7 @@
 defmodule NimbleTemplate.Phoenix.Template do
   @moduledoc false
 
-  import NimbleTemplate.Template,
-    only: [
-      host_on_github?: 0,
-      generate_github_template?: 0,
-      generate_github_workflows_readme?: 0,
-      generate_github_action_test?: 0,
-      generate_github_action_deploy_heroku?: 0,
-      install_addon_prompt?: 1
-    ]
+  import NimbleTemplate.{AddonHelper, GithubHelper}
 
   alias NimbleTemplate.Phoenix.Api.Template, as: ApiTemplate
   alias NimbleTemplate.Phoenix.Live.Template, as: LiveTemplate
@@ -26,6 +18,7 @@ defmodule NimbleTemplate.Phoenix.Template do
     project
   end
 
+  # credo:disable-for-next-line Credo.Check.Refactor.ABCSize
   defp common_setup(%Project{} = project) do
     project
     |> Addons.ElixirVersion.apply()
@@ -39,6 +32,7 @@ defmodule NimbleTemplate.Phoenix.Template do
     |> Addons.ExCoveralls.apply()
     |> Addons.ExMachina.apply()
     |> Addons.Mimic.apply()
+    |> Addons.Faker.apply()
 
     if host_on_github?(), do: github_addons_setup(project)
     if install_addon_prompt?("Oban"), do: Addons.Oban.apply(project)
@@ -59,6 +53,9 @@ defmodule NimbleTemplate.Phoenix.Template do
 
     if generate_github_action_deploy_heroku?(),
       do: Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+    if generate_github_wiki?(),
+       do: Addons.Github.apply(project, %{github_wiki: true})
   end
 
   defp variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)

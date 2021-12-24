@@ -21,7 +21,7 @@ defmodule NimbleTemplate.Addons.MimicTest do
       end)
     end
 
-    test "stats the mimic in test/test_helper.exs", %{
+    test "ensures mimic is started in test/test_helper.exs", %{
       project: project,
       test_project_path: test_project_path
     } do

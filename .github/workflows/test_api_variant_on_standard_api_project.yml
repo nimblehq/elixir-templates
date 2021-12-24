@@ -1,4 +1,4 @@
-name: "Test API variant on standard API project"
+name: Test API variant on standard API project
 
 on: push
 
@@ -9,6 +9,7 @@ env:
 
 jobs:
   unit_test:
+    name: Test API variant on standard API project
     runs-on: ubuntu-latest
 
     services:
@@ -29,11 +30,13 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: erlef/setup-elixir@v1
+      - name: Set up Elixir
+        uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
@@ -48,7 +51,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
 
-      - uses: nimblehq/elixir-templates@composite_1.4
+      - name: Run composite steps
+        uses: nimblehq/elixir-templates@composite_1.5
         with:
           new_project_options: '--no-html --no-webpack'
           variant: 'api'
