@@ -3,6 +3,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorView do
 
   use NimbleTemplate.Addon
 
+  @impl true
   def do_apply(%Project{} = project, _opts) do
     project
     |> copy_files()

@@ -6,7 +6,7 @@ install_phoenix:
 
 create_phoenix_project:
 	mix phx.new ${PROJECT_DIRECTORY} ${OPTIONS}
-	
+
 create_mix_project:
 	mix new ${PROJECT_DIRECTORY} ${OPTIONS}
 
@@ -23,7 +23,8 @@ common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\n
 # Y - in response to Would you like to add the SVG Sprite addon?
 web_addon_prompts = Y\n
 
-api_addon_prompts = 
+api_addon_prompts =
+
 
 # Y - in response to Would you like to add the SVG Sprite addon?
 live_addon_prompts = Y\n
@@ -53,7 +54,7 @@ apply_phoenix_template:
 	elif [ $(VARIANT) = live ]; then \
 		printf "${common_addon_prompts}${web_addon_prompts}${live_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --live; \
 	fi;
-	
+
 apply_mix_template:
 	cd ${PROJECT_DIRECTORY} && \
 	echo '{:nimble_template, path: "../", only: :dev, runtime: false}' > nimble_template.txt && \
