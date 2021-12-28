@@ -9,7 +9,9 @@ defmodule NimbleTemplate.Addons.Github do
       {:text, Path.join([".github", "ISSUE_TEMPLATE.md"]),
        Path.join([".github", "ISSUE_TEMPLATE.md"])},
       {:text, Path.join([".github", "PULL_REQUEST_TEMPLATE.md"]),
-       Path.join([".github", "PULL_REQUEST_TEMPLATE.md"])}
+       Path.join([".github", "PULL_REQUEST_TEMPLATE.md"])},
+      {:text, Path.join([".github", "PULL_REQUEST_TEMPLATE", "RELEASE_TEMPLATE.md"]),
+       Path.join([".github", "PULL_REQUEST_TEMPLATE", "RELEASE_TEMPLATE.md"])}
     ]
 
     Generator.copy_file(files)
@@ -28,7 +30,7 @@ defmodule NimbleTemplate.Addons.Github do
         } = project,
         opts
       )
-      when is_map_key(opts, :github_action) do
+      when is_map_key(opts, :github_action_test) do
     binding = [
       erlang_version: erlang_version,
       elixir_version: elixir_version,
@@ -49,6 +51,29 @@ defmodule NimbleTemplate.Addons.Github do
 
     Generator.copy_file(files, binding)
 
+    project
+  end
+
+  @impl true
+  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_workflows_readme) do
+    Generator.copy_file([
+      {:eex, ".github/workflows/README.md", ".github/workflows/README.md"}
+    ])
+
+    project
+  end
+
+  @impl true
+  def do_apply(%Project{} = project, opts) when opts.github_action_deploy_heroku do
+    Generator.copy_file([
+      {:eex, ".github/workflows/deploy_heroku.yml.eex", ".github/workflows/deploy_heroku.yml"}
+    ])
+
+    project
+  end
+
+  @impl true
+  def do_apply(%Project{} = project, opts) when not opts.github_action_deploy_heroku do
     project
   end
 

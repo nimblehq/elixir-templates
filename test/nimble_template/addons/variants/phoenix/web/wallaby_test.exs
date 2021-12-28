@@ -53,7 +53,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:mime, \"~> 1.0\", [override: true]},
                        {:wallaby, \"~> 0.26.2\", [only: :test, runtime: false]},
                  """
         end)

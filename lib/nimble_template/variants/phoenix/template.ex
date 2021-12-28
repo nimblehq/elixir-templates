@@ -34,21 +34,28 @@ defmodule NimbleTemplate.Phoenix.Template do
     |> Addons.Mimic.apply()
     |> Addons.Faker.apply()
 
-    if host_on_github?() do
-      if generate_github_template?(),
-        do: Addons.Github.apply(project, %{github_template: true})
-
-      if generate_github_action?(),
-        do: Addons.Github.apply(project, %{github_action: true})
-
-      if generate_github_wiki?(),
-        do: Addons.Github.apply(project, %{github_wiki: true})
-    end
-
+    if host_on_github?(), do: github_addons_setup(project)
     if install_addon_prompt?("Oban"), do: Addons.Oban.apply(project)
     if install_addon_prompt?("ExVCR"), do: Addons.ExVCR.apply(project)
 
     project
+  end
+
+  defp github_addons_setup(%Project{} = project) do
+    if generate_github_template?(),
+      do: Addons.Github.apply(project, %{github_template: true})
+
+    if generate_github_workflows_readme?(),
+      do: Addons.Github.apply(project, %{github_workflows_readme: true})
+
+    if generate_github_action_test?(),
+      do: Addons.Github.apply(project, %{github_action_test: true})
+
+    if generate_github_action_deploy_heroku?(),
+      do: Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+    if generate_github_wiki?(),
+      do: Addons.Github.apply(project, %{github_wiki: true})
   end
 
   defp variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)
