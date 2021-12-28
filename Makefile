@@ -19,7 +19,7 @@ create_mix_project:
 # Y - in response to Do you want to generate the Github Action to deploy to AWS ECS?
 # Y - in response to Would you like to add the Oban addon?
 # Y - in response to Would you like to add the ExVCR addon?
-common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\n
+common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\nY\n
 
 <<<<<<< HEAD
 # Y - in response to Would you like to add the SVG Sprite addon?
@@ -40,7 +40,7 @@ live_addon_prompts = Y\n
 # Y - in response to Do you want to publish a Github Wiki for this project? You'd need to manually create the first Github Wiki Page and set the GH_TOKEN and GH_EMAIL secret for this to properly function.
 # N - in response to Do you want to generate the Github Action to deploy to AWS ECS?
 # Y - in response to Would you like to add the Mimic addon?
-mix_addon_prompts = Y\nY\nY\nY\nY\nY\n
+mix_addon_prompts = Y\nY\nY\nY\nY\nY\nY\n
 
 post_setup_addon_prompts =
 
