@@ -1,13 +1,14 @@
 # Github Actions
 
-The following workflows are supported. Depends on what you choose when generating the project, some or all of them would be available:
+The following workflows are supported.
 
+<%= if with_test_workflow? do %>
 - Test
-- [Deploy to Heroku](#deploy-to-heroku-workflow)
+<% end %>
+<%= if with_deploy_to_heroku_workflow? do %>
+- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)
 
-Please refer to the following sections for usage instruction.
-
-## Deploy to Heroku Workflow
+## Deploy to Heroku Workflow usage instruction
 
 ### Requirements
 
@@ -58,4 +59,4 @@ Please refer to the following sections for usage instruction.
   ```
 
   otherwise, leaving it set to `false` as default.
-  
+<% end %>

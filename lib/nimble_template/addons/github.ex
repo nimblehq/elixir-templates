@@ -55,10 +55,21 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_workflows_readme) do
-    Generator.copy_file([
-      {:eex, ".github/workflows/README.md.eex", ".github/workflows/README.md"}
-    ])
+  def do_apply(
+        %Project{} = project,
+        %{
+          with_test_workflow?: with_test_workflow?,
+          with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
+        } = opts
+      )
+      when is_map_key(opts, :github_workflows_readme) do
+    Generator.copy_file(
+      [
+        {:eex, ".github/workflows/README.md.eex", ".github/workflows/README.md"}
+      ],
+      with_test_workflow?: with_test_workflow?,
+      with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
+    )
 
     project
   end
