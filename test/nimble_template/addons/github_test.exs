@@ -79,9 +79,80 @@ defmodule NimbleTemplate.Addons.GithubTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_workflows_readme: true})
+        Addons.Github.apply(project, %{
+          github_workflows_readme: true,
+          with_test_workflow?: true,
+          with_deploy_to_heroku_workflow?: true
+        })
 
-        assert_file(".github/workflows/README.md")
+        assert_file(".github/workflows/README.md", fn file ->
+          assert file =~ "- Test"
+
+          assert file =~ "- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)"
+          assert file =~ "## Deploy to Heroku Workflow usage instruction"
+        end)
+      end)
+    end
+
+    test "does NOT generate the Test section given with_test_workflow? is false", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{
+          github_workflows_readme: true,
+          with_test_workflow?: false,
+          with_deploy_to_heroku_workflow?: true
+        })
+
+        assert_file(".github/workflows/README.md", fn file ->
+          refute file =~ "- Test"
+
+          assert file =~ "- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)"
+          assert file =~ "## Deploy to Heroku Workflow usage instruction"
+        end)
+      end)
+    end
+
+    test "does NOT generate the Deploy to Heroku section given with_deploy_to_heroku_workflow? is false",
+         %{
+           project: project,
+           test_project_path: test_project_path
+         } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{
+          github_workflows_readme: true,
+          with_test_workflow?: true,
+          with_deploy_to_heroku_workflow?: false
+        })
+
+        assert_file(".github/workflows/README.md", fn file ->
+          assert file =~ "- Test"
+
+          refute file =~ "- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)"
+          refute file =~ "## Deploy to Heroku Workflow usage instruction"
+        end)
+      end)
+    end
+
+    test "does NOT generate the Test and Deploy to Heroku sections given with_test_workflow? and with_deploy_to_heroku_workflow? are false",
+         %{
+           project: project,
+           test_project_path: test_project_path
+         } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{
+          github_workflows_readme: true,
+          with_test_workflow?: false,
+          with_deploy_to_heroku_workflow?: false
+        })
+
+        assert_file(".github/workflows/README.md", fn file ->
+          refute file =~ "- Test"
+
+          refute file =~ "- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)"
+          refute file =~ "## Deploy to Heroku Workflow usage instruction"
+        end)
       end)
     end
   end
@@ -94,9 +165,38 @@ defmodule NimbleTemplate.Addons.GithubTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_workflows_readme: true})
+        Addons.Github.apply(project, %{
+          github_workflows_readme: true,
+          with_test_workflow?: true,
+          with_deploy_to_heroku_workflow?: false
+        })
 
-        assert_file(".github/workflows/README.md")
+        assert_file(".github/workflows/README.md", fn file ->
+          assert file =~ "- Test"
+
+          refute file =~ "- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)"
+          refute file =~ "## Deploy to Heroku Workflow usage instruction"
+        end)
+      end)
+    end
+
+    test "does NOT generate the Test section given with_test_workflow? is false", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{
+          github_workflows_readme: true,
+          with_test_workflow?: false,
+          with_deploy_to_heroku_workflow?: false
+        })
+
+        assert_file(".github/workflows/README.md", fn file ->
+          refute file =~ "- Test"
+
+          refute file =~ "- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)"
+          refute file =~ "## Deploy to Heroku Workflow usage instruction"
+        end)
       end)
     end
   end
