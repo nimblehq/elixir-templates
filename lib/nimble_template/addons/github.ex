@@ -57,7 +57,7 @@ defmodule NimbleTemplate.Addons.Github do
   @impl true
   def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_workflows_readme) do
     Generator.copy_file([
-      {:eex, ".github/workflows/README.md", ".github/workflows/README.md"}
+      {:eex, ".github/workflows/README.md.eex", ".github/workflows/README.md"}
     ])
 
     project
@@ -66,7 +66,7 @@ defmodule NimbleTemplate.Addons.Github do
   @impl true
   def do_apply(%Project{} = project, opts) when opts.github_action_deploy_heroku do
     Generator.copy_file([
-      {:eex, ".github/workflows/deploy_heroku.yml.eex", ".github/workflows/deploy_heroku.yml"}
+      {:eex, ".github/workflows/deploy_heroku.yml", ".github/workflows/deploy_heroku.yml"}
     ])
 
     project

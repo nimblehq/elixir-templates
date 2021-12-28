@@ -19,11 +19,11 @@ defmodule NimbleTemplate.Mix.Template do
       if generate_github_template?(),
         do: Addons.Github.apply(project, %{github_template: true})
 
-      if generate_github_workflows_readme?(),
-        do: Addons.Github.apply(project, %{github_workflows_readme: true})
-
       if generate_github_action_test?(),
         do: Addons.Github.apply(project, %{github_action_test: true})
+
+      if generate_github_workflows_readme?(),
+        do: Addons.Github.apply(project, %{github_workflows_readme: true})
 
       if generate_github_wiki?(),
         do: Addons.Github.apply(project, %{github_wiki: true})
