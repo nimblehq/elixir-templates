@@ -1,6 +1,8 @@
 {
   "extends": ["stylelint-config-sass-guidelines", "stylelint-config-property-sort-order-smacss"],
-  "ignoreFiles": [],
+  "ignoreFiles": [
+    "css/phoenix.css"
+  ],
   "rules": {
     "selector-class-pattern": null,
     "no-eol-whitespace": true,
