@@ -61,15 +61,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
     Generator.replace_content(
       "mix.exs",
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+            codebase: [
       """,
       """
             codebase: [
-              "deps.unlock --check-unused",
-              "format --check-formatted",
-              "credo --strict",
-              "prettier"
-            ],
+              "prettier",
       """
     )
 
@@ -80,14 +76,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
     Generator.replace_content(
       "mix.exs",
       """
-            "codebase.fix": ["deps.clean --unlock --unused", "format"],
+            "codebase.fix": [
       """,
       """
             "codebase.fix": [
-              "deps.clean --unlock --unused",
-              "format",
-              "prettier.fix"
-            ],
+              "prettier.fix",
       """
     )
 
