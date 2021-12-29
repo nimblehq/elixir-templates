@@ -41,9 +41,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
         AddonsWeb.Assets.apply(project)
 
         assert_file("assets/package.json", fn file ->
-          assert file =~ """
-                     "build:dev": "webpack --mode development"
-                 """
+          assert file =~ "\"build:dev\": \"webpack --mode development\","
         end)
       end)
     end
