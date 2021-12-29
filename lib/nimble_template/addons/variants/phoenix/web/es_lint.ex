@@ -60,7 +60,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
             codebase: [
       """,
       """
-            codebase: ["cmd npm run eslint --prefix assets",
+            codebase: [
+              "cmd npm run eslint --prefix assets",
       """
     )
 
@@ -70,7 +71,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
             "codebase.fix": [
       """,
       """
-            "codebase.fix": ["cmd npm run eslint.fix --prefix assets",
+            "codebase.fix": [
+              "cmd npm run eslint.fix --prefix assets",
       """
     )
 

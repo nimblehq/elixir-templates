@@ -60,7 +60,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLint do
             codebase: [
       """,
       """
-            codebase: ["cmd npm run stylelint --prefix assets",
+            codebase: [
+              "cmd npm run stylelint --prefix assets",
       """
     )
 
@@ -70,7 +71,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLint do
             "codebase.fix": [
       """,
       """
-            "codebase.fix": ["cmd npm run stylelint.fix --prefix assets",
+            "codebase.fix": [
+              "cmd npm run stylelint.fix --prefix assets",
       """
     )
 
