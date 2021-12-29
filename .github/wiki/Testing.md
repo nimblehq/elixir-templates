@@ -125,3 +125,9 @@ Putting it all together, there are 8 variants of test cases.
 - Applying the `Web variant` to a `Custom Web project`
 - Applying the `Live variant` to a `Standard LiveView project`
 - Applying the `Live variant` to a `Custom LiveView project`
+
+## Note
+
+Make sure the Phoenix version is the same between local development and CI.
+
+- Phoenix version on CI is in: `.github/workflows/test_template.yml`

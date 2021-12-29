@@ -44,7 +44,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLint do
       """,
       """
         "devDependencies": {
-          "stylelint": "^14.0.0",
+          "stylelint": "^14.2.0",
           "stylelint-config-property-sort-order-smacss": "^8.0.0",
           "stylelint-config-sass-guidelines": "^9.0.1",
       """

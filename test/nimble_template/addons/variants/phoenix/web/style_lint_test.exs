@@ -16,7 +16,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                     "stylelint": "^14.0.0",
+                     "stylelint": "^14.2.0",
                      "stylelint-config-property-sort-order-smacss": "^8.0.0",
                      "stylelint-config-sass-guidelines": "^9.0.1",
                  """
