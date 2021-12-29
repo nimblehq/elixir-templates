@@ -14,7 +14,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     project
     |> edit_assets_package()
     |> edit_mix()
-    |> edit_app_js()
 
     project
   end
@@ -80,6 +79,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     project
   end
 
+  # TODO: Enable this test on Phoenix > 1.5.13
   def edit_app_js(%Project{live_project?: true} = project) do
     Generator.replace_content(
       "assets/js/app.js",

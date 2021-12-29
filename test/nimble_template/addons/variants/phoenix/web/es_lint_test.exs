@@ -81,6 +81,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
     end
   end
 
+  # TODO: Enable this test on Phoenix > 1.5.13
+  @tag :skip
   describe "#apply/2 to a Live project" do
     @describetag live_project?: true
     @describetag required_addons: [:TestEnv]

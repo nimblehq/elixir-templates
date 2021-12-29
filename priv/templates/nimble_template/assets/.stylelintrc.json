@@ -2,6 +2,7 @@
   "extends": ["stylelint-config-sass-guidelines", "stylelint-config-property-sort-order-smacss"],
   "ignoreFiles": [
     "css/app.css",
+    "css/app.scss",
     "css/phoenix.css"
   ],
   "rules": {
