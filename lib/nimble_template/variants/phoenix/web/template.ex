@@ -11,6 +11,8 @@ defmodule NimbleTemplate.Phoenix.Web.Template do
     |> Web.Prettier.apply()
     |> Web.Sobelow.apply()
     |> Web.Wallaby.apply()
+    |> Web.EsLint.apply()
+    |> Web.StyleLint.apply()
 
     project
   end
