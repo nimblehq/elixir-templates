@@ -80,7 +80,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     project
   end
 
-  def edit_app_js(project) do
+  def edit_app_js(%Project{live_project?: true} = project) do
     Generator.replace_content(
       "assets/js/app.js",
       "window.addEventListener(\"phx:page-loading-start\", info => topbar.show())",
@@ -95,4 +95,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
 
     project
   end
+
+  def edit_app_js(project), do: project
 end

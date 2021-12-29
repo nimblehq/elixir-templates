@@ -31,4 +31,23 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
       end)
     end
   end
+
+  describe "#apply/2 to a Live project" do
+    @describetag live_project?: true
+
+    test "adds core-js into package.json", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        AddonsWeb.CoreJS.apply(project)
+
+        assert_file("assets/package.json", fn file ->
+          assert file =~ """
+                     "core-js": "^3.20.1",
+                 """
+        end)
+      end)
+    end
+  end
 end
