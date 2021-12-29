@@ -48,10 +48,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
         assert_file("mix.exs", fn file ->
           assert file =~ """
                        codebase: [
-                         \"prettier\",
-                         \"deps.unlock --check-unused\",
-                         \"format --check-formatted\"
-                       ],
+                         "prettier",
                  """
         end)
       end)
@@ -67,10 +64,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
         assert_file("mix.exs", fn file ->
           assert file =~ """
                        "codebase.fix": [
-                         \"prettier.fix\",
-                         \"deps.clean --unlock --unused\",
-                         \"format\"
-                       ],
+                         "prettier.fix",
                  """
         end)
       end)
