@@ -41,7 +41,11 @@ defmodule NimbleTemplate.Addons.CredoTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"deps.unlock --check-unused\", \"format --check-formatted\", \"credo --strict\"],
+                       codebase: [
+                         \"credo --strict\",
+                         \"deps.unlock --check-unused\",
+                         \"format --check-formatted\"
+                       ],
                  """
         end)
       end)
@@ -89,7 +93,11 @@ defmodule NimbleTemplate.Addons.CredoTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"deps.unlock --check-unused\", \"format --check-formatted\", \"credo --strict\"]
+                       codebase: [
+                         \"credo --strict\",
+                         \"deps.unlock --check-unused\",
+                         \"format --check-formatted\"
+                       ],
                  """
         end)
       end)

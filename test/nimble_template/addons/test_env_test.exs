@@ -20,7 +20,10 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"deps.unlock --check-unused\", \"format --check-formatted\"],
+                       codebase: [
+                         \"deps.unlock --check-unused\",
+                         \"format --check-formatted\"
+                       ],
                  """
         end)
       end)
@@ -32,7 +35,10 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
-                       "codebase.fix": [\"deps.clean --unlock --unused\", \"format\"],
+                       "codebase.fix": [
+                         \"deps.clean --unlock --unused\",
+                         \"format\"
+                       ],
                  """
         end)
       end)
@@ -90,7 +96,10 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
   describe "#apply/2 with mix_project" do
     @describetag mix_project?: true
 
-    test "adds codebase alias", %{project: project, test_project_path: test_project_path} do
+    test "adds codebase and codebase.fix alias", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
       in_test_project(test_project_path, fn ->
         Addons.TestEnv.apply(project)
 
@@ -100,7 +109,14 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"deps.unlock --check-unused\", \"format --check-formatted\"]
+                       codebase: [
+                         \"deps.unlock --check-unused\",
+                         \"format --check-formatted\"
+                       ],
+                       \"codebase.fix\": [
+                         \"deps.clean --unlock --unused\",
+                         \"format\"
+                       ]
                      ]
                    end
                  """
