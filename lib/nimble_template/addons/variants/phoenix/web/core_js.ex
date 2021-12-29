@@ -25,7 +25,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
         """,
         """
             "phoenix_html": "file:../deps/phoenix_html",
-            "core-js": "^3.7.0",
+            "core-js": "^3.20.1",
         """
       )
     else
@@ -36,7 +36,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
         """,
         """
             "phoenix_html": "file:../deps/phoenix_html",
-            "core-js": "^3.7.0"
+            "core-js": "^3.20.1"
         """
       )
     end

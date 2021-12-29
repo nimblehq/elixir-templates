@@ -14,6 +14,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     project
     |> edit_assets_package()
     |> edit_mix()
+    |> edit_app_js()
 
     project
   end
@@ -44,9 +45,9 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
       """,
       """
         "devDependencies": {
-          "eslint": "^7.26.0",
+          "eslint": "^8.5.0",
           "eslint-config-prettier": "^8.3.0",
-          "eslint-plugin-prettier": "^3.4.0",
+          "eslint-plugin-prettier": "^4.0.0",
       """
     )
 
@@ -74,6 +75,22 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
             "codebase.fix": [
               "cmd npm run eslint.fix --prefix assets",
       """
+    )
+
+    project
+  end
+
+  def edit_app_js(project) do
+    Generator.replace_content(
+      "assets/js/app.js",
+      "window.addEventListener(\"phx:page-loading-start\", info => topbar.show())",
+      "window.addEventListener(\"phx:page-loading-start\", _info => topbar.show())"
+    )
+
+    Generator.replace_content(
+      "assets/js/app.js",
+      "window.addEventListener(\"phx:page-loading-stop\", info => topbar.hide())",
+      "window.addEventListener(\"phx:page-loading-stop\", _info => topbar.hide())"
     )
 
     project
