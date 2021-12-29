@@ -15,7 +15,7 @@ defmodule NimbleTemplate.Addons.FakerTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:faker, \"~> 0.17.0\", [only: [:dev, :test], runtime: false]},
+                       {:faker, "~> 0.17.0", [only: [:dev, :test], runtime: false]},
                  """
         end)
       end)

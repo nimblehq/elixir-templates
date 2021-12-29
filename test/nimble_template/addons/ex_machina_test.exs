@@ -26,7 +26,7 @@ defmodule NimbleTemplate.Addons.ExMachinaTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:ex_machina, \"~> 2.4\", [only: :test]},
+                       {:ex_machina, "~> 2.4", [only: :test]},
                  """
         end)
       end)

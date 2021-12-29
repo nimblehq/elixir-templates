@@ -35,20 +35,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Sobelow do
       "mix.exs",
       """
             codebase: [
-              "deps.unlock --check-unused",
-              "format --check-formatted",
-              "credo --strict",
-              "prettier"
-            ],
       """,
       """
             codebase: [
-              "deps.unlock --check-unused",
-              "format --check-formatted",
-              "credo --strict",
-              "prettier",
-              "sobelow --config"
-            ],
+              "sobelow --config",
       """
     )
 
