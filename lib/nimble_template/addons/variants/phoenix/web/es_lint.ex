@@ -14,6 +14,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     project
     |> edit_assets_package()
     |> edit_mix()
+    |> edit_app_js()
 
     project
   end
@@ -82,14 +83,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
   def edit_app_js(%Project{live_project?: true} = project) do
     Generator.replace_content(
       "assets/js/app.js",
-      "window.addEventListener(\"phx:page-loading-start\", info => NProgress.show())",
-      "window.addEventListener(\"phx:page-loading-start\", _info => NProgress.show())"
+      "window.addEventListener(\"phx:page-loading-start\", info => NProgress.start())",
+      "window.addEventListener(\"phx:page-loading-start\", _info => NProgress.start())"
     )
 
     Generator.replace_content(
       "assets/js/app.js",
-      "window.addEventListener(\"phx:page-loading-stop\", info => NProgress.hide())",
-      "window.addEventListener(\"phx:page-loading-stop\", _info => NProgress.hide())"
+      "window.addEventListener(\"phx:page-loading-stop\", info => NProgress.done())",
+      "window.addEventListener(\"phx:page-loading-stop\", _info => NProgress.done())"
     )
 
     project

@@ -94,10 +94,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~
-                   "window.addEventListener(\"phx:page-loading-start\", _info => NProgress.show())"
+                   "window.addEventListener(\"phx:page-loading-start\", _info => NProgress.start())"
 
           assert file =~
-                   "window.addEventListener(\"phx:page-loading-stop\", _info => NProgress.hide())"
+                   "window.addEventListener(\"phx:page-loading-stop\", _info => NProgress.done())"
         end)
       end)
     end
