@@ -46,11 +46,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
       {:wallaby, latest_package_version(:wallaby), only: :test, runtime: false}
     )
 
-    # There is a conflict on `mime` version between Plug and Tesla.
-    # The Wallaby team hasn't used a the new Tesla version 1.4.4.
-    # TODO: Remove the mime update once Wallaby team uses the new Tesla version.
-    Mix.shell().cmd("mix deps.update mime")
-
     project
   end
 
