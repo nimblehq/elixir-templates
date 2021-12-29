@@ -81,8 +81,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
     end
   end
 
-  # TODO: Enable this test on Phoenix > 1.5.13
-  @tag :skip
   describe "#apply/2 to a Live project" do
     @describetag live_project?: true
     @describetag required_addons: [:TestEnv]
@@ -96,10 +94,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~
-                   "window.addEventListener(\"phx:page-loading-start\", _info => topbar.show())"
+                   "window.addEventListener(\"phx:page-loading-start\", _info => NProgress.show())"
 
           assert file =~
-                   "window.addEventListener(\"phx:page-loading-stop\", _info => topbar.hide())"
+                   "window.addEventListener(\"phx:page-loading-stop\", _info => NProgress.hide())"
         end)
       end)
     end

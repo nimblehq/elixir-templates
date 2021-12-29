@@ -79,18 +79,17 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     project
   end
 
-  # TODO: Enable this test on Phoenix > 1.5.13
   def edit_app_js(%Project{live_project?: true} = project) do
     Generator.replace_content(
       "assets/js/app.js",
-      "window.addEventListener(\"phx:page-loading-start\", info => topbar.show())",
-      "window.addEventListener(\"phx:page-loading-start\", _info => topbar.show())"
+      "window.addEventListener(\"phx:page-loading-start\", info => NProgress.show())",
+      "window.addEventListener(\"phx:page-loading-start\", _info => NProgress.show())"
     )
 
     Generator.replace_content(
       "assets/js/app.js",
-      "window.addEventListener(\"phx:page-loading-stop\", info => topbar.hide())",
-      "window.addEventListener(\"phx:page-loading-stop\", _info => topbar.hide())"
+      "window.addEventListener(\"phx:page-loading-stop\", info => NProgress.hide())",
+      "window.addEventListener(\"phx:page-loading-stop\", _info => NProgress.hide())"
     )
 
     project
