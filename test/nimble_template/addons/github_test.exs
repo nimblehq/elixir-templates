@@ -357,6 +357,23 @@ defmodule NimbleTemplate.Addons.GithubTest do
         end)
       end)
     end
+
+    test "mentions Wiki in README.md", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_wiki: true})
+
+        assert_file("README.md", fn file ->
+          assert file =~ """
+                 ## Project documentation
+
+                 Most of the documentation is located in the `.github/wiki` directory, which is published to the [project's Github wiki](https://github.com/[REPO]/wiki).
+                 """
+        end)
+      end)
+    end
   end
 
   describe "#apply/2 with api_project and github_wiki option" do
