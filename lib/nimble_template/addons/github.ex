@@ -89,16 +89,22 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(
-        %Project{
-          web_project?: web_project?,
-          mix_project?: mix_project?,
-          erlang_version: erlang_version,
-          elixir_version: elixir_version
-        } = project,
-        opts
-      )
-      when is_map_key(opts, :github_wiki) do
+  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_wiki) do
+    project
+    |> copy_wiki_files()
+    |> append_wiki_into_readme()
+
+    project
+  end
+
+  defp copy_wiki_files(
+         %Project{
+           web_project?: web_project?,
+           mix_project?: mix_project?,
+           erlang_version: erlang_version,
+           elixir_version: elixir_version
+         } = project
+       ) do
     binding = [
       web_project?: web_project?,
       mix_project?: mix_project?,
@@ -125,6 +131,20 @@ defmodule NimbleTemplate.Addons.Github do
     ]
 
     Generator.copy_file(files, binding)
+
+    project
+  end
+
+  defp append_wiki_into_readme(project) do
+    Generator.append_content(
+      "README.md",
+      """
+
+      ## Project documentation
+
+      Most of the documentation locate in the `.github/wiki` directory, which is published to the [project's Github wiki](https://github.com/[REPO]/wiki).
+      """
+    )
 
     project
   end
