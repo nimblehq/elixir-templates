@@ -74,11 +74,16 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{} = project, %{github_action_deploy_heroku: true}) do
+  def do_apply(%Project{mix_project?: false} = project, %{github_action_deploy_heroku: true}) do
     Generator.copy_file([
       {:eex, ".github/workflows/deploy_heroku.yml", ".github/workflows/deploy_heroku.yml"}
     ])
 
+    project
+  end
+
+  @impl true
+  def do_apply(%Project{mix_project?: true} = project, %{github_action_deploy_heroku: true}) do
     project
   end
 

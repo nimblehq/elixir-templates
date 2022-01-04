@@ -310,7 +310,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action_deploy_heroku: false})
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
 
         refute_file(".github/workflows/deploy_heroku.yml")
       end)
