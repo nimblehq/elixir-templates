@@ -142,7 +142,7 @@ defmodule NimbleTemplate.Addons.Github do
 
       ## Project documentation
 
-      Most of the documentation locate in the `.github/wiki` directory, which is published to the [project's Github wiki](https://github.com/[REPO]/wiki).
+      Most of the documentation is located in the `.github/wiki` directory, which is published to the [project's Github wiki](https://github.com/[REPO]/wiki).
       """
     )
 
