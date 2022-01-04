@@ -1,0 +1,25 @@
+{
+  "title": "Living Style Guide",
+
+  "//": "The home page content, in markdown format",
+  "homepage": "styleguide/homepage.md",
+
+  "//": "Source tells KSS where the CSS, Sass, or SCSS is that it should parse for documentation comments.",
+  "//": "The source and destination paths are relative to this file.",
+  "source": "css",
+
+  "//": "Destination tells KSS where to compile the style guide to.",
+  "destination": "../priv/static/styleguide/",
+
+  "//": "CSS gives KSS the path to the CSS files, so it can pull the styles into the style guide.",
+  "//": "The path needs to be relative to the style guide destination.",
+  "css": [
+    "../css/app.css"
+  ],
+
+  "//": "To include any javascript files, add this block, with the path to the javascript file.",
+  "//": "Also relative to the style guide destination.",
+  "js" : [
+    "../js/app.js"
+  ]
+}
