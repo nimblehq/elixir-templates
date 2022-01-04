@@ -42,7 +42,14 @@ defmodule NimbleTemplate.Addons.TestEnv do
       """
         defp aliases do
           [
-            codebase: ["deps.unlock --check-unused", "format --check-formatted"]
+            codebase: [
+              "deps.unlock --check-unused",
+              "format --check-formatted"
+            ],
+            "codebase.fix": [
+              "deps.clean --unlock --unused",
+              "format"
+            ]
           ]
         end
 
@@ -65,8 +72,14 @@ defmodule NimbleTemplate.Addons.TestEnv do
           [
       """,
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted"],
-            "codebase.fix": ["deps.clean --unlock --unused", "format"],
+            codebase: [
+              "deps.unlock --check-unused",
+              "format --check-formatted"
+            ],
+            "codebase.fix": [
+              "deps.clean --unlock --unused",
+              "format"
+            ],
       """
     )
 

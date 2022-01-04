@@ -36,16 +36,23 @@ defmodule NimbleTemplate.AddonCase do
     test_project_path = Path.join(parent_test_project_path, "/nimble_template")
 
     project =
-      if context[:mix_project?] == true do
-        create_mix_test_project(test_project_path)
+      cond do
+        context[:mix_project?] == true ->
+          create_mix_test_project(test_project_path)
 
-        Project.new(mix: true)
-      else
-        create_phoenix_test_project(test_project_path)
+          Project.new(mix: true)
 
-        # Set Web Project as default, switch to either API or Live Project in each test case
-        # eg: project = %{project | api_project?: true, web_project?: false}
-        Project.new(web: true)
+        context[:live_project?] == true ->
+          create_phoenix_test_project(test_project_path, "--live")
+
+          Project.new(web: true, live: true)
+
+        true ->
+          create_phoenix_test_project(test_project_path)
+
+          # Set Web Project as default, switch to API in each test case
+          # eg: project = %{project | api_project?: true, web_project?: false}
+          Project.new(web: true)
       end
 
     on_exit(fn ->
@@ -68,10 +75,10 @@ defmodule NimbleTemplate.AddonCase do
   defp mock_latest_package_version({_package, version}),
     do: expect(Package, :get_latest_version, fn _package -> version end)
 
-  defp create_phoenix_test_project(test_project_path) do
+  defp create_phoenix_test_project(test_project_path, opts \\ "") do
     # N - in response to Fetch and install dependencies?
     Mix.shell().cmd(
-      "printf \"N\n\" | make create_phoenix_project PROJECT_DIRECTORY=#{test_project_path} > /dev/null"
+      "printf \"N\n\" | make create_phoenix_project PROJECT_DIRECTORY=#{test_project_path} OPTIONS=#{opts} > /dev/null"
     )
   end
 

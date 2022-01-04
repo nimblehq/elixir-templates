@@ -26,7 +26,7 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:excoveralls, \"~> 0.12.2\", [only: :test]},
+                       {:excoveralls, "~> 0.12.2", [only: :test]},
                  """
         end)
       end)
@@ -59,7 +59,7 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
           assert file =~ """
                    defp aliases do
                      [
-                       coverage: [\"coveralls.html --raise\"],
+                       coverage: ["coveralls.html --raise"],
                  """
         end)
       end)
@@ -93,7 +93,7 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:excoveralls, \"~> 0.12.2\", [only: :test]},
+                       {:excoveralls, "~> 0.12.2", [only: :test]},
                  """
         end)
       end)
@@ -126,7 +126,7 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
           assert file =~ """
                    defp aliases do
                      [
-                       coverage: [\"coveralls.html --raise\"],
+                       coverage: ["coveralls.html --raise"],
                  """
         end)
       end)

@@ -10,7 +10,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
           assert file =~ """
                    defp aliases do
                      [
-                       \"assets.compile\": &compile_assets/1,
+                       "assets.compile": &compile_assets/1,
                  """
         end)
       end)
@@ -42,7 +42,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                     "build:dev": "webpack --mode development"
+                   "scripts": {
+                     "build:dev": "webpack --mode development",
                  """
         end)
       end)

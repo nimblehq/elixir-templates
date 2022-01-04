@@ -16,7 +16,7 @@ defmodule NimbleTemplate.Addons.ObanTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:oban, \"~> 2.3\"},
+                       {:oban, "~> 2.3"},
                  """
         end)
       end)

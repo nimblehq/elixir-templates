@@ -51,11 +51,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
     Generator.replace_content(
       "assets/package.json",
       """
-          "watch": "webpack --mode development --watch"
+        "scripts": {
       """,
       """
-          "watch": "webpack --mode development --watch",
-          "build:dev": "webpack --mode development"
+        "scripts": {
+          "build:dev": "webpack --mode development",
       """
     )
 

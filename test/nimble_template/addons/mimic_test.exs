@@ -15,7 +15,7 @@ defmodule NimbleTemplate.Addons.MimicTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:mimic, \"~> 1.3.1\", [only: :test]},
+                       {:mimic, "~> 1.3.1", [only: :test]},
                  """
         end)
       end)

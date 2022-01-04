@@ -2,8 +2,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag mock_latest_package_versions: [{:credo, "0.26.2"}]
-    @describetag required_addons: [:TestEnv, :Credo]
+    @describetag required_addons: [:TestEnv]
 
     test "adds prettier and prettier-plugin-eex into package.json", %{
       project: project,
@@ -49,11 +48,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
         assert_file("mix.exs", fn file ->
           assert file =~ """
                        codebase: [
-                         \"deps.unlock --check-unused\",
-                         \"format --check-formatted\",
-                         \"credo --strict\",
-                         \"prettier\"
-                       ],
+                         "prettier",
                  """
         end)
       end)
@@ -69,10 +64,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
         assert_file("mix.exs", fn file ->
           assert file =~ """
                        "codebase.fix": [
-                         \"deps.clean --unlock --unused\",
-                         \"format\",
-                         \"prettier.fix\"
-                       ],
+                         "prettier.fix",
                  """
         end)
       end)

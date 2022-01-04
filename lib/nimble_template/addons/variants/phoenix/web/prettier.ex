@@ -61,15 +61,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
     Generator.replace_content(
       "mix.exs",
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+            codebase: [
       """,
       """
             codebase: [
-              "deps.unlock --check-unused",
-              "format --check-formatted",
-              "credo --strict",
-              "prettier"
-            ],
+              "prettier",
       """
     )
 
@@ -80,14 +76,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
     Generator.replace_content(
       "mix.exs",
       """
-            "codebase.fix": ["deps.clean --unlock --unused", "format"],
+            "codebase.fix": [
       """,
       """
             "codebase.fix": [
-              "deps.clean --unlock --unused",
-              "format",
-              "prettier.fix"
-            ],
+              "prettier.fix",
       """
     )
 
@@ -96,7 +89,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
 
   defp copy_files(%Project{} = project) do
     Generator.copy_file([{:text, ".prettierignore", ".prettierignore"}])
-    Generator.copy_file([{:eex, ".prettierrc.yaml.eex", ".prettierrc.yaml"}])
+    Generator.copy_file([{:text, ".prettierrc.yaml", ".prettierrc.yaml"}])
 
     project
   end

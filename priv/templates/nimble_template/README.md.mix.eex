@@ -38,6 +38,12 @@
   mix codebase 
   ```
 
+- Fix all lint:
+
+  ```sh
+  mix codebase.fix 
+  ```
+
 - Test coverage:
 
   ```sh
