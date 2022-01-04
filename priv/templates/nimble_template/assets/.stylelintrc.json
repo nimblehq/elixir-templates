@@ -4,7 +4,7 @@
     "stylelint-config-property-sort-order-smacss"
   ],
   "ignoreFiles": [
-    "css/app.scss",
+    "css/app.css",
     "css/phoenix.css"
   ],
   "rules": {
