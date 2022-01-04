@@ -43,9 +43,6 @@ defmodule NimbleTemplate.Addons.CredoTest do
                      [
                        codebase: [
                          "credo --strict",
-                         "deps.unlock --check-unused",
-                         "format --check-formatted"
-                       ],
                  """
         end)
       end)
@@ -95,9 +92,6 @@ defmodule NimbleTemplate.Addons.CredoTest do
                      [
                        codebase: [
                          "credo --strict",
-                         "deps.unlock --check-unused",
-                         "format --check-formatted"
-                       ],
                  """
         end)
       end)
