@@ -65,6 +65,29 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorView do
       """
     )
 
+    Generator.delete_content(
+      "#{web_path}/router.ex",
+      """
+        pipeline :browser do
+          plug :accepts, ["html"]
+          plug :fetch_session
+          plug :fetch_flash
+          plug :protect_from_forgery
+          plug :put_secure_browser_headers
+        end
+      """
+    )
+
+    Generator.replace_content(
+      "#{web_path}/router.ex",
+      """
+            pipe_through :browser
+      """,
+      """
+            pipe_through [:fetch_session, :protect_from_forgery]
+      """
+    )
+
     project
   end
 end
