@@ -4,8 +4,16 @@ defmodule <%= base_module %>.ReleaseTasks do
   def migrate do
     load_app()
 
-    migrate_schemas()
-    migrate_data()
+    for repo <- repos() do
+      schema_migrations = Ecto.Migrator.migrations_path(repo, "migrations")
+      data_migrations = Ecto.Migrator.migrations_path(repo, "data_migrations")
+
+      {:ok, _, _} =
+        Ecto.Migrator.with_repo(
+          repo,
+          &Ecto.Migrator.run(&1, [schema_migrations, data_migrations], :up, all: true)
+        )
+    end
   end
 
   def rollback(repo, version) do
@@ -27,19 +35,5 @@ defmodule <%= base_module %>.ReleaseTasks do
     Application.ensure_all_started(:ssl)
 
     Application.load(@app)
-  end
-  
-  defp migrate_schemas do
-    for repo <- repos() do
-      {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :up, all: true))
-    end
-  end
-
-  defp migrate_data do
-    for repo <- repos() do
-      source = Ecto.Migrator.migrations_path(repo, "data_migrations")
-
-      {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, source, :up, all: true))
-    end
   end
 end

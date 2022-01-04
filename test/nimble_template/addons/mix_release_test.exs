@@ -62,8 +62,16 @@ defmodule NimbleTemplate.Addons.MixReleaseTest do
                    def migrate do
                      load_app()
 
-                     migrate_schemas()
-                     migrate_data()
+                     for repo <- repos() do
+                       schema_migrations = Ecto.Migrator.migrations_path(repo, "migrations")
+                       data_migrations = Ecto.Migrator.migrations_path(repo, "data_migrations")
+
+                       {:ok, _, _} =
+                         Ecto.Migrator.with_repo(
+                           repo,
+                           &Ecto.Migrator.run(&1, [schema_migrations, data_migrations], :up, all: true)
+                         )
+                     end
                    end
                  """
         end)
