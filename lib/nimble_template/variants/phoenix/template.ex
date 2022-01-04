@@ -25,6 +25,7 @@ defmodule NimbleTemplate.Phoenix.Template do
     |> Addons.Readme.apply()
     |> Addons.Makefile.apply()
     |> Addons.Docker.apply()
+    |> Addons.EctoDataMigration.apply()
     |> Addons.MixRelease.apply()
     |> Addons.TestEnv.apply()
     |> Addons.Credo.apply()
