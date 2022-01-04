@@ -128,6 +128,7 @@ Putting it all together, there are 8 variants of test cases.
 
 ## Note
 
-Make sure the Phoenix version is the same between local development and CI.
+Make sure the Phoenix version is the same between local development and CI, otherwise there will be some error in the unit test.
 
-- Phoenix version on CI is in: `.github/workflows/test_template.yml`
+- Phoenix version on CI can be found in: `.github/workflows/test_template.yml`
+- Install a correct Phoenix version on local via command: `mix archive.install hex phx_new __PHOENIX_VERSION__`
