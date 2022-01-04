@@ -34,7 +34,8 @@ defmodule NimbleTemplate.Addons.ExVCR do
 
       # Configurations for ExVCR
       config :exvcr,
-        vcr_cassette_library_dir: "#{@cassette_directory}"
+        vcr_cassette_library_dir: "#{@cassette_directory}",
+        ignore_localhost: true
       """
     )
 
