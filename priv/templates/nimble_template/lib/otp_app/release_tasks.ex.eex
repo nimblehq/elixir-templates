@@ -3,7 +3,7 @@ defmodule <%= base_module %>.ReleaseTasks do
 
   def migrate do
     load_app()
-  
+
     migrate_schemas()
     migrate_data()
   end

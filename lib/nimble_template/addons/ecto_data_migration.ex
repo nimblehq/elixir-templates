@@ -37,5 +37,37 @@ defmodule NimbleTemplate.Addons.EctoDataMigration do
             ],
       """
     )
+
+    Generator.replace_content(
+      "mix.exs",
+      """
+        end
+      end
+      """,
+      """
+        end
+
+        defp migrate(_) do
+          if Mix.env() == :test do
+            Mix.Task.run("ecto.migrate", ["--quiet"])
+          else
+            Mix.Task.run("ecto.migrate_all", [])
+          end
+        end
+      end
+      """
+    )
+
+    Generator.replace_content(
+      "mix.exs",
+      """
+            "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      """,
+      """
+            "ecto.setup": ["ecto.create", &migrate/1, "run priv/repo/seeds.exs"],
+      """
+    )
+
+    project
   end
 end

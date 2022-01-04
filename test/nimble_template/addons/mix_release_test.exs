@@ -60,6 +60,11 @@ defmodule NimbleTemplate.Addons.MixReleaseTest do
                    @app :nimble_template
 
                    def migrate do
+                     load_app()
+
+                     migrate_schemas()
+                     migrate_data()
+                   end
                  """
         end)
       end)
