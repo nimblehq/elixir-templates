@@ -8,6 +8,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorView do
     project
     |> delete_files()
     |> copy_files()
+    |> remove_page_route()
   end
 
   defp copy_files(
@@ -40,6 +41,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorView do
 
   defp delete_files(%Project{web_test_path: web_test_path, web_path: web_path} = project) do
     files_to_delete = [
+      "#{web_path}/controllers/page_controller.ex",
       "#{web_path}/views/error_view.ex",
       "#{web_path}/views/error_helpers.ex",
       "#{web_path}/views/layout_view.ex",
@@ -51,6 +53,17 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorView do
     Enum.each(files_to_delete, fn path ->
       if File.exists?(path), do: File.rm!(path)
     end)
+
+    project
+  end
+
+  defp remove_page_route(%Project{web_path: web_path} = project) do
+    Generator.delete_content(
+      "#{web_path}/router.ex",
+      """
+          get "/", PageController, :index
+      """
+    )
 
     project
   end
