@@ -97,13 +97,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
        ) do
     Generator.copy_file(
       [
-        {:eex, "lib/otp_app_web/helpers/icon_helper.ex.eex", "#{web_path}/helpers/icon_helper.ex"}
-      ],
-      web_module: web_module
-    )
-
-    Generator.copy_file(
-      [
+        {:eex, "lib/otp_app_web/helpers/icon_helper.ex.eex", "#{web_path}/helpers/icon_helper.ex"},
         {:eex, "test/otp_app_web/helpers/icon_helper_test.exs.eex",
          "#{web_test_path}/helpers/icon_helper_test.exs"}
       ],
