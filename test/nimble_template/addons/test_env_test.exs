@@ -21,8 +21,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
                    defp aliases do
                      [
                        codebase: [
-                         \"deps.unlock --check-unused\",
-                         \"format --check-formatted\"
+                         "deps.unlock --check-unused",
+                         "format --check-formatted"
                        ],
                  """
         end)
@@ -36,8 +36,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
         assert_file("mix.exs", fn file ->
           assert file =~ """
                        "codebase.fix": [
-                         \"deps.clean --unlock --unused\",
-                         \"format\"
+                         "deps.clean --unlock --unused",
+                         "format"
                        ],
                  """
         end)
@@ -110,12 +110,12 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
                    defp aliases do
                      [
                        codebase: [
-                         \"deps.unlock --check-unused\",
-                         \"format --check-formatted\"
+                         "deps.unlock --check-unused",
+                         "format --check-formatted"
                        ],
-                       \"codebase.fix\": [
-                         \"deps.clean --unlock --unused\",
-                         \"format\"
+                       "codebase.fix": [
+                         "deps.clean --unlock --unused",
+                         "format"
                        ]
                      ]
                    end
