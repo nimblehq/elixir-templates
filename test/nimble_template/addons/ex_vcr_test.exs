@@ -28,7 +28,8 @@ defmodule NimbleTemplate.Addons.ExVCRTest do
           assert file =~ """
                  # Configurations for ExVCR
                  config :exvcr,
-                   vcr_cassette_library_dir: "test/support/fixtures/vcr_cassettes"
+                   vcr_cassette_library_dir: "test/support/fixtures/vcr_cassettes",
+                   ignore_localhost: true
                  """
         end)
       end)
