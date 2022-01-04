@@ -13,6 +13,7 @@ defmodule NimbleTemplate.Phoenix.Web.Template do
     |> Web.Wallaby.apply()
     |> Web.EsLint.apply()
     |> Web.StyleLint.apply()
+    |> Web.SvgSprite.apply()
 
     project
   end
