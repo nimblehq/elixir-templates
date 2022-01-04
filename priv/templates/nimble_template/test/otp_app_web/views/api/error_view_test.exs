@@ -1,10 +1,10 @@
-defmodule <%= web_module %>.ErrorViewTest do
+defmodule <%= web_module %>.Api.ErrorViewTest do
   use <%= web_module %>.ConnCase, async: true
 
   # Bring render/3 and render_to_string/3 for testing custom views
   import Phoenix.View
 
-  alias <%= web_module %>.ErrorView
+  alias <%= web_module %>.Api.ErrorView
 
   defmodule Device do
     use Ecto.Schema

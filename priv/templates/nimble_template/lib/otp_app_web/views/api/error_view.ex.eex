@@ -1,4 +1,4 @@
-defmodule <%= web_module %>.ErrorView do
+defmodule <%= web_module %>.Api.ErrorView do
   use <%= web_module %>, :view
 
   alias Ecto.Changeset
