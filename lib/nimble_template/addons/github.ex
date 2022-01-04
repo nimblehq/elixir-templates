@@ -4,7 +4,7 @@ defmodule NimbleTemplate.Addons.Github do
   use NimbleTemplate.Addon
 
   @impl true
-  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_template) do
+  def do_apply(%Project{} = project, %{github_template: true}) do
     files = [
       {:text, Path.join([".github", "ISSUE_TEMPLATE.md"]),
        Path.join([".github", "ISSUE_TEMPLATE.md"])},
@@ -28,9 +28,8 @@ defmodule NimbleTemplate.Addons.Github do
           elixir_version: elixir_version,
           node_version: node_version
         } = project,
-        opts
-      )
-      when is_map_key(opts, :github_action_test) do
+        %{github_action_test: true}
+      ) do
     binding = [
       erlang_version: erlang_version,
       elixir_version: elixir_version,
@@ -60,9 +59,9 @@ defmodule NimbleTemplate.Addons.Github do
         %{
           with_test_workflow?: with_test_workflow?,
           with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
-        } = opts
-      )
-      when is_map_key(opts, :github_workflows_readme) do
+          github_workflows_readme: true
+        }
+      ) do
     Generator.copy_file(
       [
         {:eex, ".github/workflows/README.md.eex", ".github/workflows/README.md"}
@@ -75,7 +74,7 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{} = project, opts) when opts.github_action_deploy_heroku do
+  def do_apply(%Project{} = project, %{github_action_deploy_heroku: true}) do
     Generator.copy_file([
       {:eex, ".github/workflows/deploy_heroku.yml", ".github/workflows/deploy_heroku.yml"}
     ])
@@ -84,12 +83,12 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{} = project, opts) when not opts.github_action_deploy_heroku do
+  def do_apply(%Project{} = project, %{github_action_deploy_heroku: false}) do
     project
   end
 
   @impl true
-  def do_apply(%Project{} = project, opts) when is_map_key(opts, :github_wiki) do
+  def do_apply(%Project{} = project, %{github_wiki: true}) do
     project
     |> copy_wiki_files()
     |> append_wiki_into_readme()
