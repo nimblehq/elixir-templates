@@ -11,7 +11,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                     "core-js": "^3.20.1"
+                     "core-js": "^3.7.0"
                  """
         end)
       end)
@@ -44,7 +44,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                     "core-js": "^3.20.1",
+                     "core-js": "^3.7.0",
                  """
         end)
       end)
