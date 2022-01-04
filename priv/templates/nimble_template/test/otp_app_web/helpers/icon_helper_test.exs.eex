@@ -5,7 +5,7 @@ defmodule <%= web_module %>.IconHelperTest do
 
   alias <%= web_module %>.IconHelper
 
-  describe "icon_tag/2" do
+  describe "icon_tag/3" do
     test "renders a svg icon" do
       image =
         <%= web_module %>.Endpoint

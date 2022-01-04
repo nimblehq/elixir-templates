@@ -1,5 +1,3 @@
-# Icon Sprite
-
 ## Generate/update the `icon-sprite.svg` file
 
 1. Export SVG icon from Figma.
