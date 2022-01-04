@@ -58,7 +58,7 @@ defmodule NimbleTemplate.Addons.Github do
         %Project{} = project,
         %{
           with_test_workflow?: with_test_workflow?,
-          with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
+          with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?,
           github_workflows_readme: true
         }
       ) do
