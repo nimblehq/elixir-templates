@@ -83,11 +83,6 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{} = project, %{github_action_deploy_heroku: false}) do
-    project
-  end
-
-  @impl true
   def do_apply(%Project{} = project, %{github_wiki: true}) do
     project
     |> copy_wiki_files()
