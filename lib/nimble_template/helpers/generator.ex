@@ -12,8 +12,6 @@ defmodule NimbleTemplate.Generator do
     )
   end
 
-  def replace_file(source, target), do: Mix.Generator.copy_file(source, target, [:force])
-
   def replace_content(file_path, anchor, content) do
     file = Path.join([file_path])
 
