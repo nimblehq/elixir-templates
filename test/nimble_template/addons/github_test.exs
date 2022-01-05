@@ -305,14 +305,14 @@ defmodule NimbleTemplate.Addons.GithubTest do
   describe "#apply/2 with mix_project and github_action_deploy_heroku option" do
     @describetag mix_project?: true
 
-    test "doest NOT copy the .github/workflows/deploy_heroku.yml file", %{
+    test "raises FunctionClauseError exception", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
-
-        refute_file(".github/workflows/deploy_heroku.yml")
+        assert_raise FunctionClauseError, fn ->
+          Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+        end
       end)
     end
   end
