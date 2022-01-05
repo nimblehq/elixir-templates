@@ -4,7 +4,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
   import NimbleTemplate.AddonHelper
 
   alias NimbleTemplate.Addons.Phoenix.Web
-  alias NimbleTemplate.Project
+  alias NimbleTemplate.Projects.Project
 
   def apply(%Project{} = project) do
     project

@@ -3,7 +3,8 @@ defmodule NimbleTemplate.Templates.Mix.Template do
 
   import NimbleTemplate.{AddonHelper, GithubHelper}
 
-  alias NimbleTemplate.{Addons, Project}
+  alias NimbleTemplate.Addons
+  alias NimbleTemplate.Projects.Project
 
   def apply(%Project{} = project) do
     project

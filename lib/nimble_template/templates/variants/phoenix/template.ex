@@ -3,10 +3,11 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
 
   import NimbleTemplate.{AddonHelper, GithubHelper}
 
+  alias NimbleTemplate.Addons
+  alias NimbleTemplate.Projects.Project
   alias NimbleTemplate.Templates.Phoenix.Api.Template, as: ApiTemplate
   alias NimbleTemplate.Templates.Phoenix.Live.Template, as: LiveTemplate
   alias NimbleTemplate.Templates.Phoenix.Web.Template, as: WebTemplate
-  alias NimbleTemplate.{Addons, Project}
 
   def apply(%Project{} = project) do
     project

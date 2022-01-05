@@ -2,7 +2,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Api.Template do
   @moduledoc false
 
   alias NimbleTemplate.Addons.Phoenix.Api
-  alias NimbleTemplate.Project
+  alias NimbleTemplate.Projects.Project
 
   def apply(%Project{} = project) do
     project
