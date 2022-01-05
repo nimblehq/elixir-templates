@@ -1,7 +1,8 @@
-defmodule NimbleTemplate.Addon do
+defmodule NimbleTemplate.Addons.Addon do
   @moduledoc false
 
-  alias NimbleTemplate.{Addon, Project}
+  alias __MODULE__
+  alias NimbleTemplate.Project
 
   @callback apply(%Project{}, %{}) :: %Project{}
   @callback do_apply(%Project{}, %{}) :: %Project{}

@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Phoenix.Web.Template do
+defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
   @moduledoc false
 
   import NimbleTemplate.AddonHelper

@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Phoenix.Api.Template do
+defmodule NimbleTemplate.Templates.Phoenix.Api.Template do
   @moduledoc false
 
   alias NimbleTemplate.Addons.Phoenix.Api

@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Mix.Template do
+defmodule NimbleTemplate.Templates.Mix.Template do
   @moduledoc false
 
   import NimbleTemplate.{AddonHelper, GithubHelper}

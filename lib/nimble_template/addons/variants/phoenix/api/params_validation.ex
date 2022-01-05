@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Phoenix.Api.ParamsValidation do
   @moduledoc false
 
-  use NimbleTemplate.Addon
+  use NimbleTemplate.Addons.Addon
 
   def do_apply(%Project{} = project, _opts), do: copy_files(project)
 
