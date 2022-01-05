@@ -22,12 +22,8 @@ create_mix_project:
 # Y - in response to Would you like to add the ExVCR addon?
 common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\nY\n
 
-<<<<<<< HEAD
 # Y - in response to Would you like to add the SVG Sprite addon?
 web_addon_prompts = Y\n
-=======
-web_addon_prompts =
->>>>>>> 0ff285f (Update Makefile for answering test question)
 
 api_addon_prompts =
 
