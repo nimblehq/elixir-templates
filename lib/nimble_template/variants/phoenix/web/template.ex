@@ -1,6 +1,8 @@
 defmodule NimbleTemplate.Phoenix.Web.Template do
   @moduledoc false
 
+  import NimbleTemplate.AddonHelper
+
   alias NimbleTemplate.Addons.Phoenix.Web
   alias NimbleTemplate.Project
 
@@ -13,6 +15,8 @@ defmodule NimbleTemplate.Phoenix.Web.Template do
     |> Web.Wallaby.apply()
     |> Web.EsLint.apply()
     |> Web.StyleLint.apply()
+
+    if install_addon_prompt?("SVG Sprite"), do: Web.SvgSprite.apply(project)
 
     project
   end
