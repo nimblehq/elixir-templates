@@ -25,7 +25,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJS do
       import "./initializers/";
 
       import "./screens/";
-
       """
     )
 
