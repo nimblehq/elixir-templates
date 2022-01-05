@@ -35,7 +35,8 @@
           ~r"/_build/",
           ~r"/deps/",
           ~r"/node_modules/",
-          ~r"/lib/nimble_template/addons/addon.ex"
+          ~r"/lib/nimble_template/addons/addon.ex",
+          ~r"/test/support/addon_case.ex"
         ]
       },
       #
