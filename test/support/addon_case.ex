@@ -3,10 +3,11 @@ defmodule NimbleTemplate.AddonCase do
 
   use Mimic
 
+  alias NimbleTemplate.Addons
   alias NimbleTemplate.Addons.Phoenix.Api, as: AddonsApi
   alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
-  alias NimbleTemplate.{Addons, Project}
   alias NimbleTemplate.Hex.Package
+  alias NimbleTemplate.Projects.Project
 
   using do
     quote do
