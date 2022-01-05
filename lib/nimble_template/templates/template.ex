@@ -3,9 +3,9 @@ defmodule NimbleTemplate.Templates.Template do
 
   import NimbleTemplate.DependencyHelper
 
+  alias NimbleTemplate.Projects.Project
   alias NimbleTemplate.Templates.Mix.Template, as: MixTemplate
   alias NimbleTemplate.Templates.Phoenix.Template, as: PhoenixTemplate
-  alias NimbleTemplate.Projects.Project
 
   def apply(%Project{mix_project?: true} = project) do
     MixTemplate.apply(project)
