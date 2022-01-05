@@ -12,6 +12,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
     project
     |> edit_mix()
     |> edit_assets_package()
+    |> enable_gzip_for_static_assets()
 
     project
   end
@@ -56,6 +57,20 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
       """
         "scripts": {
           "build:dev": "webpack --mode development",
+      """
+    )
+
+    project
+  end
+
+  defp enable_gzip_for_static_assets(%Project{web_path: web_path} = project) do
+    Generator.replace_content(
+      "#{web_path}/endpoint.ex",
+      """
+          gzip: false,
+      """,
+      """
+          gzip: true,
       """
     )
 
