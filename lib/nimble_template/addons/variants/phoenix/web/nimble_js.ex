@@ -6,5 +6,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJS do
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
+
+    #     // Application
+    # import "./initializers/";
+
+    # import "./screens/";
   end
 end
