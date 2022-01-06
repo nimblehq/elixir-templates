@@ -1,0 +1,52 @@
+defmodule <%= web_module %>.HealthPlug do
+  use <%= web_module %>, :plug
+
+  alias Ecto.Adapters.SQL
+  alias <%= base_module %>.Repo
+
+  require Logger
+
+  @impl true
+  def init(opts), do: opts
+
+  @impl true
+  def call(%{path_info: ["liveness"]} = conn, _opts) do
+    conn
+    |> resp(:ok, "alive")
+    |> halt()
+  end
+
+  @impl true
+  def call(%{path_info: ["readiness"]} = conn, _opts) do
+    case readiness_check() do
+      :ok ->
+        conn
+        |> resp(:ok, "ready")
+        |> halt()
+
+      :error ->
+        conn
+        |> resp(:internal_server_error, "")
+        |> halt()
+    end
+  end
+
+  @impl true
+  def call(conn, _opts) do
+    conn
+    |> resp(:not_found, "")
+    |> halt()
+  end
+
+  defp readiness_check do
+    case SQL.query(Repo, "SELECT 1") do
+      {:ok, _result} ->
+        :ok
+
+      {:error, exception} ->
+        Logger.error(inspect(exception))
+
+        :error
+    end
+  end
+end
