@@ -48,6 +48,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     |> PhoenixAddons.Docker.apply()
     |> PhoenixAddons.EctoDataMigration.apply()
     |> PhoenixAddons.MixRelease.apply()
+    |> PhoenixAddons.HealthPlug.apply()
   end
 
   defp apply_optional_common_phoenix_addons(project) do

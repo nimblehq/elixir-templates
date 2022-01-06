@@ -36,8 +36,61 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
 
   defp edit_files(project) do
     project
-    # |> edit_router()
-    # |> edit_config()
+    |> edit_config()
+    |> edit_router()
+
     # |> edit_wiki_sidebar()
+  end
+
+  defp edit_config(%Project{web_module: web_module, otp_app: otp_app} = project) do
+    Generator.replace_content(
+      "config/config.exs",
+      """
+      config :#{otp_app}, #{web_module}.Endpoint,
+      """,
+      """
+      config :#{otp_app}, #{web_module}.Endpoint,
+        health_path: "/_health",
+      """
+    )
+
+    Generator.replace_content(
+      "config/runtime.exs",
+      """
+        config :#{otp_app}, #{web_module}.Endpoint,
+      """,
+      """
+        config :#{otp_app}, #{web_module}.Endpoint,
+          health_path: System.fetch_env!("HEALTH_PATH"),
+      """
+    )
+
+    project
+  end
+
+  defp edit_router(%Project{web_path: web_path, web_module: web_module, otp_app: otp_app} = project) do
+    Generator.replace_content(
+      "#{web_path}/router.ex",
+      """
+        # coveralls-ignore-start
+        pipeline :api do
+          plug :accepts, ["json"]
+        end
+
+        # coveralls-ignore-stop
+      """,
+      """
+        # coveralls-ignore-start
+        pipeline :api do
+          plug :accepts, ["json"]
+        end
+
+        # coveralls-ignore-stop
+
+        forward Application.get_env(:#{otp_app}, #{web_module}.Endpoint)[:health_path], #{web_module}.HealthPlug
+      """
+    )
+
+    project
   end
 end
