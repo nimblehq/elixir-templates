@@ -15,12 +15,14 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
            web_module: web_module,
            base_module: base_module,
            web_path: web_path,
-           web_test_path: web_test_path
+           web_test_path: web_test_path,
+           otp_app: otp_app
          } = project
        ) do
     binding = [
       web_module: web_module,
-      base_module: base_module
+      base_module: base_module,
+      otp_app: otp_app
     ]
 
     files = [
