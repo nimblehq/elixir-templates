@@ -93,26 +93,48 @@ defmodule NimbleTemplate.Addons.Github do
 
   defp copy_wiki_files(
          %Project{
+           mix_project?: true,
+           erlang_version: erlang_version,
+           elixir_version: elixir_version
+         } = project
+       ) do
+    binding = [
+      erlang_version: erlang_version,
+      elixir_version: elixir_version
+    ]
+
+    template_getting_started_path = ".github/wiki/Getting-Started.md.mix.eex"
+    publish_wiki_workflow_path = ".github/workflows/publish_wiki.yml"
+    homepage_path = ".github/wiki/Home.md"
+    sidebar_path = ".github/wiki/_Sidebar.md.mix"
+
+    files = [
+      {:text, publish_wiki_workflow_path, publish_wiki_workflow_path},
+      {:text, homepage_path, homepage_path},
+      {:eex, template_getting_started_path, ".github/wiki/Getting-Started.md"},
+      {:text, sidebar_path, ".github/wiki/_Sidebar.md"}
+    ]
+
+    Generator.copy_file(files, binding)
+
+    project
+  end
+
+  defp copy_wiki_files(
+         %Project{
            web_project?: web_project?,
-           mix_project?: mix_project?,
+           mix_project?: false,
            erlang_version: erlang_version,
            elixir_version: elixir_version
          } = project
        ) do
     binding = [
       web_project?: web_project?,
-      mix_project?: mix_project?,
       erlang_version: erlang_version,
       elixir_version: elixir_version
     ]
 
-    template_getting_started_path =
-      if mix_project? do
-        ".github/wiki/Getting-Started.md.mix.eex"
-      else
-        ".github/wiki/Getting-Started.md.eex"
-      end
-
+    template_getting_started_path = ".github/wiki/Getting-Started.md.eex"
     publish_wiki_workflow_path = ".github/workflows/publish_wiki.yml"
     homepage_path = ".github/wiki/Home.md"
     sidebar_path = ".github/wiki/_Sidebar.md"

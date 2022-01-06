@@ -352,8 +352,19 @@ defmodule NimbleTemplate.Addons.GithubTest do
           assert file =~ "Insert information about your project here!"
         end)
 
+        assert_file(".github/wiki/Application-Status.md")
+
         assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
+          assert file =~ """
+                 ## Table of Contents
+
+                 - [[Home]]
+                 - [[Getting Started]]
+
+                 ## Infrastructure
+
+                 - [[Application Status]]
+                 """
         end)
       end)
     end
@@ -413,8 +424,19 @@ defmodule NimbleTemplate.Addons.GithubTest do
           assert file =~ "Insert information about your project here!"
         end)
 
+        assert_file(".github/wiki/Application-Status.md")
+
         assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
+          assert file =~ """
+                 ## Table of Contents
+
+                 - [[Home]]
+                 - [[Getting Started]]
+
+                 ## Infrastructure
+
+                 - [[Application Status]]
+                 """
         end)
       end)
     end
@@ -457,8 +479,21 @@ defmodule NimbleTemplate.Addons.GithubTest do
           assert file =~ "Insert information about your project here!"
         end)
 
+        refute_file(".github/wiki/Application-Status.md")
+
         assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
+          assert file =~ """
+                 ## Table of Contents
+
+                 - [[Home]]
+                 - [[Getting Started]]
+                 """
+
+          refute file =~ """
+                 ## Infrastructure
+
+                 - [[Application Status]]
+                 """
         end)
       end)
     end
