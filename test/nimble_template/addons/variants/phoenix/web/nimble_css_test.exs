@@ -9,7 +9,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.NimbleCSS.apply(project)
+        WebAddons.NimbleCSS.apply(project)
 
         assert_directory("assets/css/base")
         assert_directory("assets/css/components")
@@ -29,7 +29,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.NimbleCSS.apply(project)
+        WebAddons.NimbleCSS.apply(project)
 
         refute_file("assets/css/app.css")
         refute_file("assets/css/phoenix.css")
@@ -41,7 +41,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.NimbleCSS.apply(project)
+        WebAddons.NimbleCSS.apply(project)
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~ "css/app.scss"
@@ -55,7 +55,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.NimbleCSS.apply(project)
+        WebAddons.NimbleCSS.apply(project)
 
         assert_file("assets/.stylelintrc.json", fn file ->
           refute file =~ "css/app.css"

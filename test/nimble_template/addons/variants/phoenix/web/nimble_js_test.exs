@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.NimbleJS.apply(project)
+        WebAddons.NimbleJS.apply(project)
 
         assert_directory("assets/js/adapters")
         assert_directory("assets/js/components")
@@ -26,7 +26,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.NimbleJS.apply(project)
+        WebAddons.NimbleJS.apply(project)
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~ """

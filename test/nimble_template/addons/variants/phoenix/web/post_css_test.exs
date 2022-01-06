@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.PostCSS.apply(project)
+        WebAddons.PostCSS.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -25,7 +25,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.PostCSS.apply(project)
+        WebAddons.PostCSS.apply(project)
 
         assert_file("assets/postcss.config.js")
       end)
