@@ -44,6 +44,17 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
 
   defp edit_case(project) do
     Generator.inject_content(
+      "test/support/channel_case.ex",
+      """
+          quote do
+      """,
+      """
+            use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
+      """
+    )
+
+    Generator.inject_content(
       "test/support/conn_case.ex",
       """
           quote do
@@ -56,6 +67,17 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
 
     Generator.inject_content(
       "test/support/data_case.ex",
+      """
+          quote do
+      """,
+      """
+            use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
+      """
+    )
+
+    Generator.inject_content(
+      "test/support/view_case.ex",
       """
           quote do
       """,

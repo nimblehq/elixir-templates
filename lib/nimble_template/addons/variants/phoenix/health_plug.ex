@@ -38,6 +38,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
     project
     |> edit_config()
     |> edit_router()
+    |> edit_test_helper()
   end
 
   defp edit_config(%Project{web_module: web_module, otp_app: otp_app} = project) do
@@ -86,6 +87,22 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
         # coveralls-ignore-stop
 
         forward Application.get_env(:#{otp_app}, #{web_module}.Endpoint)[:health_path], #{web_module}.HealthPlug
+      """
+    )
+
+    project
+  end
+
+  defp edit_test_helper(project) do
+    Generator.replace_content(
+      "test/test_helper.exs",
+      """
+      ExUnit.start()
+      """,
+      """
+      Mimic.copy(Ecto.Adapters.SQL)
+
+      ExUnit.start()
       """
     )
 
