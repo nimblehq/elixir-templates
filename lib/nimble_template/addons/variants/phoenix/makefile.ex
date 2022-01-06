@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Makefile do
+defmodule NimbleTemplate.Addons.Phoenix.Makefile do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

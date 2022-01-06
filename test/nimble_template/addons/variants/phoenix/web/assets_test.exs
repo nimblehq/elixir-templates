@@ -4,7 +4,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
   describe "#apply/2" do
     test "adds assets.compile alias", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Assets.apply(project)
+        WebAddons.Assets.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -21,7 +21,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Assets.apply(project)
+        WebAddons.Assets.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -38,7 +38,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Assets.apply(project)
+        WebAddons.Assets.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -54,7 +54,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.AssetsTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Assets.apply(project)
+        WebAddons.Assets.apply(project)
 
         assert_file("lib/nimble_template_web/endpoint.ex", fn file ->
           assert file =~ "gzip: true,"

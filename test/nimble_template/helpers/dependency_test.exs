@@ -2,6 +2,7 @@ defmodule NimbleTemplate.DependencyTest do
   use NimbleTemplate.AddonCase, async: false
 
   alias NimbleTemplate.{Addons, DependencyHelper}
+  alias NimbleTemplate.Addons.Phoenix, as: PhoenixAddons
 
   describe "order_dependencies!/0" do
     @describetag mock_latest_package_versions: [{:exvcr, "0.12.2"}, {:mimic, "1.3.1"}]
@@ -11,7 +12,7 @@ defmodule NimbleTemplate.DependencyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.ExVCR.apply(project)
+        PhoenixAddons.ExVCR.apply(project)
         Addons.Mimic.apply(project)
 
         # Unordered mix dependencies

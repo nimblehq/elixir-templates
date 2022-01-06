@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.MixRelease do
+defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

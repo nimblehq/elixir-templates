@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.ExVCR do
+defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

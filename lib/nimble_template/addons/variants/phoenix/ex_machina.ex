@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.ExMachina do
+defmodule NimbleTemplate.Addons.Phoenix.ExMachina do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

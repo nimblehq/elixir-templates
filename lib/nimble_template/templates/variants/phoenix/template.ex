@@ -4,6 +4,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
   import NimbleTemplate.{AddonHelper, GithubHelper}
 
   alias NimbleTemplate.Addons
+  alias NimbleTemplate.Addons.Phoenix, as: PhoenixAddons
   alias NimbleTemplate.Projects.Project
   alias NimbleTemplate.Templates.Phoenix.Api.Template, as: ApiTemplate
   alias NimbleTemplate.Templates.Phoenix.Live.Template, as: LiveTemplate
@@ -11,34 +12,59 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
 
   def apply(%Project{} = project) do
     project
-    |> common_setup()
-    |> variant_setup()
-
-    Addons.ExUnit.apply(project)
-
-    project
+    |> apply_phoenix_common_setup()
+    |> apply_phoenix_variant_setup()
   end
 
   # credo:disable-for-next-line Credo.Check.Refactor.ABCSize
-  defp common_setup(%Project{} = project) do
+  defp apply_phoenix_common_setup(%Project{} = project) do
+    project
+    |> apply_default_common_phoenix_addons()
+    |> apply_optional_common_phoenix_addons()
+  end
+
+  defp apply_default_common_phoenix_addons(project) do
+    project
+    |> apply_default_common_addons()
+    |> apply_default_phoenix_addons()
+  end
+
+  defp apply_default_common_addons(project) do
     project
     |> Addons.ElixirVersion.apply()
     |> Addons.Readme.apply()
-    |> Addons.Makefile.apply()
-    |> Addons.Docker.apply()
-    |> Addons.EctoDataMigration.apply()
-    |> Addons.MixRelease.apply()
     |> Addons.TestEnv.apply()
     |> Addons.Credo.apply()
     |> Addons.Dialyxir.apply()
     |> Addons.ExCoveralls.apply()
-    |> Addons.ExMachina.apply()
     |> Addons.Mimic.apply()
     |> Addons.Faker.apply()
+  end
 
+  defp apply_default_phoenix_addons(project) do
+    project
+    |> PhoenixAddons.ExMachina.apply()
+    |> PhoenixAddons.Makefile.apply()
+    |> PhoenixAddons.Docker.apply()
+    |> PhoenixAddons.EctoDataMigration.apply()
+    |> PhoenixAddons.MixRelease.apply()
+  end
+
+  defp apply_optional_common_phoenix_addons(project) do
+    project
+    |> apply_optional_common_addons()
+    |> apply_optional_phoenix_addons()
+  end
+
+  defp apply_optional_common_addons(project) do
     if host_on_github?(), do: github_addons_setup(project)
-    if install_addon_prompt?("Oban"), do: Addons.Oban.apply(project)
-    if install_addon_prompt?("ExVCR"), do: Addons.ExVCR.apply(project)
+
+    project
+  end
+
+  defp apply_optional_phoenix_addons(project) do
+    if install_addon_prompt?("Oban"), do: PhoenixAddons.Oban.apply(project)
+    if install_addon_prompt?("ExVCR"), do: PhoenixAddons.ExVCR.apply(project)
 
     project
   end
@@ -69,11 +95,12 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
       do: Addons.Github.apply(project, %{github_wiki: true})
   end
 
-  defp variant_setup(%Project{api_project?: true} = project), do: ApiTemplate.apply(project)
+  defp apply_phoenix_variant_setup(%Project{api_project?: true} = project),
+    do: ApiTemplate.apply(project)
 
-  defp variant_setup(%Project{web_project?: true, live_project?: false} = project),
+  defp apply_phoenix_variant_setup(%Project{web_project?: true, live_project?: false} = project),
     do: WebTemplate.apply(project)
 
-  defp variant_setup(%Project{web_project?: true, live_project?: true} = project),
+  defp apply_phoenix_variant_setup(%Project{web_project?: true, live_project?: true} = project),
     do: LiveTemplate.apply(project)
 end

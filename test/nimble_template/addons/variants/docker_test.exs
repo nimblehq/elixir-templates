@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.DockerTest do
+defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Docker.apply(project)
+        PhoenixAddons.Docker.apply(project)
 
         assert_file("docker-compose.dev.yml", fn file ->
           assert file =~ """
@@ -32,7 +32,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Docker.apply(project)
+        PhoenixAddons.Docker.apply(project)
 
         assert_file("docker-compose.yml")
       end)
@@ -43,7 +43,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Docker.apply(project)
+        PhoenixAddons.Docker.apply(project)
 
         assert_file(".dockerignore")
       end)
@@ -54,7 +54,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Docker.apply(project)
+        PhoenixAddons.Docker.apply(project)
 
         assert_file("Dockerfile", fn file ->
           assert file =~ """
@@ -89,7 +89,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Docker.apply(project)
+        PhoenixAddons.Docker.apply(project)
 
         assert_file("bin/start.sh", fn file ->
           assert file =~ """
@@ -110,7 +110,7 @@ defmodule NimbleTemplate.Addons.DockerTest do
       project = %{project | api_project?: true, web_project?: false}
 
       in_test_project(test_project_path, fn ->
-        Addons.Docker.apply(project)
+        PhoenixAddons.Docker.apply(project)
 
         assert_file("Dockerfile", fn file ->
           refute file =~ """
