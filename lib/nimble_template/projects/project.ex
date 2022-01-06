@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Project do
+defmodule NimbleTemplate.Projects.Project do
   @moduledoc false
 
   @alpine_version "3.14.0"

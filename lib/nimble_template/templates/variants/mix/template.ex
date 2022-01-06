@@ -1,9 +1,10 @@
-defmodule NimbleTemplate.Mix.Template do
+defmodule NimbleTemplate.Templates.Mix.Template do
   @moduledoc false
 
   import NimbleTemplate.{AddonHelper, GithubHelper}
 
-  alias NimbleTemplate.{Addons, Project}
+  alias NimbleTemplate.Addons
+  alias NimbleTemplate.Projects.Project
 
   def apply(%Project{} = project) do
     project

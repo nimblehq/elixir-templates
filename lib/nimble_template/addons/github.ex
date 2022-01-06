@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Github do
   @moduledoc false
 
-  use NimbleTemplate.Addon
+  use NimbleTemplate.Addons.Addon
 
   @impl true
   def do_apply(%Project{} = project, %{github_template: true}) do

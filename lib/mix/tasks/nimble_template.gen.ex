@@ -25,7 +25,8 @@ defmodule Mix.Tasks.NimbleTemplate.Gen do
 
   use Mix.Task
 
-  alias NimbleTemplate.{Project, Template}
+  alias NimbleTemplate.Projects.Project
+  alias NimbleTemplate.Templates.Template
 
   @version Mix.Project.config()[:version]
   @variants [api: :boolean, web: :boolean, live: :boolean, mix: :boolean]

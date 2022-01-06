@@ -1,10 +1,10 @@
-defmodule NimbleTemplate.Phoenix.Web.Template do
+defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
   @moduledoc false
 
   import NimbleTemplate.AddonHelper
 
   alias NimbleTemplate.Addons.Phoenix.Web
-  alias NimbleTemplate.Project
+  alias NimbleTemplate.Projects.Project
 
   def apply(%Project{} = project) do
     project

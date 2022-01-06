@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.MixRelease do
   @moduledoc false
 
-  use NimbleTemplate.Addon
+  use NimbleTemplate.Addons.Addon
 
   @prod_secret_path "config/prod.secret.exs"
 
