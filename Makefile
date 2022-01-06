@@ -13,7 +13,6 @@ create_mix_project:
 # Y - in response to Will you host this project on Github?
 # Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
 # Y - in response to Do you want to generate the Github Action workflows: Test?
-# Y - in response to Do you want to generate the Github Action workflows: Deploy to Heroku?
 # Y - in response to Do you want to generate the .github/.workflow/README file?
 # Y - in response to Do you want to publish a Github Wiki for this project? You'd need to manually create the first Github Wiki Page and set the GH_TOKEN and GH_EMAIL secret for this to properly function.
 # Y - in response to Do you want to generate the Github Action workflows: Deploy to Heroku?
