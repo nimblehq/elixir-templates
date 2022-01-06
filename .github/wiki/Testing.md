@@ -14,12 +14,13 @@ All test files are located under `test/` directory.
 │   ├── nimble_template
 │   │   └── addons
 │   │   │   ├── ...
-│   │   │   ├── common_addon_test.exs
+│   │   │   ├── common_mix_phoenix_addon_test.exs
 │   │   │   └── variants
 │   │   │   │   └── mix
 │   │   │   │   │   ├── ...
 │   │   │   │   │   └── mix_addon_test.exs
 │   │   │   │   └── phoenix
+│   │   │   │   │   └── common_phoenix_addon_test.exs
 │   │   │   │   │   └── api
 │   │   │   │   │   │   ├── ...
 │   │   │   │   │   │   └── api_addon_test.exs
