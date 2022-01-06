@@ -114,6 +114,4 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
 
     project
   end
-
-  defp has_github_wiki_directory?, do: File.dir?(".github/wiki/")
 end

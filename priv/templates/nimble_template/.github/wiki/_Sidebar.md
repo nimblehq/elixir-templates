@@ -2,3 +2,7 @@
 
 - [[Home]]
 - [[Getting Started]]
+
+ ## Infrastructure
+
+- [[Application Status]]

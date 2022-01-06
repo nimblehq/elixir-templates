@@ -38,8 +38,6 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
     project
     |> edit_config()
     |> edit_router()
-
-    # |> edit_wiki_sidebar()
   end
 
   defp edit_config(%Project{web_module: web_module, otp_app: otp_app} = project) do
