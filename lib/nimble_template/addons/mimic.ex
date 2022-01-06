@@ -73,17 +73,6 @@ defmodule NimbleTemplate.Addons.Mimic do
       """
     )
 
-    Generator.inject_content(
-      "test/support/view_case.ex",
-      """
-          quote do
-      """,
-      """
-            use Mimic
-
-      """
-    )
-
     project
   end
 

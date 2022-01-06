@@ -76,17 +76,6 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
       """
     )
 
-    Generator.inject_content(
-      "test/support/view_case.ex",
-      """
-          quote do
-      """,
-      """
-            use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
-
-      """
-    )
-
     project
   end
 
