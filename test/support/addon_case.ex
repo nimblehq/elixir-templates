@@ -23,6 +23,9 @@ defmodule NimbleTemplate.AddonCase do
       defp assert_file(path),
         do: assert(File.regular?(path), "Expected #{path} to exist, but does not")
 
+      defp assert_directory(path),
+        do: assert(File.dir?(path), "Expected #{path} to exist, but does not")
+
       defp assert_file(path, match) do
         assert_file(path)
         match.(File.read!(path))
