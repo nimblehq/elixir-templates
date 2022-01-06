@@ -20,6 +20,17 @@ defmodule NimbleTemplate.Addons.Gettext do
       """
     )
 
+    Generator.replace_content(
+      "mix.exs",
+      """
+            "codebase.fix": [
+      """,
+      """
+            "codebase.fix": [
+              "gettext.extract-and-merge",
+      """
+    )
+
     project
   end
 end
