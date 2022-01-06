@@ -13,6 +13,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
+                   "devDependencies": {
                      "eslint": "^8.5.0",
                      "eslint-config-prettier": "^8.3.0",
                      "eslint-plugin-prettier": "^4.0.0",
@@ -30,6 +31,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
+                   "scripts": {
                      "eslint": "eslint --color ./",
                      "eslint.fix": "eslint --color --fix ./",
                  """
