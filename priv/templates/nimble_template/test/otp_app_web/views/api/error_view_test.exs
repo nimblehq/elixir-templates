@@ -75,7 +75,7 @@ defmodule <%= web_module %>.Api.ErrorViewTest do
              }
   end
 
-  test "given error code and an invalid changeset has single error field, renders error.json" do
+  test "given error code and an invalid changeset with single error field, renders error.json" do
     changeset = Device.changeset(%{device_id: "12345678-9012", device_name: "Android"})
     error = %{code: :validation_error, changeset: changeset}
 
