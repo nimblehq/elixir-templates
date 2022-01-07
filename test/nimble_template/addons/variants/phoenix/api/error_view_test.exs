@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorViewTest do
       test_project_path: project_path
     } do
       in_test_project(project_path, fn ->
-        AddonsApi.ErrorView.apply(project)
+        ApiAddons.ErrorView.apply(project)
 
         assert_file("lib/nimble_template_web/views/error_helpers.ex")
         assert_file("lib/nimble_template_web/views/api/error_view.ex")
