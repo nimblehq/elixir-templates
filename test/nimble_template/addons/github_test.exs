@@ -364,6 +364,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
                  ## Infrastructure
 
                  - [[Application Status]]
+                 - [[Configuring Variables|Variable Configuration]]
                  """
         end)
       end)
@@ -425,6 +426,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
         end)
 
         assert_file(".github/wiki/Application-Status.md")
+        assert_file(".github/wiki/Variable-Configuration.md")
 
         assert_file(".github/wiki/_Sidebar.md", fn file ->
           assert file =~ """
