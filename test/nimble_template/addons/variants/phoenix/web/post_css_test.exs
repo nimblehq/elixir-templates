@@ -14,7 +14,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
                    "devDependencies": {
                      "autoprefixer": "^10.4.1",
                      "postcss": "^8.4.5",
-                     "postcss-loader": "^6.2.1",
+                     "postcss-loader": "^4.2.0",
                  """
         end)
       end)
