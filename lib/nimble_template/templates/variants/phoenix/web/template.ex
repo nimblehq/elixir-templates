@@ -32,6 +32,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
       do: Web.NimbleCSS.apply(project)
 
     if install_addon_prompt?("Nimble JS"), do: Web.NimbleJS.apply(project)
+    if install_addon_prompt?("Bootstrap"), do: Web.Bootstrap.apply(project)
 
     project
   end
