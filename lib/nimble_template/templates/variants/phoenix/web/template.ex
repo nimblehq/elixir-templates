@@ -21,10 +21,13 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
     |> Web.Wallaby.apply()
     |> Web.EsLint.apply()
     |> Web.StyleLint.apply()
+    |> Web.PostCSS.apply()
   end
 
   defp apply_optional_web_addons(project) do
     if install_addon_prompt?("SVG Sprite"), do: Web.SvgSprite.apply(project)
+    if install_addon_prompt?("Nimble CSS"), do: Web.NimbleCSS.apply(project)
+    if install_addon_prompt?("Nimble JS"), do: Web.NimbleJS.apply(project)
 
     project
   end

@@ -3,6 +3,16 @@ defmodule NimbleTemplate.Generator do
 
   @template_resource "priv/templates/nimble_template"
 
+  def copy_directory(source_path, binding \\ []) do
+    root = Application.app_dir(:nimble_template, @template_resource)
+
+    "#{root}/#{source_path}/**/*"
+    |> Path.wildcard(match_dot: true)
+    |> Enum.reject(&File.dir?/1)
+    |> Enum.map(&String.replace(&1, "#{root}/", ""))
+    |> Enum.each(&copy_file([{:text, &1, &1}], binding))
+  end
+
   def copy_file(files, binding \\ []) do
     Mix.Phoenix.copy_from(
       [:nimble_template],
