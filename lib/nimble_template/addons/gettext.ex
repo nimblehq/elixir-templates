@@ -17,6 +17,10 @@ defmodule NimbleTemplate.Addons.Gettext do
       """,
       """
         "gettext.extract-and-merge": ["gettext.extract --merge --no-fuzzy"],
+        "gettext.check": [
+          "gettext.extract-and-merge",
+          ~S/cmd [ -z \"$(git diff --exit-code priv\/gettext)\" ] || echo "The localization files POs, POTs are NOT up-to-date."/
+        ],
       """
     )
 
@@ -28,6 +32,17 @@ defmodule NimbleTemplate.Addons.Gettext do
       """
             "codebase.fix": [
               "gettext.extract-and-merge",
+      """
+    )
+
+    Generator.replace_content(
+      "mix.exs",
+      """
+        codebase: [
+      """,
+      """
+        codebase: [
+          "gettext.check",
       """
     )
 

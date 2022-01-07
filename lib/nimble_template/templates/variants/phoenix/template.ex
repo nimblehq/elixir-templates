@@ -66,7 +66,9 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
   defp apply_optional_phoenix_addons(project) do
     if install_addon_prompt?("Oban"), do: PhoenixAddons.Oban.apply(project)
     if install_addon_prompt?("ExVCR"), do: PhoenixAddons.ExVCR.apply(project)
-    if install_addon_prompt?("Gettext Extract and Merge command"), do: PhoenixAddons.Gettext.apply(project)
+
+    if install_addon_prompt?("Gettext Extract and Merge command"),
+      do: PhoenixAddons.Gettext.apply(project)
 
     project
   end

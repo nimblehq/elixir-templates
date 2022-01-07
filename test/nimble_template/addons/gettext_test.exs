@@ -23,6 +23,12 @@ defmodule NimbleTemplate.Addons.GettextTest do
                          "gettext.extract-and-merge",
                  """
         end)
+
+        assert_file("mix.exs", fn file ->
+          assert file =~ """
+                       codebase: [\n    \"gettext.check\",
+                 """
+        end)
       end)
     end
   end
