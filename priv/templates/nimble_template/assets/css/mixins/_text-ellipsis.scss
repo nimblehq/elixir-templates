@@ -1,3 +1,6 @@
+$font-size-base: 1rem !default;
+$line-height-base: 1.5 !default;
+
 @mixin text-ellipsis(
   $lines: 2,
   $font-size: $font-size-base,
