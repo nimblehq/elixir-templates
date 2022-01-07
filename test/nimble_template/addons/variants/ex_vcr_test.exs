@@ -39,6 +39,10 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCRTest do
       in_test_project(test_project_path, fn ->
         PhoenixAddons.ExVCR.apply(project)
 
+        assert_file("test/support/channel_case.ex", fn file ->
+          assert file =~ "use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney"
+        end)
+
         assert_file("test/support/data_case.ex", fn file ->
           assert file =~ "use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney"
         end)
