@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Gettext do
+defmodule NimbleTemplate.Addons.Phoenix.Gettext do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.GettextTest do
+defmodule NimbleTemplate.Addons.Phoenix.GettextTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
@@ -9,7 +9,7 @@ defmodule NimbleTemplate.Addons.GettextTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.Gettext.apply(project)
+        PhoenixAddons.Gettext.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
