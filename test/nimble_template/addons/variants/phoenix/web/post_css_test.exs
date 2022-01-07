@@ -20,6 +20,23 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
       end)
     end
 
+    test "adds postcss-loader to MiniCssExtractPlugin.loader", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        WebAddons.PostCSS.apply(project)
+
+        assert_file("assets/webpack.config.js", fn file ->
+          assert file =~ """
+                             MiniCssExtractPlugin.loader,
+                             'css-loader',
+                             'postcss-loader',
+                 """
+        end)
+      end)
+    end
+
     test "copies the assets/postcss.config.js", %{
       project: project,
       test_project_path: test_project_path

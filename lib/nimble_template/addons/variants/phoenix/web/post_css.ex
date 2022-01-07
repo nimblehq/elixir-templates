@@ -11,6 +11,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
   end
 
   defp edit_files(%Project{} = project) do
+    project
+    |> edit_package()
+    |> edit_webpack_config()
+
+    project
+  end
+
+  defp edit_package(project) do
     Generator.replace_content(
       "assets/package.json",
       """
@@ -21,6 +29,23 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
           "autoprefixer": "^10.4.1",
           "postcss": "^8.4.5",
           "postcss-loader": "^6.2.1",
+      """
+    )
+
+    project
+  end
+
+  defp edit_webpack_config(project) do
+    Generator.replace_content(
+      "assets/webpack.config.js",
+      """
+                  MiniCssExtractPlugin.loader,
+                  'css-loader',
+      """,
+      """
+                  MiniCssExtractPlugin.loader,
+                  'css-loader',
+                  'postcss-loader',
       """
     )
 
