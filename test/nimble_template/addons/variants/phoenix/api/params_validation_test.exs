@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ParamsValidationTest do
       test_project_path: project_path
     } do
       in_test_project(project_path, fn ->
-        AddonsApi.ParamsValidation.apply(project)
+        ApiAddons.ParamsValidation.apply(project)
 
         assert_file("lib/nimble_template_web/params/params.ex")
         assert_file("lib/nimble_template_web/params/params_validator.ex")

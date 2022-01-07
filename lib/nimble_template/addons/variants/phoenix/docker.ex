@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Docker do
+defmodule NimbleTemplate.Addons.Phoenix.Docker do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

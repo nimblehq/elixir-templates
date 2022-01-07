@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Oban do
+defmodule NimbleTemplate.Addons.Phoenix.Oban do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

@@ -10,7 +10,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Sobelow.apply(project)
+        WebAddons.Sobelow.apply(project)
 
         assert_file(".sobelow-conf")
       end)
@@ -21,7 +21,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Sobelow.apply(project)
+        WebAddons.Sobelow.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -35,7 +35,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
 
     test "adds sobelow codebase alias", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Sobelow.apply(project)
+        WebAddons.Sobelow.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """

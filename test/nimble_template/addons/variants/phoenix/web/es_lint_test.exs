@@ -9,7 +9,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -26,7 +26,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -42,7 +42,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -58,7 +58,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -74,7 +74,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("assets/.eslintrc.json")
       end)
@@ -90,7 +90,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~

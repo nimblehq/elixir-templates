@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ConfigTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsApi.Config.apply(project)
+        ApiAddons.Config.apply(project)
 
         assert_file("config/prod.exs", fn file ->
           refute file =~ "cache_static_manifest: \"priv/static/cache_manifest.json\""

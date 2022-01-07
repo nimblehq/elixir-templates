@@ -9,7 +9,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Prettier.apply(project)
+        WebAddons.Prettier.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -25,7 +25,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Prettier.apply(project)
+        WebAddons.Prettier.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -43,7 +43,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Prettier.apply(project)
+        WebAddons.Prettier.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -59,7 +59,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Prettier.apply(project)
+        WebAddons.Prettier.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -75,7 +75,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Prettier.apply(project)
+        WebAddons.Prettier.apply(project)
 
         assert_file(".prettierignore")
         assert_file(".prettierrc.yaml")

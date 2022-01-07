@@ -12,7 +12,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
            test_project_path: test_project_path
          } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -29,7 +29,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -45,7 +45,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -61,7 +61,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -77,7 +77,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("assets/.stylelintrc.json")
       end)

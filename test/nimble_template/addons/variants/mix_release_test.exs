@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.MixReleaseTest do
+defmodule NimbleTemplate.Addons.Phoenix.MixReleaseTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.MixReleaseTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.MixRelease.apply(project)
+        PhoenixAddons.MixRelease.apply(project)
 
         assert_file("config/prod.exs", fn file ->
           refute file =~ """
@@ -24,7 +24,7 @@ defmodule NimbleTemplate.Addons.MixReleaseTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.MixRelease.apply(project)
+        PhoenixAddons.MixRelease.apply(project)
 
         refute_file("config/prod.secret.exs")
       end)
@@ -35,7 +35,7 @@ defmodule NimbleTemplate.Addons.MixReleaseTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.MixRelease.apply(project)
+        PhoenixAddons.MixRelease.apply(project)
 
         assert_file("config/runtime.exs", fn file ->
           assert file =~ """
@@ -52,7 +52,7 @@ defmodule NimbleTemplate.Addons.MixReleaseTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.MixRelease.apply(project)
+        PhoenixAddons.MixRelease.apply(project)
 
         assert_file("lib/nimble_template/release_tasks.ex", fn file ->
           assert file =~ """

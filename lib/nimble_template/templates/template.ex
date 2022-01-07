@@ -3,6 +3,7 @@ defmodule NimbleTemplate.Templates.Template do
 
   import NimbleTemplate.DependencyHelper
 
+  alias NimbleTemplate.Addons.ExUnit
   alias NimbleTemplate.Projects.Project
   alias NimbleTemplate.Templates.Mix.Template, as: MixTemplate
   alias NimbleTemplate.Templates.Phoenix.Template, as: PhoenixTemplate
@@ -10,11 +11,15 @@ defmodule NimbleTemplate.Templates.Template do
   def apply(%Project{mix_project?: true} = project) do
     MixTemplate.apply(project)
 
+    ExUnit.apply(project)
+
     post_apply(project)
   end
 
   def apply(%Project{mix_project?: false} = project) do
     PhoenixTemplate.apply(project)
+
+    ExUnit.apply(project)
 
     post_apply(project)
   end

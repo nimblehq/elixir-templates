@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -22,7 +22,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -37,7 +37,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("lib/nimble_template_web.ex", fn file ->
           assert file =~ """
@@ -52,7 +52,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("lib/nimble_template_web/helpers/icon_helper.ex")
       end)
@@ -63,7 +63,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("test/nimble_template_web/helpers/icon_helper_test.exs")
       end)
@@ -74,7 +74,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         refute_file(".github/wiki/Icon-Sprite.md")
       end)
@@ -85,7 +85,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         refute_file(".github/wiki/_Sidebar.md")
       end)
@@ -100,7 +100,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file(".github/wiki/Icon-Sprite.md")
       end)
@@ -111,7 +111,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file(".github/wiki/_Sidebar.md", fn file ->
           assert file =~ """

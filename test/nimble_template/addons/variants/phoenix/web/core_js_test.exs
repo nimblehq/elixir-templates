@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.CoreJS.apply(project)
+        WebAddons.CoreJS.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -19,7 +19,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
 
     test "imports core-js into app.js", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.CoreJS.apply(project)
+        WebAddons.CoreJS.apply(project)
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~ """
@@ -40,7 +40,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.CoreJS.apply(project)
+        WebAddons.CoreJS.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """

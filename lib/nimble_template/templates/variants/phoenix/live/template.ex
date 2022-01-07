@@ -5,8 +5,10 @@ defmodule NimbleTemplate.Templates.Phoenix.Live.Template do
   alias NimbleTemplate.Templates.Phoenix.Web.Template, as: WebTemplate
 
   def apply(%Project{} = project) do
-    WebTemplate.apply(project)
+    apply_web_addons(project)
+  end
 
-    project
+  defp apply_web_addons(project) do
+    WebTemplate.apply(project)
   end
 end

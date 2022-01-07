@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.EctoDataMigration do
+defmodule NimbleTemplate.Addons.Phoenix.EctoDataMigration do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon
