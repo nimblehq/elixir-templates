@@ -6,4 +6,4 @@
 ## Infrastructure
 
 - [[Application Status]]
-- [[Configuring Variables|Variable Configuration]]
+- [[Environment Variables]]

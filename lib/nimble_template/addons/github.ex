@@ -139,7 +139,7 @@ defmodule NimbleTemplate.Addons.Github do
     homepage_path = ".github/wiki/Home.md"
     sidebar_path = ".github/wiki/_Sidebar.md"
     application_status_path = ".github/wiki/Application-Status.md"
-    variable_configuration_path = ".github/wiki/Variable-Configuration.md.eex"
+    environment_variables_path = ".github/wiki/Environment-Variables.md.eex"
 
     files = [
       {:text, publish_wiki_workflow_path, publish_wiki_workflow_path},
@@ -147,7 +147,7 @@ defmodule NimbleTemplate.Addons.Github do
       {:eex, template_getting_started_path, ".github/wiki/Getting-Started.md"},
       {:text, sidebar_path, sidebar_path},
       {:text, application_status_path, application_status_path},
-      {:eex, variable_configuration_path, ".github/wiki/Variable-Configuration.md"}
+      {:eex, environment_variables_path, ".github/wiki/Environment-Variables.md"}
     ]
 
     Generator.copy_file(files, binding)

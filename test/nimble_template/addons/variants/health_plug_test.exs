@@ -28,7 +28,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       end)
     end
 
-    test "adds health_path configuration in config", %{
+    test "adds health path configuration in config", %{
       project: project,
       test_project_path: test_project_path
     } do

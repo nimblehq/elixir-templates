@@ -12,7 +12,7 @@ defmodule <%= web_module %>.HealthPlugTest do
   end
 
   describe "call/2" do
-    test "returns 200 status given the liveness path" do
+    test "given the liveness path, returns 200 status " do
       conn =
         :get
         |> build_conn("/liveness")
@@ -22,7 +22,7 @@ defmodule <%= web_module %>.HealthPlugTest do
       assert response(conn, :ok) =~ "alive"
     end
 
-    test "returns 200 status given the readiness path" do
+    test "given the readiness path, returns 200 status " do
       conn =
         :get
         |> build_conn("/readiness")
@@ -32,7 +32,7 @@ defmodule <%= web_module %>.HealthPlugTest do
       assert response(conn, :ok) =~ "ready"
     end
 
-    test "returns 500 internal server error given the database is not ready" do
+    test "given the database is not ready, returns 500 internal server error " do
       expect(Ecto.Adapters.SQL, :query, fn <%= base_module %>.Repo, "SELECT 1" ->
         {:error, DBConnection.ConnectionError.exception("Database connection error")}
       end)
@@ -51,7 +51,7 @@ defmodule <%= web_module %>.HealthPlugTest do
       assert error_message =~ "Database connection error"
     end
 
-    test "returns 404 status given a path does NOT exist" do
+    test "given a path does NOT exist, returns 404 status " do
       conn =
         :get
         |> build_conn("/something_else")
