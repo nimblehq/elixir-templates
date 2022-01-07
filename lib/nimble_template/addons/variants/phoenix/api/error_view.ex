@@ -10,6 +10,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorView do
     |> copy_files()
   end
 
+  defp delete_files(%Project{web_path: web_path} = project) do
+    File.rm!("#{web_path}/views/error_helpers.ex")
+
+    project
+  end
+
   defp copy_files(
          %Project{
            base_module: base_module,
@@ -34,12 +40,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorView do
     ]
 
     Generator.copy_file(files, binding)
-
-    project
-  end
-
-  defp delete_files(%Project{web_path: web_path} = project) do
-    File.rm!("#{web_path}/views/error_helpers.ex")
 
     project
   end

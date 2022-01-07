@@ -1,8 +1,5 @@
 defmodule <%= web_module %>.Api.ErrorViewTest do
-  use <%= web_module %>.ConnCase, async: true
-
-  # Bring render/3 and render_to_string/3 for testing custom views
-  import Phoenix.View
+  use <%= web_module %>.ViewCase, async: true
 
   alias <%= web_module %>.Api.ErrorView
 
@@ -57,7 +54,7 @@ defmodule <%= web_module %>.Api.ErrorViewTest do
              }
   end
 
-  test "given error code and an invalid changeset has multiple errors fields, renders error.json" do
+  test "given error code and an invalid changeset with multiple errors fields, renders error.json" do
     changeset = Device.changeset(%{})
     error = %{code: :validation_error, changeset: changeset}
 
