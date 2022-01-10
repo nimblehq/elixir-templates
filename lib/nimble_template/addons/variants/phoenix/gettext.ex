@@ -19,7 +19,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Gettext do
         "gettext.extract-and-merge": ["gettext.extract --merge --no-fuzzy"],
         "gettext.check": [
           "gettext.extract-and-merge",
-          ~S/cmd [ -z \\"$(git diff --exit-code priv\\/gettext)\\" ] || echo "The localization files POs, POTs are NOT up-to-date."/
+          ~S/cmd git diff --no-ext-diff --quiet priv\\/gettext || echo "The localization files POs, POTs are NOT up-to-date."/
         ],
       """
     )
