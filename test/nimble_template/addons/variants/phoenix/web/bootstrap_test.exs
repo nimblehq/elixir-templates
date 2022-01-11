@@ -4,10 +4,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
   describe "#apply/2" do
     @describetag required_addons: [:TestEnv, :"Phoenix.Web.StyleLint"]
 
-    test "copies Bootstrap file", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
+    test "copies Bootstrap file", %{project: project, test_project_path: test_project_path} do
       in_test_project(test_project_path, fn ->
         WebAddons.CoreJS.apply(project)
         WebAddons.NimbleCSS.apply(project)
@@ -28,8 +25,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-            "bootstrap": "^5.0.0",
-            """
+                 "bootstrap": "^5.0.0",
+                 """
         end)
       end)
     end
@@ -42,13 +39,16 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~ """
-            import "bootstrap/dist/js/bootstrap";
-            """
+                 import "bootstrap/dist/js/bootstrap";
+                 """
         end)
       end)
     end
 
-    test "imports Bootstrap into app.scss", %{project: project, test_project_path: test_project_path} do
+    test "imports Bootstrap into app.scss", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
       in_test_project(test_project_path, fn ->
         WebAddons.CoreJS.apply(project)
         WebAddons.NimbleCSS.apply(project)
@@ -56,8 +56,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
 
         assert_file("assets/css/app.scss", fn file ->
           assert file =~ """
-            @import 'vendor/boostrap';
-            """
+                 @import 'vendor/boostrap';
+                 """
         end)
       end)
     end
