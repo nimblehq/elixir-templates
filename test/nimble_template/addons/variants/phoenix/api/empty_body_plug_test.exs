@@ -33,11 +33,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyPlugTest do
 
         assert_file("lib/nimble_template_web/router.ex", fn file ->
           assert file =~ """
-            pipeline :api do
-              plug :accepts, ["json"]
-              plug NimbleTemplateWeb.CheckEmptyBodyParamsPlug
-            end
-          """
+                   pipeline :api do
+                     plug :accepts, ["json"]
+                     plug NimbleTemplateWeb.CheckEmptyBodyParamsPlug
+                   end
+                 """
         end)
       end)
     end

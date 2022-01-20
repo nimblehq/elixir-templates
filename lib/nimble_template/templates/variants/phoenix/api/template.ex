@@ -15,5 +15,6 @@ defmodule NimbleTemplate.Templates.Phoenix.Api.Template do
     |> Api.ParamsValidation.apply()
     |> Api.ErrorView.apply()
     |> Api.JsonApi.apply()
+    |> Api.FallbackController.apply()
   end
 end
