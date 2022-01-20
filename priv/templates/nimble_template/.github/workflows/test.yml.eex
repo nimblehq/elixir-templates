@@ -10,8 +10,69 @@ env:
   DB_HOST: localhost
 
 jobs:
-  test:
-    name: Test
+  install_and_compile_dependencies:
+    name: Install and Compile Dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Elixir
+        uses: erlef/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+      <%= if web_project? do %>
+      - name: Set up Node
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      <% end %>
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      <%= if web_project? do %>
+      - name: Cache Node npm
+        uses: actions/cache@v2
+        with:
+          path: assets/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      <% end %>
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile dependencies
+        run: mix compile
+
+      <%= if web_project? do %>
+      - name: Install node module
+        run: npm --prefix assets install
+
+      - name: Compile assets
+        run: npm run --prefix assets build:dev
+      <% end %>
+
+  lint_codebase:
+    name: Linting
+    
+    needs: install_and_compile_dependencies
+    
     runs-on: ubuntu-latest
 
     services:
@@ -27,11 +88,6 @@ jobs:
           --health-retries 5
 
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.8.0
-        with:
-          access_token: ${{ github.token }}
-
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -87,9 +143,161 @@ jobs:
 
       - name: Run codebase check
         run: mix codebase
+    
+  seed_data:
+    name: Test seed data
+    
+    needs: lint_codebase
+    
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    env:
+      MIX_ENV: dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Elixir
+        uses: erlef/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+      <%= if web_project? do %>
+      - name: Set up Node
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      <% end %>
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      <%= if web_project? do %>
+      - name: Cache Node npm
+        uses: actions/cache@v2
+        with:
+          path: assets/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      <% end %>
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile dependencies
+        run: mix compile
+
+      <%= if web_project? do %>
+      - name: Install node module
+        run: npm --prefix assets install
+
+      - name: Compile assets
+        run: npm run --prefix assets build:dev
+      <% end %>
+      - name: Create database
+        run: mix ecto.create
+
+      - name: Migrate database
+        run: mix ecto.migrate
+
+      - name: Seed data
+        run: mix run priv/repo/seeds.exs
+      
+  unit_test:
+    name: Unit test
+    
+    needs: lint_codebase
+    
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Elixir
+        uses: erlef/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+      <%= if web_project? do %>
+      - name: Set up Node
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      <% end %>
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      <%= if web_project? do %>
+      - name: Cache Node npm
+        uses: actions/cache@v2
+        with:
+          path: assets/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      <% end %>
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile dependencies
+        run: mix compile
+
+      <%= if web_project? do %>
+      - name: Install node module
+        run: npm --prefix assets install
+
+      - name: Compile assets
+        run: npm run --prefix assets build:dev
+      <% end %>
+      - name: Create database
+        run: mix ecto.create
+
+      - name: Migrate database
+        run: mix ecto.migrate
 
       - name: Run Tests
-        run: mix coverage
+        run: mix coverage --exclude feature_test
 
       - name: Upload Code Coverage Artifact
         uses: actions/upload-artifact@v2
@@ -97,12 +305,92 @@ jobs:
         with:
           name: code_coverage
           path: cover/
+<%= if web_project? do %>
+  feature_test:
+    name: Feature test
+    
+    needs: lint_codebase
+    
+    runs-on: ubuntu-latest
 
-      <%= if web_project? do %>
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    strategy:
+      matrix:
+        mix_test_partition: [1, 2, 3, 4]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Elixir
+        uses: erlef/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+      
+      - name: Set up Node
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Cache Node npm
+        uses: actions/cache@v2
+        with:
+          path: assets/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile dependencies
+        run: mix compile
+
+      - name: Install node module
+        run: npm --prefix assets install
+
+      - name: Compile assets
+        run: npm run --prefix assets build:dev
+        
+      - name: Create database
+        run: mix ecto.create
+
+      - name: Migrate database
+        run: mix ecto.migrate
+
+      - name: Run Tests
+        run: mix test --only feature_test --partitions 4
+        env:
+          MIX_TEST_PARTITION: ${{ matrix.mix_test_partition }}
+
       - name: Upload Wallaby Screenshots Artifact
         uses: actions/upload-artifact@v2
         if: ${{ failure() }}
         with:
           name: wallaby_screenshots
           path: tmp/wallaby_screenshots/
-      <% end %>
+<% end %>
