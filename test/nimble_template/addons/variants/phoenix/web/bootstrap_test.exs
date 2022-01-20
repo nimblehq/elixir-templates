@@ -56,7 +56,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
 
         assert_file("assets/css/app.scss", fn file ->
           assert file =~ """
-                 @import 'vendor/boostrap';
+                 @import 'vendor/bootstrap';
                  """
         end)
       end)
