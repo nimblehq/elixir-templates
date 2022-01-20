@@ -1,0 +1,57 @@
+defmodule <%= web_module %>.CheckEmptyBodyParamsPlugTest do
+  use <%= web_module %>.ConnCase, async: true
+
+  alias <%= web_module %>.CheckEmptyBodyParamsPlug
+
+  describe "init/1" do
+    test "returns given options" do
+      assert CheckEmptyBodyParamsPlug.init([]) == []
+    end
+  end
+
+  describe "call/2" do
+    test "given body params are empty on the request with the supported method, halts the conn and returns 400 status",
+         %{
+           conn: conn
+         } do
+      conn =
+        conn
+        |> Map.put(:body_params, %{})
+        |> Map.put(:method, "POST")
+        |> CheckEmptyBodyParamsPlug.call([])
+
+      assert conn.halted == true
+
+      assert json_response(conn, 400) == %{
+               "errors" => [
+                 %{
+                   "code" => "bad_request",
+                   "detail" => %{},
+                   "message" => "Missing body params"
+                 }
+               ]
+             }
+    end
+
+    test "given body params are empty on GET request, does NOT halt the conn", %{
+      conn: conn
+    } do
+      conn =
+        conn
+        |> Map.put(:body_params, %{})
+        |> Map.put(:method, "GET")
+        |> CheckEmptyBodyParamsPlug.call([])
+
+      assert conn.halted == false
+    end
+
+    test "given body params are NOT empty, returns conn", %{conn: conn} do
+      conn =
+        conn
+        |> Map.put(:body_params, %{name: "Android Phone"})
+        |> CheckEmptyBodyParamsPlug.call([])
+
+      assert conn.halted == false
+    end
+  end
+end

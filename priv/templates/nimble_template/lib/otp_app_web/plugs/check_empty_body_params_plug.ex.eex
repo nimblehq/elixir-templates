@@ -1,0 +1,23 @@
+defmodule <%= web_module %>.CheckEmptyBodyParamsPlug do
+  @behaviour Plug
+
+  import Phoenix.Controller, only: [put_view: 2, render: 3]
+  import Plug.Conn
+
+  alias <%= web_module %>.Api.ErrorView
+
+  @apply_for_methods ["POST", "PUT", "PATCH"]
+
+  def init(opts), do: opts
+
+  def call(%{body_params: body_params, method: method} = conn, _opts)
+      when body_params == %{} and method in @apply_for_methods do
+    conn
+    |> put_status(:bad_request)
+    |> put_view(ErrorView)
+    |> render("400.json", %{message: "Missing body params"})
+    |> halt()
+  end
+
+  def call(conn, _opts), do: conn
+end
