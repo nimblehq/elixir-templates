@@ -1,4 +1,4 @@
-name: Publish to Hex.pm
+name: Publish to Hex package manager
 
 on:
   workflow_run:
@@ -16,9 +16,12 @@ env:
 
 jobs:
   publish:
-    - name: Publish to HexPm
+    name: Publish
+
     runs-on: ubuntu-latest
+    
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.8.0
@@ -30,7 +33,7 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
-      - name: Set up Elixir
+      - name: Set up Elixir ${{ env.ELIXIR_VERSION }} and OTP ${{ env.OTP_VERSION }}
         uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}

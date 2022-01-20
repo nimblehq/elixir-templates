@@ -1,0 +1,18 @@
+name: Apply Live variant
+
+on: push
+
+jobs:
+  standard_project:
+    name: Standard Live project
+    uses: nimblehq/elixir-templates/.github/workflows/reusable_phoenix_project.yml@composite_2.0
+    with:
+      new_project_options: "--live"
+      variant: "live"
+
+  non-standard_project:
+    name: Non-Standard Live project
+    uses: nimblehq/elixir-templates/.github/workflows/reusable_phoenix_project.yml@composite_2.0
+    with:
+      new_project_options: "--live --module=SampleCustomModule --app=sample_custom_app"
+      variant: "live"
