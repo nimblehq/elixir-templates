@@ -13,5 +13,6 @@ defmodule NimbleTemplate.Templates.Phoenix.Api.Template do
     |> Api.Config.apply()
     |> Api.ParamsValidation.apply()
     |> Api.ErrorView.apply()
+    |> Api.JsonApi.apply()
   end
 end
