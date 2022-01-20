@@ -12,6 +12,7 @@ env:
 jobs:
   install_and_compile_dependencies:
     name: Install and Compile Dependencies
+
     runs-on: ubuntu-latest
 
     steps:
@@ -46,7 +47,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
       <%= if web_project? do %>
-      - name: Cache Node npm
+      - name: Cache Node modules
         uses: actions/cache@v2
         with:
           path: assets/node_modules
@@ -54,14 +55,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       <% end %>
-      - name: Install Dependencies
+      - name: Install Elixir dependencies
         run: mix deps.get
 
       - name: Compile dependencies
         run: mix compile
 
       <%= if web_project? do %>
-      - name: Install node module
+      - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
@@ -114,7 +115,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
       <%= if web_project? do %>
-      - name: Cache Node npm
+      - name: Cache Node modules
         uses: actions/cache@v2
         with:
           path: assets/node_modules
@@ -122,14 +123,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       <% end %>
-      - name: Install Dependencies
+      - name: Install Elixir dependencies
         run: mix deps.get
 
       - name: Compile dependencies
         run: mix compile --warnings-as-errors --all-warnings
 
       <%= if web_project? do %>
-      - name: Install node module
+      - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
@@ -193,7 +194,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
       <%= if web_project? do %>
-      - name: Cache Node npm
+      - name: Cache Node modules
         uses: actions/cache@v2
         with:
           path: assets/node_modules
@@ -201,14 +202,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       <% end %>
-      - name: Install Dependencies
+      - name: Install Elixir dependencies
         run: mix deps.get
 
       - name: Compile dependencies
         run: mix compile
 
       <%= if web_project? do %>
-      - name: Install node module
+      - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
@@ -269,7 +270,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
       <%= if web_project? do %>
-      - name: Cache Node npm
+      - name: Cache Node modules
         uses: actions/cache@v2
         with:
           path: assets/node_modules
@@ -277,14 +278,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       <% end %>
-      - name: Install Dependencies
+      - name: Install Elixir dependencies
         run: mix deps.get
 
       - name: Compile dependencies
         run: mix compile
 
       <%= if web_project? do %>
-      - name: Install node module
+      - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
@@ -356,7 +357,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mix-
 
-      - name: Cache Node npm
+      - name: Cache Node modules
         uses: actions/cache@v2
         with:
           path: assets/node_modules
@@ -364,13 +365,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install Dependencies
+      - name: Install Elixir dependencies
         run: mix deps.get
 
       - name: Compile dependencies
         run: mix compile
 
-      - name: Install node module
+      - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets

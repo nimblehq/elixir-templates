@@ -10,6 +10,7 @@ env:
 jobs:
   install_and_compile_dependencies:
     name: Install and Compile Dependencies
+
     runs-on: ubuntu-latest
 
     steps:
