@@ -17,7 +17,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.JsonApiTest do
       end)
     end
 
-    test "adds config for json_api in config/config.exs", %{
+    test "adds config for jsonapi in config/config.exs", %{
       project: project,
       test_project_path: test_project_path
     } do
