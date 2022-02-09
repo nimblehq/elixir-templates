@@ -10,12 +10,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ParamsValidation do
   end
 
   defp edit_files(project) do
-    edit_web_entrypoint(project)
+    edit_web_entry_point(project)
   end
 
-  defp edit_web_entrypoint(%Project{web_module: web_module, web_path: web_entrypoint} = project) do
+  defp edit_web_entry_point(%Project{web_module: web_module, web_path: web_entry_point} = project) do
     Generator.replace_content(
-      "#{web_entrypoint}.ex",
+      "#{web_entry_point}.ex",
       """
         def controller do
           quote do

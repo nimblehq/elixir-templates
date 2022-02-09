@@ -15,7 +15,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.FallbackControllerTest do
       end)
     end
 
-    test "adds FallbackController alias into the web entrypoint", %{
+    test "adds FallbackController alias into the web entry_point", %{
       project: project,
       test_project_path: project_path
     } do

@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyPlug do
+defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlug do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

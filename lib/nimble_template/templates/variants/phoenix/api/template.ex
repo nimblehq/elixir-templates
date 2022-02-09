@@ -11,7 +11,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Api.Template do
   defp apply_default_api_addons(project) do
     project
     |> Api.Config.apply()
-    |> Api.EmptyBodyPlug.apply()
+    |> Api.EmptyBodyParamsPlug.apply()
     |> Api.ParamsValidation.apply()
     |> Api.ErrorView.apply()
     |> Api.JsonApi.apply()

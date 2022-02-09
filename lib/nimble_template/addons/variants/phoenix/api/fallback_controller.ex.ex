@@ -25,9 +25,9 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.FallbackController do
     project
   end
 
-  defp edit_files(%Project{web_module: web_module, web_path: web_entrypoint} = project) do
+  defp edit_files(%Project{web_module: web_module, web_path: web_entry_point} = project) do
     Generator.replace_content(
-      "#{web_entrypoint}.ex",
+      "#{web_entry_point}.ex",
       """
         def controller do
           quote do

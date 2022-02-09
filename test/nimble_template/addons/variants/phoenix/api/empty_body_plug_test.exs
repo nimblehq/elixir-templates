@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyPlugTest do
+defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlugTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyPlugTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        ApiAddons.EmptyBodyPlug.apply(project)
+        ApiAddons.EmptyBodyParamsPlug.apply(project)
 
         assert_file("lib/nimble_template_web/plugs/check_empty_body_params_plug.ex")
       end)
@@ -18,7 +18,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyPlugTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        ApiAddons.EmptyBodyPlug.apply(project)
+        ApiAddons.EmptyBodyParamsPlug.apply(project)
 
         assert_file("test/nimble_template_web/plugs/check_empty_body_params_plug_test.exs")
       end)
@@ -29,7 +29,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyPlugTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        ApiAddons.EmptyBodyPlug.apply(project)
+        ApiAddons.EmptyBodyParamsPlug.apply(project)
 
         assert_file("lib/nimble_template_web/router.ex", fn file ->
           assert file =~ """

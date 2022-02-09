@@ -15,7 +15,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ParamsValidationTest do
       end)
     end
 
-    test "adds ParamsValidator alias into the web entrypoint", %{
+    test "adds ParamsValidator alias into the web entry_point", %{
       project: project,
       test_project_path: project_path
     } do
