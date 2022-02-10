@@ -6,12 +6,10 @@ defmodule <%= web_module %>.CheckEmptyBodyParamsPlug do
 
   alias <%= web_module %>.Api.ErrorView
 
-  @apply_for_methods ["POST", "PUT", "PATCH"]
-
   def init(opts), do: opts
 
-  def call(%{body_params: body_params, method: method} = conn, _opts)
-      when body_params == %{} and method in @apply_for_methods do
+  def call(%{body_params: body_params, method: "POST"} = conn, _opts)
+      when body_params == %{} do
     conn
     |> put_status(:bad_request)
     |> put_view(ErrorView)
