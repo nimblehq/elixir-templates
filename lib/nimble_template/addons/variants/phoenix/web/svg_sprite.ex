@@ -13,7 +13,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
   defp edit_files(%Project{} = project) do
     project
     |> edit_assets_package()
-    |> edit_web_entrypoint()
+    |> edit_web_entry_point()
     |> edit_wiki_sidebar()
 
     project
@@ -53,7 +53,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
     project
   end
 
-  defp edit_web_entrypoint(%Project{web_module: web_module, web_path: web_path} = project) do
+  defp edit_web_entry_point(%Project{web_module: web_module, web_path: web_path} = project) do
     Generator.replace_content(
       "#{web_path}.ex",
       """
