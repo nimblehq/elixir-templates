@@ -1,4 +1,4 @@
-name: Test Release version
+name: Verify Release version
 
 on:
   push:
@@ -13,6 +13,7 @@ env:
 
 jobs:
   release_version_test:
+    name: Verify the Release version
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +27,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-     - name: Set up Elixir
+     - name: Set up Elixir ${{ env.ELIXIR_VERSION }} and OTP ${{ env.OTP_VERSION }}
        uses: erlef/setup-elixir@v1
        with:
          otp-version: ${{ env.OTP_VERSION }}
