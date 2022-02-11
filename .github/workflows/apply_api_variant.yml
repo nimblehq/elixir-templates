@@ -5,28 +5,28 @@ on: push
 jobs:
   standard_api_project:
     name: Test on a Standard API project
-    uses: ./.github/workflows/reusable_phoenix_project.yml@composite_2.0
+    uses: nimblehq/elixir-templates/.github/workflows/reusable_phoenix_project.yml@composite_2.0
     with:
       new_project_options: "--no-html --no-webpack"
       variant: "api"
 
   non-standard_api_project:
     name: Test on a Non-Standard API project
-    uses: ./.github/workflows/reusable_phoenix_project.yml@composite_2.0
+    uses: nimblehq/elixir-templates/.github/workflows/reusable_phoenix_project.yml@composite_2.0
     with:
       new_project_options: "--no-html --no-webpack --module=SampleCustomModule --app=sample_custom_app"
       variant: "api"
 
   standard_web_project:
     name: Test on a Standard Web project
-    uses: ./.github/workflows/reusable_phoenix_project.yml@composite_2.0
+    uses: nimblehq/elixir-templates/.github/workflows/reusable_phoenix_project.yml@composite_2.0
     with:
       new_project_options: ""
       variant: "api"
 
   non-standard_web_project:
     name: Test on a Non-Standard Web project
-    uses: ./.github/workflows/reusable_phoenix_project.yml@composite_2.0
+    uses: nimblehq/elixir-templates/.github/workflows/reusable_phoenix_project.yml@composite_2.0
     with:
       new_project_options: "--module=SampleCustomModule --app=sample_custom_app"
       variant: "api"
