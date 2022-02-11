@@ -4,14 +4,14 @@ on: push
 
 jobs:
   standard_project:
-    name: Standard Web project
+    name: Test on a Standard Web project
     uses: nimblehq/elixir-templates/.github/workflows/reusable_phoenix_project.yml@composite_2.0
     with:
       new_project_options: ""
       variant: "web"
 
   non-standard_project:
-    name: Non-Standard Web project
+    name: Test on a Non-Standard Web project
     uses: nimblehq/elixir-templates/.github/workflows/reusable_phoenix_project.yml@composite_2.0
     with:
       new_project_options: "--module=SampleCustomModule --app=sample_custom_app"

@@ -16,7 +16,7 @@ env:
 
 jobs:
   publish:
-    name: Publish
+    name: Publish hex package
 
     runs-on: ubuntu-latest
     
