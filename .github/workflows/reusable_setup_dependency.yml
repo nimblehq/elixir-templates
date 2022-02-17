@@ -1,0 +1,74 @@
+name: Reusable Setup Dependency
+
+on:
+  workflow_call:
+    inputs:
+      new_project_options:
+        required: true
+        type: string
+      variant:
+        required: true
+        type: string
+
+env:
+  OTP_VERSION: 24.0.4
+  ELIXIR_VERSION: 1.12.2
+  PHOENIX_VERSION: 1.5.13
+  MIX_ENV: test
+  
+jobs:
+  unit_test:
+    name: Unit test
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Elixir ${{ env.ELIXIR_VERSION }} and OTP ${{ env.OTP_VERSION }}
+        uses: erlef/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+
+      - name: Set up Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Cache Elixir build
+        uses: actions/cache@v2
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile dependencies
+        run: mix compile --warnings-as-errors --all-warnings
+      
+      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
+        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
