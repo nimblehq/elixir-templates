@@ -3,9 +3,6 @@ name: Test template
 on: push
 
 env:
-  OTP_VERSION: 24.0.4
-  ELIXIR_VERSION: 1.12.2
-  PHOENIX_VERSION: 1.5.13
   MIX_ENV: test
 
 jobs:
@@ -13,9 +10,11 @@ jobs:
     name: Run unit test
     
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/reusable_setup_dependency.yml
     
     steps:
+      - name: Setup dependency
+        uses: ./.github/workflows/reusable_setup_dependency.yml
+
       - name: Run codebase check
         run: mix codebase
 
