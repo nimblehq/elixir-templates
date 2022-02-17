@@ -6,25 +6,16 @@ env:
   MIX_ENV: test
 
 jobs:
+  setup_dependency:
+    uses: ./.github/workflows/reusable_setup_dependency.yml
+  
   unit_test:
     name: Run unit test
-    
+
     runs-on: ubuntu-latest
+    needs: setup_dependency
     
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.8.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Setup dependency
-        uses: ./.github/workflows/reusable_setup_dependency.yml
-
       - name: Run codebase check
         run: mix codebase
 
