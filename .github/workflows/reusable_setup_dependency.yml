@@ -10,8 +10,8 @@ env:
   MIX_ENV: test
   
 jobs:
-  unit_test:
-    name: Unit test
+  setup_dependency:
+    name: Setup dependency
     runs-on: ubuntu-latest
 
     services:
