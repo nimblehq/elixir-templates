@@ -145,8 +145,8 @@ jobs:
       - name: Run codebase check
         run: mix codebase
     
-  seed_data:
-    name: Test seed data
+  test_database_seeds:
+    name: Test database seeds
     
     needs: lint_codebase
     
@@ -221,7 +221,7 @@ jobs:
       - name: Migrate database
         run: mix ecto.migrate
 
-      - name: Seed data
+      - name: Seed database
         run: mix run priv/repo/seeds.exs
       
   unit_test:
