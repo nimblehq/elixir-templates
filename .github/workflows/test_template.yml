@@ -10,9 +10,11 @@ env:
 
 jobs:
   unit_test:
-    name: Run unit test    
+    name: Run unit test
+    
     runs-on: ubuntu-latest
     uses: ./.github/workflows/reusable_setup_dependency.yml
+    
     steps:
       - name: Run codebase check
         run: mix codebase
