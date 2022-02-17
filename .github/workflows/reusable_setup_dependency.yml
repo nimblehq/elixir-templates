@@ -1,15 +1,5 @@
 name: Reusable Setup Dependency
 
-on:
-  workflow_call:
-    inputs:
-      new_project_options:
-        required: true
-        type: string
-      variant:
-        required: true
-        type: string
-
 env:
   OTP_VERSION: 24.0.4
   ELIXIR_VERSION: 1.12.2
