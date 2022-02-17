@@ -1,5 +1,8 @@
 name: Reusable Setup Dependency
 
+on:
+  workflow_call:
+
 env:
   OTP_VERSION: 24.0.4
   ELIXIR_VERSION: 1.12.2
