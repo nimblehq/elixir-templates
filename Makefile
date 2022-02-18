@@ -18,8 +18,7 @@ create_mix_project:
 # Y - in response to Do you want to publish a Github Wiki for this project? You'd need to manually create the first Github Wiki Page and set the GH_TOKEN and GH_EMAIL secret for this to properly function.
 # Y - in response to Would you like to add the Oban addon?
 # Y - in response to Would you like to add the ExVCR addon?
-# Y - in response to Would you like to add the Gettext Extract and Merge command addon?
-common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\nY\n
+common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\n
 
 # Y - in response to Would you like to add the SVG Sprite addon?
 # Y - in response to Would you like to add the Nimble CSS addon?
