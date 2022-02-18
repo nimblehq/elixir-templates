@@ -35,7 +35,8 @@ defmodule NimbleTemplate.Addons.Phoenix.GettextTest do
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
-                       codebase: [\n    \"gettext.check\",
+                   codebase: [
+                     "gettext.check",
                  """
         end)
       end)
