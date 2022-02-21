@@ -7,14 +7,14 @@ jobs:
     name: Test on a Standard API project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
-      new_project_options: "--no-html --no-webpack"
+      new_project_options: "--no-html --no-assets"
       variant: "api"
 
   non-standard_api_project:
     name: Test on a Non-Standard API project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
-      new_project_options: "--no-html --no-webpack --module=SampleCustomModule --app=sample_custom_app"
+      new_project_options: "--no-html --no-assets --module=SampleCustomModule --app=sample_custom_app"
       variant: "api"
 
   standard_web_project:

@@ -2,6 +2,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
+    @describetag required_addons: [:"Phoenix.Web.NodePackage"]
+
     test "adds core-js into package.json", %{
       project: project,
       test_project_path: test_project_path
@@ -12,7 +14,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "dependencies": {
-                     "core-js": "^3.7.0",
+                     "core-js": "^3.7.0"
                  """
         end)
       end)
@@ -26,7 +28,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
           assert file =~ """
                  // CoreJS
                  import "core-js/stable"
-                 import "regenerator-runtime/runtime"
                  """
         end)
       end)
@@ -35,6 +36,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
 
   describe "#apply/2 to a Live project" do
     @describetag live_project?: true
+    @describetag required_addons: [:"Phoenix.Web.NodePackage"]
 
     test "adds core-js into package.json", %{
       project: project,
@@ -46,7 +48,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "dependencies": {
-                     "core-js": "^3.7.0",
+                     "core-js": "^3.7.0"
                  """
         end)
       end)

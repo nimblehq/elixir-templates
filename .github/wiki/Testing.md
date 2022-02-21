@@ -68,22 +68,22 @@ Adding it all together, totals to 4 variant test cases.
 
 A Phoenix project could be either a Web, LiveView, or API.
 
-- Web variants support HTML and Webpack configuration.
+- Web variants support HTML and Assets.
+
+```bash
+mix phx.new awesome_project --no-live
+```
+
+- LiveView projects include HTML and Assets configuration.
 
 ```bash
 mix phx.new awesome_project
 ```
 
-- LiveView projects include HTML and Webpack configuration.
+- API variants do NOT support HTML and Assets configuration.
 
 ```bash
-mix phx.new awesome_project --live
-```
-
-- API variants do NOT support HTML and Webpack configuration.
-
-```bash
-mix phx.new awesome_project --no-html --no-webpack
+mix phx.new awesome_project --no-html --no-assets
 ```
 
 - Custom project variants allow us to modify the app name or module name.
@@ -103,18 +103,18 @@ So it ends up with 6 project types:
 
 Web project
 
-- Standard (`mix phx.new awesome_project`)
-- Custom (`mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name`)
+- Standard (`mix phx.new awesome_project --no-live`)
+- Custom (`mix phx.new awesome_project --no-live --module=CustomModuleName --app=custom_otp_app_name`)
 
 API project
 
-- Standard (`mix phx.new awesome_project --no-html --no-webpack`)
-- Custom (`mix phx.new awesome_project --no-html --no-webpack --module=CustomModuleName --app=custom_otp_app_name`)
+- Standard (`mix phx.new awesome_project --no-html --no-assets`)
+- Custom (`mix phx.new awesome_project --no-html --no-assets --module=CustomModuleName --app=custom_otp_app_name`)
 
 LiveView project
 
-- Standard (`mix phx.new awesome_project --live`)
-- Custom (`mix phx.new awesome_project --live --module=CustomModuleName --app=custom_otp_app_name`)
+- Standard (`mix phx.new awesome_project`)
+- Custom (`mix phx.new awesome_project --module=CustomModuleName --app=custom_otp_app_name`)
 
 Putting it all together, there are 8 variants of test cases.
 

@@ -68,11 +68,16 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
           assert file =~ "FROM alpine:${RELEASE_IMAGE_VERSION} AS app"
 
           assert file =~ """
+                 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+                 RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-2.34-r0.apk
+                 RUN apk add glibc-2.34-r0.apk
+                 """
+
+          assert file =~ """
                  RUN cd assets && \\
                  \t\tnpm ci --progress=false --no-audit --loglevel=error && \\
-                 \t\tnpm run deploy && \\
                  \t\tcd - && \\
-                 \t\tmix phx.digest
+                 \t\tmix assets.deploy
                  """
 
           assert file =~ "adduser -u 1000 -G appuser -g appuser -s /bin/sh -D appuser"
@@ -114,11 +119,16 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
 
         assert_file("Dockerfile", fn file ->
           refute file =~ """
+                 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+                 RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-2.34-r0.apk
+                 RUN apk add glibc-2.34-r0.apk
+                 """
+
+          refute file =~ """
                  RUN cd assets && \\
                  \t\tnpm ci --progress=false --no-audit --loglevel=error && \\
-                 \t\tnpm run deploy && \\
                  \t\tcd - && \\
-                 \t\tmix phx.digest
+                 \t\tmix assets.deploy
                  """
         end)
       end)

@@ -2,6 +2,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
+    @describetag required_addons: [:"Phoenix.Web.NodePackage"]
+
     test "adds svg-sprite into package.json", %{
       project: project,
       test_project_path: test_project_path
@@ -95,7 +97,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
   end
 
   describe "#apply/2 with Github Wiki addon" do
-    @describetag required_addons: [{:Github, %{github_wiki: true}}]
+    @describetag required_addons: [{:Github, %{github_wiki: true}}, :"Phoenix.Web.NodePackage"]
 
     test "copies `.github/wiki/Icon-Sprite.md`", %{
       project: project,

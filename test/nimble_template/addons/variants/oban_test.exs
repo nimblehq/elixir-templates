@@ -5,7 +5,7 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
   describe "#apply/2" do
     @describetag mock_latest_package_versions: [{:oban, "2.3"}]
 
-    test "injects credo to mix dependency", %{
+    test "injects oban to mix dependency", %{
       project: project,
       test_project_path: test_project_path
     } do

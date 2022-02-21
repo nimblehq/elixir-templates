@@ -2,7 +2,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag required_addons: [:TestEnv]
+    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "adds prettier and prettier-plugin-eex into package.json", %{
       project: project,
@@ -15,7 +15,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
           assert file =~ """
                    "devDependencies": {
                      "prettier": "2.2.1",
-                     "prettier-plugin-eex": "^0.5.0",
+                     "prettier-plugin-eex": "^0.5.0"
                  """
         end)
       end)

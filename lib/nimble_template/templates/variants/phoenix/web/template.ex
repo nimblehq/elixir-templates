@@ -14,6 +14,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
 
   defp apply_default_web_addons(project) do
     project
+    |> Web.NodePackage.apply()
     |> Web.Assets.apply()
     |> Web.CoreJS.apply()
     |> Web.Prettier.apply()
@@ -21,7 +22,6 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
     |> Web.Wallaby.apply()
     |> Web.EsLint.apply()
     |> Web.StyleLint.apply()
-    |> Web.PostCSS.apply()
   end
 
   defp apply_optional_web_addons(project) do
