@@ -68,7 +68,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
       """
       @import './screens';
 
-      @import 'vendor/bootstrap';
+      @import './vendor/bootstrap';
       """
     )
 
