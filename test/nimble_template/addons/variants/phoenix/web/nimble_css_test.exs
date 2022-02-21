@@ -3,7 +3,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
 
   describe "#apply/2" do
     @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage", :"Phoenix.Web.StyleLint"]
-    @describetag mock_latest_package_versions: [{:dart_sass, "0.26.2"}]
 
     test "copies Nimble JS structure", %{
       project: project,
@@ -34,36 +33,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
 
         refute_file("assets/css/app.css")
         refute_file("assets/css/phoenix.css")
-      end)
-    end
-
-    test "remove the import `css/app.css` in assets/js/app.js", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.NimbleCSS.apply(project)
-
-        assert_file("assets/js/app.js", fn file ->
-          refute file =~ "import \"../css/app.css\""
-        end)
-      end)
-    end
-
-    test "injects dart_sass to mix dependency", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.NimbleCSS.apply(project)
-
-        assert_file("mix.exs", fn file ->
-          assert file =~ """
-                   defp deps do
-                     [
-                       {:dart_sass, "~> 0.26.2", [runtime: Mix.env() == :dev]},
-                 """
-        end)
       end)
     end
 

@@ -21,9 +21,10 @@ create_mix_project:
 common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\n
 
 # Y - in response to Would you like to add the SVG Sprite addon?
-# Y - in response to Would you like to add the Nimble CSS addon?
+# Y - in response to Would you like to add the Dart Sass addon?
+# Y - in response to Would you like to add the Nimble CSS addon (this addon requires Dart Sass addon)?
 # Y - in response to Would you like to add the Nimble JS addon?
-web_addon_prompts = Y\nY\nY\n
+web_addon_prompts = Y\nY\nY\nY\n
 
 api_addon_prompts =
 

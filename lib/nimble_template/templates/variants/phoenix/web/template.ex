@@ -26,7 +26,11 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
 
   defp apply_optional_web_addons(project) do
     if install_addon_prompt?("SVG Sprite"), do: Web.SvgSprite.apply(project)
-    if install_addon_prompt?("Nimble CSS"), do: Web.NimbleCSS.apply(project)
+    if install_addon_prompt?("Dart Sass"), do: Web.DartSass.apply(project)
+
+    if install_addon_prompt?("Nimble CSS", %{required_addon: "Dart Sass"}),
+      do: Web.NimbleCSS.apply(project)
+
     if install_addon_prompt?("Nimble JS"), do: Web.NimbleJS.apply(project)
 
     project
