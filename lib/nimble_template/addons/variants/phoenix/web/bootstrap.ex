@@ -84,7 +84,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
        ) do
     Generator.copy_file(
       [
-        {:eex, "assets/css_bootstrap/vendor/_bootstrap.scss.eex", "assets/css/vendor/_bootstrap.scss"}
+        {:eex, "assets/css_bootstrap/vendor/_bootstrap.scss.eex",
+         "assets/css/vendor/_bootstrap.scss"}
       ],
       web_module: web_module
     )
