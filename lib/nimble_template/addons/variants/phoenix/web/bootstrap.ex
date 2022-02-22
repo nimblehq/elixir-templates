@@ -20,8 +20,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
   end
 
   defp copy_files(%Project{} = project) do
-    project
-    |> copy_bootstrap()
+    copy_bootstrap(project)
 
     project
   end
