@@ -12,7 +12,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
         WebAddons.DartSass.apply(project)
 
         assert_file("assets/js/app.js", fn file ->
-          refute file =~ "import \"../css/app.css\""
+          refute file =~ """
+                 // We import the CSS which is extracted to its own file by esbuild.
+                 // Remove this line if you add a your own CSS build pipeline (e.g postcss).
+                 import "../css/app.css"
+
+                 """
         end)
       end)
     end

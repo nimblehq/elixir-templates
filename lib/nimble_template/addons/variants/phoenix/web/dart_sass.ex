@@ -86,7 +86,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
   defp edit_app_js(project) do
     Generator.delete_content(
       "assets/js/app.js",
-      "import \"../css/app.css\""
+      """
+      // We import the CSS which is extracted to its own file by esbuild.
+      // Remove this line if you add a your own CSS build pipeline (e.g postcss).
+      import "../css/app.css"
+
+      """
     )
 
     project
