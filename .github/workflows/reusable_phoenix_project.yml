@@ -104,4 +104,4 @@ jobs:
         if: ${{ failure() }}
         with:
           name: code_coverage
-          path: ${{ BASE_PROJECT_DIRECTORY }}/cover/
+          path: sample_project/cover/
