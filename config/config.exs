@@ -1,3 +1,3 @@
-use Mix.Config
+use Config
 
 config :phoenix, :json_library, Jason
