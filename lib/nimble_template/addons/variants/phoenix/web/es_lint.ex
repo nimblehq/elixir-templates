@@ -34,7 +34,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
       """
         "scripts": {
           "eslint": "eslint --color ./",
-          "eslint.fix": "eslint --color --fix ./",
+          "eslint.fix": "eslint --color --fix ./"
       """
     )
 

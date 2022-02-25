@@ -24,7 +24,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
       """,
       """
         "dependencies": {
-          "core-js": "^3.7.0",
+          "core-js": "^3.7.0"
       """
     )
 
@@ -40,7 +40,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
       """
       // CoreJS
       import "core-js/stable"
-      import "regenerator-runtime/runtime"
 
       import "phoenix_html"
       """

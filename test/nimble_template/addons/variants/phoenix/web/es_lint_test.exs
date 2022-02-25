@@ -2,7 +2,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag required_addons: [:TestEnv]
+    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "adds eslint, eslint-config-prettier and eslint-plugin-prettier into package.json", %{
       project: project,
@@ -33,7 +33,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
           assert file =~ """
                    "scripts": {
                      "eslint": "eslint --color ./",
-                     "eslint.fix": "eslint --color --fix ./",
+                     "eslint.fix": "eslint --color --fix ./"
                  """
         end)
       end)
@@ -85,7 +85,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
 
   describe "#apply/2 to a Live project" do
     @describetag live_project?: true
-    @describetag required_addons: [:TestEnv]
+    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "updates the assets/js/app.js", %{
       project: project,

@@ -2,7 +2,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag required_addons: [:TestEnv]
+    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "adds stylelint,
           stylelint-config-property-sort-order-smacss

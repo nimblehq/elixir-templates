@@ -2,7 +2,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag required_addons: [:TestEnv, :"Phoenix.Web.StyleLint"]
+    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage", :"Phoenix.Web.StyleLint"]
 
     test "copies Nimble JS structure", %{
       project: project,
@@ -33,20 +33,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
 
         refute_file("assets/css/app.css")
         refute_file("assets/css/phoenix.css")
-      end)
-    end
-
-    test "imports `css/app.scss` into assets/js/app.js", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.NimbleCSS.apply(project)
-
-        assert_file("assets/js/app.js", fn file ->
-          assert file =~ "css/app.scss"
-          refute file =~ "css/app.css"
-        end)
       end)
     end
 

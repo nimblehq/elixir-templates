@@ -8,7 +8,7 @@ on:
 env:
   OTP_VERSION: 23.3
   ELIXIR_VERSION: 1.11.4
-  PHOENIX_VERSION: 1.5.13
+  PHOENIX_VERSION: 1.6.6
   MIX_ENV: test
 
 jobs:

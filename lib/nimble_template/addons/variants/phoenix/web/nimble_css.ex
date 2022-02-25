@@ -8,7 +8,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSS do
     project
     |> remove_default_phoenix_structure()
     |> copy_nimble_structure()
-    |> edit_app_js()
     |> edit_style_lint_rc()
   end
 
@@ -20,16 +19,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSS do
 
   defp copy_nimble_structure(project) do
     Generator.copy_directory("assets/css")
-
-    project
-  end
-
-  defp edit_app_js(project) do
-    Generator.replace_content(
-      "assets/js/app.js",
-      "/css/app.css",
-      "/css/app.scss"
-    )
 
     project
   end

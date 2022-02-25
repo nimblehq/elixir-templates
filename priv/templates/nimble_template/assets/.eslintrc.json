@@ -23,5 +23,7 @@
       }
     ]
   },
-  "ignorePatterns": []
+  "ignorePatterns": [
+    "/vendor/topbar.js"
+  ]
 }

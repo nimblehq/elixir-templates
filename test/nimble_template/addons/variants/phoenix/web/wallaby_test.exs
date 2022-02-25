@@ -114,8 +114,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
 
         assert_file("config/test.exs", fn file ->
           assert file =~ """
-                 config :nimble_template, NimbleTemplateWeb.Endpoint,
-                   http: [port: 4002],
                    server: true
 
                  config :nimble_template, :sql_sandbox, true

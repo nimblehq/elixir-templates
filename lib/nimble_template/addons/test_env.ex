@@ -155,22 +155,14 @@ defmodule NimbleTemplate.Addons.TestEnv do
 
     Generator.replace_content(
       support_case_path,
-      """
-          :ok = Ecto.Adapters.SQL.Sandbox.checkout(#{project.base_module}.Repo)
-      """,
-      """
-          :ok = Sandbox.checkout(#{project.base_module}.Repo)
-      """
+      "Ecto.Adapters.SQL.Sandbox.start_owner!",
+      "Sandbox.start_owner!"
     )
 
     Generator.replace_content(
       support_case_path,
-      """
-        Ecto.Adapters.SQL.Sandbox.mode(#{project.base_module}.Repo, {:shared, self()})
-      """,
-      """
-        Sandbox.mode(#{project.base_module}.Repo, {:shared, self()})
-      """
+      "Ecto.Adapters.SQL.Sandbox.stop_owner",
+      "Sandbox.stop_owner"
     )
 
     project

@@ -7,12 +7,12 @@ jobs:
     name: Test on a Standard Live project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
-      new_project_options: "--live"
+      new_project_options: ""
       variant: "live"
 
   non-standard_project:
     name: Test on a Non-Standard Live project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
-      new_project_options: "--live --module=SampleCustomModule --app=sample_custom_app"
+      new_project_options: "--module=SampleCustomModule --app=sample_custom_app"
       variant: "live"

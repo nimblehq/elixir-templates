@@ -48,12 +48,12 @@ defmodule NimbleTemplate.AddonCase do
           Project.new(mix: true)
 
         context[:live_project?] == true ->
-          create_phoenix_test_project(test_project_path, "--live")
+          create_phoenix_test_project(test_project_path)
 
           Project.new(web: true, live: true)
 
         true ->
-          create_phoenix_test_project(test_project_path)
+          create_phoenix_test_project(test_project_path, "--no-live")
 
           # Set Web Project as default, switch to API in each test case
           # eg: project = %{project | api_project?: true, web_project?: false}
