@@ -14,7 +14,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJSTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "dependencies": {
-                     "core-js": "^3.7.0"
+                     "core-js": "^3.21.1"
                  """
         end)
       end)
