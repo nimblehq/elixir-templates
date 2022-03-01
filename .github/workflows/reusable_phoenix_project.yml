@@ -98,10 +98,3 @@ jobs:
         
       - name: Test Production Docker image build
         run: cd $BASE_PROJECT_DIRECTORY && docker-compose build
-        
-      - name: Upload Code Coverage Artifact
-        uses: actions/upload-artifact@v2
-        if: ${{ failure() }}
-        with:
-          name: code_coverage
-          path: sample_project/cover/
