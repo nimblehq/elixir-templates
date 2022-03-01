@@ -44,17 +44,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     Generator.replace_content(
       "assets/js/app.js",
       """
-      // CoreJS
-      import "core-js/stable"
-      import "regenerator-runtime/runtime"
+      import "phoenix_html"
       """,
       """
-      // CoreJS
-      import "core-js/stable"
-      import "regenerator-runtime/runtime"
-
       // Bootstrap
       import "bootstrap/dist/js/bootstrap";
+
+      import "phoenix_html"
       """
     )
 
