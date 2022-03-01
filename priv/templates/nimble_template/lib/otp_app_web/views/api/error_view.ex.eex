@@ -29,7 +29,6 @@ defmodule <%= web_module %>.Api.ErrorView do
   end
 
   defp to_sentence([message]), do: message
-  defp to_sentence([]), do: ""
 
   defp to_sentence(messages) do
     sentence =
