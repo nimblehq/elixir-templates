@@ -15,6 +15,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     |> edit_assets_package()
     |> edit_app_js(opts)
     |> edit_app_scss(opts)
+    |> edit_vendor_index(opts)
 
     project
   end
@@ -89,6 +90,19 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
       @import './vendor/';
       """
     )
+
+    project
+  end
+
+  def edit_vendor_index(project, %{with_nimble_css_addon: true}) do
+    Generator.append_content("assets/css/vendor/_index.scss", "@import './bootstrap';")
+
+    project
+  end
+
+  def edit_vendor_index(project, %{with_nimble_css_addon: false}) do
+    Generator.make_directory("assets/css/vendor/", false)
+    Generator.create_file("assets/css/vendor/_index.scss", "@import './bootstrap';")
 
     project
   end

@@ -117,6 +117,16 @@ defmodule NimbleTemplate.Generator do
     create_keep_file(path, touch_directory)
   end
 
+  def create_file(path, content) do
+    case File.write(path, content) do
+      :ok ->
+        :ok
+
+      {:error, reason} ->
+        Mix.raise(~s[Failed to create file at #{path}, reason: #{Atom.to_string(reason)}])
+    end
+  end
+
   def print_log(prefix, content \\ ""), do: Mix.shell().info([:green, prefix, :reset, content])
 
   defp split_with_self(contents, text) do

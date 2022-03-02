@@ -76,6 +76,22 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
         end)
       end)
     end
+
+    test "imports bootstrap vendor index file", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        WebAddons.Bootstrap.apply(project, %{
+          with_nimble_css_addon: false,
+          with_nimble_js_addon: false
+        })
+
+        assert_file("assets/css/vendor/_index.scss", fn file ->
+          assert file =~ "@import './bootstrap';"
+        end)
+      end)
+    end
   end
 
   describe "#apply/2 given Nimble CSS and Nimble JS structure" do
@@ -153,6 +169,22 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
 
                  @import './vendor';
                  """
+        end)
+      end)
+    end
+
+    test "imports bootstrap vendor index file", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        WebAddons.Bootstrap.apply(project, %{
+          with_nimble_css_addon: true,
+          with_nimble_js_addon: true
+        })
+
+        assert_file("assets/css/vendor/_index.scss", fn file ->
+          assert file =~ "@import './bootstrap';"
         end)
       end)
     end
