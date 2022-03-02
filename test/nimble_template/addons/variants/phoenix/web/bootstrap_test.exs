@@ -99,6 +99,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :TestEnv,
                    :"Phoenix.Web.NodePackage",
                    :"Phoenix.Web.StyleLint",
+                   :"Phoenix.Web.EsLint",
                    :"Phoenix.Web.DartSass",
                    :"Phoenix.Web.NimbleCSS",
                    :"Phoenix.Web.NimbleJS"
