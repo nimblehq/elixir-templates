@@ -10,7 +10,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
         Addons.Readme.apply(project)
 
         assert_file("README.md", fn file ->
-          assert file =~ "Erlang 24.2.1"
+          assert file =~ "Erlang 24.2.2"
           assert file =~ "Elixir 1.13.3"
 
           assert file =~ """
@@ -44,7 +44,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
         Addons.Readme.apply(project)
 
         assert_file("README.md", fn file ->
-          assert file =~ "Erlang 24.2.1"
+          assert file =~ "Erlang 24.2.2"
           assert file =~ "Elixir 1.13.3"
 
           refute file =~ """
@@ -78,7 +78,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
         Addons.Readme.apply(project)
 
         assert_file("README.md", fn file ->
-          assert file =~ "Erlang 24.2.1"
+          assert file =~ "Erlang 24.2.2"
           assert file =~ "Elixir 1.13.3"
 
           refute file =~ """

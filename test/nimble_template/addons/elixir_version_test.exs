@@ -11,7 +11,7 @@ defmodule NimbleTemplate.Addons.ElixirVersionTest do
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """
-                 erlang 24.2.1
+                 erlang 24.2.2
                  elixir 1.13.3-otp-24
                  """
         end)

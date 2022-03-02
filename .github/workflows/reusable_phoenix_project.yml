@@ -11,7 +11,7 @@ on:
         type: string
 
 env:
-  OTP_VERSION: 24.2.1
+  OTP_VERSION: 24.2.2
   ELIXIR_VERSION: 1.13.3
   PHOENIX_VERSION: 1.6.6
   NODE_VERSION: 16

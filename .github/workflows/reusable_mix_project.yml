@@ -8,7 +8,7 @@ on:
         type: string
 
 env:
-  OTP_VERSION: 24.2.1
+  OTP_VERSION: 24.2.2
   ELIXIR_VERSION: 1.13.3
   BASE_PROJECT_DIRECTORY: sample_project
   MIX_ENV: test
