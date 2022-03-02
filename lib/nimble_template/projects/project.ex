@@ -1,10 +1,10 @@
 defmodule NimbleTemplate.Projects.Project do
   @moduledoc false
 
-  @alpine_version "3.14.0"
-  @elixir_version "1.12.2"
-  @erlang_version "24.0.4"
-  @node_version "14"
+  @alpine_version "3.15.0"
+  @elixir_version "1.13.3"
+  @erlang_version "24.2.2"
+  @node_version "16"
 
   defstruct base_module: nil,
             base_path: nil,

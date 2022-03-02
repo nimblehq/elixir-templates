@@ -328,8 +328,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           assert file =~ """
                  - Install Node dependencies:
@@ -401,8 +401,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           refute file =~ """
                       - Install Node dependencies:
@@ -457,8 +457,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           refute file =~ """
                       - Install Node dependencies:
