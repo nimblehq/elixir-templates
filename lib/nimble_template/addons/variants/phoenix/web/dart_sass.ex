@@ -12,6 +12,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
     |> edit_config()
     |> edit_mix()
     |> edit_app_js()
+    |> rename_app_css()
   end
 
   defp inject_mix_dependency(%Project{} = project) do
@@ -92,6 +93,15 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
       import "../css/app.css"
 
       """
+    )
+
+    project
+  end
+
+  defp rename_app_css(project) do
+    Generator.rename_file(
+      "assets/css/app.css",
+      "assets/css/app.scss"
     )
 
     project

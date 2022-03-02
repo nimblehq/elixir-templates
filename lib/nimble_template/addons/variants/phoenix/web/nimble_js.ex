@@ -11,7 +11,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJS do
   end
 
   defp copy_nimble_structure(project) do
-    Generator.copy_directory("assets/js")
+    Generator.copy_directory("assets/nimble_js", "assets/js")
 
     project
   end

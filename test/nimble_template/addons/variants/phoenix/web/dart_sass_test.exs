@@ -98,5 +98,17 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
         end)
       end)
     end
+
+    test "rename app.css into app.scss", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        WebAddons.DartSass.apply(project)
+
+        assert_file("assets/css/app.scss")
+        refute_file("assets/css/app.css")
+      end)
+    end
   end
 end

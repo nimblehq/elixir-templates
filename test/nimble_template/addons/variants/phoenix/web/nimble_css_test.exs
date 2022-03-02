@@ -4,7 +4,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSSTest do
   describe "#apply/2" do
     @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage", :"Phoenix.Web.StyleLint"]
 
-    test "copies Nimble JS structure", %{
+    test "copies Nimble CSS structure", %{
       project: project,
       test_project_path: test_project_path
     } do

@@ -18,7 +18,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleCSS do
   end
 
   defp copy_nimble_structure(project) do
-    Generator.copy_directory("assets/css")
+    Generator.copy_directory("assets/nimble_css", "assets/css")
 
     project
   end

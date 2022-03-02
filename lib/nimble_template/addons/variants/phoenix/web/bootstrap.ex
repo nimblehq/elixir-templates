@@ -4,23 +4,23 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply(%Project{} = project, opts) do
     project
-    |> edit_files()
+    |> edit_files(opts)
     |> copy_files()
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files(%Project{} = project, opts) do
     project
     |> edit_assets_package()
-    |> edit_app_js()
-    |> edit_app_scss()
+    |> edit_app_js(opts)
+    |> edit_app_scss(opts)
 
     project
   end
 
   defp copy_files(%Project{} = project) do
-    copy_bootstrap(project)
+    copy_bootstrap_vendor(project)
 
     project
   end
@@ -29,18 +29,19 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     Generator.replace_content(
       "assets/package.json",
       """
-        "devDependencies": {
+        "dependencies": {
       """,
       """
-        "devDependencies": {
-          "bootstrap": "^5.0.0",
+        "dependencies": {
+          "@popperjs/core": "^2.11.2",
+          "bootstrap": "5.1.3",
       """
     )
 
     project
   end
 
-  def edit_app_js(project) do
+  def edit_app_js(project, %{with_nimble_js_addon: true}) do
     Generator.replace_content(
       "assets/js/app.js",
       """
@@ -57,33 +58,45 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     project
   end
 
-  def edit_app_scss(project) do
+  def edit_app_js(project, %{with_nimble_js_addon: false}) do
     Generator.replace_content(
-      "assets/css/app.scss",
+      "assets/js/app.js",
       """
-      @import './screens';
+      import "phoenix_html"
       """,
       """
-      @import './screens';
+      // Bootstrap
+      import "bootstrap/dist/js/bootstrap";
 
-      @import './vendor/bootstrap';
+      import "phoenix_html"
       """
     )
 
     project
   end
 
-  defp copy_bootstrap(
-         %Project{web_module: web_module, web_path: _web_path, web_test_path: _web_test_path} =
-           project
-       ) do
-    Generator.copy_file(
-      [
-        {:eex, "assets/css_bootstrap/vendor/_bootstrap.scss.eex",
-         "assets/css/vendor/_bootstrap.scss"}
-      ],
-      web_module: web_module
+  def edit_app_scss(project, %{with_nimble_css_addon: true}), do: project
+
+  def edit_app_scss(project, %{with_nimble_css_addon: false}) do
+    Generator.replace_content(
+      "assets/css/app.scss",
+      """
+      @import "./phoenix.css";
+      """,
+      """
+      @import "./phoenix.css";
+
+      @import './vendor/';
+      """
     )
+
+    project
+  end
+
+  defp copy_bootstrap_vendor(%Project{} = project) do
+    Generator.copy_file([
+      {:text, "assets/css_bootstrap/vendor/_bootstrap.scss", "assets/css/vendor/_bootstrap.scss"}
+    ])
 
     project
   end
