@@ -54,7 +54,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
                  config :dart_sass,
                    version: "1.49.8",
                    default: [
-                     args: ~w(css/app.scss ../priv/static/assets/app.css),
+                     args: ~w(
+                       --load-path=./node_modules
+                       css/app.scss
+                       ../priv/static/assets/app.css
+                       ),
                      cd: Path.expand("../assets", __DIR__)
                    ]
                  """
