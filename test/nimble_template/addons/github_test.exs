@@ -287,6 +287,22 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/deploy_heroku.yml")
       end)
     end
+
+    test "enables ssl for Ecto", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: true, web_project?: false}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+        assert_file("config/runtime.exs", fn file ->
+          assert file =~ "ssl: true,"
+          refute file =~ "# ssl: true,"
+        end)
+      end)
+    end
   end
 
   describe "#apply/2 with web_project and github_action_deploy_heroku option" do

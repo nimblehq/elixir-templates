@@ -79,6 +79,8 @@ defmodule NimbleTemplate.Addons.Github do
       {:eex, ".github/workflows/deploy_heroku.yml", ".github/workflows/deploy_heroku.yml"}
     ])
 
+    Generator.replace_content("config/runtime.exs", "# ssl: true,", "ssl: true,")
+
     project
   end
 
