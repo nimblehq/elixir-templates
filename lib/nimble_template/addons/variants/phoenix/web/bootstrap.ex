@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
+defpmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon
@@ -42,7 +42,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     project
   end
 
-  def edit_app_js(project, %{with_nimble_js_addon: true}) do
+  defp edit_app_js(project, %{with_nimble_js_addon: true}) do
     Generator.replace_content(
       "assets/js/app.js",
       """
@@ -59,7 +59,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     project
   end
 
-  def edit_app_js(project, %{with_nimble_js_addon: false}) do
+  defp edit_app_js(project, %{with_nimble_js_addon: false}) do
     Generator.replace_content(
       "assets/js/app.js",
       """
@@ -76,9 +76,9 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     project
   end
 
-  def edit_app_scss(project, %{with_nimble_css_addon: true}), do: project
+  defp edit_app_scss(project, %{with_nimble_css_addon: true}), do: project
 
-  def edit_app_scss(project, %{with_nimble_css_addon: false}) do
+  defp edit_app_scss(project, %{with_nimble_css_addon: false}) do
     Generator.replace_content(
       "assets/css/app.scss",
       """
@@ -94,13 +94,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     project
   end
 
-  def edit_vendor_index(project, %{with_nimble_css_addon: true}) do
+  defp edit_vendor_index(project, %{with_nimble_css_addon: true}) do
     Generator.append_content("assets/css/vendor/_index.scss", "@import './bootstrap';")
 
     project
   end
 
-  def edit_vendor_index(project, %{with_nimble_css_addon: false}) do
+  defp edit_vendor_index(project, %{with_nimble_css_addon: false}) do
     Generator.make_directory("assets/css/vendor/", false)
     Generator.create_file("assets/css/vendor/_index.scss", "@import './bootstrap';")
 
