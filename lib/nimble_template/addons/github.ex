@@ -100,6 +100,21 @@ defmodule NimbleTemplate.Addons.Github do
       "url: [scheme: \"https\", host: host,"
     )
 
+    Generator.replace_content(
+      "config/runtime.exs",
+      """
+        host = System.get_env("PHX_HOST") || "example.com"
+      """,
+      """
+        host =
+          System.get_env("PHX_HOST") ||
+            raise \"\"\"
+            Environment variable PHX_HOST is missing.
+            Set the Heroku endpoint to this variable.
+            \"\"\"
+      """
+    )
+
     project
   end
 
