@@ -65,7 +65,7 @@ jobs:
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
   lint_codebase:
     name: Linting
@@ -131,7 +131,7 @@ jobs:
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
@@ -209,7 +209,7 @@ jobs:
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
@@ -284,7 +284,7 @@ jobs:
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
@@ -370,7 +370,7 @@ jobs:
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
         
       - name: Create database
         run: mix ecto.create
