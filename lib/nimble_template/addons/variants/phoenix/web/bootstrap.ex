@@ -109,7 +109,7 @@ defpmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
 
   defp copy_bootstrap_vendor(%Project{} = project) do
     Generator.copy_file([
-      {:text, "assets/css_bootstrap/vendor/_bootstrap.scss", "assets/css/vendor/_bootstrap.scss"}
+      {:text, "assets/bootstrap_css/vendor/_bootstrap.scss", "assets/css/vendor/_bootstrap.scss"}
     ])
 
     project
