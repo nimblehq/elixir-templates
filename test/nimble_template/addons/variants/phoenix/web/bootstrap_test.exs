@@ -92,6 +92,31 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
         end)
       end)
     end
+
+    test "creates the assets/css/_variables.scss", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        WebAddons.Bootstrap.apply(project, %{
+          with_nimble_css_addon: false,
+          with_nimble_js_addon: false
+        })
+
+        assert_file("assets/css/_variables.scss", fn file ->
+          assert file =~ """
+                 ////////////////////////////////
+                 // Shared variables           //
+                 ////////////////////////////////
+
+
+                 ////////////////////////////////
+                 // Custom Bootstrap variables //
+                 ////////////////////////////////
+                 """
+        end)
+      end)
+    end
   end
 
   describe "#apply/2 given Nimble CSS and Nimble JS structure" do
@@ -186,6 +211,31 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
 
         assert_file("assets/css/vendor/_index.scss", fn file ->
           assert file =~ "@import './bootstrap';"
+        end)
+      end)
+    end
+
+    test "updates the assets/css/_variables.scss", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        WebAddons.Bootstrap.apply(project, %{
+          with_nimble_css_addon: true,
+          with_nimble_js_addon: true
+        })
+
+        assert_file("assets/css/_variables.scss", fn file ->
+          assert file =~ """
+                 ////////////////////////////////
+                 // Shared variables           //
+                 ////////////////////////////////
+
+
+                 ////////////////////////////////
+                 // Custom Bootstrap variables //
+                 ////////////////////////////////
+                 """
         end)
       end)
     end

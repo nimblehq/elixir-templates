@@ -16,6 +16,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     |> edit_app_js(opts)
     |> edit_app_scss(opts)
     |> edit_vendor_index(opts)
+    |> edit_css_variables(opts)
 
     project
   end
@@ -88,6 +89,42 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
       @import "./phoenix.css";
 
       @import './vendor/';
+      """
+    )
+
+    project
+  end
+
+  defp edit_css_variables(project, %{with_nimble_css_addon: false}) do
+    Generator.create_file(
+      "assets/css/_variables.scss",
+      """
+      ////////////////////////////////
+      // Shared variables           //
+      ////////////////////////////////
+
+
+      ////////////////////////////////
+      // Custom Bootstrap variables //
+      ////////////////////////////////
+      """
+    )
+
+    project
+  end
+
+  defp edit_css_variables(project, %{with_nimble_css_addon: true}) do
+    Generator.append_content(
+      "assets/css/_variables.scss",
+      """
+      ////////////////////////////////
+      // Shared variables           //
+      ////////////////////////////////
+
+
+      ////////////////////////////////
+      // Custom Bootstrap variables //
+      ////////////////////////////////
       """
     )
 
