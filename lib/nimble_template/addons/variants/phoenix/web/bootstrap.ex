@@ -1,4 +1,4 @@
-defpmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
+defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon
