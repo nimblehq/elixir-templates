@@ -329,7 +329,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file("config/prod.exs", fn file ->
           assert file =~ """
                  config :nimble_template, NimbleTemplateWeb.Endpoint,
-                   force_ssl: [rewrite_on: [:x_forwarded_proto]],
+                   force_ssl: [rewrite_on: [:x_forwarded_proto]]
                  """
         end)
       end)

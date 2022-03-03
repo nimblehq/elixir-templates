@@ -84,17 +84,6 @@ defmodule NimbleTemplate.Addons.Github do
     Generator.replace_content("config/runtime.exs", "# ssl: true,", "ssl: true,")
 
     Generator.replace_content(
-      "config/prod.exs",
-      """
-      config :#{otp_app}, #{web_module}.Endpoint,
-      """,
-      """
-      config :#{otp_app}, #{web_module}.Endpoint,
-        force_ssl: [rewrite_on: [:x_forwarded_proto]],
-      """
-    )
-
-    Generator.replace_content(
       "config/runtime.exs",
       "url: [host: host,",
       "url: [scheme: \"https\", host: host,"
@@ -112,6 +101,14 @@ defmodule NimbleTemplate.Addons.Github do
             Environment variable PHX_HOST is missing.
             Set the Heroku endpoint to this variable.
             \"\"\"
+      """
+    )
+
+    Generator.append_content(
+      "config/prod.exs",
+      """
+      config :#{otp_app}, #{web_module}.Endpoint,
+        force_ssl: [rewrite_on: [:x_forwarded_proto]]
       """
     )
 
