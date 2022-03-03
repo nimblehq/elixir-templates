@@ -304,15 +304,6 @@ defmodule NimbleTemplate.Addons.GithubTest do
                    config :nimble_template, NimbleTemplate.Repo,
                      ssl: true,
                  """
-
-          assert file =~ """
-                   host =
-                     System.get_env("PHX_HOST") ||
-                       raise \"\"\"
-                       Environment variable PHX_HOST is missing.
-                       Set the Heroku endpoint to this variable.
-                       \"\"\"
-                 """
         end)
       end)
     end

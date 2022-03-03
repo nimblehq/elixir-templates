@@ -46,6 +46,15 @@ defmodule NimbleTemplate.Addons.Phoenix.MixReleaseTest do
                      server: true,
                  """
 
+          assert file =~ """
+                   host =
+                     System.get_env("PHX_HOST") ||
+                       raise \"\"\"
+                       Environment variable PHX_HOST is missing.
+                       Set the Heroku endpoint to this variable.
+                       \"\"\"
+                 """
+
           refute file =~ """
 
                    # ## Using releases

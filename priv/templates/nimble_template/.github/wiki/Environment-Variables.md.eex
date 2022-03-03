@@ -8,3 +8,5 @@
 ### Endpoint configuration
 
 - `HEALTH_PATH`: Health path (eg: "/_health")
+- `PHX_HOST`: The application endpoint.
+- `SECRET_KEY_BASE`: Secret key base
