@@ -288,7 +288,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
       end)
     end
 
-    test "enables ssl for Ecto", %{
+    test "adjusts config/runtime.exs ", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -298,8 +298,30 @@ defmodule NimbleTemplate.Addons.GithubTest do
         Addons.Github.apply(project, %{github_action_deploy_heroku: true})
 
         assert_file("config/runtime.exs", fn file ->
-          assert file =~ "ssl: true,"
-          refute file =~ "# ssl: true,"
+          assert file =~ "url: [scheme: \"https\", host: host,"
+
+          assert file =~ """
+                   config :nimble_template, NimbleTemplate.Repo,
+                     ssl: true,
+                 """
+        end)
+      end)
+    end
+
+    test "adds force_ssl config into config/prod.exs", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: true, web_project?: false}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+        assert_file("config/prod.exs", fn file ->
+          assert file =~ """
+                 config :nimble_template, NimbleTemplateWeb.Endpoint,
+                   force_ssl: [rewrite_on: [:x_forwarded_proto]],
+                 """
         end)
       end)
     end
