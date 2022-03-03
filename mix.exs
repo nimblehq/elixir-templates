@@ -41,7 +41,8 @@ defmodule NimbleTemplate.MixProject do
 
   defp aliases do
     [
-      codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"]
+      codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+      "codebase.fix": ["deps.clean --unlock --unused", "format"]
     ]
   end
 

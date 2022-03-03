@@ -60,15 +60,13 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile
-
       <%= if web_project? do %>
       - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
-
   lint_codebase:
     name: Linting
     
@@ -128,13 +126,12 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile --warnings-as-errors --all-warnings
-
       <%= if web_project? do %>
       - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
@@ -207,13 +204,12 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile
-
       <%= if web_project? do %>
       - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
@@ -283,13 +279,12 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile
-
       <%= if web_project? do %>
       - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
@@ -375,7 +370,7 @@ jobs:
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
         
       - name: Create database
         run: mix ecto.create
