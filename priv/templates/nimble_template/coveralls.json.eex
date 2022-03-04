@@ -6,7 +6,10 @@
     "lib/<%= otp_app %>_web.ex",
     "lib/<%= otp_app %>_mail.ex",
     "lib/<%= otp_app %>_web/endpoint.ex",
+    "lib/<%= otp_app %>_web/telemetry.ex",
+    "lib/<%= otp_app %>_web/channels/user_socket.ex",
     "lib/<%= otp_app %>_web/views/error_helpers.ex",
+    "lib/<%= otp_app %>_web/controller/api/fallback_controller.ex",
     "test/support"
   ],
   "coverage_options": {

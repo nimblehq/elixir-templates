@@ -1,0 +1,23 @@
+$font-size-base: 1rem !default;
+$line-height-base: 1.5 !default;
+
+@mixin text-ellipsis(
+  $lines: 2,
+  $font-size: $font-size-base,
+  $line-height: $line-height-base
+) {
+  /* stylelint-disable property-no-vendor-prefix */
+  /* stylelint-disable value-no-vendor-prefix */
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  max-height: calc(#{$line-height} * #{$font-size} * #{$lines});
+  overflow: hidden;
+  word-break: break-word;
+  /* stylelint-enable property-no-vendor-prefix */
+  /* stylelint-enable value-no-vendor-prefix */
+
+  @include media-breakpoint-up(md) {
+    max-height: calc(#{$line-height} * #{$font-size} * #{$lines});
+  }
+}

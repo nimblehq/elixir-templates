@@ -3,11 +3,18 @@ defmodule <%= web_module %>.FeatureCase do
 
   using do
     quote do
+      use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
       use Wallaby.Feature
+      use Mimic
 
       import <%= base_module %>.Factory
+      import <%= web_module %>.Gettext
 
+      alias <%= base_module %>.Repo
+      alias <%= web_module %>.Endpoint
       alias <%= web_module %>.Router.Helpers, as: Routes
+
+      @moduletag :feature_test
     end
   end
 end

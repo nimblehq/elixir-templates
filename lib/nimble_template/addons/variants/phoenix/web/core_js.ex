@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
   @moduledoc false
 
-  use NimbleTemplate.Addon
+  use NimbleTemplate.Addons.Addon
 
   @impl true
   def do_apply(%Project{} = project, _opts) do
@@ -16,30 +16,17 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
     project
   end
 
-  def edit_package_json(%Project{live_project?: live_project?} = project) do
-    if live_project? do
-      Generator.replace_content(
-        "assets/package.json",
-        """
-            "phoenix_html": "file:../deps/phoenix_html",
-        """,
-        """
-            "phoenix_html": "file:../deps/phoenix_html",
-            "core-js": "^3.7.0",
-        """
-      )
-    else
-      Generator.replace_content(
-        "assets/package.json",
-        """
-            "phoenix_html": "file:../deps/phoenix_html"
-        """,
-        """
-            "phoenix_html": "file:../deps/phoenix_html",
-            "core-js": "^3.7.0"
-        """
-      )
-    end
+  def edit_package_json(%Project{} = project) do
+    Generator.replace_content(
+      "assets/package.json",
+      """
+        "dependencies": {
+      """,
+      """
+        "dependencies": {
+          "core-js": "^3.21.1"
+      """
+    )
 
     project
   end
@@ -53,7 +40,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
       """
       // CoreJS
       import "core-js/stable"
-      import "regenerator-runtime/runtime"
 
       import "phoenix_html"
       """

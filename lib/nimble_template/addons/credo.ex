@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Credo do
   @moduledoc false
 
-  use NimbleTemplate.Addon
+  use NimbleTemplate.Addons.Addon
 
   @impl true
   def do_apply(%Project{} = project, _opts) do
@@ -30,28 +30,15 @@ defmodule NimbleTemplate.Addons.Credo do
     project
   end
 
-  defp edit_mix(%Project{mix_project?: true} = project) do
-    Generator.replace_content(
-      "mix.exs",
-      """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted"]
-      """,
-      """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"]
-      """
-    )
-
-    project
-  end
-
   defp edit_mix(project) do
     Generator.replace_content(
       "mix.exs",
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted"],
+            codebase: [
       """,
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+            codebase: [
+              "credo --strict",
       """
     )
 

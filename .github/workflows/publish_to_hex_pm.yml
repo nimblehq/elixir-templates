@@ -1,4 +1,4 @@
-name: "Publish to Hex.pm"
+name: Publish to Hex package manager
 
 on:
   workflow_run:
@@ -11,24 +11,30 @@ on:
   workflow_dispatch:
 
 env:
-  OTP_VERSION: 23.3
-  ELIXIR_VERSION: 1.11.4
+  OTP_VERSION: 24.2.2
+  ELIXIR_VERSION: 1.13.3
 
-jobs:   
+jobs:
   publish:
+    name: Publish hex package
+
     runs-on: ubuntu-latest
+    
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.8.0
         with:
           access_token: ${{ github.token }}
-      
-      - uses: actions/checkout@v2
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
-      - uses: erlef/setup-elixir@v1
+      - name: Set up Elixir ${{ env.ELIXIR_VERSION }} and OTP ${{ env.OTP_VERSION }}
+        uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}

@@ -6,31 +6,40 @@ install_phoenix:
 
 create_phoenix_project:
 	mix phx.new ${PROJECT_DIRECTORY} ${OPTIONS}
-	
+
 create_mix_project:
 	mix new ${PROJECT_DIRECTORY} ${OPTIONS}
 
 # Y - in response to Will you host this project on Github?
 # Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
-# Y - in response to Do you want to generate the Github Action workflow?
+# Y - in response to Do you want to generate the Github Action workflows: Test?
+# Y - in response to Do you want to generate the Github Action workflows: Deploy to Heroku?
+# Y - in response to Do you want to generate the .github/.workflow/README file?
+# Y - in response to Do you want to publish a Github Wiki for this project? You'd need to manually create the first Github Wiki Page and set the GH_TOKEN and GH_EMAIL secret for this to properly function.
 # Y - in response to Would you like to add the Oban addon?
 # Y - in response to Would you like to add the ExVCR addon?
-common_addon_prompts = Y\nY\nY\nY\nY\n
+common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\n
 
-web_addon_prompts = 
+# Y - in response to Would you like to add the SVG Sprite addon?
+# Y - in response to Would you like to add the Dart Sass addon?
+# Y - in response to Would you like to add the Nimble CSS addon?
+# Y - in response to Would you like to add the Nimble JS addon?
+# Y - in response to Would you like to add the Boostrap addon?
+web_addon_prompts = Y\nY\nY\nY\nY\n
 
-api_addon_prompts = 
+api_addon_prompts =
 
-live_addon_prompts = 
+live_addon_prompts =
 
 # Y - in response to Will you host this project on Github?
 # Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?
-# Y - in response to Do you want to generate the Github Action workflow?
+# Y - in response to Do you want to generate the Github Action workflow: Test?
+# Y - in response to Do you want to generate the .github/.workflow/README file?
+# Y - in response to Do you want to publish a Github Wiki for this project? You'd need to manually create the first Github Wiki Page and set the GH_TOKEN and GH_EMAIL secret for this to properly function.
 # Y - in response to Would you like to add the Mimic addon?
-mix_addon_prompts = Y\nY\nY\nY\n
+mix_addon_prompts = Y\nY\nY\nY\nY\nY\n
 
-# Y - in response to Fetch and install dependencies?
-post_setup_addon_prompts = Y\n
+post_setup_addon_prompts =
 
 apply_phoenix_template:
 	cd ${PROJECT_DIRECTORY} && \
@@ -47,7 +56,7 @@ apply_phoenix_template:
 	elif [ $(VARIANT) = live ]; then \
 		printf "${common_addon_prompts}${web_addon_prompts}${live_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --live; \
 	fi;
-	
+
 apply_mix_template:
 	cd ${PROJECT_DIRECTORY} && \
 	echo '{:nimble_template, path: "../", only: :dev, runtime: false}' > nimble_template.txt && \

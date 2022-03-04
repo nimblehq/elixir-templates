@@ -10,11 +10,11 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
         Addons.Readme.apply(project)
 
         assert_file("README.md", fn file ->
-          assert file =~ "Erlang 23.3"
-          assert file =~ "Elixir 1.11.4"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           assert file =~ """
-                 * Install Node dependencies:
+                 - Install Node dependencies:
 
                    ```sh
                    npm install --prefix assets
@@ -22,7 +22,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  """
 
           assert file =~ """
-                 * Start the Phoenix app
+                 - Start the Phoenix app
 
                    ```sh
                    iex -S mix phx.server
@@ -44,11 +44,11 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
         Addons.Readme.apply(project)
 
         assert_file("README.md", fn file ->
-          assert file =~ "Erlang 23.3"
-          assert file =~ "Elixir 1.11.4"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           refute file =~ """
-                 * Install Node dependencies:
+                 - Install Node dependencies:
 
                    ```sh
                    npm install --prefix assets
@@ -56,7 +56,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  """
 
           assert file =~ """
-                 * Start the Phoenix app
+                 - Start the Phoenix app
 
                    ```sh
                    iex -S mix phx.server
@@ -78,11 +78,11 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
         Addons.Readme.apply(project)
 
         assert_file("README.md", fn file ->
-          assert file =~ "Erlang 23.3"
-          assert file =~ "Elixir 1.11.4"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           refute file =~ """
-                 * Install Node dependencies:
+                 - Install Node dependencies:
 
                    ```sh
                    npm install --prefix assets
@@ -90,7 +90,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
                  """
 
           refute file =~ """
-                 * Start the Phoenix app
+                 - Start the Phoenix app
 
                    ```sh
                    iex -S mix phx.server

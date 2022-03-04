@@ -27,7 +27,7 @@ defmodule NimbleTemplate.Addons.CredoTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:credo, \"~> 1.4\", [only: [:dev, :test], runtime: false]},
+                       {:credo, "~> 1.4", [only: [:dev, :test], runtime: false]},
                  """
         end)
       end)
@@ -41,7 +41,8 @@ defmodule NimbleTemplate.Addons.CredoTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"deps.unlock --check-unused\", \"format --check-formatted\", \"credo --strict\"],
+                       codebase: [
+                         "credo --strict",
                  """
         end)
       end)
@@ -75,7 +76,7 @@ defmodule NimbleTemplate.Addons.CredoTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:credo, \"~> 1.4\", [only: [:dev, :test], runtime: false]},
+                       {:credo, "~> 1.4", [only: [:dev, :test], runtime: false]},
                  """
         end)
       end)
@@ -89,7 +90,8 @@ defmodule NimbleTemplate.Addons.CredoTest do
           assert file =~ """
                    defp aliases do
                      [
-                       codebase: [\"deps.unlock --check-unused\", \"format --check-formatted\", \"credo --strict\"]
+                       codebase: [
+                         "credo --strict",
                  """
         end)
       end)

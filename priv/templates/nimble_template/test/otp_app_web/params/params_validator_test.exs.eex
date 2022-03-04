@@ -1,0 +1,104 @@
+defmodule <%= web_module %>.ParamsValidatorTest do
+  use <%= base_module %>.DataCase, async: true
+
+  alias <%= web_module %>.ParamsValidator
+
+  defmodule CreateDeviceParams do
+    use <%= web_module %>.Params
+
+    embedded_schema do
+      field(:device_id, :string)
+      field(:device_name, :string)
+    end
+
+    def changeset(data \\ %__MODULE__{}, params) do
+      data
+      |> cast(params, [:device_id, :device_name])
+      |> validate_required([:device_id, :device_name])
+    end
+
+    def custom_changeset(data \\ %__MODULE__{}, params) do
+      data
+      |> cast(params, [:device_id, :device_name])
+      |> validate_required([:device_id])
+    end
+  end
+
+  defmodule CreateUserParams do
+    use <%= web_module %>.Params
+
+    embedded_schema do
+      field(:name, :string)
+      embeds_many(:devices, CreateDeviceParams)
+    end
+
+    def changeset(data \\ %__MODULE__{}, params) do
+      data
+      |> cast(params, [:name])
+      |> cast_embed(:devices, required: true)
+      |> validate_required([:name])
+    end
+  end
+
+  describe "validate/2" do
+    test "given valid params, returns {:ok, validated_params}" do
+      params = %{
+        "name" => "John Doe",
+        "devices" => [
+          %{
+            "device_id" => "Android",
+            "device_name" => "John Doe Devices"
+          }
+        ]
+      }
+
+      assert {:ok, validated_params} = ParamsValidator.validate(params, for: CreateUserParams)
+
+      assert validated_params == %{
+               devices: [%{device_id: "Android", device_name: "John Doe Devices"}],
+               name: "John Doe"
+             }
+    end
+
+    test "given valid params for the custom_changeset, returns {:ok, validated_params} " do
+      params = %{
+        "device_id" => "Android",
+        "device_name" => "John Doe Devices"
+      }
+
+      assert {:ok, validated_params} =
+               ParamsValidator.validate(params, :custom_changeset, for: CreateDeviceParams)
+
+      assert validated_params == %{
+               device_id: "Android",
+               device_name: "John Doe Devices"
+             }
+    end
+
+    test "given invalid params, returns {:error, :invalid_params, changeset}" do
+      params = %{"device_id" => ""}
+
+      assert {:error, :invalid_params, changeset} =
+               ParamsValidator.validate(params, for: CreateUserParams)
+
+      assert changeset.valid? == false
+      assert changeset.action == :validate
+
+      assert errors_on(changeset) == %{devices: ["can't be blank"], name: ["can't be blank"]}
+    end
+
+    test "given invalid params for the custom_changeset, returns {:error, :invalid_params, changeset}" do
+      params = %{"device_id" => ""}
+
+      assert {:error, :invalid_params, changeset} =
+               ParamsValidator.validate(params, :custom_changeset, for: CreateDeviceParams)
+
+      assert changeset.valid? == false
+      assert changeset.action == :validate
+
+      assert errors_on(changeset) == %{
+               device_id: ["can't be blank"]
+             }
+    end
+  end
+end

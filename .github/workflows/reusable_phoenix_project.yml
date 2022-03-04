@@ -1,0 +1,100 @@
+name: Reusable Phoenix project
+
+on:
+  workflow_call:
+    inputs:
+      new_project_options:
+        required: true
+        type: string
+      variant:
+        required: true
+        type: string
+
+env:
+  OTP_VERSION: 24.2.2
+  ELIXIR_VERSION: 1.13.3
+  PHOENIX_VERSION: 1.6.6
+  NODE_VERSION: 16
+  BASE_PROJECT_DIRECTORY: sample_project
+  DB_HOST: localhost
+  
+jobs:
+  unit_test:
+    name: Unit test
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:12.3
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Elixir ${{ env.ELIXIR_VERSION }} and OTP ${{ env.OTP_VERSION }}
+        uses: erlef/setup-elixir@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+
+      - name: Set up Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+        
+      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
+        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+        
+      - name: Create a new project
+        run: printf "Y\n" | make create_phoenix_project PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY OPTIONS="${{ inputs.new_project_options }}"
+        
+      - name: Apply ${{ inputs.variant }} variant into the new project
+        run: make apply_phoenix_template PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY VARIANT="${{ inputs.variant }}"
+
+      # Verify the new project after applying the nimble_template
+
+      - name: Install Elixir Dependencies
+        run: cd $BASE_PROJECT_DIRECTORY && mix deps.get
+
+      - name: Compile dependencies
+        run: cd $BASE_PROJECT_DIRECTORY && mix compile --warnings-as-errors --all-warnings
+          
+      - name: Install Node Dependencies
+        if: ${{ inputs.variant != 'api' }}
+        run: cd $BASE_PROJECT_DIRECTORY && npm install --prefix assets
+        
+      - name: Run mix ecto.create
+        run: cd $BASE_PROJECT_DIRECTORY && mix ecto.create
+        env:
+          MIX_ENV: test
+      
+      - name: Run mix ecto.migrate
+        run: cd $BASE_PROJECT_DIRECTORY && mix ecto.migrate
+        env:
+          MIX_ENV: test
+      
+      - name: Run mix codebase
+        run: cd $BASE_PROJECT_DIRECTORY && mix codebase
+
+      - name: Run mix test
+        run: cd $BASE_PROJECT_DIRECTORY && mix coverage
+
+      - name: Remove nimble_template dependency
+        run: make remove_nimble_template PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY
+        
+      - name: Test Production Docker image build
+        run: cd $BASE_PROJECT_DIRECTORY && docker-compose build

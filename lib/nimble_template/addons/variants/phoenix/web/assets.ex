@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
   @moduledoc false
 
-  use NimbleTemplate.Addon
+  use NimbleTemplate.Addons.Addon
 
   @impl true
   def do_apply(%Project{} = project, _opts) do
@@ -9,53 +9,19 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Assets do
   end
 
   defp edit_files(%Project{} = project) do
-    project
-    |> edit_mix()
-    |> edit_assets_package()
+    enable_gzip_for_static_assets(project)
 
     project
   end
 
-  defp edit_mix(%Project{} = project) do
-    Generator.inject_content(
-      "mix.exs",
-      """
-        defp aliases do
-          [
-      """,
-      """
-            "assets.compile": &compile_assets/1,
-      """
-    )
-
+  defp enable_gzip_for_static_assets(%Project{web_path: web_path} = project) do
     Generator.replace_content(
-      "mix.exs",
+      "#{web_path}/endpoint.ex",
       """
-        end
-      end
+          gzip: false,
       """,
       """
-        end
-
-        defp compile_assets(_) do
-          Mix.shell().cmd("npm run --prefix assets build:dev", quiet: true)
-        end
-      end
-      """
-    )
-
-    project
-  end
-
-  defp edit_assets_package(%Project{} = project) do
-    Generator.replace_content(
-      "assets/package.json",
-      """
-          "watch": "webpack --mode development --watch"
-      """,
-      """
-          "watch": "webpack --mode development --watch",
-          "build:dev": "webpack --mode development"
+          gzip: true,
       """
     )
 

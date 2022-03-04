@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.TestEnv do
   @moduledoc false
 
-  use NimbleTemplate.Addon
+  use NimbleTemplate.Addons.Addon
 
   @impl true
   def do_apply(%Project{mix_project?: true} = project, _opts) do
@@ -42,7 +42,14 @@ defmodule NimbleTemplate.Addons.TestEnv do
       """
         defp aliases do
           [
-            codebase: ["deps.unlock --check-unused", "format --check-formatted"]
+            codebase: [
+              "deps.unlock --check-unused",
+              "format --check-formatted"
+            ],
+            "codebase.fix": [
+              "deps.clean --unlock --unused",
+              "format"
+            ]
           ]
         end
 
@@ -65,7 +72,14 @@ defmodule NimbleTemplate.Addons.TestEnv do
           [
       """,
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted"],
+            codebase: [
+              "deps.unlock --check-unused",
+              "format --check-formatted"
+            ],
+            "codebase.fix": [
+              "deps.clean --unlock --unused",
+              "format"
+            ],
       """
     )
 
@@ -141,22 +155,14 @@ defmodule NimbleTemplate.Addons.TestEnv do
 
     Generator.replace_content(
       support_case_path,
-      """
-          :ok = Ecto.Adapters.SQL.Sandbox.checkout(#{project.base_module}.Repo)
-      """,
-      """
-          :ok = Sandbox.checkout(#{project.base_module}.Repo)
-      """
+      "Ecto.Adapters.SQL.Sandbox.start_owner!",
+      "Sandbox.start_owner!"
     )
 
     Generator.replace_content(
       support_case_path,
-      """
-        Ecto.Adapters.SQL.Sandbox.mode(#{project.base_module}.Repo, {:shared, self()})
-      """,
-      """
-        Sandbox.mode(#{project.base_module}.Repo, {:shared, self()})
-      """
+      "Ecto.Adapters.SQL.Sandbox.stop_owner",
+      "Sandbox.stop_owner"
     )
 
     project

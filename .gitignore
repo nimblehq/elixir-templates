@@ -27,5 +27,6 @@ nimble_template-*.tar
 # Ignore folder information and IDE-specific files
 .DS_Store
 .idea/*
+nimble_template.iml
 
 **/tmp

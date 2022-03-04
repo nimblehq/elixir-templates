@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.Sobelow do
   @moduledoc false
 
-  use NimbleTemplate.Addon
+  use NimbleTemplate.Addons.Addon
 
   @impl true
   def do_apply(%Project{} = project, _opts) do
@@ -34,15 +34,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Sobelow do
     Generator.replace_content(
       "mix.exs",
       """
-            codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+            codebase: [
       """,
       """
             codebase: [
-              "deps.unlock --check-unused",
-              "format --check-formatted",
-              "credo --strict",
-              "sobelow --config"
-            ],
+              "sobelow --config",
       """
     )
 

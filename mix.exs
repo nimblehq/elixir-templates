@@ -4,9 +4,9 @@ defmodule NimbleTemplate.MixProject do
   def project do
     [
       app: :nimble_template,
-      version: "3.0.0",
+      version: "4.0.0",
       description: "Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).",
-      elixir: "~> 1.11.4",
+      elixir: "~> 1.13.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -35,13 +35,14 @@ defmodule NimbleTemplate.MixProject do
       {:httpoison, "~> 1.7"},
       {:jason, "~> 1.2"},
       {:mimic, "~> 1.3", only: :test},
-      {:phoenix, "~> 1.5.7"}
+      {:phoenix, "~> 1.6.6"}
     ]
   end
 
   defp aliases do
     [
-      codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"]
+      codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+      "codebase.fix": ["deps.clean --unlock --unused", "format"]
     ]
   end
 

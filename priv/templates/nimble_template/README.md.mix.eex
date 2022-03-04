@@ -8,11 +8,11 @@
 
 ### Erlang & Elixir
 
-* Erlang <%= erlang_version %>
+- Erlang <%= erlang_version %>
 
-* Elixir <%= elixir_version %>
+- Elixir <%= elixir_version %>
 
-* Recommended version manager.
+- Recommended version manager.
 
   - [asdf](https://github.com/asdf-vm/asdf)
   - [asdf-erlang](https://github.com/asdf-vm/asdf-erlang)
@@ -20,26 +20,36 @@
 
 ### Development
 
-* Install Elixir dependencies:
+- Install Elixir dependencies:
 
   ```sh
   mix deps.get
   ```
 
-* Run all tests:
+- Run all tests:
 
   ```sh
   mix test 
   ```
 
-* Run all lint:
+- Run all lint:
 
   ```sh
   mix codebase 
   ```
 
-* Test coverage:
+- Fix all lint:
+
+  ```sh
+  mix codebase.fix 
+  ```
+
+- Test coverage:
 
   ```sh
   mix coverage 
   ```
+
+### CI/CD
+The project relies entirely on [Github Actions](https://github.com/features/actions) for CI/CD via multiple workflows located under the [`.github/workflows/`](.github/workflows) directory.
+Please check out the [`.github/workflows/README.md`](.github/workflows/README.md) file for further instructions.

@@ -15,13 +15,13 @@ defmodule NimbleTemplate.Addons.MimicTest do
           assert file =~ """
                    defp deps do
                      [
-                       {:mimic, \"~> 1.3.1\", [only: :test]},
+                       {:mimic, "~> 1.3.1", [only: :test]},
                  """
         end)
       end)
     end
 
-    test "stats the mimic in test/test_helper.exs", %{
+    test "ensures mimic is started in test/test_helper.exs", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -34,6 +34,24 @@ defmodule NimbleTemplate.Addons.MimicTest do
 
                  ExUnit.start()
                  """
+        end)
+      end)
+    end
+
+    test "updates test cases", %{project: project, test_project_path: test_project_path} do
+      in_test_project(test_project_path, fn ->
+        Addons.Mimic.apply(project)
+
+        assert_file("test/support/channel_case.ex", fn file ->
+          assert file =~ "use Mimic"
+        end)
+
+        assert_file("test/support/data_case.ex", fn file ->
+          assert file =~ "use Mimic"
+        end)
+
+        assert_file("test/support/conn_case.ex", fn file ->
+          assert file =~ "use Mimic"
         end)
       end)
     end
