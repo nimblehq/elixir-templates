@@ -1,5 +1,10 @@
 # Adding a new addon
 
+There are 3 types of addons
+1. API
+2. Live
+3. Web
+
 For example, to add a new web addon, create a new file at `lib/nimble_template/addons/variants/phoenix/web/sample_addon.ex`
 
 ```
