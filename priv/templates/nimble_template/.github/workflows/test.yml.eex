@@ -139,6 +139,15 @@ jobs:
       - name: Migrate database
         run: mix ecto.migrate
 
+      - name: Ensure that localization files (POs, POTs) are up-to-date.
+        run:
+          mix gettext.extract-and-merge;
+
+          if [ -n "$(git diff --exit-code priv/gettext/)" ]; then
+            echo "The localization files (POs, POTs) are NOT up-to-date, run \"mix gettext.extract-and-merge\" on your local and push again.";
+            exit 1;
+          fi
+
       - name: Run codebase check
         run: mix codebase
     
