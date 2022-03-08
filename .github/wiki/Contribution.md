@@ -164,6 +164,22 @@ Generator.append_content(
 )
 ```
 
+`inject_mix_dependency(dependency)`
+
+Inject a new mix dependency into `mix.exs` file.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| dependency | Tuple | Item of dependency |
+
+`dependency` can also be a list of tuple in case of multiple items.
+
+```elixir
+Generator.inject_mix_dependency(
+  {:credo, latest_package_version(:credo), only: [:dev, :test], runtime: false}
+)
+```
+
 `make_directory(path, touch_directory \\ true)`
 
 Create a new directory.
