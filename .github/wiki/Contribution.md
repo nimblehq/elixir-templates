@@ -5,6 +5,8 @@ There are 3 types of addons.
 2. Live
 3. Web
 
+[[https://user-images.githubusercontent.com/11751745/157225788-9f8c28ad-058b-4994-851e-82c98854ddcd.png|alt=structure]]
+
 For example, to add a new web addon, create a new file at `lib/nimble_template/addons/variants/phoenix/web/sample_addon.ex`.
 
 ```elixir
