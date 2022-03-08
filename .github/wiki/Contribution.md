@@ -1,6 +1,8 @@
 # Adding a new addon
 
-There are 3 types of addons.
+There are 2 types of addon, Mix addon and Phoenix addon.
+
+Phoenix addon consists of 3 types.
 1. API
 2. Live
 3. Web
