@@ -7,7 +7,7 @@ There are 3 types of addons
 
 For example, to add a new web addon, create a new file at `lib/nimble_template/addons/variants/phoenix/web/sample_addon.ex`
 
-```
+```elixir
 defmodule NimbleTemplate.Addons.Phoenix.Web.SampleAddon do
   @moduledoc false
 
@@ -26,53 +26,189 @@ With a new corresponding test file at `test/nimble_template/addons/variants/phoe
 
 Then call `NimbleTemplate.Addons.Phoenix.Web.SampleAddon.apply(project)` inside `lib/nimble_template/templates/variants/phoenix/web/template.ex` which will be executed on Terminal prompt
 
-## Functions from NimbleTemplate.Generator
+## Functions
 
-`Generator.replace_content(path, content_to_find, content_to_replace)`
+These are functions from `NimbleTemplate.Generator` which can be called
 
-Find and replace specified content in an existing file
+`copy_directory(source_path, target_path, binding \\ [])`
 
-Example
-```
-  Generator.replace_content(
-    "assets/package.json",
-    """
-      "dependencies": {
-    """,
-    """
-      "dependencies": {
-        "@popperjs/core": "^2.11.2",
-        "bootstrap": "5.1.3",
-    """
-  )
-```
+Copy a directory and its content from source path to target path.
 
-`Generator.append_content(path, content)`
-
-Append specified content to an existing file
+| Parameter | Type | Description |
+| -- | -- | -- |
+| source_path | String | Source path to copy the file from |
+| target_path | String | Target path to copy the file to |
+| binding | List | - |
 
 Example
-```
-  Generator.append_content(
-    "assets/css/_variables.scss",
-    """
-    Content
-    """
-  )
+```elixir
+Generator.copy_directory("assets/nimble_js", "assets/js")
 ```
 
-`Generator.create_file(path, content, options \\ [])`
+`copy_file(files, binding \\ [])`
 
-Create a new file with specified content
+Copy a list of files from source path to target path.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| files | List | List of tuple with format (`:text`, `:eex` or `:new_eex`), source path and target path |
+| binding | List | - |
 
 Example
+```elixir
+Generator.copy_file([
+  {:eex, "bin/start.sh.eex", "bin/start.sh"},
+  {:text, ".dockerignore", ".dockerignore"}
+])
 ```
-  Generator.create_file(
-    "assets/css/_variables.scss",
-    """
-    Content
-    """
-  )
+
+`rename_file(old_path, new_path)`
+
+Rename a file from old path to new path.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| old_path | String | Old path to rename the file from |
+| new_path | String | New path to rename the file to |
+
+Example
+```elixir
+Generator.rename_file("assets/css/app.css", "assets/css/app.scss")
+```
+
+`replace_content(file_path, anchor, content)`
+
+Find and replace specified content of an existing file.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| file_path | String | File path |
+| anchor | String | Content to find |
+| content | String | Content to replace |
+
+Example
+```elixir
+Generator.replace_content(
+  "test/test_helper.exs",
+  """
+  ExUnit.start()
+  """,
+  """
+  ExUnit.start(capture_log: true)
+  """
+)
+```
+
+`delete_content(file_path, anchor)`
+
+Find and remove specified content of an existing file.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| file_path | String | File path |
+| anchor | String | Content to delete |
+
+Example
+```elixir
+Generator.delete_content(
+  "assets/js/app.js",
+  """
+  // We import the CSS which is extracted to its own file by esbuild.
+  // Remove this line if you add a your own CSS build pipeline (e.g postcss).
+  import "../css/app.css"
+
+  """
+)
+```
+
+`inject_content(file_path, anchor, content)`
+
+Inject a specified content below a specified content of an existing file.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| file_path | String | File path |
+| anchor | String | Content to find |
+| content | String | Content to inject |
+
+Example
+```elixir
+Generator.inject_content(
+  support_case_path,
+  """
+    use ExUnit.CaseTemplate
+  """,
+  """
+
+    alias Ecto.Adapters.SQL.Sandbox
+  """
+)
+```
+
+`append_content(file_path, content)`
+
+Append a specified content to the end of an existing file.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| file_path | String | File path |
+| content | String | Content to append |
+
+Example
+```elixir
+Generator.append_content(
+  "assets/css/_variables.scss",
+  """
+  Content
+  """
+)
+```
+
+`make_directory(path, touch_directory \\ true)`
+
+Create a new directory.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| path | String | Path to create the new directory |
+| touch_directory | Boolean | Create `.keep` file inside the directory |
+
+Example
+```elixir
+Generator.make_directory("assets/css/vendor/", false)
+```
+
+`create_file(path, content)`
+
+Create a new file with specified content.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| path | String | Path to create the new file |
+| content | String | Content to put into |
+
+Example
+```elixir
+Generator.create_file(
+  "assets/css/_variables.scss",
+  """
+  Content
+  """
+)
+```
+
+`print_log(prefix, content \\ "")`
+
+Print log to console.
+
+| Parameter | Type | Description |
+| -- | -- | -- |
+| prefix | String | Prefix of message to display |
+| content | String | Content to display |
+
+Example
+```elixir
+Generator.print_log("* applying ", inspect(__MODULE__))
 ```
 
 # Run unit test on local
