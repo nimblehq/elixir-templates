@@ -1,14 +1,14 @@
 1. Clone [Elixir templates](https://github.com/nimblehq/elixir-templates) project to your local directory.
 
-2. Create a new project using `mix phx.new sample_project` command
+2. Create a new project using `mix phx.new sample_project` or ``mix new sample_project`` command
 
 3. Answer the prompt `Fetch and install dependencies? [Yn]` with `n` (not install)
 
-4. Change directory into `sample_project` using `cd sample_project`
+4. Change directory into `sample_project` using `cd sample_project` command
 
 5. Edit `mix.exs` file and add this line to the dependencies.
 
-```
+```elixir
 {:nimble_template, "~> 3.0", path: "~/elixir-templates", only: :dev, runtime: false}
 ```
 
