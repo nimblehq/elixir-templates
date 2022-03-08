@@ -1,11 +1,11 @@
 # Adding a new addon
 
-There are 3 types of addons
+There are 3 types of addons.
 1. API
 2. Live
 3. Web
 
-For example, to add a new web addon, create a new file at `lib/nimble_template/addons/variants/phoenix/web/sample_addon.ex`
+For example, to add a new web addon, create a new file at `lib/nimble_template/addons/variants/phoenix/web/sample_addon.ex`.
 
 ```elixir
 defmodule NimbleTemplate.Addons.Phoenix.Web.SampleAddon do
@@ -20,15 +20,15 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SampleAddon do
 end
 ```
 
-The module should implement `do_apply` callbacks of a behaviour
+The module should implement `do_apply` callbacks of a behaviour.
 
-With a new corresponding test file at `test/nimble_template/addons/variants/phoenix/web/addon_test.exs`
+With a new corresponding test file at `test/nimble_template/addons/variants/phoenix/web/addon_test.exs`.
 
-Then call `NimbleTemplate.Addons.Phoenix.Web.SampleAddon.apply(project)` inside `lib/nimble_template/templates/variants/phoenix/web/template.ex` which will be executed on Terminal prompt
+Then call `NimbleTemplate.Addons.Phoenix.Web.SampleAddon.apply(project)` inside `lib/nimble_template/templates/variants/phoenix/web/template.ex` file which will be executed on Terminal prompt.
 
 ## Functions
 
-These are functions from `NimbleTemplate.Generator` which can be called
+These are functions from `NimbleTemplate.Generator` which can be called.
 
 `copy_directory(source_path, target_path, binding \\ [])`
 
