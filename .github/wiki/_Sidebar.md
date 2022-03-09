@@ -1,9 +1,9 @@
 ## Table of Contents
 
 - [[Home]]
+- [[Contribution]]
 
 ## Architecture
 
-- [[Contribution]]
 - [[Docker]]
 - [[Testing]]
