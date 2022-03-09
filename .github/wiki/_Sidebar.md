@@ -1,7 +1,7 @@
 ## Table of Contents
 
 - [[Home]]
-- [[Test the apply action on development]]
+- [[Test The Apply Action On Development]]
 
 ## Architecture
 
