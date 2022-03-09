@@ -237,6 +237,6 @@ Generator.print_log("* applying ", inspect(__MODULE__))
 
 # Apply the whole template on local
 
-See [[Installation]]
+See [[Test The Apply Action On Development]]
 
 # FAQ
