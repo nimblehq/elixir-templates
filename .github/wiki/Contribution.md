@@ -7,7 +7,7 @@ Phoenix addon consists of 3 types.
 2. Live
 3. Web
 
-![diagram](assets/images/diagram.png)
+![addon-structure](assets/images/addon-structure.png)
 
 For example, to add a new web addon, create a new file at `lib/nimble_template/addons/variants/phoenix/web/sample_addon.ex`.
 
