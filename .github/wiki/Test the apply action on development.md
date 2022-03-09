@@ -23,8 +23,8 @@ Modify the path to locate the `elixir-templates` directory. For example `~/elixi
 7. Choose which template you want to use inside your project
 
 - Web: `mix nimble_template.gen --web`
-- Live: `mix nimble_template.gen --api`
-- API: `mix nimble_template.gen --live`
+- Live: `mix nimble_template.gen --live`
+- API: `mix nimble_template.gen --api`
 
 8. Answer the interactive prompt that will be displayed during the setup
 
