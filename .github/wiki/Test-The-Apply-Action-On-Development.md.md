@@ -1,4 +1,4 @@
-# Test the apply action on development
+## Manually
 
 1. Clone [Elixir templates](https://github.com/nimblehq/elixir-templates) project to your local directory.
 
