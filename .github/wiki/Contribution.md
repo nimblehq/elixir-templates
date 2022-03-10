@@ -55,14 +55,14 @@ Copy a list of files from source path to target path.
 
 | Parameter | Type | Description |
 | -- | -- | -- |
-| files | List | List of tuple with format (`:text`, `:eex` or `:new_eex`), source path and target path |
+| files | List | List of tuple containing format (`:text`, `:eex` or `:new_eex`), source path and target path |
 | binding | List | - |
 
 Example
 ```elixir
 Generator.copy_file([
   {:eex, "bin/start.sh.eex", "bin/start.sh"},
-  {:text, ".dockerignore", ".dockerignore"}
+  {:text, "assets/bootstrap_css/vendor/_bootstrap.scss", "assets/css/vendor/_bootstrap.scss"}
 ])
 ```
 
