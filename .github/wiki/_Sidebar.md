@@ -1,6 +1,7 @@
 ## Table of Contents
 
 - [[Home]]
+- [[Contribution]]
 
 ## Architecture
 
