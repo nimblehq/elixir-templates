@@ -214,7 +214,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "assets/node_modules"
           refute file =~ "npm --prefix assets install"
-          refute file =~ "npm run --prefix assets build:dev"
+          refute file =~ "mix assets.deploy"
           refute file =~ "wallaby_screenshots"
         end)
       end)
@@ -232,7 +232,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/test.yml", fn file ->
           assert file =~ "assets/node_modules"
           assert file =~ "npm --prefix assets install"
-          assert file =~ "npm run --prefix assets build:dev"
+          assert file =~ "mix assets.deploy"
           assert file =~ "wallaby_screenshots"
         end)
       end)
@@ -267,7 +267,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "assets/node_modules"
           refute file =~ "npm --prefix assets install"
-          refute file =~ "npm run --prefix assets build:dev"
+          refute file =~ "mix assets.deploy"
           refute file =~ "wallaby_screenshots"
         end)
       end)
@@ -285,6 +285,44 @@ defmodule NimbleTemplate.Addons.GithubTest do
         Addons.Github.apply(project, %{github_action_deploy_heroku: true})
 
         assert_file(".github/workflows/deploy_heroku.yml")
+      end)
+    end
+
+    test "adjusts config/runtime.exs ", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: true, web_project?: false}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+        assert_file("config/runtime.exs", fn file ->
+          assert file =~ "url: [scheme: \"https\", host: host,"
+
+          assert file =~ """
+                   config :nimble_template, NimbleTemplate.Repo,
+                     ssl: true,
+                 """
+        end)
+      end)
+    end
+
+    test "adds force_ssl config into config/prod.exs", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: true, web_project?: false}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+        assert_file("config/prod.exs", fn file ->
+          assert file =~ """
+                 config :nimble_template, NimbleTemplateWeb.Endpoint,
+                   force_ssl: [rewrite_on: [:x_forwarded_proto]]
+                 """
+        end)
       end)
     end
   end
@@ -328,8 +366,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           assert file =~ """
                  - Install Node dependencies:
@@ -401,8 +439,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           refute file =~ """
                       - Install Node dependencies:
@@ -457,8 +495,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 24.2.2"
+          assert file =~ "Elixir 1.13.3"
 
           refute file =~ """
                       - Install Node dependencies:

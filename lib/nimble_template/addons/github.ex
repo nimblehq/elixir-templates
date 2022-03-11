@@ -74,10 +74,28 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{mix_project?: false} = project, %{github_action_deploy_heroku: true}) do
+  def do_apply(%Project{mix_project?: false, otp_app: otp_app, web_module: web_module} = project, %{
+        github_action_deploy_heroku: true
+      }) do
     Generator.copy_file([
       {:eex, ".github/workflows/deploy_heroku.yml", ".github/workflows/deploy_heroku.yml"}
     ])
+
+    Generator.replace_content("config/runtime.exs", "# ssl: true,", "ssl: true,")
+
+    Generator.replace_content(
+      "config/runtime.exs",
+      "url: [host: host,",
+      "url: [scheme: \"https\", host: host,"
+    )
+
+    Generator.append_content(
+      "config/prod.exs",
+      """
+      config :#{otp_app}, #{web_module}.Endpoint,
+        force_ssl: [rewrite_on: [:x_forwarded_proto]]
+      """
+    )
 
     project
   end

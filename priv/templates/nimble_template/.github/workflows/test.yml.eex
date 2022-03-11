@@ -60,15 +60,13 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile
-
       <%= if web_project? do %>
       - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
-
   lint_codebase:
     name: Linting
     
@@ -128,19 +126,27 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile --warnings-as-errors --all-warnings
-
       <%= if web_project? do %>
       - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
 
       - name: Migrate database
         run: mix ecto.migrate
+
+      - name: Ensure that localization files (POs, POTs) are up-to-date.
+        run:
+          mix gettext.extract-and-merge;
+
+          if [ -n "$(git diff --exit-code priv/gettext/)" ]; then
+            echo "The localization files (POs, POTs) are NOT up-to-date, run \"mix gettext.extract-and-merge\" on your local and push again.";
+            exit 1;
+          fi
 
       - name: Run codebase check
         run: mix codebase
@@ -207,13 +213,12 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile
-
       <%= if web_project? do %>
       - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
@@ -283,13 +288,12 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile
-
       <%= if web_project? do %>
       - name: Install Node dependencies
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
       <% end %>
       - name: Create database
         run: mix ecto.create
@@ -325,10 +329,14 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
+    
+    # To have parallel feature test jobs, adjust the `mix_test_partition` here and the `--partitions option` in the `Run test` step.
+    # Example: 
+    # - mix_test_partition: [1, 2, 3, 4]
+    # - mix test --only feature_test --partitions 4
     strategy:
       matrix:
-        mix_test_partition: [1, 2, 3, 4]
+        mix_test_partition: [1]
 
     steps:
       - name: Checkout repository
@@ -375,7 +383,7 @@ jobs:
         run: npm --prefix assets install
 
       - name: Compile assets
-        run: npm run --prefix assets build:dev
+        run: mix assets.deploy
         
       - name: Create database
         run: mix ecto.create
@@ -384,7 +392,7 @@ jobs:
         run: mix ecto.migrate
 
       - name: Run Tests
-        run: mix test --only feature_test --partitions 4
+        run: mix test --only feature_test --partitions 1
         env:
           MIX_TEST_PARTITION: ${{ matrix.mix_test_partition }}
 

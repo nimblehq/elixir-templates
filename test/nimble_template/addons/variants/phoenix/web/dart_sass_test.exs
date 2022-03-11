@@ -54,7 +54,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
                  config :dart_sass,
                    version: "1.49.8",
                    default: [
-                     args: ~w(css/app.scss ../priv/static/assets/app.css),
+                     args: ~w(
+                       --load-path=./node_modules
+                       css/app.scss
+                       ../priv/static/assets/app.css
+                       ),
                      cd: Path.expand("../assets", __DIR__)
                    ]
                  """
@@ -96,6 +100,18 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
                        {:dart_sass, "~> 0.26.2", [runtime: Mix.env() == :dev]},
                  """
         end)
+      end)
+    end
+
+    test "rename app.css into app.scss", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        WebAddons.DartSass.apply(project)
+
+        assert_file("assets/css/app.scss")
+        refute_file("assets/css/app.css")
       end)
     end
   end

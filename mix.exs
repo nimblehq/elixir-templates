@@ -6,7 +6,7 @@ defmodule NimbleTemplate.MixProject do
       app: :nimble_template,
       version: "4.0.0",
       description: "Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).",
-      elixir: "~> 1.12.2",
+      elixir: "~> 1.13.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -41,7 +41,8 @@ defmodule NimbleTemplate.MixProject do
 
   defp aliases do
     [
-      codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"]
+      codebase: ["deps.unlock --check-unused", "format --check-formatted", "credo --strict"],
+      "codebase.fix": ["deps.clean --unlock --unused", "format"]
     ]
   end
 

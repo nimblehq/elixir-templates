@@ -31,7 +31,6 @@ RUN cd assets && \
 		cd - && \
 		mix assets.deploy
 <% end %>
-
 RUN mix release
 
 #

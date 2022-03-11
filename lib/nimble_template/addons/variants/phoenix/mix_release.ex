@@ -5,7 +5,9 @@ defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
 
   @impl true
   def do_apply(%Project{} = project, _opts) do
-    copy_files(project)
+    project
+    |> copy_files()
+    |> edit_files()
 
     project
   end
@@ -19,6 +21,63 @@ defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
       ],
       otp_app: otp_app,
       base_module: base_module
+    )
+
+    project
+  end
+
+  defp edit_files(%{otp_app: otp_app, web_module: web_module} = project) do
+    Generator.delete_content(
+      "config/runtime.exs",
+      """
+      # Start the phoenix server if environment is set and running in a release
+      if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
+        config :#{otp_app}, #{web_module}.Endpoint, server: true
+      end
+
+      """
+    )
+
+    Generator.delete_content(
+      "config/runtime.exs",
+      """
+
+        # ## Using releases
+        #
+        # If you are doing OTP releases, you need to instruct Phoenix
+        # to start each relevant endpoint:
+        #
+        #     config :#{otp_app}, #{web_module}.Endpoint, server: true
+        #
+        # Then you can assemble a release by calling `mix release`.
+        # See `mix help release` for more information.
+      """
+    )
+
+    Generator.replace_content(
+      "config/runtime.exs",
+      """
+        config :#{otp_app}, #{web_module}.Endpoint,
+      """,
+      """
+        config :#{otp_app}, #{web_module}.Endpoint,
+          server: true,
+      """
+    )
+
+    Generator.replace_content(
+      "config/runtime.exs",
+      """
+        host = System.get_env("PHX_HOST") || "example.com"
+      """,
+      """
+        host =
+          System.get_env("PHX_HOST") ||
+            raise \"\"\"
+            Environment variable PHX_HOST is missing.
+            Set the Heroku endpoint to this variable.
+            \"\"\"
+      """
     )
 
     project

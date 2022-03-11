@@ -26,7 +26,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
       """,
       """
         "devDependencies": {
-          "prettier": "2.2.1",
+          "prettier": "2.5.1",
           "prettier-plugin-eex": "^0.5.0"
       """
     )

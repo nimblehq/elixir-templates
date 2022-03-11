@@ -11,10 +11,10 @@ on:
         type: string
 
 env:
-  OTP_VERSION: 24.0.4
-  ELIXIR_VERSION: 1.12.2
+  OTP_VERSION: 24.2.2
+  ELIXIR_VERSION: 1.13.3
   PHOENIX_VERSION: 1.6.6
-  NODE_VERSION: 14
+  NODE_VERSION: 16
   BASE_PROJECT_DIRECTORY: sample_project
   DB_HOST: localhost
   
