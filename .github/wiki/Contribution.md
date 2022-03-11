@@ -34,6 +34,8 @@ Then call `NimbleTemplate.Addons.Phoenix.Web.SampleAddon.apply(project)` inside 
 
 These are functions from `NimbleTemplate.Generator` which can be called.
 
+---
+
 `copy_directory(source_path, target_path, binding \\ [])`
 
 Copy a directory and its content from source path to target path.
@@ -48,6 +50,8 @@ Example
 ```elixir
 Generator.copy_directory("assets/nimble_js", "assets/js")
 ```
+
+---
 
 `copy_file(files, binding \\ [])`
 
@@ -66,6 +70,8 @@ Generator.copy_file([
 ])
 ```
 
+---
+
 `rename_file(old_path, new_path)`
 
 Rename a file from old path to new path.
@@ -79,6 +85,8 @@ Example
 ```elixir
 Generator.rename_file("assets/css/app.css", "assets/css/app.scss")
 ```
+
+---
 
 `replace_content(file_path, anchor, content)`
 
@@ -103,6 +111,8 @@ Generator.replace_content(
 )
 ```
 
+---
+
 `delete_content(file_path, anchor)`
 
 Find and remove specified content of an existing file.
@@ -124,6 +134,8 @@ Generator.delete_content(
   """
 )
 ```
+
+---
 
 `inject_content(file_path, anchor, content)`
 
@@ -149,6 +161,8 @@ Generator.inject_content(
 )
 ```
 
+---
+
 `append_content(file_path, content)`
 
 Append a specified content to the end of an existing file.
@@ -168,6 +182,8 @@ Generator.append_content(
 )
 ```
 
+---
+
 `inject_mix_dependency(dependency)`
 
 Inject a new mix dependency into `mix.exs` file.
@@ -178,11 +194,14 @@ Inject a new mix dependency into `mix.exs` file.
 
 `dependency` can also be a list of tuple in case of multiple items.
 
+Example
 ```elixir
 Generator.inject_mix_dependency(
   {:credo, latest_package_version(:credo), only: [:dev, :test], runtime: false}
 )
 ```
+
+---
 
 `make_directory(path, touch_directory \\ true)`
 
@@ -197,6 +216,8 @@ Example
 ```elixir
 Generator.make_directory("assets/css/vendor/", false)
 ```
+
+---
 
 `create_file(path, content)`
 
@@ -217,6 +238,8 @@ Generator.create_file(
 )
 ```
 
+---
+
 `print_log(prefix, content \\ "")`
 
 Print log to console.
@@ -231,12 +254,14 @@ Example
 Generator.print_log("* applying ", inspect(__MODULE__))
 ```
 
+---
+
 # Run unit test on local
 
 `mix test`
 
 # Apply the whole template on local
 
-See [[Test The Apply Action On Development]]
+See [[Generation]]
 
 # FAQ
