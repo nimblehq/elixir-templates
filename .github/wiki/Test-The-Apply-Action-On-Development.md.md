@@ -2,7 +2,7 @@
 
 1. Clone [Elixir templates](https://github.com/nimblehq/elixir-templates) project to your local directory.
 
-2. Create a new project using `mix phx.new sample_project` or ``mix new sample_project`` command
+2. Create a new project using `mix phx.new sample_project` or `mix new sample_project` command
 
 3. Answer the prompt `Fetch and install dependencies? [Yn]` with `n` (not install)
 
