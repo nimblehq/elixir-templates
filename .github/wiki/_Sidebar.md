@@ -1,7 +1,7 @@
 ## Table of Contents
 
 - [[Home]]
-- [[Test The Apply Action On Development]]
+- [[Generation]]
 - [[Contribution]]
 
 ## Architecture
