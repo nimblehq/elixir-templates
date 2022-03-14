@@ -55,6 +55,6 @@ RUN addgroup -g 1000 appuser && \
 COPY --from=build --chown=1000:1000 /app/_build/prod/rel/<%= otp_app %> ./
 COPY bin/start.sh ./bin/start.sh
 
-USER app_user
+USER appuser
 
 CMD bin/start.sh

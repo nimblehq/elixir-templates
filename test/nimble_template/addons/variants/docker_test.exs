@@ -81,7 +81,7 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
                  """
 
           assert file =~ "adduser -u 1000 -G appuser -g appuser -s /bin/sh -D appuser"
-          assert file =~ "USER app_user"
+          assert file =~ "USER appuser"
 
           assert file =~
                    "COPY --from=build --chown=1000:1000 /app/_build/prod/rel/nimble_template ./"
