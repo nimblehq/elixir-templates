@@ -10,4 +10,11 @@ defmodule <%= web_module %>.Api.FallbackController do
     |> put_view(ErrorView)
     |> render("error.json", %{code: :validation_error, changeset: changeset})
   end
+  
+  def call(conn, {:error, %Changeset{valid?: false} = changeset}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(ErrorView)
+    |> render("error.json", %{code: :unprocessable_entity, changeset: changeset})
+  end
 end
