@@ -11,7 +11,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.FallbackControllerTest do
       in_test_project(project_path, fn ->
         ApiAddons.FallbackController.apply(project)
 
-        assert_file("lib/nimble_template_web/controller/api/fallback_controller.ex")
+        assert_file("lib/nimble_template_web/controllers/api/fallback_controller.ex")
       end)
     end
 

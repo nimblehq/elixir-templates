@@ -17,7 +17,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.FallbackController do
 
     files = [
       {:eex, "lib/otp_app_web/controllers/api/fallback_controller.ex.eex",
-       "#{web_path}/controller/api/fallback_controller.ex"}
+       "#{web_path}/controllers/api/fallback_controller.ex"}
     ]
 
     Generator.copy_file(files, binding)
