@@ -21,7 +21,7 @@ jobs:
     name: Test on a short custom name API project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
-      new_project_options: "--no-html --no-assets --module=Ab --app=ab"
+      new_project_options: "--no-html --no-assets --module=Z --app=z"
       variant: "api"
 
   standard_web_project:
@@ -42,7 +42,7 @@ jobs:
     name: Test on a short custom name Web project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
-      new_project_options: "--no-live --module=Ab --app=ab"
+      new_project_options: "--no-live --module=Z --app=z"
       variant: "api"
       
       
@@ -64,5 +64,5 @@ jobs:
     name: Test on a short custom name Live project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
-      new_project_options: "--module=Ab --app=ab"
+      new_project_options: "--module=Z --app=z"
       variant: "api"

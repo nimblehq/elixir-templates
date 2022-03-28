@@ -21,5 +21,5 @@ jobs:
     name: Test on a short custom name Live project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
-      new_project_options: "--module=Ab --app=ab"
+      new_project_options: "--module=Z --app=z"
       variant: "live"

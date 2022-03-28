@@ -19,7 +19,7 @@ jobs:
     name: Test on a short custom name Mix project
     uses: ./.github/workflows/reusable_mix_project.yml
     with:
-      new_project_options: "--module=Ab --app=ab"
+      new_project_options: "--module=Z --app=z"
       
   standard_mix_supervision_project:
     name: Test on a Standard Supervision Mix project
@@ -37,4 +37,4 @@ jobs:
     name: Test on a short custom name Supervision Mix project
     uses: ./.github/workflows/reusable_mix_project.yml
     with:
-      new_project_options: "--sup --module=Ab --app=ab"
+      new_project_options: "--sup --module=Z --app=z"
