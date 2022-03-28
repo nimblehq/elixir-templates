@@ -9,10 +9,17 @@ jobs:
     with:
       new_project_options: ""
       variant: "live"
-
-  non-standard_project:
-    name: Test on a Non-Standard Live project
+  
+  long_custom_name_live_project:
+    name: Test on a long custom name Live project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
       new_project_options: "--module=SampleCustomModule --app=sample_custom_app"
+      variant: "live"
+      
+  short_custom_name_live_project:
+    name: Test on a short custom name Live project
+    uses: ./.github/workflows/reusable_phoenix_project.yml
+    with:
+      new_project_options: "--module=Ab --app=ab"
       variant: "live"

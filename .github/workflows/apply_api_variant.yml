@@ -10,23 +10,59 @@ jobs:
       new_project_options: "--no-html --no-assets"
       variant: "api"
 
-  non-standard_api_project:
-    name: Test on a Non-Standard API project
+  long_custom_name_api_project:
+    name: Test on a long custom name API project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
       new_project_options: "--no-html --no-assets --module=SampleCustomModule --app=sample_custom_app"
+      variant: "api"
+  
+  short_custom_name_api_project:
+    name: Test on a short custom name API project
+    uses: ./.github/workflows/reusable_phoenix_project.yml
+    with:
+      new_project_options: "--no-html --no-assets --module=Ab --app=ab"
       variant: "api"
 
   standard_web_project:
     name: Test on a Standard Web project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
+      new_project_options: "--no-live"
+      variant: "api"
+
+  long_custom_name_web_project:
+    name: Test on a long custom name Web project
+    uses: ./.github/workflows/reusable_phoenix_project.yml
+    with:
+      new_project_options: "--no-live --module=SampleCustomModule --app=sample_custom_app"
+      variant: "api"
+      
+  short_custom_name_web_project:
+    name: Test on a short custom name Web project
+    uses: ./.github/workflows/reusable_phoenix_project.yml
+    with:
+      new_project_options: "--no-live --module=Ab --app=ab"
+      variant: "api"
+      
+      
+  standard_live_project:
+    name: Test on a Standard Live project
+    uses: ./.github/workflows/reusable_phoenix_project.yml
+    with:
       new_project_options: ""
       variant: "api"
 
-  non-standard_web_project:
-    name: Test on a Non-Standard Web project
+  long_custom_name_live_project:
+    name: Test on a long custom name Live project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
       new_project_options: "--module=SampleCustomModule --app=sample_custom_app"
+      variant: "api"
+      
+  short_custom_name_live_project:
+    name: Test on a short custom name Live project
+    uses: ./.github/workflows/reusable_phoenix_project.yml
+    with:
+      new_project_options: "--module=Ab --app=ab"
       variant: "api"
