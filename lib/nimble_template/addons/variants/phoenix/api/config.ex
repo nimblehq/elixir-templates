@@ -17,12 +17,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.Config do
   def edit_config_prod(%Project{otp_app: otp_app, web_module: web_module} = project) do
     Generator.replace_content(
       "config/prod.exs",
-      """
-      config :#{otp_app}, #{web_module}.Endpoint,
-      """,
-      """
-      config :#{otp_app}, #{web_module}.Endpoint.Anchor
-      """
+      "config :#{otp_app}, #{web_module}.Endpoint,",
+      "config :#{otp_app}, #{web_module}.Endpoint.Anchor"
     )
 
     Generator.delete_content(
