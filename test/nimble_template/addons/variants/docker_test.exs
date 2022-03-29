@@ -15,7 +15,7 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
 
                  services:
                    db:
-                     image: postgres:12.3
+                     image: postgres:14.2
                      container_name: nimble_template_db
                      environment:
                        - POSTGRES_HOST_AUTH_METHOD=trust
