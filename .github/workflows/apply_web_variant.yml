@@ -10,9 +10,16 @@ jobs:
       new_project_options: "--no-live"
       variant: "web"
 
-  non-standard_project:
-    name: Test on a Non-Standard Web project
+  long_custom_name_web_project:
+    name: Test on a long custom name Web project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
       new_project_options: "--no-live --module=SampleCustomModule --app=sample_custom_app"
+      variant: "web"
+      
+  short_custom_name_web_project:
+    name: Test on a short custom name Web project
+    uses: ./.github/workflows/reusable_phoenix_project.yml
+    with:
+      new_project_options: "--no-live --module=Z --app=z"
       variant: "web"

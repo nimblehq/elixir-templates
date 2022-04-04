@@ -44,7 +44,7 @@ defmodule NimbleTemplate.Templates.Template do
   end
 
   defp fetch_and_install_elixir_dependencies() do
-    Mix.shell().cmd("MIX_ENV=develop mix do deps.get, deps.compile")
+    Mix.shell().cmd("MIX_ENV=dev mix do deps.get, deps.compile")
     Mix.shell().cmd("MIX_ENV=test mix do deps.get, deps.compile")
   end
 
