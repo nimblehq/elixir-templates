@@ -69,14 +69,14 @@ jobs:
       <% end %>
   lint_codebase:
     name: Linting
-    
+
     needs: install_and_compile_dependencies
-    
+
     runs-on: ubuntu-latest
 
     services:
       db:
-        image: postgres:12.3
+        image: postgres:14.2
         ports: ['5432:5432']
         env:
           POSTGRES_PASSWORD: postgres
@@ -150,17 +150,17 @@ jobs:
 
       - name: Run codebase check
         run: mix codebase
-    
+
   test_database_seeds:
     name: Test database seeds
-    
+
     needs: lint_codebase
-    
+
     runs-on: ubuntu-latest
 
     services:
       db:
-        image: postgres:12.3
+        image: postgres:14.2
         ports: ['5432:5432']
         env:
           POSTGRES_PASSWORD: postgres
@@ -169,7 +169,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    
+
     env:
       MIX_ENV: dev
 
@@ -228,17 +228,17 @@ jobs:
 
       - name: Seed database
         run: mix run priv/repo/seeds.exs
-      
+
   unit_test:
     name: Unit test
-    
+
     needs: lint_codebase
-    
+
     runs-on: ubuntu-latest
 
     services:
       db:
-        image: postgres:12.3
+        image: postgres:14.2
         ports: ['5432:5432']
         env:
           POSTGRES_PASSWORD: postgres
@@ -313,14 +313,14 @@ jobs:
 <%= if web_project? do %>
   feature_test:
     name: Feature test
-    
+
     needs: lint_codebase
-    
+
     runs-on: ubuntu-latest
 
     services:
       db:
-        image: postgres:12.3
+        image: postgres:14.2
         ports: ['5432:5432']
         env:
           POSTGRES_PASSWORD: postgres
@@ -329,9 +329,9 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    
+
     # To have parallel feature test jobs, adjust the `mix_test_partition` here and the `--partitions option` in the `Run test` step.
-    # Example: 
+    # Example:
     # - mix_test_partition: [1, 2, 3, 4]
     # - mix test --only feature_test --partitions 4
     strategy:
@@ -349,7 +349,7 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
-      
+
       - name: Set up Node
         uses: actions/setup-node@v2.1.5
         with:
@@ -384,7 +384,7 @@ jobs:
 
       - name: Compile assets
         run: mix assets.deploy
-        
+
       - name: Create database
         run: mix ecto.create
 
