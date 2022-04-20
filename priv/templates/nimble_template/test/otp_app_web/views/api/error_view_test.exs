@@ -58,7 +58,7 @@ defmodule <%= web_module %>.Api.ErrorViewTest do
     assert render(ErrorView, "500.json", status: 500, code: :custom_error_code) ==
              %{
                errors: [
-                 %{code: :custom_error_code, detail: %{}, message: "Something went wrong"}
+                 %{code: :custom_error_code, detail: %{}, message: "Internal Server Error"}
                ]
              }
   end
