@@ -54,6 +54,15 @@ defmodule <%= web_module %>.Api.ErrorViewTest do
              }
   end
 
+  test "renders custom error code" do
+    assert render(ErrorView, "500.json", status: 500, code: :custom_error_code) ==
+             %{
+               errors: [
+                 %{code: :custom_error_code, detail: %{}, message: "Something went wrong"}
+               ]
+             }
+  end
+
   test "given error code and an invalid changeset with multiple errors fields, renders error.json" do
     changeset = Device.changeset(%{})
     error = %{code: :validation_error, changeset: changeset}
