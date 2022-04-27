@@ -5,6 +5,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
     @describetag required_addons: [
                    :TestEnv,
                    :"Phoenix.Web.NodePackage",
+                   :"Phoenix.Web.EsBuild",
                    :"Phoenix.Web.DartSass"
                  ]
 
@@ -125,6 +126,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :"Phoenix.Web.NodePackage",
                    :"Phoenix.Web.StyleLint",
                    :"Phoenix.Web.EsLint",
+                   :"Phoenix.Web.EsBuild",
                    :"Phoenix.Web.DartSass",
                    :"Phoenix.Web.NimbleCSS",
                    :"Phoenix.Web.NimbleJS"
