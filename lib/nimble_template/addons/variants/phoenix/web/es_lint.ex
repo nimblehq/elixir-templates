@@ -45,9 +45,9 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
       """,
       """
         "devDependencies": {
-          "eslint": "^8.10.0",
-          "eslint-config-prettier": "^8.4.0",
-          "eslint-plugin-prettier": "^4.0.0",
+          "eslint": "8.14.0",
+          "eslint-config-prettier": "8.5.0",
+          "eslint-plugin-prettier": "4.0.0",
       """
     )
 

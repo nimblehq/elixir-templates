@@ -46,7 +46,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
       """,
       """
         "devDependencies": {
-          "svg-sprite": "^1.5.4",
+          "svg-sprite": "1.5.4",
       """
     )
 

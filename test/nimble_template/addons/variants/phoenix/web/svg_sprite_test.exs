@@ -14,7 +14,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "devDependencies": {
-                     "svg-sprite": "^1.5.4",
+                     "svg-sprite": "1.5.4",
                  """
         end)
       end)
