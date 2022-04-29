@@ -6,6 +6,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :TestEnv,
                    :"Phoenix.Web.NodePackage",
                    :"Phoenix.Web.EsBuild",
+                   :"Phoenix.Web.PostCSS",
                    :"Phoenix.Web.DartSass"
                  ]
 
@@ -127,6 +128,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :"Phoenix.Web.StyleLint",
                    :"Phoenix.Web.EsLint",
                    :"Phoenix.Web.EsBuild",
+                   :"Phoenix.Web.PostCSS",
                    :"Phoenix.Web.DartSass",
                    :"Phoenix.Web.NimbleCSS",
                    :"Phoenix.Web.NimbleJS"

@@ -27,9 +27,11 @@ ENV MIX_ENV=prod
 RUN mix do deps.get, deps.compile, compile
 <%= if web_project? do %>
 RUN cd assets && \
-		npm ci --progress=false --no-audit --loglevel=error && \
-		cd - && \
-		mix assets.deploy
+		npm ci --progress=false --no-audit --loglevel=error
+
+ENV NODE_ENV=production
+
+RUN mix assets.deploy
 <% end %>
 RUN mix release
 

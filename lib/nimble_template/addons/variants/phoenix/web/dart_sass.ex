@@ -74,12 +74,17 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
     Generator.replace_content(
       "mix.exs",
       """
-            "assets.deploy": ["esbuild app --minify", "phx.digest"]
+            "assets.deploy": [
+              "esbuild app --minify",
+              "cmd npm run postcss --prefix assets",
+              "phx.digest"
+            ]
       """,
       """
             "assets.deploy": [
               "esbuild app --minify",
               "sass app --no-source-map --style=compressed",
+              "cmd npm run postcss --prefix assets",
               "phx.digest"
             ]
       """
