@@ -52,7 +52,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
           assert file =~ """
                  # Configure dart_sass (the version is required)
                  config :dart_sass,
-                   version: "1.49.8",
+                   version: "1.51.0",
                    default: [
                      args: ~w(
                        --load-path=./node_modules
