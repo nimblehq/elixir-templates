@@ -35,7 +35,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
       """,
       """
         "scripts": {
-          "svg-sprite.generate-icon": "svg-sprite --shape-id-generator \\"icon-%s\\" --symbol --symbol-dest ../priv/static/images --symbol-sprite icon-sprite.svg ../priv/static/images/icons/*.svg",
+          "svg-sprite.generate-icon": "svg-sprite --shape-id-generator \\"icon-%s\\" --symbol --symbol-dest static/images --symbol-sprite icon-sprite.svg static/images/icons/*.svg",
       """
     )
 
