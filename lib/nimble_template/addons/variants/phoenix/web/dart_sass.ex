@@ -3,7 +3,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
 
   use NimbleTemplate.Addons.Addon
 
-  @dart_sass_version "1.51.0"
+  @dart_sass_version "1.49.11"
 
   @impl true
   def do_apply(%Project{} = project, _opts) do
