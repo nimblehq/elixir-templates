@@ -14,6 +14,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
     project
     |> edit_package()
     |> edit_mix()
+    |> edit_phoenix_watcher()
 
     project
   end
@@ -41,6 +42,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
       """
         "scripts": {
           "postcss": "postcss ../priv/static/assets/*.css --dir ../priv/static/assets/ --config ./",
+          "postcss.watch": "postcss ../priv/static/assets/*.css --dir ../priv/static/assets/ --config ./ --watch",
       """
     )
 
@@ -59,6 +61,25 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
               "cmd npm run postcss --prefix assets",
               "phx.digest"
             ]
+      """
+    )
+
+    project
+  end
+
+  defp edit_phoenix_watcher(project) do
+    Generator.replace_content(
+      "config/dev.exs",
+      """
+        watchers: [
+      """,
+      """
+        watchers: [
+          npm: [
+            "run",
+            "postcss.watch",
+            cd: Path.expand("../assets", __DIR__)
+          ],
       """
     )
 
