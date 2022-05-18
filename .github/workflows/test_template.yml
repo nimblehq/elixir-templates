@@ -24,6 +24,12 @@ jobs:
 
       - name: Install .tool-versions.
         uses: asdf-vm/actions/install@v1
+        
+      - name: Install rebar
+        run: mix local.rebar --force
+        
+      - name: Install hex
+        run: mix local.hex --force
 
       - name: Cache Elixir build
         uses: actions/cache@v2
@@ -61,6 +67,12 @@ jobs:
 
       - name: Install .tool-versions.
         uses: asdf-vm/actions/install@v1
+        
+      - name: Install rebar
+        run: mix local.rebar --force
+        
+      - name: Install hex
+        run: mix local.hex --force
 
       - name: Cache Elixir build
         uses: actions/cache@v2
