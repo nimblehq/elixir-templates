@@ -42,8 +42,14 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Install .tool-versions.
+      - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
+        
+      - name: Install rebar
+        run: mix local.rebar --force
+        
+      - name: Install hex
+        run: mix local.hex --force
         
       - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}

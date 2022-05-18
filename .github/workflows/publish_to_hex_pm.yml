@@ -29,8 +29,14 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
-      - name: Install .tool-versions.
+      - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
+        
+      - name: Install rebar
+        run: mix local.rebar --force
+        
+      - name: Install hex
+        run: mix local.hex --force
 
       - name: Cache Elixir build
         uses: actions/cache@v2
