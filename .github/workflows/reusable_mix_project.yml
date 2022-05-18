@@ -8,8 +8,6 @@ on:
         type: string
 
 env:
-  OTP_VERSION: 24.2.2
-  ELIXIR_VERSION: 1.13.3
   BASE_PROJECT_DIRECTORY: sample_project
   MIX_ENV: test
   
@@ -29,11 +27,8 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up Elixir ${{ env.ELIXIR_VERSION }} and OTP ${{ env.OTP_VERSION }}
-        uses: erlef/setup-elixir@v1
-        with:
-          otp-version: ${{ env.OTP_VERSION }}
-          elixir-version: ${{ env.ELIXIR_VERSION }}
+      - name: Install .tool-versions.
+        uses: asdf-vm/actions/install@v1
       
       - name: Create Mix project
         run: make create_mix_project PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY OPTIONS="${{ inputs.new_project_options }}"
