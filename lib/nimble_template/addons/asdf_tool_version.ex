@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.ElixirVersion do
+defmodule NimbleTemplate.Addons.AsdfToolVersion do
   @moduledoc false
 
   use NimbleTemplate.Addons.Addon

@@ -31,7 +31,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
 
   defp apply_default_common_addons(project) do
     project
-    |> Addons.ElixirVersion.apply()
+    |> Addons.AsdfToolVersion.apply()
     |> Addons.Readme.apply()
     |> Addons.TestEnv.apply()
     |> Addons.Credo.apply()

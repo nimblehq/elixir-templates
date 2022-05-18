@@ -1,4 +1,4 @@
-defmodule NimbleTemplate.Addons.ElixirVersionTest do
+defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
@@ -7,7 +7,7 @@ defmodule NimbleTemplate.Addons.ElixirVersionTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.ElixirVersion.apply(project)
+        Addons.AsdfToolVersion.apply(project)
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """

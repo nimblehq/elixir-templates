@@ -14,7 +14,7 @@ defmodule NimbleTemplate.Templates.Mix.Template do
 
   defp apply_default_mix_addons(project) do
     project
-    |> Addons.ElixirVersion.apply()
+    |> Addons.AsdfToolVersion.apply()
     |> Addons.Readme.apply()
     |> Addons.TestEnv.apply()
     |> Addons.Credo.apply()
