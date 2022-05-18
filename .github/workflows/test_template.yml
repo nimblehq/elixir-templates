@@ -22,7 +22,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Install .tool-versions.
+      - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
         
       - name: Install rebar
@@ -65,7 +65,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Install .tool-versions.
+      - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
         
       - name: Install rebar
@@ -114,7 +114,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Install .tool-versions.
+      - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
         
       - name: Install rebar
