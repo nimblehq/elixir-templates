@@ -44,7 +44,7 @@ jobs:
 
       - name: Install dependencies in .tool-versions
         if: steps.asdf-cache.outputs.cache-hit != 'true'
-        uses: asdf-vm/actions/install@v13
+        uses: asdf-vm/actions/install@v1
         
       - name: Install rebar
         run: mix local.rebar --force
