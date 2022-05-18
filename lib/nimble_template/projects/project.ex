@@ -5,6 +5,7 @@ defmodule NimbleTemplate.Projects.Project do
   @elixir_version "1.13.3"
   @erlang_version "24.2.2"
   @node_version "16"
+  @node_asdf_version "16.15.0"
 
   defstruct base_module: nil,
             base_path: nil,
@@ -19,6 +20,7 @@ defmodule NimbleTemplate.Projects.Project do
             elixir_asdf_version:
               "#{@elixir_version}-otp-#{@erlang_version |> String.split(".") |> List.first()}",
             erlang_version: @erlang_version,
+            node_asdf_version: @node_asdf_version,
             node_version: @node_version,
             # Variants
             api_project?: false,
