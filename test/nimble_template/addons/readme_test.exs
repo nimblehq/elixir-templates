@@ -13,6 +13,9 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
           assert file =~ "Erlang 24.2.2"
           assert file =~ "Elixir 1.13.3"
 
+          assert file =~ "Node 16.15.0"
+          assert file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
+
           assert file =~ """
                  - Install Node dependencies:
 
@@ -47,6 +50,9 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
           assert file =~ "Erlang 24.2.2"
           assert file =~ "Elixir 1.13.3"
 
+          refute file =~ "Node 16.15.0"
+          refute file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
+
           refute file =~ """
                  - Install Node dependencies:
 
@@ -80,6 +86,9 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
         assert_file("README.md", fn file ->
           assert file =~ "Erlang 24.2.2"
           assert file =~ "Elixir 1.13.3"
+
+          refute file =~ "Node 16.15.0"
+          refute file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
 
           refute file =~ """
                  - Install Node dependencies:
