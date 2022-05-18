@@ -26,7 +26,6 @@ jobs:
         uses: asdf-vm/actions/setup@v1
       
       - name: Cache asdf
-        id: asdf-cache
         uses: actions/cache@v2
         with:
           path: |
@@ -36,7 +35,6 @@ jobs:
             ${{ runner.os }}-asdf-
       
       - name: Install dependencies in .tool-versions
-        if: steps.asdf-cache.outputs.cache-hit != 'true'
         uses: asdf-vm/actions/install@v1
         
       - name: Install rebar
@@ -83,7 +81,6 @@ jobs:
         uses: asdf-vm/actions/setup@v1
       
       - name: Cache asdf
-        id: asdf-cache
         uses: actions/cache@v2
         with:
           path: |
@@ -93,7 +90,6 @@ jobs:
             ${{ runner.os }}-asdf-
       
       - name: Install dependencies in .tool-versions
-        if: steps.asdf-cache.outputs.cache-hit != 'true'
         uses: asdf-vm/actions/install@v1
         
       - name: Install rebar
@@ -146,7 +142,6 @@ jobs:
         uses: asdf-vm/actions/setup@v1
       
       - name: Cache asdf
-        id: asdf-cache
         uses: actions/cache@v2
         with:
           path: |
@@ -156,7 +151,6 @@ jobs:
             ${{ runner.os }}-asdf-
       
       - name: Install dependencies in .tool-versions
-        if: steps.asdf-cache.outputs.cache-hit != 'true'
         uses: asdf-vm/actions/install@v1
         
       - name: Install rebar
