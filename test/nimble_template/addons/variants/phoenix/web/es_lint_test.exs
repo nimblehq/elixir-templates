@@ -14,9 +14,9 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "devDependencies": {
-                     "eslint": "^8.10.0",
-                     "eslint-config-prettier": "^8.4.0",
-                     "eslint-plugin-prettier": "^4.0.0",
+                     "eslint": "8.14.0",
+                     "eslint-config-prettier": "8.5.0",
+                     "eslint-plugin-prettier": "4.0.0",
                  """
         end)
       end)

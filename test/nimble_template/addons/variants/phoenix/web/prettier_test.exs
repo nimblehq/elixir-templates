@@ -14,8 +14,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "devDependencies": {
-                     "prettier": "2.5.1",
-                     "prettier-plugin-eex": "^0.5.0"
+                     "prettier": "2.6.2",
+                     "prettier-plugin-eex": "0.5.0"
                  """
         end)
       end)

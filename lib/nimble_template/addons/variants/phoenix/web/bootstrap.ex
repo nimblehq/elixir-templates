@@ -35,7 +35,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
       """,
       """
         "dependencies": {
-          "@popperjs/core": "^2.11.2",
+          "@popperjs/core": "2.11.5",
           "bootstrap": "5.1.3",
       """
     )
