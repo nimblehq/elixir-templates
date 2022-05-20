@@ -46,8 +46,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
       """
         "devDependencies": {
           "eslint": "8.14.0",
-          "@nimblehq/eslint-config-nimble": "2.3.0"
-          ""
+          "@nimblehq/eslint-config-nimble": "2.3.0",
       """
     )
 
