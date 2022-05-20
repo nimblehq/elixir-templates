@@ -42,6 +42,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
+            ${{ env.BASE_PROJECT_DIRECTORY }}/_build
             ${{ env.BASE_PROJECT_DIRECTORY }}/deps
           key: ${{ runner.os }}-mix-deps
           restore-keys: |
