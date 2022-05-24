@@ -2,7 +2,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag required_addons: [:"Phoenix.Web.EsBuild"]
+    @describetag required_addons: [
+                   :"Phoenix.Web.NodePackage",
+                   :"Phoenix.Web.EsBuild",
+                   :"Phoenix.Web.PostCSS"
+                 ]
     @describetag mock_latest_package_versions: [{:dart_sass, "0.26.2"}]
 
     test "remove the import `css/app.css` in assets/js/app.js", %{
@@ -35,6 +39,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
                        "assets.deploy": [
                          "esbuild app --minify",
                          "sass app --no-source-map --style=compressed",
+                         "cmd npm run postcss --prefix assets",
                          "phx.digest"
                        ]
                  """
