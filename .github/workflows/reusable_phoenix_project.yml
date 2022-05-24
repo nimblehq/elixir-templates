@@ -33,12 +33,12 @@ jobs:
           --health-retries 5
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.8.0
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
@@ -46,7 +46,7 @@ jobs:
         uses: asdf-vm/actions/setup@v1
 
       - name: Cache asdf
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
