@@ -11,10 +11,7 @@ on:
         type: string
 
 env:
-  OTP_VERSION: 24.2.2
-  ELIXIR_VERSION: 1.13.3
   PHOENIX_VERSION: 1.6.6
-  NODE_VERSION: 16
   BASE_PROJECT_DIRECTORY: sample_project
   DB_HOST: localhost
   
@@ -36,25 +33,33 @@ jobs:
           --health-retries 5
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.8.0
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up Elixir ${{ env.ELIXIR_VERSION }} and OTP ${{ env.OTP_VERSION }}
-        uses: erlef/setup-elixir@v1
-        with:
-          otp-version: ${{ env.OTP_VERSION }}
-          elixir-version: ${{ env.ELIXIR_VERSION }}
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v1
 
-      - name: Set up Node ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v2.1.5
+      - name: Cache asdf
+        uses: actions/cache@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          path: /home/runner/.asdf
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+
+      - name: Install dependencies in .tool-versions
+        uses: asdf-vm/actions/install@v1
+        
+      - name: Install rebar
+        run: mix local.rebar --force
+        
+      - name: Install hex
+        run: mix local.hex --force
         
       - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
