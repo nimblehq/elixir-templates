@@ -21,7 +21,8 @@ defmodule NimbleTemplate.Addons.Readme do
            web_project?: web_project?,
            mix_project?: mix_project?,
            erlang_version: erlang_version,
-           elixir_version: elixir_version
+           elixir_version: elixir_version,
+           node_asdf_version: node_asdf_version
          } = project
        ) do
     template_file_path =
@@ -34,6 +35,7 @@ defmodule NimbleTemplate.Addons.Readme do
     Generator.copy_file([{:eex, template_file_path, "README.md"}],
       erlang_version: erlang_version,
       elixir_version: elixir_version,
+      node_asdf_version: node_asdf_version,
       web_project?: web_project?
     )
 
