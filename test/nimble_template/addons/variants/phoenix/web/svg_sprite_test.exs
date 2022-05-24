@@ -14,7 +14,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "devDependencies": {
-                     "svg-sprite": "^1.5.4",
+                     "svg-sprite": "1.5.4",
                  """
         end)
       end)
@@ -30,7 +30,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "scripts": {
-                     "svg-sprite.generate-icon": "svg-sprite --shape-id-generator \\"icon-%s\\" --symbol --symbol-dest static/images --symbol-sprite icon-sprite.svg static/images/icons/*.svg",
+                     "svg-sprite.generate-icon": "svg-sprite --shape-id-generator \\"icon-%s\\" --symbol --symbol-dest ../priv/static/images --symbol-sprite icon-sprite.svg ../priv/static/images/icons/*.svg",
                  """
         end)
       end)

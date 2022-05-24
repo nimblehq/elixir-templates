@@ -24,7 +24,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
       """,
       """
         "dependencies": {
-          "core-js": "^3.21.1"
+          "core-js": "3.22.0"
       """
     )
 

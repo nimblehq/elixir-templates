@@ -8,8 +8,6 @@ on:
         type: string
 
 env:
-  OTP_VERSION: 24.2.2
-  ELIXIR_VERSION: 1.13.3
   BASE_PROJECT_DIRECTORY: sample_project
   MIX_ENV: test
   
@@ -20,20 +18,33 @@ jobs:
 
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.8.0
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up Elixir ${{ env.ELIXIR_VERSION }} and OTP ${{ env.OTP_VERSION }}
-        uses: erlef/setup-elixir@v1
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v1
+
+      - name: Cache asdf
+        uses: actions/cache@v3
         with:
-          otp-version: ${{ env.OTP_VERSION }}
-          elixir-version: ${{ env.ELIXIR_VERSION }}
+          path: /home/runner/.asdf
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+
+      - name: Install dependencies in .tool-versions
+        uses: asdf-vm/actions/install@v1
+        
+      - name: Install rebar
+        run: mix local.rebar --force
+        
+      - name: Install hex
+        run: mix local.hex --force
       
       - name: Create Mix project
         run: make create_mix_project PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY OPTIONS="${{ inputs.new_project_options }}"

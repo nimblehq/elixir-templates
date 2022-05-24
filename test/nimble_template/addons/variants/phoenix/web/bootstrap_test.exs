@@ -5,6 +5,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
     @describetag required_addons: [
                    :TestEnv,
                    :"Phoenix.Web.NodePackage",
+                   :"Phoenix.Web.EsBuild",
+                   :"Phoenix.Web.PostCSS",
                    :"Phoenix.Web.DartSass"
                  ]
 
@@ -32,7 +34,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "dependencies": {
-                     "@popperjs/core": "^2.11.2",
+                     "@popperjs/core": "2.11.5",
                      "bootstrap": "5.1.3",
                  """
         end)
@@ -125,6 +127,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :"Phoenix.Web.NodePackage",
                    :"Phoenix.Web.StyleLint",
                    :"Phoenix.Web.EsLint",
+                   :"Phoenix.Web.EsBuild",
+                   :"Phoenix.Web.PostCSS",
                    :"Phoenix.Web.DartSass",
                    :"Phoenix.Web.NimbleCSS",
                    :"Phoenix.Web.NimbleJS"
@@ -154,7 +158,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "dependencies": {
-                     "@popperjs/core": "^2.11.2",
+                     "@popperjs/core": "2.11.5",
                      "bootstrap": "5.1.3",
                  """
         end)

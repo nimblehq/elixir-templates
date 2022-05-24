@@ -3,7 +3,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
 
   use NimbleTemplate.Addons.Addon
 
-  @dart_sass_version "1.49.8"
+  @dart_sass_version "1.49.11"
 
   @impl true
   def do_apply(%Project{} = project, _opts) do
@@ -39,7 +39,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
       # Configure dart_sass (the version is required)
       config :dart_sass,
         version: "#{@dart_sass_version}",
-        default: [
+        app: [
           args: ~w(
             --load-path=./node_modules
             css/app.scss
@@ -59,10 +59,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
       """,
       """
         watchers: [
-          sass: {
+          app_sass: {
             DartSass,
             :install_and_run,
-            [:default, ~w(--embed-source-map --source-map-urls=absolute --watch)]
+            [:app, ~w(--embed-source-map --source-map-urls=absolute --watch)]
           },
       """
     )
@@ -74,12 +74,17 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
     Generator.replace_content(
       "mix.exs",
       """
-            "assets.deploy": ["esbuild default --minify", "phx.digest"]
+            "assets.deploy": [
+              "esbuild app --minify",
+              "cmd npm run postcss --prefix assets",
+              "phx.digest"
+            ]
       """,
       """
             "assets.deploy": [
-              "esbuild default --minify",
-              "sass default --no-source-map --style=compressed",
+              "esbuild app --minify",
+              "sass app --no-source-map --style=compressed",
+              "cmd npm run postcss --prefix assets",
               "phx.digest"
             ]
       """

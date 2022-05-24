@@ -25,15 +25,13 @@ defmodule NimbleTemplate.Addons.Github do
           web_project?: web_project?,
           mix_project?: mix_project?,
           erlang_version: erlang_version,
-          elixir_version: elixir_version,
-          node_version: node_version
+          elixir_version: elixir_version
         } = project,
         %{github_action_test: true}
       ) do
     binding = [
       erlang_version: erlang_version,
       elixir_version: elixir_version,
-      node_version: node_version,
       web_project?: web_project?
     ]
 
@@ -143,13 +141,15 @@ defmodule NimbleTemplate.Addons.Github do
            web_project?: web_project?,
            mix_project?: false,
            erlang_version: erlang_version,
-           elixir_version: elixir_version
+           elixir_version: elixir_version,
+           node_asdf_version: node_asdf_version
          } = project
        ) do
     binding = [
       web_project?: web_project?,
       erlang_version: erlang_version,
-      elixir_version: elixir_version
+      elixir_version: elixir_version,
+      node_asdf_version: node_asdf_version
     ]
 
     publish_wiki_workflow_path = ".github/workflows/publish_wiki.yml"

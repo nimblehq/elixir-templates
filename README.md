@@ -10,6 +10,7 @@ NimbleTemplate has been developed and actively tested with the below environment
 - Elixir 1.13.3
 - Erlang/OTP 24.2.2
 - Phoenix 1.6.6
+- Node 16.15.0
 
 ## Installation
 
@@ -30,7 +31,7 @@ Step 2: Add `nimble_template` dependency to `mix.exs`:
 ```elixir
 def deps do
   [
-    {:nimble_template, "~> 4.1", only: :dev, runtime: false},
+    {:nimble_template, "~> 4.2", only: :dev, runtime: false},
     # other dependencies ...
   ]
 end

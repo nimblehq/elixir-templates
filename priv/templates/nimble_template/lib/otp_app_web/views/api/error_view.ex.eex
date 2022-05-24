@@ -5,7 +5,7 @@ defmodule <%= web_module %>.Api.ErrorView do
 
   def template_not_found(template, assigns) do
     build_error_response(
-      code: status_code_from_template(template),
+      code: assigns[:code] || status_code_from_template(template),
       detail: %{},
       message: assigns[:message] || Phoenix.Controller.status_message_from_template(template)
     )

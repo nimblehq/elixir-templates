@@ -75,9 +75,11 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
 
           assert file =~ """
                  RUN cd assets && \\
-                 \t\tnpm ci --progress=false --no-audit --loglevel=error && \\
-                 \t\tcd - && \\
-                 \t\tmix assets.deploy
+                 \t\tnpm ci --progress=false --no-audit --loglevel=error
+
+                 ENV NODE_ENV=production
+
+                 RUN mix assets.deploy
                  """
 
           assert file =~ "adduser -u 1000 -G appuser -g appuser -s /bin/sh -D appuser"
@@ -126,9 +128,11 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
 
           refute file =~ """
                  RUN cd assets && \\
-                 \t\tnpm ci --progress=false --no-audit --loglevel=error && \\
-                 \t\tcd - && \\
-                 \t\tmix assets.deploy
+                 \t\tnpm ci --progress=false --no-audit --loglevel=error
+
+                 ENV NODE_ENV=production
+
+                 RUN mix assets.deploy
                  """
         end)
       end)
