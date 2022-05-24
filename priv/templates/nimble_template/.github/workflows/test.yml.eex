@@ -19,7 +19,7 @@ jobs:
           access_token: ${{ github.token }}
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
@@ -27,7 +27,7 @@ jobs:
         uses: asdf-vm/actions/setup@v1
 
       - name: Cache asdf
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
@@ -37,7 +37,7 @@ jobs:
         uses: asdf-vm/actions/install@v1
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
@@ -46,7 +46,7 @@ jobs:
           restore-keys: ${{ runner.os }}-mix-
       <%= if web_project? do %>
       - name: Cache Node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: assets/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -85,7 +85,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
@@ -93,7 +93,7 @@ jobs:
         uses: asdf-vm/actions/setup@v1
 
       - name: Cache asdf
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
@@ -103,7 +103,7 @@ jobs:
         uses: asdf-vm/actions/install@v1
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
@@ -112,7 +112,7 @@ jobs:
           restore-keys: ${{ runner.os }}-mix-
       <%= if web_project? do %>
       - name: Cache Node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: assets/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -172,7 +172,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
@@ -180,7 +180,7 @@ jobs:
         uses: asdf-vm/actions/setup@v1
 
       - name: Cache asdf
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
@@ -190,7 +190,7 @@ jobs:
         uses: asdf-vm/actions/install@v1
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
@@ -199,7 +199,7 @@ jobs:
           restore-keys: ${{ runner.os }}-mix-
       <%= if web_project? do %>
       - name: Cache Node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: assets/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -247,7 +247,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
@@ -255,7 +255,7 @@ jobs:
         uses: asdf-vm/actions/setup@v1
 
       - name: Cache asdf
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
@@ -265,7 +265,7 @@ jobs:
         uses: asdf-vm/actions/install@v1
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
@@ -274,7 +274,7 @@ jobs:
           restore-keys: ${{ runner.os }}-mix-
       <%= if web_project? do %>
       - name: Cache Node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: assets/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -337,7 +337,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
@@ -345,7 +345,7 @@ jobs:
         uses: asdf-vm/actions/setup@v1
 
       - name: Cache asdf
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
@@ -355,7 +355,7 @@ jobs:
         uses: asdf-vm/actions/install@v1
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
@@ -364,7 +364,7 @@ jobs:
           restore-keys: ${{ runner.os }}-mix-
 
       - name: Cache Node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: assets/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
