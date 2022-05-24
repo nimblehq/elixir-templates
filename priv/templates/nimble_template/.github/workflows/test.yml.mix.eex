@@ -3,8 +3,6 @@ name: Test
 on: pull_request
 
 env:
-  OTP_VERSION: <%= inspect erlang_version %>
-  ELIXIR_VERSION: <%= inspect elixir_version %>
   MIX_ENV: test
 
 jobs:
@@ -20,25 +18,31 @@ jobs:
           access_token: ${{ github.token }}
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up Elixir
-        uses: erlef/setup-elixir@v1
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v1
+
+      - name: Cache asdf
+        uses: actions/cache@v3
         with:
-          otp-version: ${{ env.OTP_VERSION }}
-          elixir-version: ${{ env.ELIXIR_VERSION }}
+          path: /home/runner/.asdf
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+
+      - name: Install dependencies in .tool-versions
+        uses: asdf-vm/actions/install@v1
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
             deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-mix-
+          restore-keys: ${{ runner.os }}-mix-
 
       - name: Install dependencies
         run: mix deps.get
@@ -55,25 +59,31 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up Elixir
-        uses: erlef/setup-elixir@v1
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v1
+
+      - name: Cache asdf
+        uses: actions/cache@v3
         with:
-          otp-version: ${{ env.OTP_VERSION }}
-          elixir-version: ${{ env.ELIXIR_VERSION }}
+          path: /home/runner/.asdf
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+
+      - name: Install dependencies in .tool-versions
+        uses: asdf-vm/actions/install@v1
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
             deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-mix-
+          restore-keys: ${{ runner.os }}-mix-
 
       - name: Install dependencies
         run: mix deps.get
@@ -93,25 +103,31 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up Elixir
-        uses: erlef/setup-elixir@v1
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v1
+
+      - name: Cache asdf
+        uses: actions/cache@v3
         with:
-          otp-version: ${{ env.OTP_VERSION }}
-          elixir-version: ${{ env.ELIXIR_VERSION }}
+          path: /home/runner/.asdf
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+
+      - name: Install dependencies in .tool-versions
+        uses: asdf-vm/actions/install@v1
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build
             deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-mix-
+          restore-keys: ${{ runner.os }}-mix-
 
       - name: Install dependencies
         run: mix deps.get
