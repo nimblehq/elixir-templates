@@ -28,11 +28,9 @@ jobs:
       - name: Cache asdf
         uses: actions/cache@v2
         with:
-          path: |
-            /home/runner/.asdf
+          path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
-          restore-keys: |
-            ${{ runner.os }}-asdf-
+          restore-keys: ${{ runner.os }}-asdf-
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
@@ -44,8 +42,7 @@ jobs:
             _build
             deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-mix-
+          restore-keys: ${{ runner.os }}-mix-
 
       - name: Install dependencies
         run: mix deps.get
@@ -72,11 +69,9 @@ jobs:
       - name: Cache asdf
         uses: actions/cache@v2
         with:
-          path: |
-            /home/runner/.asdf
+          path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
-          restore-keys: |
-            ${{ runner.os }}-asdf-
+          restore-keys: ${{ runner.os }}-asdf-
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
@@ -88,8 +83,7 @@ jobs:
             _build
             deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-mix-
+          restore-keys: ${{ runner.os }}-mix-
 
       - name: Install dependencies
         run: mix deps.get
@@ -119,11 +113,9 @@ jobs:
       - name: Cache asdf
         uses: actions/cache@v2
         with:
-          path: |
-            /home/runner/.asdf
+          path: /home/runner/.asdf
           key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
-          restore-keys: |
-            ${{ runner.os }}-asdf-
+          restore-keys: ${{ runner.os }}-asdf-
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
@@ -135,8 +127,7 @@ jobs:
             _build
             deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-mix-
+          restore-keys: ${{ runner.os }}-mix-
 
       - name: Install dependencies
         run: mix deps.get
