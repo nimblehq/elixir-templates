@@ -79,6 +79,19 @@ Once the release branch is merged into the `master` branch, Github Action automa
 
 Contributions, issues, and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues).
 
+## FAQ
+
+### 1. Getting `(Mix) The task "phx.new" could not be found` error
+
+The Phoenix application generator is missing. By solving this problem, you need to run
+``` bash
+mix archive.install hex phx_new
+```
+or
+```bash
+mix archive.install hex phx_new #{specific-version}
+```
+
 ## License
 
 This project is Copyright (c) 2014 and onwards. It is free software, and may be redistributed under the terms specified in the [LICENSE] file.
