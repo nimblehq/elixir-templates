@@ -9,14 +9,14 @@ jobs:
     with:
       new_project_options: ""
       variant: "live"
-  
+
   long_custom_name_live_project:
     name: Test on a long custom name Live project
     uses: ./.github/workflows/reusable_phoenix_project.yml
     with:
       new_project_options: "--module=SampleCustomModule --app=sample_custom_app"
       variant: "live"
-      
+
   short_custom_name_live_project:
     name: Test on a short custom name Live project
     uses: ./.github/workflows/reusable_phoenix_project.yml

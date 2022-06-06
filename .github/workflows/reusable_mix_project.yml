@@ -10,7 +10,7 @@ on:
 env:
   BASE_PROJECT_DIRECTORY: sample_project
   MIX_ENV: test
-  
+
 jobs:
   unit_test:
     name: Unit test
@@ -39,13 +39,13 @@ jobs:
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
-        
+
       - name: Install rebar
         run: mix local.rebar --force
-        
+
       - name: Install hex
         run: mix local.hex --force
-      
+
       - name: Create Mix project
         run: make create_mix_project PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY OPTIONS="${{ inputs.new_project_options }}"
 

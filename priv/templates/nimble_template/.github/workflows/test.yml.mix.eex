@@ -49,12 +49,12 @@ jobs:
 
       - name: Compile dependencies
         run: mix compile
-          
+
   lint_codebase:
     name: Linting
-    
+
     needs: install_and_compile_dependencies
-    
+
     runs-on: ubuntu-latest
 
     steps:
@@ -76,6 +76,12 @@ jobs:
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
 
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
+
       - name: Cache Elixir build
         uses: actions/cache@v3
         with:
@@ -93,12 +99,12 @@ jobs:
 
       - name: Run codebase check
         run: mix codebase
-          
+
   test:
     name: Unit Test
-    
+
     needs: lint_codebase
-    
+
     runs-on: ubuntu-latest
 
     steps:

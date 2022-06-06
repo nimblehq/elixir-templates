@@ -15,9 +15,9 @@ jobs:
     name: Publish hex package
 
     runs-on: ubuntu-latest
-    
+
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
-    
+
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -41,10 +41,10 @@ jobs:
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
-        
+
       - name: Install rebar
         run: mix local.rebar --force
-        
+
       - name: Install hex
         run: mix local.hex --force
 
