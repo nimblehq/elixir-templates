@@ -37,10 +37,10 @@ jobs:
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
-        
+
       - name: Install rebar
         run: mix local.rebar --force
-        
+
       - name: Install hex
         run: mix local.hex --force
 
