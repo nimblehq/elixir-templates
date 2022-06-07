@@ -48,5 +48,7 @@ defmodule NimbleTemplate.Version do
   defp git_add_and_push(new_version) do
     Mix.shell().cmd("git add mix.exs README.md")
     Mix.shell().cmd("git commit -m \"Bump to #{new_version}\"")
+
+    Mix.shell().cmd("git push origin chore/bump-to-#{new_version} -f")
   end
 end
