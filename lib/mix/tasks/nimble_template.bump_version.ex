@@ -28,7 +28,7 @@ defmodule Mix.Tasks.NimbleTemplate.BumpVersion do
       {[], [new_version], []} ->
         new_version
 
-      _ ->
+      _other ->
         Mix.raise("Invalid format. Please use `mix nimble_template.bump_version new_version`")
     end
   end

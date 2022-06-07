@@ -24,7 +24,7 @@ defmodule NimbleTemplate.Version do
   end
 
   defp included_git_action?(%{included_git_action?: true}), do: true
-  defp included_git_action?(_), do: false
+  defp included_git_action?(_opts), do: false
 
   defp bump_version_to(current_version, new_version) do
     Generator.replace_content(
