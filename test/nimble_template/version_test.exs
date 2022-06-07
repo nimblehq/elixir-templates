@@ -52,11 +52,11 @@ defmodule NimbleTemplate.VersionTest do
       end
 
       assert_file("mix.exs", fn file ->
-        assert file =~ "version: \"#{current_version}\""
+        refute file =~ "version: \"#{new_version}\""
       end)
 
       assert_file("README.md", fn file ->
-        assert file =~ "{:nimble_template, \"~> #{current_version}\", only: :dev, runtime: false},"
+        refute file =~ "{:nimble_template, \"~> #{new_version}\", only: :dev, runtime: false},"
       end)
     end
   end
