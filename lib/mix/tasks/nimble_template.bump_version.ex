@@ -15,12 +15,12 @@ defmodule Mix.Tasks.NimbleTemplate.BumpVersion do
 
   use Mix.Task
 
-  alias NimbleTemplate.Version
+alias NimbleTemplate.Version
 
   def run(args) do
     new_version = parse_opts(args)
 
-    Version.bump(new_version, %{included_git_action?: true})
+    Version.bump(new_version)
   end
 
   defp parse_opts(args) do
