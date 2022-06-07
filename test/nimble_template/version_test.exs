@@ -3,6 +3,12 @@ defmodule NimbleTemplate.VersionTest do
 
   alias NimbleTemplate.Version
 
+  setup do
+    on_exit(fn ->
+      Mix.shell().cmd("git checkout mix.exs README.md")
+    end)
+  end
+
   describe "bump/1" do
     test "updates the version in mix.exs and README.md files given a valid version number" do
       current_version = Mix.Project.config()[:version]
@@ -24,10 +30,12 @@ defmodule NimbleTemplate.VersionTest do
 
       assert_file("mix.exs", fn file ->
         assert file =~ "version: \"#{new_version}\""
+        refute file =~ "version: \"#{current_version}\""
       end)
 
       assert_file("README.md", fn file ->
         assert file =~ "{:nimble_template, \"~> #{new_version}\", only: :dev, runtime: false},"
+        refute file =~ "{:nimble_template, \"~> #{current_version}\", only: :dev, runtime: false},"
       end)
     end
 
@@ -52,10 +60,12 @@ defmodule NimbleTemplate.VersionTest do
       end
 
       assert_file("mix.exs", fn file ->
+        assert file =~ "version: \"#{current_version}\""
         refute file =~ "version: \"#{new_version}\""
       end)
 
       assert_file("README.md", fn file ->
+        assert file =~ "{:nimble_template, \"~> #{current_version}\", only: :dev, runtime: false},"
         refute file =~ "{:nimble_template, \"~> #{new_version}\", only: :dev, runtime: false},"
       end)
     end
