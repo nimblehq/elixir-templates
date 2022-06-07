@@ -31,7 +31,7 @@ Step 2: Add `nimble_template` dependency to `mix.exs`:
 ```elixir
 def deps do
   [
-    {:nimble_template, "~> 4.2", only: :dev, runtime: false},
+    {:nimble_template, "~> 4.2.0", only: :dev, runtime: false},
     # other dependencies ...
   ]
 end
@@ -71,9 +71,17 @@ Set the `HEX_API_KEY` as a Github secret (skip this step if it has been done).
 
 The release process follows the [Git flow](https://nimblehq.co/compass/development/version-control/release-management).
 
-Once a `release/<version number>` is created, to publish the new version to Hex.pm, the version number in the `mix.ex` file needs to be updated on the release branch before merging.
+1. Bump the new version on local
 
-Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
+  ```bash
+  mix nimble_template.bump_version new_version
+  ```
+
+2. Open a PR to develop.
+
+3. Once that bump_version PR is merged, create the `release/<version number>` from the `develop` branch, points to the `master` branch.
+
+4. Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
 
 ## Contributing
 
