@@ -31,7 +31,7 @@ Step 2: Add `nimble_template` dependency to `mix.exs`:
 ```elixir
 def deps do
   [
-    {:nimble_template, "~> 4.2.0", only: :dev, runtime: false},
+    {:nimble_template, "~> 4.2.1", only: :dev, runtime: false},
     # other dependencies ...
   ]
 end
