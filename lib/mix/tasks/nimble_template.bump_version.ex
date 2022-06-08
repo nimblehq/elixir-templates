@@ -15,7 +15,7 @@ defmodule Mix.Tasks.NimbleTemplate.BumpVersion do
 
   use Mix.Task
 
-alias NimbleTemplate.Version
+  alias NimbleTemplate.Version
 
   def run(args) do
     new_version = parse_opts(args)
