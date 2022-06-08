@@ -73,16 +73,3 @@ jobs:
         with:
           token: ${{ secrets.WIKI_ACTION_TOKEN }}
           commit-message: Bump to ${{ github.event.inputs.newVersion }}
-          title: [Chore] Bump to ${{ github.event.inputs.newVersion }}
-          body: |
-            ## What happened
-
-            Bump to ${{ github.event.inputs.newVersion }}
-
-            ## Insight
-
-            Created by the Bump Version workflow.
-
-            ## Proof Of Work
-
-            Check the file changes
