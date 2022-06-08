@@ -70,13 +70,13 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
-          with:
+        with:
           token: ${{ secrets.WIKI_ACTION_TOKEN }}
           commit-message: Bump to ${{ github.event.inputs.newVersion }}
           committer: Dev Nimble <dev@nimblehq.co>
           branch: chore/bump-to-${{ github.event.inputs.newVersion }}
           delete-branch: true
-          title: [Chore] Bump to ${{ github.event.inputs.newVersion }}
+          title: '[Chore] Bump to ${{ github.event.inputs.newVersion }}'
           body: |
             ## What happened
 
@@ -88,4 +88,4 @@ jobs:
 
             ## Proof Of Work
 
-            Check the file changes
+            On Files changed tab
