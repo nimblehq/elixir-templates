@@ -10,7 +10,7 @@ defmodule Mix.Tasks.NimbleTemplate.BumpVersion do
   # Usage
 
   - mix help nimble_template.bump_version # Print help
-  - mix nimble_template.bump_version [new_version] # Bump the template into the [new_version].
+  - mix nimble_template.bump_version [new_version] # Bump the template version to the [new_version].
   """
 
   use Mix.Task
