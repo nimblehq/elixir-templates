@@ -77,6 +77,9 @@ jobs:
           branch: chore/bump-to-${{ github.event.inputs.newVersion }}
           delete-branch: true
           title: '[Chore] Bump to ${{ github.event.inputs.newVersion }}'
+          labels: |
+            type : chore
+          assignees: andyduong1920
           body: |
             ## What happened
 
@@ -84,8 +87,8 @@ jobs:
 
             ## Insight
 
-            Created by the Bump Version workflow.
+            Automated creates by the Bump Version workflow.
 
             ## Proof Of Work
 
-            On Files changed tab
+            On the Files changed tab
