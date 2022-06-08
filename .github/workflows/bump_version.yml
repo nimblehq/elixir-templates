@@ -72,20 +72,3 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.WIKI_ACTION_TOKEN }}
-          commit-message: Bump to ${{ github.event.inputs.newVersion }}
-          committer: Dev Nimble <dev@nimblehq.co>
-          branch: chore/bump-to-${{ github.event.inputs.newVersion }}
-          delete-branch: true
-          title: [Chore] Bump to ${{ github.event.inputs.newVersion }}
-          body: |
-            ## What happened
-
-            Bump to ${{ github.event.inputs.newVersion }}
-
-            ## Insight
-
-            Created by the Bump Version workflow.
-
-            ## Proof Of Work
-
-            Check the file changes
