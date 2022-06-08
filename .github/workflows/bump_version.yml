@@ -70,7 +70,7 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
-          with:
+        with:
           token: ${{ secrets.WIKI_ACTION_TOKEN }}
           commit-message: Bump to ${{ github.event.inputs.newVersion }}
           committer: Dev Nimble <dev@nimblehq.co>
