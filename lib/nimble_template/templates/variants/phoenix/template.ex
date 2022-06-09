@@ -51,6 +51,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     |> PhoenixAddons.MixRelease.apply()
     |> PhoenixAddons.HealthPlug.apply()
     |> PhoenixAddons.Gettext.apply(project)
+    |> PhoenixAddons.Seeds.apply(project)
   end
 
   defp apply_optional_common_phoenix_addons(project) do

@@ -180,7 +180,7 @@ jobs:
           --health-retries 5
 
     env:
-      MIX_ENV: dev
+      ENABLE_DB_SEED: true
 
     steps:
       - name: Checkout repository
