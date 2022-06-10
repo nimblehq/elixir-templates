@@ -36,7 +36,7 @@ defmodule Mix.Tasks.NimbleTemplate.UpgradeStack do
              node: :string
            ]
          ) do
-      {stack_versions, [], []} ->
+      {stack_versions, _, _} ->
         stack_versions
 
       _other ->
