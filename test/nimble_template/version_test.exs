@@ -71,9 +71,9 @@ defmodule NimbleTemplate.VersionTest do
     end
   end
 
-  describe "upgrade_elixir_erlang_node_and_alpine/1" do
+  describe "upgrade_stack/1" do
     test "upgrade elixir version given the new elixir_version" do
-      assert Version.upgrade_elixir_erlang_node_and_alpine(%{elixir_version: "130.13.4"}) == :ok
+      assert Version.upgrade_stack(%{elixir_version: "130.13.4"}) == :ok
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
         assert file =~ "@elixir_version \"130.13.4\""
@@ -101,7 +101,7 @@ defmodule NimbleTemplate.VersionTest do
     end
 
     test "upgrade erlang version given the new erlang_version" do
-      assert Version.upgrade_elixir_erlang_node_and_alpine(%{erlang_version: "250.0.1"}) == :ok
+      assert Version.upgrade_stack(%{erlang_version: "250.0.1"}) == :ok
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
         assert file =~ "@erlang_version \"250.0.1\""
@@ -131,7 +131,7 @@ defmodule NimbleTemplate.VersionTest do
     end
 
     test "upgrade node version given the new node_version" do
-      assert Version.upgrade_elixir_erlang_node_and_alpine(%{node_version: "180.3.0"}) == :ok
+      assert Version.upgrade_stack(%{node_version: "180.3.0"}) == :ok
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
         assert file =~ "@node_asdf_version \"180.3.0\""
@@ -155,7 +155,7 @@ defmodule NimbleTemplate.VersionTest do
     end
 
     test "upgrade alpine version given the new alpine_version" do
-      assert Version.upgrade_elixir_erlang_node_and_alpine(%{alpine_version: "300.14.6"}) == :ok
+      assert Version.upgrade_stack(%{alpine_version: "300.14.6"}) == :ok
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
         assert file =~ "@alpine_version \"300.14.6\""
