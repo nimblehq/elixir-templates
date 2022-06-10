@@ -80,7 +80,7 @@ jobs:
       - name: Create the new phoenix application
         run: printf "Y\n" | make create_phoenix_project PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} OPTIONS=""
 
-      - name: Create the new phoenix application
+      - name: Apply the template
         run: make apply_phoenix_template PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} VARIANT=${{ github.event.inputs.projectVariant }}
 
       - name: Remove the build folders before sending to Github Artifact
