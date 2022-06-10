@@ -24,7 +24,7 @@ env:
 
 jobs:
   release_version_test:
-    name: Bump version
+    name: Generate a new project
     runs-on: ubuntu-latest
 
     steps:
@@ -79,7 +79,7 @@ jobs:
         run: printf "Y\n" | make create_phoenix_project PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} OPTIONS=""
 
       - name: Apply the template
-        run: make apply_phoenix_template PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} VARIANT=${{ github.event.inputs.projectVariant }}
+        run: make apply_phoenix_template NIMBLE_TEMPLATE_VERSION="~> 4.2.0" PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} VARIANT=${{ github.event.inputs.projectVariant }}
 
       - name: Remove the build folders before sending to Github Artifact
         run: rm -rf ${{ github.event.inputs.projectName }}/deps ${{ github.event.inputs.projectName }}/_build ${{ github.event.inputs.projectName }}/assets/node_modules

@@ -43,7 +43,7 @@ post_setup_addon_prompts =
 
 apply_phoenix_template:
 	cd ${PROJECT_DIRECTORY} && \
-	echo '{:nimble_template, path: "../", only: :dev, runtime: false},' > nimble_template.txt && \
+	echo '{:nimble_template, path: ${NIMBLE_TEMPLATE_VERSION}, only: :dev, runtime: false},' > nimble_template.txt && \
 	sed -i -e '/{:phoenix, "~> /r nimble_template.txt' mix.exs && \
 	rm nimble_template.txt && \
 	export MIX_ENV=dev && \
