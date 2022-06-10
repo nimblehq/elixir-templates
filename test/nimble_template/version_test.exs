@@ -79,6 +79,10 @@ defmodule NimbleTemplate.VersionTest do
         assert file =~ "@elixir_version \"130.13.4\""
       end)
 
+      assert_file(".tool-versions", fn file ->
+        assert file =~ "elixir 130.13.4-otp-"
+      end)
+
       assert_file("test/nimble_template/addons/asdf_tool_version_test.exs", fn file ->
         assert file =~ "elixir 130.13.4-otp-"
       end)
@@ -101,6 +105,11 @@ defmodule NimbleTemplate.VersionTest do
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
         assert file =~ "@erlang_version \"250.0.1\""
+      end)
+
+      assert_file(".tool-versions", fn file ->
+        assert file =~ "erlang 250.0.1"
+        assert file =~ "-otp-250"
       end)
 
       assert_file("test/nimble_template/addons/asdf_tool_version_test.exs", fn file ->
@@ -126,6 +135,10 @@ defmodule NimbleTemplate.VersionTest do
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
         assert file =~ "@node_asdf_version \"180.3.0\""
+      end)
+
+      assert_file(".tool-versions", fn file ->
+        assert file =~ "nodejs 180.3.0"
       end)
 
       assert_file("test/nimble_template/addons/asdf_tool_version_test.exs", fn file ->

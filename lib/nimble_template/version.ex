@@ -64,6 +64,12 @@ defmodule NimbleTemplate.Version do
       "@elixir_version \"#{new_version}\""
     )
 
+    Generator.replace_content(
+      ".tool-versions",
+      "elixir #{current_version}",
+      "elixir #{new_version}"
+    )
+
     Generator.replace_content_all(
       "test/nimble_template/addons/asdf_tool_version_test.exs",
       "elixir #{current_version}-otp-#{}",
@@ -96,6 +102,18 @@ defmodule NimbleTemplate.Version do
       "lib/nimble_template/projects/project.ex",
       "@erlang_version \"#{current_version}\"",
       "@erlang_version \"#{new_version}\""
+    )
+
+    Generator.replace_content(
+      ".tool-versions",
+      "erlang #{current_version}",
+      "erlang #{new_version}"
+    )
+
+    Generator.replace_content(
+      ".tool-versions",
+      "-otp-#{Project.get_otp_major_version(current_version)}",
+      "-otp-#{Project.get_otp_major_version(new_version)}"
     )
 
     Generator.replace_content_all(
@@ -152,6 +170,12 @@ defmodule NimbleTemplate.Version do
       "lib/nimble_template/projects/project.ex",
       "@node_asdf_version \"#{current_version}\"",
       "@node_asdf_version \"#{new_version}\""
+    )
+
+    Generator.replace_content(
+      ".tool-versions",
+      "nodejs #{current_version}",
+      "nodejs #{new_version}"
     )
 
     Generator.replace_content_all(
