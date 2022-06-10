@@ -73,96 +73,96 @@ defmodule NimbleTemplate.VersionTest do
 
   describe "upgrade_stack/1" do
     test "upgrade elixir version given the new elixir_version" do
-      assert Version.upgrade_stack(%{elixir_version: "130.13.4"}) == :ok
+      assert Version.upgrade_stack(%{elixir_version: "a.b.c"}) == :ok
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
-        assert file =~ "@elixir_version \"130.13.4\""
+        assert file =~ "@elixir_version \"a.b.c\""
       end)
 
       assert_file(".tool-versions", fn file ->
-        assert file =~ "elixir 130.13.4-otp-"
+        assert file =~ "elixir a.b.c-otp-"
       end)
 
       assert_file("test/nimble_template/addons/asdf_tool_version_test.exs", fn file ->
-        assert file =~ "elixir 130.13.4-otp-"
+        assert file =~ "elixir a.b.c-otp-"
       end)
 
       assert_file("test/nimble_template/addons/github_test.exs", fn file ->
-        assert file =~ "Elixir 130.13.4"
+        assert file =~ "Elixir a.b.c"
       end)
 
       assert_file("test/nimble_template/addons/readme_test.exs", fn file ->
-        assert file =~ "Elixir 130.13.4"
+        assert file =~ "Elixir a.b.c"
       end)
 
       assert_file("test/nimble_template/addons/variants/docker_test.exs", fn file ->
-        assert file =~ "ELIXIR_IMAGE_VERSION=130.13.4"
+        assert file =~ "ELIXIR_IMAGE_VERSION=a.b.c"
       end)
     end
 
     test "upgrade erlang version given the new erlang_version" do
-      assert Version.upgrade_stack(%{erlang_version: "250.0.1"}) == :ok
+      assert Version.upgrade_stack(%{erlang_version: "x.y.z"}) == :ok
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
-        assert file =~ "@erlang_version \"250.0.1\""
+        assert file =~ "@erlang_version \"x.y.z\""
       end)
 
       assert_file(".tool-versions", fn file ->
-        assert file =~ "erlang 250.0.1"
-        assert file =~ "-otp-250"
+        assert file =~ "erlang x.y.z"
+        assert file =~ "-otp-x"
       end)
 
       assert_file("test/nimble_template/addons/asdf_tool_version_test.exs", fn file ->
-        assert file =~ "erlang 250.0.1"
-        assert file =~ "-otp-250"
+        assert file =~ "erlang x.y.z"
+        assert file =~ "-otp-x"
       end)
 
       assert_file("test/nimble_template/addons/github_test.exs", fn file ->
-        assert file =~ "Erlang 250.0.1"
+        assert file =~ "Erlang x.y.z"
       end)
 
       assert_file("test/nimble_template/addons/readme_test.exs", fn file ->
-        assert file =~ "Erlang 250.0.1"
+        assert file =~ "Erlang x.y.z"
       end)
 
       assert_file("test/nimble_template/addons/variants/docker_test.exs", fn file ->
-        assert file =~ "ERLANG_IMAGE_VERSION=250.0.1"
+        assert file =~ "ERLANG_IMAGE_VERSION=x.y.z"
       end)
     end
 
     test "upgrade node version given the new node_version" do
-      assert Version.upgrade_stack(%{node_version: "180.3.0"}) == :ok
+      assert Version.upgrade_stack(%{node_version: "a.s.d"}) == :ok
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
-        assert file =~ "@node_asdf_version \"180.3.0\""
+        assert file =~ "@node_asdf_version \"a.s.d\""
       end)
 
       assert_file(".tool-versions", fn file ->
-        assert file =~ "nodejs 180.3.0"
+        assert file =~ "nodejs a.s.d"
       end)
 
       assert_file("test/nimble_template/addons/asdf_tool_version_test.exs", fn file ->
-        assert file =~ "nodejs 180.3.0"
+        assert file =~ "nodejs a.s.d"
       end)
 
       assert_file("test/nimble_template/addons/github_test.exs", fn file ->
-        assert file =~ "Node 180.3.0"
+        assert file =~ "Node a.s.d"
       end)
 
       assert_file("test/nimble_template/addons/readme_test.exs", fn file ->
-        assert file =~ "Node 180.3.0"
+        assert file =~ "Node a.s.d"
       end)
     end
 
     test "upgrade alpine version given the new alpine_version" do
-      assert Version.upgrade_stack(%{alpine_version: "300.14.6"}) == :ok
+      assert Version.upgrade_stack(%{alpine_version: "z.x.c"}) == :ok
 
       assert_file("lib/nimble_template/projects/project.ex", fn file ->
-        assert file =~ "@alpine_version \"300.14.6\""
+        assert file =~ "@alpine_version \"z.x.c\""
       end)
 
       assert_file("test/nimble_template/addons/variants/docker_test.exs", fn file ->
-        assert file =~ "RELEASE_IMAGE_VERSION=300.14.6"
+        assert file =~ "RELEASE_IMAGE_VERSION=z.x.c"
       end)
     end
   end
