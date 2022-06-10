@@ -68,7 +68,7 @@ jobs:
         run: printf "Y\n" | make create_phoenix_project PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY OPTIONS="${{ inputs.new_project_options }}"
 
       - name: Apply ${{ inputs.variant }} variant into the new project
-        run: make apply_phoenix_template NIMBLE_TEMPLATE_VERSION="../" PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY VARIANT="${{ inputs.variant }}"
+        run: make apply_phoenix_template PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY VARIANT="${{ inputs.variant }}"
 
       # Verify the new project after applying the nimble_template
 

@@ -76,10 +76,10 @@ jobs:
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
 
       - name: Create the new phoenix application
-        run: printf "Y\n" | make create_phoenix_project PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} OPTIONS=""
+        run: make create_phoenix_project PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} OPTIONS=""
 
       - name: Apply the template
-        run: make apply_phoenix_template NIMBLE_TEMPLATE_VERSION="~> 4.2.0" PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} VARIANT=${{ github.event.inputs.projectVariant }}
+        run: make apply_phoenix_template_2 PROJECT_DIRECTORY=${{ github.event.inputs.projectName }} VARIANT=${{ github.event.inputs.projectVariant }}
 
       - name: Remove the build folders before sending to Github Artifact
         run: rm -rf ${{ github.event.inputs.projectName }}/deps ${{ github.event.inputs.projectName }}/_build ${{ github.event.inputs.projectName }}/assets/node_modules

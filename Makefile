@@ -41,9 +41,25 @@ mix_addon_prompts = Y\nY\nY\nY\nY\nY\n
 
 post_setup_addon_prompts =
 
+apply_phoenix_template_2:
+	cd ${PROJECT_DIRECTORY} && \
+	echo '{:nimble_template, "~> 4.2.0", only: :dev, runtime: false},' > nimble_template.txt && \
+	sed -i -e '/{:phoenix, "~> /r nimble_template.txt' mix.exs && \
+	rm nimble_template.txt && \
+	export MIX_ENV=dev && \
+	mix do deps.get, deps.compile && \
+	mix format && \
+	if [ $(VARIANT) = web ]; then \
+		printf "${common_addon_prompts}${web_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --web; \
+	elif [ $(VARIANT) = api ]; then \
+		printf "${common_addon_prompts}${api_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --api; \
+	elif [ $(VARIANT) = live ]; then \
+		printf "${common_addon_prompts}${web_addon_prompts}${live_addon_prompts}${post_setup_addon_prompts}" | mix nimble_template.gen --live; \
+	fi;
+
 apply_phoenix_template:
 	cd ${PROJECT_DIRECTORY} && \
-	echo '{:nimble_template, path: ${NIMBLE_TEMPLATE_VERSION}, only: :dev, runtime: false},' > nimble_template.txt && \
+	echo '{:nimble_template, path: "../", only: :dev, runtime: false},' > nimble_template.txt && \
 	sed -i -e '/{:phoenix, "~> /r nimble_template.txt' mix.exs && \
 	rm nimble_template.txt && \
 	export MIX_ENV=dev && \
