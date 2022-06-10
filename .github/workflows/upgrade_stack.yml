@@ -92,7 +92,7 @@ jobs:
           committer: Nimble Bot <bot@nimblehq.co>
           branch: chore/upgrade-stack-versions
           delete-branch: true
-          title: '[Chore] Upgrade stack versions
+          title: '[Chore] Upgrade stack versions'
           labels: |
             type : chore
           body: |
