@@ -1,0 +1,94 @@
+name: Upgrade Stack
+
+on:
+  workflow_dispatch:
+    inputs:
+      newVersion:
+        description: "New version"
+        required: true
+        type: string
+
+env:
+  PHOENIX_VERSION: 1.6.6
+  MIX_ENV: test
+
+jobs:
+  release_version_test:
+    name: Bump version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v1
+
+      - name: Cache asdf
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.asdf
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+
+      - name: Install dependencies in .tool-versions
+        uses: asdf-vm/actions/install@v1
+
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
+
+      - name: Cache Elixir build
+        uses: actions/cache@v3
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile dependencies
+        run: mix compile --warnings-as-errors --all-warnings
+
+      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
+        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+
+      - name: Bump version
+        run: mix nimble_template.bump_version ${{ github.event.inputs.newVersion }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          assignees: andyduong1920
+          token: ${{ secrets.WIKI_ACTION_TOKEN }}
+          commit-message: Bump version to ${{ github.event.inputs.newVersion }}
+          committer: Nimble Bot <bot@nimblehq.co>
+          branch: chore/bump-version-to-${{ github.event.inputs.newVersion }}
+          delete-branch: true
+          title: '[Chore] Bump version to ${{ github.event.inputs.newVersion }}'
+          labels: |
+            type : chore
+          body: |
+            ## What happened
+
+            Bump version to ${{ github.event.inputs.newVersion }}
+
+            ## Insight
+
+            Automatically created by the Bump Version workflow.
+
+            ## Proof Of Work
+
+            On the Files changed tab
