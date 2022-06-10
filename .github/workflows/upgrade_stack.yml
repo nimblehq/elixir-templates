@@ -3,9 +3,24 @@ name: Upgrade Stack
 on:
   workflow_dispatch:
     inputs:
-      newVersion:
-        description: "New version"
-        required: true
+      elixirVersion:
+        description: "Elixir version"
+        required: false
+        type: string
+
+      erlangVersion:
+        description: "Erlang version"
+        required: false
+        type: string
+
+      alpineVersion:
+        description: "Alpine version"
+        required: false
+        type: string
+
+      nodeVersion:
+        description: "Node version"
+        required: false
         type: string
 
 env:
@@ -14,7 +29,7 @@ env:
 
 jobs:
   release_version_test:
-    name: Bump version
+    name: Upgrade Stack
     runs-on: ubuntu-latest
 
     steps:
@@ -65,29 +80,29 @@ jobs:
       - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
         run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
 
-      - name: Bump version
-        run: mix nimble_template.bump_version ${{ github.event.inputs.newVersion }}
+      - name: Upgrade Stack
+        run: mix nimble_template.upgrade_stack --elixir ${{ github.event.inputs.elixirVersion }} --erlang ${{ github.event.inputs.erlangVersion }} --node ${{ github.event.inputs.nodeVersion }} --alpine ${{ github.event.inputs.alpineVersion }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: andyduong1920
           token: ${{ secrets.WIKI_ACTION_TOKEN }}
-          commit-message: Bump version to ${{ github.event.inputs.newVersion }}
+          commit-message: Upgrade stack versions
           committer: Nimble Bot <bot@nimblehq.co>
-          branch: chore/bump-version-to-${{ github.event.inputs.newVersion }}
+          branch: chore/upgrade-stack-versions
           delete-branch: true
-          title: '[Chore] Bump version to ${{ github.event.inputs.newVersion }}'
+          title: '[Chore] Upgrade stack versions
           labels: |
             type : chore
           body: |
             ## What happened
 
-            Bump version to ${{ github.event.inputs.newVersion }}
+            Upgrade stack versions
 
             ## Insight
 
-            Automatically created by the Bump Version workflow.
+            Automatically created by the Upgrade stacks workflow.
 
             ## Proof Of Work
 
