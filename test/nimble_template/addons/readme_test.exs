@@ -11,7 +11,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
 
         assert_file("README.md", fn file ->
           assert file =~ "Erlang 25.0.1"
-          assert file =~ "Elixir 1.13.4"
+          assert file =~ "Elixir 1.15.6"
 
           assert file =~ "Node 16.15.0"
           assert file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
@@ -48,7 +48,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
 
         assert_file("README.md", fn file ->
           assert file =~ "Erlang 25.0.1"
-          assert file =~ "Elixir 1.13.4"
+          assert file =~ "Elixir 1.15.6"
 
           refute file =~ "Node 16.15.0"
           refute file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
@@ -85,7 +85,7 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
 
         assert_file("README.md", fn file ->
           assert file =~ "Erlang 25.0.1"
-          assert file =~ "Elixir 1.13.4"
+          assert file =~ "Elixir 1.15.6"
 
           refute file =~ "Node 16.15.0"
           refute file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
