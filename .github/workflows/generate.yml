@@ -8,7 +8,11 @@ on:
         required: true
         type: string
 
-    inputs:
+      # projectOptions:
+      #   description: "Options"
+      #   required: true
+      #   type: string
+
       projectVariant:
         description: "Variant"
         required: true
