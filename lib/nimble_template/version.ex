@@ -17,24 +17,24 @@ defmodule NimbleTemplate.Version do
   end
 
   def upgrade_stack(elixir_erlang_node_alpine_versions) do
-    elixir_version = Map.get(elixir_erlang_node_alpine_versions, :elixir_version, nil)
-    erlang_version = Map.get(elixir_erlang_node_alpine_versions, :erlang_version, nil)
-    node_version = Map.get(elixir_erlang_node_alpine_versions, :node_version, nil)
-    alpine_version = Map.get(elixir_erlang_node_alpine_versions, :alpine_version, nil)
+    elixir_version = Keyword.get(elixir_erlang_node_alpine_versions, :elixir, "")
+    erlang_version = Keyword.get(elixir_erlang_node_alpine_versions, :erlang, "")
+    node_version = Keyword.get(elixir_erlang_node_alpine_versions, :node, "")
+    alpine_version = Keyword.get(elixir_erlang_node_alpine_versions, :alpine, "")
 
-    if elixir_version do
+    if elixir_version != "" do
       upgrade_elixir(elixir_version)
     end
 
-    if erlang_version do
+    if erlang_version != "" do
       upgrade_erlang(erlang_version)
     end
 
-    if alpine_version do
+    if alpine_version != "" do
       upgrade_alpine(alpine_version)
     end
 
-    if node_version do
+    if node_version != "" do
       upgrade_node(node_version)
     end
 
