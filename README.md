@@ -87,10 +87,28 @@ The Phoenix application generator is missing. By solving this problem, you need 
 ``` bash
 mix archive.install hex phx_new
 ```
+
 or
+
 ```bash
 mix archive.install hex phx_new #{specific-version}
 ```
+
+### 2. Getting `Wallaby can't find chromedriver` error
+Your OS is missing/not installing `chromedriver`, you need to run:
+
+Brew
+``` bash
+brew install --cask chromedriver
+```
+
+Apt
+``` bash
+apt install chromium-chromedriver
+```
+
+Or download the package on the official site:
+https://chromedriver.chromium.org/downloads
 
 ## License
 
