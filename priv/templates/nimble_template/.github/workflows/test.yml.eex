@@ -36,6 +36,12 @@ jobs:
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
 
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
+
       - name: Cache Elixir build
         uses: actions/cache@v3
         with:
@@ -101,6 +107,12 @@ jobs:
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
+
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
 
       - name: Cache Elixir build
         uses: actions/cache@v3
@@ -168,7 +180,7 @@ jobs:
           --health-retries 5
 
     env:
-      MIX_ENV: dev
+      ENABLE_DB_SEED: true
 
     steps:
       - name: Checkout repository
@@ -188,6 +200,12 @@ jobs:
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
+
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
 
       - name: Cache Elixir build
         uses: actions/cache@v3
@@ -263,6 +281,12 @@ jobs:
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
+
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
 
       - name: Cache Elixir build
         uses: actions/cache@v3
@@ -353,6 +377,12 @@ jobs:
 
       - name: Install dependencies in .tool-versions
         uses: asdf-vm/actions/install@v1
+
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
 
       - name: Cache Elixir build
         uses: actions/cache@v3

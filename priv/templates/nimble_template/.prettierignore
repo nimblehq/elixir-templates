@@ -6,3 +6,5 @@ priv
 cover/
 .github/
 README.md
+.idea
+.vscode

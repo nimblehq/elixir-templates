@@ -8,31 +8,31 @@ jobs:
     uses: ./.github/workflows/reusable_mix_project.yml
     with:
       new_project_options: ""
-  
+
   long_custom_name_mix_project:
     name: Test on a long custom name Mix project
     uses: ./.github/workflows/reusable_mix_project.yml
     with:
       new_project_options: "--module=SampleCustomModule --app=sample_custom_app"
-      
+
   short_custom_name_mix_project:
     name: Test on a short custom name Mix project
     uses: ./.github/workflows/reusable_mix_project.yml
     with:
       new_project_options: "--module=Z --app=z"
-      
+
   standard_mix_supervision_project:
     name: Test on a Standard Supervision Mix project
     uses: ./.github/workflows/reusable_mix_project.yml
     with:
       new_project_options: "--sup"
-  
+
   long_custom_name_mix_supervision_project:
     name: Test on a long custom name Supervision Mix project
     uses: ./.github/workflows/reusable_mix_project.yml
     with:
       new_project_options: "--sup --module=SampleCustomModule --app=sample_custom_app"
-      
+
   short_custom_name_mix_supervision_project:
     name: Test on a short custom name Supervision Mix project
     uses: ./.github/workflows/reusable_mix_project.yml

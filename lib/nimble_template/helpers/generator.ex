@@ -24,7 +24,7 @@ defmodule NimbleTemplate.Generator do
 
   def rename_file(old_path, new_path), do: File.rename(old_path, new_path)
 
-  def replace_content(file_path, anchor, content) do
+  def replace_content(file_path, anchor, content, raise_exception \\ true) do
     file = Path.join([file_path])
 
     file_content =
@@ -40,7 +40,21 @@ defmodule NimbleTemplate.Generator do
         File.write!(file, [left, content, right])
 
       :error ->
-        Mix.raise(~s[Could not find #{anchor} in #{file_path}])
+        if raise_exception do
+          Mix.raise(~s[Could not find #{anchor} in #{file_path}])
+        else
+          :error
+        end
+    end
+  end
+
+  def replace_content_all(file_path, anchor, content) do
+    case replace_content(file_path, anchor, content, false) do
+      :ok ->
+        replace_content_all(file_path, anchor, content)
+
+      :error ->
+        nil
     end
   end
 
