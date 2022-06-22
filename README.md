@@ -73,6 +73,37 @@ The release documentation is on [Wiki](https://github.com/nimblehq/elixir-templa
 
 Contributions, issues, and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues).
 
+## FAQ
+
+### 1. Getting `(Mix) The task "phx.new" could not be found` error
+
+The Phoenix application generator is missing. By solving this problem, you need to run
+``` bash
+mix archive.install hex phx_new
+```
+
+or
+
+```bash
+mix archive.install hex phx_new #{specific-version}
+```
+
+### 2. Getting `Wallaby can't find chromedriver` error
+Your OS is missing/not installing `chromedriver`, you need to run:
+
+Brew
+``` bash
+brew install --cask chromedriver
+```
+
+Apt
+``` bash
+apt install chromium-chromedriver
+```
+
+Or download the package on the official site:
+https://chromedriver.chromium.org/downloads
+
 ## License
 
 This project is Copyright (c) 2014 and onwards. It is free software, and may be redistributed under the terms specified in the [LICENSE] file.
