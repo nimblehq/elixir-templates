@@ -24,7 +24,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
 
         assert_file("test/nimble_template_web/plugs/health_plug_test.exs")
         assert_file("test/nimble_template_web/requests/_health/liveness_request_test.exs")
-        assert_file("test/nimble_template_web/requests/_health/rediness_request_test.exs")
+        assert_file("test/nimble_template_web/requests/_health/readiness_request_test.exs")
       end)
     end
 
