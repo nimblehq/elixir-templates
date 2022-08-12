@@ -1,13 +1,8 @@
 name: Publish to Hex package manager
 
 on:
-  workflow_run:
-    workflows:
-      - Test template
-    branches:
-      - master
-    types:
-      - completed
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
