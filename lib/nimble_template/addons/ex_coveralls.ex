@@ -13,7 +13,8 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
   defp copy_files(%Project{otp_app: otp_app, mix_project?: mix_project?} = project) do
     binding = [
       otp_app: otp_app,
-      minimum_coverage: 100
+      minimum_coverage: 100,
+      html_filter_full_covered: true
     ]
 
     template_file_path =
