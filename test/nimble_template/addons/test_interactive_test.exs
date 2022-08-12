@@ -1,0 +1,38 @@
+defmodule NimbleTemplate.Addons.TestInteractiveTest do
+  use NimbleTemplate.AddonCase, async: false
+
+  describe "#apply/2" do
+    test "injects mix_test_interactive to mix dependencies list", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.TestInteractive.apply(project)
+
+        assert_file("mix.exs", fn file ->
+          assert file =~ """
+                   defp deps do
+                     [
+                       {:mix_test_interactive, "~> 0.12.2", [only: :test]},
+                 """
+        end)
+      end)
+    end
+
+    test "injects mix_test_interactive config to the dev config", %{
+      project: project,
+      test_project_path: test_project_path(ct_path)
+    } do
+      in_test_project(test_project_path, fn ->
+        Addons.TestInteractive.apply(project)
+
+        assert_file("config/dev.exs", fn file ->
+          assert file =~ """
+                   config :mix_test_interactive,
+                     clear: true
+                 """
+        end)
+      end)
+    end
+  end
+end
