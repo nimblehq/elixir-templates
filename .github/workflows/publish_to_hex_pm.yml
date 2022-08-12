@@ -3,7 +3,6 @@ name: Publish to Hex package manager
 on:
   release:
     types: [published]
-  workflow_dispatch:
 
 jobs:
   publish:
