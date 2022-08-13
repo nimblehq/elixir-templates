@@ -10,6 +10,8 @@
 
 5. Merge the Bump version PR above into the `develop` branch.
 
-6. Create the `release/<version number>` from the `develop` branch, pointing to the `master` branch.
+6. Create the `release/<version number>` from the `develop` branch, pointing to the `main` branch.
 
-7. Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
+7. Create a Release from the `main` branch.
+
+8. Once the release is published, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
