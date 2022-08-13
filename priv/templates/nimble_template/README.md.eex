@@ -62,25 +62,35 @@
 - Run all tests:
 
   ```sh
-  mix test 
+  mix test
+  ```
+
+- Run all tests with `watch` option:
+
+  ```sh
+  mix test.interactive # Watch the whole test suite
+
+  mix test.interactive test_file_path # Watch a specific test file
+
+  mix test.interactive test_file_path:line_number # Watch a specific test line number
   ```
 
 - Run all lint:
 
   ```sh
-  mix codebase 
+  mix codebase
   ```
-  
+
 - Fix all lint:
 
   ```sh
-  mix codebase.fix 
+  mix codebase.fix
   ```
-  
+
 - Test coverage:
 
   ```sh
-  mix coverage 
+  mix coverage
   ```
 
 ### Production
