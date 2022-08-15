@@ -11,7 +11,10 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
       in_test_project(test_project_path, fn ->
         Addons.ExCoveralls.apply(project)
 
-        assert_file("coveralls.json")
+        assert_file("coveralls.json", fn file ->
+          assert file =~ "minimum_coverage\": 100"
+          assert file =~ "html_filter_full_covered\": true"
+        end)
       end)
     end
 
