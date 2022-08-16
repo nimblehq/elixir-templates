@@ -63,11 +63,11 @@ mix nimble_template.gen --mix # Apply the Mix template
 
 ## Running tests
 
-The testing documentation is on [Wiki](https://github.com/nimblehq/elixir-templates/wiki)
+The testing documentation is on [Wiki](https://github.com/nimblehq/elixir-templates/wiki/Testing)
 
 ### Release process
 
-The release documentation is on [Wiki](https://github.com/nimblehq/elixir-templates/wiki)
+The release documentation is on [Wiki](https://github.com/nimblehq/elixir-templates/wiki/Release)
 
 ## Contributing
 
