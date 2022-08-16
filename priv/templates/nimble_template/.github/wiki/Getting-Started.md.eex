@@ -57,7 +57,7 @@
   mix test
   ```
 
-- Run all tests with `watch` option:
+- Run tests with `watch` option:
 
   ```sh
   mix test.interactive # Watch the whole test suite
