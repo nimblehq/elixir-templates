@@ -14,6 +14,8 @@ defmodule NimbleTemplate.Addons.TestInteractive do
     add_dev_config(project)
   end
 
+  defp add_dev_config(%Project{mix_project?: true} = project), do: project
+
   defp add_dev_config(project) do
     Generator.append_content(
       "config/dev.exs",
