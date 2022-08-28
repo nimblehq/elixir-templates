@@ -133,10 +133,7 @@ defmodule NimbleTemplate.Addons.TestEnv do
   end
 
   defp edit_test_support_cases(project) do
-    project
-    |> edit_test_support_case("channel_case")
-    |> edit_test_support_case("conn_case")
-    |> edit_test_support_case("data_case")
+    edit_test_support_case(project, "data_case")
   end
 
   defp edit_test_support_case(project, support_case_name) do

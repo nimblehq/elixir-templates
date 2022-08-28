@@ -69,10 +69,6 @@ defmodule NimbleTemplate.Addons.Phoenix.ExMachinaTest do
           assert file =~ "import NimbleTemplate.Factory"
         end)
 
-        assert_file("test/support/channel_case.ex", fn file ->
-          assert file =~ "import NimbleTemplate.Factory"
-        end)
-
         assert_file("test/support/conn_case.ex", fn file ->
           assert file =~ "import NimbleTemplate.Factory"
         end)
