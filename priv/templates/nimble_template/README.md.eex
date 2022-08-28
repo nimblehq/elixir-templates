@@ -46,6 +46,20 @@
   ```sh
   npm install --prefix assets
   ```
+
+- Install `chromedriver` for Wallaby browser tests
+
+  Homebrew
+
+  ```sh
+  brew install --cask chromedriver
+  ```
+
+  Debian/Ubuntu
+
+  ```sh
+  brew install --cask chromedriver
+  ```
 <% end %>
 - Setup the databases:
 
@@ -62,25 +76,25 @@
 - Run all tests:
 
   ```sh
-  mix test 
+  mix test
   ```
 
 - Run all lint:
 
   ```sh
-  mix codebase 
+  mix codebase
   ```
-  
+
 - Fix all lint:
 
   ```sh
-  mix codebase.fix 
+  mix codebase.fix
   ```
-  
+
 - Test coverage:
 
   ```sh
-  mix coverage 
+  mix coverage
   ```
 
 ### Production

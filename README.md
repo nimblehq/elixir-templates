@@ -91,13 +91,15 @@ mix archive.install hex phx_new #{specific-version}
 ### 2. Getting `Wallaby can't find chromedriver` error
 Your OS is missing/not installing `chromedriver`, you need to run:
 
-Brew
-``` bash
+Homebrew
+
+```bash
 brew install --cask chromedriver
 ```
 
-Apt
-``` bash
+Debian/Ubuntu
+
+```bash
 apt install chromium-chromedriver
 ```
 
