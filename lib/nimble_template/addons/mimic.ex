@@ -12,6 +12,7 @@ defmodule NimbleTemplate.Addons.Mimic do
     project
     |> inject_mix_dependency()
     |> edit_test_helper()
+    |> edit_case()
 
     project
   end
@@ -35,6 +36,47 @@ defmodule NimbleTemplate.Addons.Mimic do
       """
     )
 
+    project
+  end
+
+  defp edit_case(%Project{mix_project?: false} = project) do
+    Generator.inject_content(
+      "test/support/channel_case.ex",
+      """
+          quote do
+      """,
+      """
+            use Mimic
+
+      """
+    )
+
+    Generator.inject_content(
+      "test/support/conn_case.ex",
+      """
+          quote do
+      """,
+      """
+            use Mimic
+
+      """
+    )
+
+    Generator.inject_content(
+      "test/support/data_case.ex",
+      """
+          quote do
+      """,
+      """
+            use Mimic
+
+      """
+    )
+
+    project
+  end
+
+  defp edit_case(project) do
     project
   end
 end

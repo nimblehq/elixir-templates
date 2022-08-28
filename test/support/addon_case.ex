@@ -4,16 +4,17 @@ defmodule NimbleTemplate.AddonCase do
   use Mimic
 
   alias NimbleTemplate.Addons
-  alias NimbleTemplate.Addons.Phoenix.Api, as: AddonsApi
-  alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
+  alias NimbleTemplate.Addons.Phoenix.Api, as: ApiAddons
+  alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
   alias NimbleTemplate.Hex.Package
   alias NimbleTemplate.Projects.Project
 
   using do
     quote do
       alias NimbleTemplate.Addons
-      alias NimbleTemplate.Addons.Phoenix.Api, as: AddonsApi
-      alias NimbleTemplate.Addons.Phoenix.Web, as: AddonsWeb
+      alias NimbleTemplate.Addons.Phoenix, as: PhoenixAddons
+      alias NimbleTemplate.Addons.Phoenix.Api, as: ApiAddons
+      alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
 
       # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
       # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3
@@ -21,6 +22,9 @@ defmodule NimbleTemplate.AddonCase do
 
       defp assert_file(path),
         do: assert(File.regular?(path), "Expected #{path} to exist, but does not")
+
+      defp assert_directory(path),
+        do: assert(File.dir?(path), "Expected #{path} to exist, but does not")
 
       defp assert_file(path, match) do
         assert_file(path)
@@ -44,12 +48,12 @@ defmodule NimbleTemplate.AddonCase do
           Project.new(mix: true)
 
         context[:live_project?] == true ->
-          create_phoenix_test_project(test_project_path, "--live")
+          create_phoenix_test_project(test_project_path)
 
           Project.new(web: true, live: true)
 
         true ->
-          create_phoenix_test_project(test_project_path)
+          create_phoenix_test_project(test_project_path, "--no-live")
 
           # Set Web Project as default, switch to API in each test case
           # eg: project = %{project | api_project?: true, web_project?: false}

@@ -2,20 +2,21 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag required_addons: [:TestEnv]
+    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "adds eslint, eslint-config-prettier and eslint-plugin-prettier into package.json", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                     "eslint": "^8.5.0",
-                     "eslint-config-prettier": "^8.3.0",
-                     "eslint-plugin-prettier": "^4.0.0",
+                   "devDependencies": {
+                     "eslint": "8.14.0",
+                     "eslint-config-prettier": "8.5.0",
+                     "eslint-plugin-prettier": "4.0.0",
                  """
         end)
       end)
@@ -26,12 +27,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
+                   "scripts": {
                      "eslint": "eslint --color ./",
-                     "eslint.fix": "eslint --color --fix ./",
+                     "eslint.fix": "eslint --color --fix ./"
                  """
         end)
       end)
@@ -42,7 +44,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -58,7 +60,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -74,7 +76,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("assets/.eslintrc.json")
       end)
@@ -83,14 +85,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
 
   describe "#apply/2 to a Live project" do
     @describetag live_project?: true
-    @describetag required_addons: [:TestEnv]
+    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "updates the assets/js/app.js", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.EsLint.apply(project)
+        WebAddons.EsLint.apply(project)
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~

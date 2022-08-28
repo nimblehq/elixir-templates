@@ -37,5 +37,23 @@ defmodule NimbleTemplate.Addons.MimicTest do
         end)
       end)
     end
+
+    test "updates test cases", %{project: project, test_project_path: test_project_path} do
+      in_test_project(test_project_path, fn ->
+        Addons.Mimic.apply(project)
+
+        assert_file("test/support/channel_case.ex", fn file ->
+          assert file =~ "use Mimic"
+        end)
+
+        assert_file("test/support/data_case.ex", fn file ->
+          assert file =~ "use Mimic"
+        end)
+
+        assert_file("test/support/conn_case.ex", fn file ->
+          assert file =~ "use Mimic"
+        end)
+      end)
+    end
   end
 end

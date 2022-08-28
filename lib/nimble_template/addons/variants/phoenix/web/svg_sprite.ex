@@ -13,7 +13,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
   defp edit_files(%Project{} = project) do
     project
     |> edit_assets_package()
-    |> edit_web_entrypoint()
+    |> edit_web_entry_point()
     |> edit_wiki_sidebar()
 
     project
@@ -35,7 +35,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
       """,
       """
         "scripts": {
-          "svg-sprite.generate-icon": "svg-sprite --shape-id-generator \\"icon-%s\\" --symbol --symbol-dest static/images --symbol-sprite icon-sprite.svg static/images/icons/*.svg",
+          "svg-sprite.generate-icon": "svg-sprite --shape-id-generator \\"icon-%s\\" --symbol --symbol-dest ../priv/static/images --symbol-sprite icon-sprite.svg ../priv/static/images/icons/*.svg",
       """
     )
 
@@ -46,14 +46,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
       """,
       """
         "devDependencies": {
-          "svg-sprite": "^1.5.3",
+          "svg-sprite": "1.5.4",
       """
     )
 
     project
   end
 
-  defp edit_web_entrypoint(%Project{web_module: web_module, web_path: web_path} = project) do
+  defp edit_web_entry_point(%Project{web_module: web_module, web_path: web_path} = project) do
     Generator.replace_content(
       "#{web_path}.ex",
       """
@@ -114,6 +114,4 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
 
     project
   end
-
-  defp has_github_wiki_directory?, do: File.dir?(".github/wiki/")
 end

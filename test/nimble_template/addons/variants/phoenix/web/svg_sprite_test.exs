@@ -2,16 +2,19 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
+    @describetag required_addons: [:"Phoenix.Web.NodePackage"]
+
     test "adds svg-sprite into package.json", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                     "svg-sprite": "^1.5.3",
+                   "devDependencies": {
+                     "svg-sprite": "1.5.4",
                  """
         end)
       end)
@@ -22,11 +25,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                 "svg-sprite.generate-icon": "svg-sprite --shape-id-generator \\"icon-%s\\" --symbol --symbol-dest static/images --symbol-sprite icon-sprite.svg static/images/icons/*.svg",
+                   "scripts": {
+                     "svg-sprite.generate-icon": "svg-sprite --shape-id-generator \\"icon-%s\\" --symbol --symbol-dest ../priv/static/images --symbol-sprite icon-sprite.svg ../priv/static/images/icons/*.svg",
                  """
         end)
       end)
@@ -37,7 +41,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("lib/nimble_template_web.ex", fn file ->
           assert file =~ """
@@ -52,7 +56,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("lib/nimble_template_web/helpers/icon_helper.ex")
       end)
@@ -63,7 +67,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file("test/nimble_template_web/helpers/icon_helper_test.exs")
       end)
@@ -74,7 +78,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         refute_file(".github/wiki/Icon-Sprite.md")
       end)
@@ -85,7 +89,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         refute_file(".github/wiki/_Sidebar.md")
       end)
@@ -93,14 +97,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
   end
 
   describe "#apply/2 with Github Wiki addon" do
-    @describetag required_addons: [{:Github, %{github_wiki: true}}]
+    @describetag required_addons: [{:Github, %{github_wiki: true}}, :"Phoenix.Web.NodePackage"]
 
     test "copies `.github/wiki/Icon-Sprite.md`", %{
       project: project,
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file(".github/wiki/Icon-Sprite.md")
       end)
@@ -111,7 +115,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSpriteTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.SvgSprite.apply(project)
+        WebAddons.SvgSprite.apply(project)
 
         assert_file(".github/wiki/_Sidebar.md", fn file ->
           assert file =~ """

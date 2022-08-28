@@ -1,0 +1,13 @@
+defmodule <%= web_module %>.ReadinessRequestTest do
+  use <%= web_module %>.ConnCase, async: true
+
+  test "returns 200", %{conn: conn} do
+    conn =
+      get(
+        conn,
+        "#{Application.get_env(:<%= otp_app %>, <%= web_module %>.Endpoint)[:health_path]}/readiness"
+      )
+
+    assert response(conn, :ok) =~ "ready"
+  end
+end

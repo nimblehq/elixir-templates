@@ -1,0 +1,66 @@
+name: Verify Release version
+
+on:
+  push:
+    branches:
+      - 'release/**'
+
+env:
+  PHOENIX_VERSION: 1.6.6
+  MIX_ENV: test
+
+jobs:
+  release_version_test:
+    name: Verify the Release version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v1
+
+      - name: Cache asdf
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.asdf
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+
+      - name: Install dependencies in .tool-versions
+        uses: asdf-vm/actions/install@v1
+
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
+
+      - name: Cache Elixir build
+        uses: actions/cache@v3
+        with:
+          path: |
+            _build
+            deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile dependencies
+        run: mix compile --warnings-as-errors --all-warnings
+
+      - name: Install Phoenix ${{ env.PHOENIX_VERSION }}
+        run: make install_phoenix PHOENIX_VERSION=${{ env.PHOENIX_VERSION }}
+
+      - name: Run Tests
+        run: mix test --only release_version

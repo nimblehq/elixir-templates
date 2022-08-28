@@ -85,8 +85,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
         Enum.each(["channel_case", "conn_case", "data_case"], fn support_case_name ->
           assert_file("test/support/" <> support_case_name <> ".ex", fn file ->
             assert file =~ "alias Ecto.Adapters.SQL.Sandbox"
-            assert file =~ "Sandbox.checkout(#{project.base_module}.Repo)"
-            assert file =~ "Sandbox.mode(#{project.base_module}.Repo, {:shared, self()})"
+            assert file =~ "Sandbox.start_owner!"
+            assert file =~ "Sandbox.stop_owner"
           end)
         end)
       end)

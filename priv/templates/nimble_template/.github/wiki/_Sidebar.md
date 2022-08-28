@@ -2,3 +2,8 @@
 
 - [[Home]]
 - [[Getting Started]]
+
+## Infrastructure
+
+- [[Application Status]]
+- [[Environment Variables]]

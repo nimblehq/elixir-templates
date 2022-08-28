@@ -22,12 +22,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
     Generator.replace_content(
       "assets/package.json",
       """
-          "webpack-cli": "^3.3.2"
+        "devDependencies": {
       """,
       """
-          "webpack-cli": "^3.3.2",
-          "prettier": "2.2.1",
-          "prettier-plugin-eex": "^0.5.0"
+        "devDependencies": {
+          "prettier": "2.6.2",
+          "prettier-plugin-eex": "0.5.0"
       """
     )
 

@@ -13,7 +13,11 @@ RUN apk update && \
       build-base && \
     mix local.rebar --force && \
     mix local.hex --force
-
+<%= if web_project? do %>
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-2.34-r0.apk
+RUN apk add glibc-2.34-r0.apk
+<% end %>
 WORKDIR /app
 
 COPY . .
@@ -23,12 +27,12 @@ ENV MIX_ENV=prod
 RUN mix do deps.get, deps.compile, compile
 <%= if web_project? do %>
 RUN cd assets && \
-		npm ci --progress=false --no-audit --loglevel=error && \
-		npm run deploy && \
-		cd - && \
-		mix phx.digest
-<% end %>
+		npm ci --progress=false --no-audit --loglevel=error
 
+ENV NODE_ENV=production
+
+RUN mix assets.deploy
+<% end %>
 RUN mix release
 
 #
@@ -53,6 +57,6 @@ RUN addgroup -g 1000 appuser && \
 COPY --from=build --chown=1000:1000 /app/_build/prod/rel/<%= otp_app %> ./
 COPY bin/start.sh ./bin/start.sh
 
-USER app_user
+USER appuser
 
 CMD bin/start.sh

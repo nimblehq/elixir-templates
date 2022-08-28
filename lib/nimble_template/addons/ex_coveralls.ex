@@ -13,7 +13,8 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
   defp copy_files(%Project{otp_app: otp_app, mix_project?: mix_project?} = project) do
     binding = [
       otp_app: otp_app,
-      minimum_coverage: 100
+      minimum_coverage: 100,
+      html_filter_full_covered: true
     ]
 
     template_file_path =
@@ -36,13 +37,11 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
     project
   end
 
-  defp edit_files(%Project{live_project?: live_project?} = project) do
+  defp edit_files(%Project{} = project) do
     project
     |> inject_mix_dependency()
     |> edit_mix()
     |> edit_web_router()
-
-    if live_project?, do: edit_page_live(project)
 
     project
   end
@@ -81,21 +80,6 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
       """,
       """
             coverage: ["coveralls.html --raise"],
-      """
-    )
-
-    project
-  end
-
-  defp edit_page_live(%Project{web_path: web_path, web_module: web_module} = project) do
-    Generator.replace_content(
-      "#{web_path}/live/page_live.ex",
-      """
-      defmodule #{web_module}.PageLive do
-      """,
-      """
-      # coveralls-ignore-start
-      defmodule #{web_module}.PageLive do
       """
     )
 

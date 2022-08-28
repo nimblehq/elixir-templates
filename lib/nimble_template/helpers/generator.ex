@@ -3,6 +3,16 @@ defmodule NimbleTemplate.Generator do
 
   @template_resource "priv/templates/nimble_template"
 
+  def copy_directory(source_path, target_path, binding \\ []) do
+    root = Application.app_dir(:nimble_template, @template_resource)
+
+    "#{root}/#{source_path}/**/*"
+    |> Path.wildcard(match_dot: true)
+    |> Enum.reject(&File.dir?/1)
+    |> Enum.map(&String.replace(&1, "#{root}/", ""))
+    |> Enum.each(&copy_file([{:text, &1, String.replace(&1, source_path, target_path)}], binding))
+  end
+
   def copy_file(files, binding \\ []) do
     Mix.Phoenix.copy_from(
       [:nimble_template],
@@ -12,7 +22,9 @@ defmodule NimbleTemplate.Generator do
     )
   end
 
-  def replace_content(file_path, anchor, content) do
+  def rename_file(old_path, new_path), do: File.rename(old_path, new_path)
+
+  def replace_content(file_path, anchor, content, raise_exception \\ true) do
     file = Path.join([file_path])
 
     file_content =
@@ -28,7 +40,21 @@ defmodule NimbleTemplate.Generator do
         File.write!(file, [left, content, right])
 
       :error ->
-        Mix.raise(~s[Could not find #{anchor} in #{file_path}])
+        if raise_exception do
+          Mix.raise(~s[Could not find #{anchor} in #{file_path}])
+        else
+          :error
+        end
+    end
+  end
+
+  def replace_content_all(file_path, anchor, content) do
+    case replace_content(file_path, anchor, content, false) do
+      :ok ->
+        replace_content_all(file_path, anchor, content)
+
+      :error ->
+        nil
     end
   end
 
@@ -103,6 +129,16 @@ defmodule NimbleTemplate.Generator do
     end
 
     create_keep_file(path, touch_directory)
+  end
+
+  def create_file(path, content) do
+    case File.write(path, content) do
+      :ok ->
+        :ok
+
+      {:error, reason} ->
+        Mix.raise(~s[Failed to create file at #{path}, reason: #{Atom.to_string(reason)}])
+    end
   end
 
   def print_log(prefix, content \\ ""), do: Mix.shell().info([:green, prefix, :reset, content])

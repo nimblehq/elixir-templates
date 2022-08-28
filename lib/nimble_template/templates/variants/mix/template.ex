@@ -8,14 +8,23 @@ defmodule NimbleTemplate.Templates.Mix.Template do
 
   def apply(%Project{} = project) do
     project
-    |> Addons.ElixirVersion.apply()
+    |> apply_default_mix_addons()
+    |> apply_optional_mix_addons()
+  end
+
+  defp apply_default_mix_addons(project) do
+    project
+    |> Addons.AsdfToolVersion.apply()
     |> Addons.Readme.apply()
     |> Addons.TestEnv.apply()
     |> Addons.Credo.apply()
     |> Addons.Dialyxir.apply()
     |> Addons.ExCoveralls.apply()
     |> Addons.Faker.apply()
+    |> Addons.Git.apply()
+  end
 
+  defp apply_optional_mix_addons(project) do
     if host_on_github?() do
       if generate_github_template?(),
         do: Addons.Github.apply(project, %{github_template: true})
@@ -38,8 +47,6 @@ defmodule NimbleTemplate.Templates.Mix.Template do
     end
 
     if install_addon_prompt?("Mimic"), do: Addons.Mimic.apply(project)
-
-    Addons.ExUnit.apply(project)
 
     project
   end

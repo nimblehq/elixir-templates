@@ -1,0 +1,67 @@
+name: Reusable Mix project
+
+on:
+  workflow_call:
+    inputs:
+      new_project_options:
+        required: true
+        type: string
+
+env:
+  BASE_PROJECT_DIRECTORY: sample_project
+  MIX_ENV: test
+
+jobs:
+  unit_test:
+    name: Unit test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v1
+
+      - name: Cache asdf
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.asdf
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+
+      - name: Install dependencies in .tool-versions
+        uses: asdf-vm/actions/install@v1
+
+      - name: Install rebar
+        run: mix local.rebar --force
+
+      - name: Install hex
+        run: mix local.hex --force
+
+      - name: Create Mix project
+        run: make create_mix_project PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY OPTIONS="${{ inputs.new_project_options }}"
+
+      - name: Apply Mix template
+        run: make apply_mix_template PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY
+
+      # Verify the new project after applying the nimble_template
+
+      - name: Install Elixir Dependencies
+        run: cd $BASE_PROJECT_DIRECTORY && mix deps.get
+
+      - name: Compile dependencies
+        run: cd $BASE_PROJECT_DIRECTORY && mix compile --warnings-as-errors --all-warnings
+
+      - name: Run mix codebase
+        run: cd $BASE_PROJECT_DIRECTORY && mix codebase
+
+      - name: Run mix test
+        run: cd $BASE_PROJECT_DIRECTORY && mix test

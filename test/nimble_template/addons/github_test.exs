@@ -214,7 +214,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "assets/node_modules"
           refute file =~ "npm --prefix assets install"
-          refute file =~ "npm run --prefix assets build:dev"
+          refute file =~ "mix assets.deploy"
           refute file =~ "wallaby_screenshots"
         end)
       end)
@@ -232,7 +232,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/test.yml", fn file ->
           assert file =~ "assets/node_modules"
           assert file =~ "npm --prefix assets install"
-          assert file =~ "npm run --prefix assets build:dev"
+          assert file =~ "mix assets.deploy"
           assert file =~ "wallaby_screenshots"
         end)
       end)
@@ -267,7 +267,7 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/test.yml", fn file ->
           refute file =~ "assets/node_modules"
           refute file =~ "npm --prefix assets install"
-          refute file =~ "npm run --prefix assets build:dev"
+          refute file =~ "mix assets.deploy"
           refute file =~ "wallaby_screenshots"
         end)
       end)
@@ -285,6 +285,44 @@ defmodule NimbleTemplate.Addons.GithubTest do
         Addons.Github.apply(project, %{github_action_deploy_heroku: true})
 
         assert_file(".github/workflows/deploy_heroku.yml")
+      end)
+    end
+
+    test "adjusts config/runtime.exs ", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: true, web_project?: false}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+        assert_file("config/runtime.exs", fn file ->
+          assert file =~ "url: [scheme: \"https\", host: host,"
+
+          assert file =~ """
+                   config :nimble_template, NimbleTemplate.Repo,
+                     ssl: true,
+                 """
+        end)
+      end)
+    end
+
+    test "adds force_ssl config into config/prod.exs", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: true, web_project?: false}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_heroku: true})
+
+        assert_file("config/prod.exs", fn file ->
+          assert file =~ """
+                 config :nimble_template, NimbleTemplateWeb.Endpoint,
+                   force_ssl: [rewrite_on: [:x_forwarded_proto]]
+                 """
+        end)
       end)
     end
   end
@@ -328,8 +366,11 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 25.0.1"
+          assert file =~ "Elixir 1.13.4"
+
+          assert file =~ "Node 16.15.0"
+          assert file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
 
           assert file =~ """
                  - Install Node dependencies:
@@ -352,8 +393,20 @@ defmodule NimbleTemplate.Addons.GithubTest do
           assert file =~ "Insert information about your project here!"
         end)
 
+        assert_file(".github/wiki/Application-Status.md")
+
         assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
+          assert file =~ """
+                 ## Table of Contents
+
+                 - [[Home]]
+                 - [[Getting Started]]
+
+                 ## Infrastructure
+
+                 - [[Application Status]]
+                 - [[Environment Variables]]
+                 """
         end)
       end)
     end
@@ -389,8 +442,11 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 25.0.1"
+          assert file =~ "Elixir 1.13.4"
+
+          refute file =~ "Node 16.15.0"
+          refute file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
 
           refute file =~ """
                       - Install Node dependencies:
@@ -413,8 +469,20 @@ defmodule NimbleTemplate.Addons.GithubTest do
           assert file =~ "Insert information about your project here!"
         end)
 
+        assert_file(".github/wiki/Application-Status.md")
+        assert_file(".github/wiki/Environment-Variables.md")
+
         assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
+          assert file =~ """
+                 ## Table of Contents
+
+                 - [[Home]]
+                 - [[Getting Started]]
+
+                 ## Infrastructure
+
+                 - [[Application Status]]
+                 """
         end)
       end)
     end
@@ -433,8 +501,11 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 24.0.4"
-          assert file =~ "Elixir 1.12.2"
+          assert file =~ "Erlang 25.0.1"
+          assert file =~ "Elixir 1.13.4"
+
+          refute file =~ "Node 16.15.0"
+          refute file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
 
           refute file =~ """
                       - Install Node dependencies:
@@ -457,8 +528,21 @@ defmodule NimbleTemplate.Addons.GithubTest do
           assert file =~ "Insert information about your project here!"
         end)
 
+        refute_file(".github/wiki/Application-Status.md")
+
         assert_file(".github/wiki/_Sidebar.md", fn file ->
-          assert file =~ "Table of Contents"
+          assert file =~ """
+                 ## Table of Contents
+
+                 - [[Home]]
+                 - [[Getting Started]]
+                 """
+
+          refute file =~ """
+                 ## Infrastructure
+
+                 - [[Application Status]]
+                 """
         end)
       end)
     end

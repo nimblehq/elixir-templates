@@ -25,15 +25,13 @@ defmodule NimbleTemplate.Addons.Github do
           web_project?: web_project?,
           mix_project?: mix_project?,
           erlang_version: erlang_version,
-          elixir_version: elixir_version,
-          node_version: node_version
+          elixir_version: elixir_version
         } = project,
         %{github_action_test: true}
       ) do
     binding = [
       erlang_version: erlang_version,
       elixir_version: elixir_version,
-      node_version: node_version,
       web_project?: web_project?
     ]
 
@@ -76,10 +74,28 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{mix_project?: false} = project, %{github_action_deploy_heroku: true}) do
+  def do_apply(%Project{mix_project?: false, otp_app: otp_app, web_module: web_module} = project, %{
+        github_action_deploy_heroku: true
+      }) do
     Generator.copy_file([
       {:eex, ".github/workflows/deploy_heroku.yml", ".github/workflows/deploy_heroku.yml"}
     ])
+
+    Generator.replace_content("config/runtime.exs", "# ssl: true,", "ssl: true,")
+
+    Generator.replace_content(
+      "config/runtime.exs",
+      "url: [host: host,",
+      "url: [scheme: \"https\", host: host,"
+    )
+
+    Generator.append_content(
+      "config/prod.exs",
+      """
+      config :#{otp_app}, #{web_module}.Endpoint,
+        force_ssl: [rewrite_on: [:x_forwarded_proto]]
+      """
+    )
 
     project
   end
@@ -105,35 +121,63 @@ defmodule NimbleTemplate.Addons.Github do
 
   defp copy_wiki_files(
          %Project{
-           web_project?: web_project?,
-           mix_project?: mix_project?,
+           mix_project?: true,
            erlang_version: erlang_version,
            elixir_version: elixir_version
          } = project
        ) do
     binding = [
-      web_project?: web_project?,
-      mix_project?: mix_project?,
       erlang_version: erlang_version,
       elixir_version: elixir_version
     ]
 
-    template_getting_started_path =
-      if mix_project? do
-        ".github/wiki/Getting-Started.md.mix.eex"
-      else
-        ".github/wiki/Getting-Started.md.eex"
-      end
-
     publish_wiki_workflow_path = ".github/workflows/publish_wiki.yml"
+    template_getting_started_path = ".github/wiki/Getting-Started.md.mix.eex"
     homepage_path = ".github/wiki/Home.md"
-    sidebar_path = ".github/wiki/_Sidebar.md"
+    sidebar_path = ".github/wiki/_Sidebar.md.mix"
 
     files = [
       {:text, publish_wiki_workflow_path, publish_wiki_workflow_path},
       {:text, homepage_path, homepage_path},
       {:eex, template_getting_started_path, ".github/wiki/Getting-Started.md"},
-      {:text, sidebar_path, sidebar_path}
+      {:text, sidebar_path, ".github/wiki/_Sidebar.md"}
+    ]
+
+    Generator.copy_file(files, binding)
+
+    project
+  end
+
+  defp copy_wiki_files(
+         %Project{
+           web_project?: web_project?,
+           mix_project?: false,
+           erlang_version: erlang_version,
+           elixir_version: elixir_version,
+           node_asdf_version: node_asdf_version
+         } = project
+       ) do
+    binding = [
+      web_project?: web_project?,
+      erlang_version: erlang_version,
+      elixir_version: elixir_version,
+      node_asdf_version: node_asdf_version
+    ]
+
+    publish_wiki_workflow_path = ".github/workflows/publish_wiki.yml"
+    template_getting_started_path = ".github/wiki/Getting-Started.md.eex"
+    homepage_path = ".github/wiki/Home.md"
+    sidebar_path = ".github/wiki/_Sidebar.md"
+    application_status_path = ".github/wiki/Application-Status.md"
+    environment_variables_path = ".github/wiki/Environment-Variables.md.eex"
+
+    files = [
+      {:text, publish_wiki_workflow_path, publish_wiki_workflow_path},
+      {:text, homepage_path, homepage_path},
+      {:eex, template_getting_started_path, ".github/wiki/Getting-Started.md"},
+      {:text, sidebar_path, sidebar_path},
+      {:text, application_status_path, application_status_path},
+      {:eex, environment_variables_path, ".github/wiki/Environment-Variables.md"}
     ]
 
     Generator.copy_file(files, binding)

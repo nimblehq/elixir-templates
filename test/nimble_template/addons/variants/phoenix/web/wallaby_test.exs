@@ -9,7 +9,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Wallaby.apply(project)
+        WebAddons.Wallaby.apply(project)
 
         assert_file("test/support/feature_case.ex", fn file ->
           assert file =~ """
@@ -18,11 +18,18 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
 
                    using do
                      quote do
+                       use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
                        use Wallaby.Feature
+                       use Mimic
 
                        import NimbleTemplate.Factory
+                       import NimbleTemplateWeb.Gettext
 
+                       alias NimbleTemplate.Repo
+                       alias NimbleTemplateWeb.Endpoint
                        alias NimbleTemplateWeb.Router.Helpers, as: Routes
+
+                       @moduletag :feature_test
                      end
                    end
                  end
@@ -36,7 +43,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Wallaby.apply(project)
+        WebAddons.Wallaby.apply(project)
 
         assert_file("test/nimble_template_web/features/home_page/view_home_page_test.exs")
       end)
@@ -47,7 +54,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Wallaby.apply(project)
+        WebAddons.Wallaby.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -64,7 +71,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Wallaby.apply(project)
+        WebAddons.Wallaby.apply(project)
 
         assert_file("test/test_helper.exs", fn file ->
           assert file =~ """
@@ -84,7 +91,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Wallaby.apply(project)
+        WebAddons.Wallaby.apply(project)
 
         assert_file("lib/nimble_template_web/endpoint.ex", fn file ->
           assert file =~ """
@@ -103,12 +110,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Wallaby.apply(project)
+        WebAddons.Wallaby.apply(project)
 
         assert_file("config/test.exs", fn file ->
           assert file =~ """
-                 config :nimble_template, NimbleTemplateWeb.Endpoint,
-                   http: [port: 4002],
                    server: true
 
                  config :nimble_template, :sql_sandbox, true
@@ -128,7 +133,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.Wallaby.apply(project)
+        WebAddons.Wallaby.apply(project)
 
         assert_file(".gitignore", fn file ->
           assert file =~ "**/tmp/"

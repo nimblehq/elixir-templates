@@ -1,0 +1,64 @@
+defmodule <%= web_module %>.HealthPlugTest do
+  use <%= web_module %>.ConnCase, async: true
+
+  import ExUnit.CaptureLog
+
+  alias <%= web_module %>.HealthPlug
+
+  describe "init/1" do
+    test "returns given options" do
+      assert HealthPlug.init([]) == []
+    end
+  end
+
+  describe "call/2" do
+    test "given the liveness path, returns 200 status " do
+      conn =
+        :get
+        |> build_conn("/liveness")
+        |> HealthPlug.call([])
+
+      assert conn.halted == true
+      assert response(conn, :ok) =~ "alive"
+    end
+
+    test "given the readiness path, returns 200 status " do
+      conn =
+        :get
+        |> build_conn("/readiness")
+        |> HealthPlug.call([])
+
+      assert conn.halted == true
+      assert response(conn, :ok) =~ "ready"
+    end
+
+    test "given the database is not ready, returns 500 internal server error " do
+      expect(Ecto.Adapters.SQL, :query, fn <%= base_module %>.Repo, "SELECT 1" ->
+        {:error, DBConnection.ConnectionError.exception("Database connection error")}
+      end)
+
+      error_message =
+        capture_log(fn ->
+          conn =
+            :get
+            |> build_conn("/readiness")
+            |> HealthPlug.call([])
+
+          assert conn.halted == true
+          assert response(conn, :internal_server_error) =~ ""
+        end)
+
+      assert error_message =~ "Database connection error"
+    end
+
+    test "given a path does NOT exist, returns 404 status " do
+      conn =
+        :get
+        |> build_conn("/something_else")
+        |> HealthPlug.call([])
+
+      assert conn.halted == true
+      assert response(conn, :not_found) =~ ""
+    end
+  end
+end

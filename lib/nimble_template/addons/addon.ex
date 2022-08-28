@@ -11,6 +11,8 @@ defmodule NimbleTemplate.Addons.Addon do
     quote location: :keep, bind_quoted: [opts: opts] do
       @behaviour Addon
 
+      import NimbleTemplate.GithubHelper, only: [has_github_wiki_directory?: 0]
+
       alias NimbleTemplate.Generator
       alias NimbleTemplate.Hex.Package
       alias NimbleTemplate.Projects.Project

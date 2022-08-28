@@ -22,12 +22,15 @@ create_mix_project:
 common_addon_prompts = Y\nY\nY\nY\nY\nY\nY\nY\nY\n
 
 # Y - in response to Would you like to add the SVG Sprite addon?
-web_addon_prompts = Y\n
+# Y - in response to Would you like to add the Dart Sass addon?
+# Y - in response to Would you like to add the Nimble CSS addon?
+# Y - in response to Would you like to add the Nimble JS addon?
+# Y - in response to Would you like to add the Boostrap addon?
+web_addon_prompts = Y\nY\nY\nY\nY\n
 
 api_addon_prompts =
 
-# Y - in response to Would you like to add the SVG Sprite addon?
-live_addon_prompts = Y\n
+live_addon_prompts =
 
 # Y - in response to Will you host this project on Github?
 # Y - in response to Do you want to generate the .github/ISSUE_TEMPLATE and .github/PULL_REQUEST_TEMPLATE?

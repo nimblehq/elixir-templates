@@ -2,7 +2,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag required_addons: [:TestEnv]
+    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "adds stylelint,
           stylelint-config-property-sort-order-smacss
@@ -12,13 +12,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
            test_project_path: test_project_path
          } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
-                     "stylelint": "^14.2.0",
-                     "stylelint-config-property-sort-order-smacss": "^8.0.0",
-                     "stylelint-config-sass-guidelines": "^9.0.1",
+                   "devDependencies": {
+                     "stylelint": "14.7.1",
+                     "stylelint-config-property-sort-order-smacss": "9.0.0",
+                     "stylelint-config-sass-guidelines": "9.0.1",
                  """
         end)
       end)
@@ -29,10 +30,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
+                   "scripts": {
                      "stylelint": "stylelint --color ./css",
                      "stylelint.fix": "stylelint --color --fix ./css",
                  """
@@ -45,7 +47,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -61,7 +63,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -77,7 +79,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        AddonsWeb.StyleLint.apply(project)
+        WebAddons.StyleLint.apply(project)
 
         assert_file("assets/.stylelintrc.json")
       end)

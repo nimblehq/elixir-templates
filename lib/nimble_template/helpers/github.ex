@@ -27,4 +27,6 @@ defmodule NimbleTemplate.GithubHelper do
 
   def generate_github_action_deploy_aws_ecs?(),
     do: Mix.shell().yes?("\nDo you want to generate the Github Action workflows: Deploy to AWS ECS?")
+
+  def has_github_wiki_directory?(), do: File.dir?(".github/wiki/")
 end

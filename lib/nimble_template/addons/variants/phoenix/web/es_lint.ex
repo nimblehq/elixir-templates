@@ -34,7 +34,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
       """
         "scripts": {
           "eslint": "eslint --color ./",
-          "eslint.fix": "eslint --color --fix ./",
+          "eslint.fix": "eslint --color --fix ./"
       """
     )
 
@@ -45,9 +45,9 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
       """,
       """
         "devDependencies": {
-          "eslint": "^8.5.0",
-          "eslint-config-prettier": "^8.3.0",
-          "eslint-plugin-prettier": "^4.0.0",
+          "eslint": "8.14.0",
+          "eslint-config-prettier": "8.5.0",
+          "eslint-plugin-prettier": "4.0.0",
       """
     )
 

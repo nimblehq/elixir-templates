@@ -3,7 +3,43 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ParamsValidation do
 
   use NimbleTemplate.Addons.Addon
 
-  def do_apply(%Project{} = project, _opts), do: copy_files(project)
+  def do_apply(%Project{} = project, _opts) do
+    project
+    |> copy_files()
+    |> edit_files()
+  end
+
+  defp edit_files(project) do
+    edit_web_entry_point(project)
+  end
+
+  defp edit_web_entry_point(%Project{web_module: web_module, web_path: web_entry_point} = project) do
+    Generator.replace_content(
+      "#{web_entry_point}.ex",
+      """
+        def controller do
+          quote do
+            use Phoenix.Controller, namespace: #{web_module}
+
+            import Plug.Conn
+            import #{web_module}.Gettext
+            alias #{web_module}.Router.Helpers, as: Routes
+      """,
+      """
+        def controller do
+          quote do
+            use Phoenix.Controller, namespace: #{web_module}
+
+            import Plug.Conn
+            import #{web_module}.Gettext
+
+            alias #{web_module}.ParamsValidator
+            alias #{web_module}.Router.Helpers, as: Routes
+      """
+    )
+
+    project
+  end
 
   defp copy_files(
          %Project{
