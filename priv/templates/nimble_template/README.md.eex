@@ -79,6 +79,16 @@
   mix test
   ```
 
+- Run tests with `watch` option:
+
+  ```sh
+  mix test.interactive # Watch the whole test suite
+
+  mix test.interactive test_file_path # Watch a specific test file
+
+  mix test.interactive test_file_path:line_number # Watch a specific test line number
+  ```
+
 - Run all lint:
 
   ```sh
@@ -106,5 +116,6 @@
   ```
 
 ### CI/CD
+
 The project relies entirely on [Github Actions](https://github.com/features/actions) for CI/CD via multiple workflows located under the [`.github/workflows/`](.github/workflows) directory.
 Please check out the [`.github/workflows/README.md`](.github/workflows/README.md) file for further instructions.
