@@ -22,6 +22,7 @@ defmodule NimbleTemplate.Templates.Mix.Template do
     |> Addons.ExCoveralls.apply()
     |> Addons.Faker.apply()
     |> Addons.Git.apply()
+    |> Addons.TestInteractive.apply()
   end
 
   defp apply_optional_mix_addons(project) do
