@@ -9,7 +9,7 @@ on:
         type: string
 
 env:
-  PHOENIX_VERSION: 1.6.6
+  PHOENIX_VERSION: 1.6.11
   MIX_ENV: test
 
 jobs:

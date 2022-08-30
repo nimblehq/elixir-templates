@@ -77,17 +77,6 @@ defmodule NimbleTemplate.Addons.Phoenix.ExMachina do
     )
 
     Generator.replace_content(
-      "test/support/channel_case.ex",
-      """
-            import #{web_module}.ChannelCase
-      """,
-      """
-            import #{web_module}.ChannelCase
-            import #{base_module}.Factory
-      """
-    )
-
-    Generator.replace_content(
       "test/support/conn_case.ex",
       """
             import #{web_module}.ConnCase
