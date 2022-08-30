@@ -3,7 +3,7 @@ name: Test template
 on: push
 
 env:
-  PHOENIX_VERSION: 1.6.6
+  PHOENIX_VERSION: 1.6.11
   MIX_ENV: test
 
 jobs:

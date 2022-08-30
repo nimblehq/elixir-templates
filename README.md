@@ -9,7 +9,7 @@ NimbleTemplate has been developed and actively tested with the below environment
 - Mix 1.13.3
 - Elixir 1.13.3
 - Erlang/OTP 24.2.2
-- Phoenix 1.6.6
+- Phoenix 1.6.11
 - Node 16.15.0
 
 ## Installation
@@ -78,7 +78,8 @@ Contributions, issues, and feature requests are welcome!<br />Feel free to check
 ### 1. Getting `(Mix) The task "phx.new" could not be found` error
 
 The Phoenix application generator is missing. By solving this problem, you need to run
-``` bash
+
+```bash
 mix archive.install hex phx_new
 ```
 
@@ -89,20 +90,22 @@ mix archive.install hex phx_new #{specific-version}
 ```
 
 ### 2. Getting `Wallaby can't find chromedriver` error
+
 Your OS is missing/not installing `chromedriver`, you need to run:
 
 Brew
-``` bash
+
+```bash
 brew install --cask chromedriver
 ```
 
 Apt
-``` bash
+
+```bash
 apt install chromium-chromedriver
 ```
 
-Or download the package on the official site:
-https://chromedriver.chromium.org/downloads
+Or download the package on the official site: https://chromedriver.chromium.org/downloads
 
 ## License
 

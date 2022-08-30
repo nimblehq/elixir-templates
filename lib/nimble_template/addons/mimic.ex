@@ -41,17 +41,6 @@ defmodule NimbleTemplate.Addons.Mimic do
 
   defp edit_case(%Project{mix_project?: false} = project) do
     Generator.inject_content(
-      "test/support/channel_case.ex",
-      """
-          quote do
-      """,
-      """
-            use Mimic
-
-      """
-    )
-
-    Generator.inject_content(
       "test/support/conn_case.ex",
       """
           quote do
