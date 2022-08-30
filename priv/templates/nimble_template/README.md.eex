@@ -46,6 +46,20 @@
   ```sh
   npm install --prefix assets
   ```
+
+- Install `chromedriver` for Wallaby browser tests
+
+  Homebrew
+
+  ```sh
+  brew install --cask chromedriver
+  ```
+
+  Debian/Ubuntu
+
+  ```sh
+  brew install --cask chromedriver
+  ```
 <% end %>
 - Setup the databases:
 

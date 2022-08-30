@@ -93,13 +93,13 @@ mix archive.install hex phx_new #{specific-version}
 
 Your OS is missing/not installing `chromedriver`, you need to run:
 
-Brew
+Homebrew
 
 ```bash
 brew install --cask chromedriver
 ```
 
-Apt
+Debian/Ubuntu
 
 ```bash
 apt install chromium-chromedriver
