@@ -31,8 +31,8 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
        "#{web_test_path}/plugs/health_plug_test.exs"},
       {:eex, "test/otp_app_web/requests/_health/liveness_request_test.exs.eex",
        "#{web_test_path}/requests/_health/liveness_request_test.exs"},
-      {:eex, "test/otp_app_web/requests/_health/rediness_request_test.exs.eex",
-       "#{web_test_path}/requests/_health/rediness_request_test.exs"}
+      {:eex, "test/otp_app_web/requests/_health/readiness_request_test.exs.eex",
+       "#{web_test_path}/requests/_health/readiness_request_test.exs"}
     ]
 
     Generator.copy_file(files, binding)

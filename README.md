@@ -9,7 +9,7 @@ NimbleTemplate has been developed and actively tested with the below environment
 - Mix 1.13.3
 - Elixir 1.13.3
 - Erlang/OTP 24.2.2
-- Phoenix 1.6.6
+- Phoenix 1.6.11
 - Node 16.15.0
 
 ## Installation
@@ -31,7 +31,7 @@ Step 2: Add `nimble_template` dependency to `mix.exs`:
 ```elixir
 def deps do
   [
-    {:nimble_template, "~> 4.2", only: :dev, runtime: false},
+    {:nimble_template, "~> 4.3.0", only: :dev, runtime: false},
     # other dependencies ...
   ]
 end
@@ -63,21 +63,49 @@ mix nimble_template.gen --mix # Apply the Mix template
 
 ## Running tests
 
-The testing documentation is on [Wiki](https://github.com/nimblehq/elixir-templates/wiki)
+The testing documentation is on [Wiki](https://github.com/nimblehq/elixir-templates/wiki/Testing)
 
-### Release
+### Release process
 
-Set the `HEX_API_KEY` as a Github secret (skip this step if it has been done).
-
-The release process follows the [Git flow](https://nimblehq.co/compass/development/version-control/release-management).
-
-Once a `release/<version number>` is created, to publish the new version to Hex.pm, the version number in the `mix.ex` file needs to be updated on the release branch before merging.
-
-Once the release branch is merged into the `master` branch, Github Action automatically publishes the template to [https://hex.pm/packages/nimble_template](https://hex.pm/packages/nimble_template).
+The release documentation is on [Wiki](https://github.com/nimblehq/elixir-templates/wiki/Release)
 
 ## Contributing
 
 Contributions, issues, and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nimblehq/elixir-templates/issues).
+
+## FAQ
+
+### 1. Getting `(Mix) The task "phx.new" could not be found` error
+
+The Phoenix application generator is missing. By solving this problem, you need to run
+
+```bash
+mix archive.install hex phx_new
+```
+
+or
+
+```bash
+mix archive.install hex phx_new #{specific-version}
+```
+
+### 2. Getting `Wallaby can't find chromedriver` error
+
+Your OS is missing/not installing `chromedriver`, you need to run:
+
+Homebrew
+
+```bash
+brew install --cask chromedriver
+```
+
+Debian/Ubuntu
+
+```bash
+apt install chromium-chromedriver
+```
+
+Or download the package on the official site: https://chromedriver.chromium.org/downloads
 
 ## License
 

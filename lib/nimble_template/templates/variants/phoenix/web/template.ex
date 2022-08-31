@@ -24,6 +24,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
     |> Web.StyleLint.apply()
     |> Web.EsBuild.apply()
     |> Web.PostCSS.apply()
+    |> Web.HeexFormatter.apply()
   end
 
   defp apply_optional_web_addons(project) do

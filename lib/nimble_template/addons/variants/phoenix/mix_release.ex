@@ -30,27 +30,20 @@ defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
     Generator.delete_content(
       "config/runtime.exs",
       """
-      # Start the phoenix server if environment is set and running in a release
-      if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
+
+      # ## Using releases
+      #
+      # If you use `mix release`, you need to explicitly enable the server
+      # by passing the PHX_SERVER=true when you start it:
+      #
+      #     PHX_SERVER=true bin/#{otp_app} start
+      #
+      # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
+      # script that automatically sets the env var above.
+      if System.get_env("PHX_SERVER") do
         config :#{otp_app}, #{web_module}.Endpoint, server: true
       end
 
-      """
-    )
-
-    Generator.delete_content(
-      "config/runtime.exs",
-      """
-
-        # ## Using releases
-        #
-        # If you are doing OTP releases, you need to instruct Phoenix
-        # to start each relevant endpoint:
-        #
-        #     config :#{otp_app}, #{web_module}.Endpoint, server: true
-        #
-        # Then you can assemble a release by calling `mix release`.
-        # See `mix help release` for more information.
       """
     )
 

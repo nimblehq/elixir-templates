@@ -4,7 +4,7 @@ defmodule NimbleTemplate.MixProject do
   def project do
     [
       app: :nimble_template,
-      version: "4.2.0",
+      version: "4.3.0",
       description: "Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).",
       elixir: "~> 1.13.3",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -35,7 +35,7 @@ defmodule NimbleTemplate.MixProject do
       {:httpoison, "~> 1.7"},
       {:jason, "~> 1.2"},
       {:mimic, "~> 1.3", only: :test},
-      {:phoenix, "~> 1.6.6"}
+      {:phoenix, "~> 1.6.11"}
     ]
   end
 

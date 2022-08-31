@@ -39,6 +39,8 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     |> Addons.ExCoveralls.apply()
     |> Addons.Mimic.apply()
     |> Addons.Faker.apply()
+    |> Addons.Git.apply()
+    |> Addons.TestInteractive.apply()
   end
 
   defp apply_default_phoenix_addons(project) do
@@ -50,6 +52,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     |> PhoenixAddons.MixRelease.apply()
     |> PhoenixAddons.HealthPlug.apply()
     |> PhoenixAddons.Gettext.apply(project)
+    |> PhoenixAddons.Seeds.apply(project)
   end
 
   defp apply_optional_common_phoenix_addons(project) do

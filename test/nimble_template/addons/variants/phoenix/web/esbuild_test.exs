@@ -25,7 +25,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsBuildTest do
         assert_file("config/config.exs", fn file ->
           assert file =~ """
                  config :esbuild,
-                   version: "0.14.0",
+                   version: "0.14.29",
                    app: [
                      args:
                  """

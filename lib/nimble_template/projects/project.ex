@@ -1,9 +1,9 @@
 defmodule NimbleTemplate.Projects.Project do
   @moduledoc false
 
-  @alpine_version "3.15.0"
-  @elixir_version "1.13.3"
-  @erlang_version "24.2.2"
+  @alpine_version "3.14.6"
+  @elixir_version "1.13.4"
+  @erlang_version "25.0.1"
   @node_asdf_version "16.15.0"
 
   defstruct base_module: nil,
@@ -16,10 +16,9 @@ defmodule NimbleTemplate.Projects.Project do
             # Dependency Versions
             alpine_version: @alpine_version,
             elixir_version: @elixir_version,
-            elixir_asdf_version:
-              "#{@elixir_version}-otp-#{@erlang_version |> String.split(".") |> List.first()}",
             erlang_version: @erlang_version,
             node_asdf_version: @node_asdf_version,
+            elixir_asdf_version: nil,
             # Variants
             api_project?: false,
             live_project?: false,
@@ -38,8 +37,23 @@ defmodule NimbleTemplate.Projects.Project do
       api_project?: api_project?(opts),
       web_project?: web_project?(opts),
       live_project?: live_project?(opts),
-      mix_project?: mix_project?(opts)
+      mix_project?: mix_project?(opts),
+      elixir_asdf_version: "#{@elixir_version}-otp-#{get_otp_major_version(@erlang_version)}"
     }
+  end
+
+  def alpine_version, do: @alpine_version
+
+  def elixir_version, do: @elixir_version
+
+  def erlang_version, do: @erlang_version
+
+  def node_asdf_version, do: @node_asdf_version
+
+  def get_otp_major_version(erlang_version) do
+    erlang_version
+    |> String.split(".")
+    |> List.first()
   end
 
   defp api_project?(opts), do: opts[:api] === true
