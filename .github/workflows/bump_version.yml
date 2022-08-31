@@ -13,9 +13,11 @@ env:
   MIX_ENV: test
 
 jobs:
-  release_version_test:
+  bump_version:
     name: Bump version
     runs-on: ubuntu-latest
+
+    timeout-minutes: 10
 
     steps:
       - name: Cancel Previous Runs

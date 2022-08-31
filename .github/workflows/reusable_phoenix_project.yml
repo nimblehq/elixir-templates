@@ -20,6 +20,8 @@ jobs:
     name: Unit test
     runs-on: ubuntu-latest
 
+    timeout-minutes: 10
+
     services:
       db:
         image: postgres:14.2

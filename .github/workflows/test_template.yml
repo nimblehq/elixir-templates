@@ -11,6 +11,8 @@ jobs:
     name: Install and Compile Dependencies
     runs-on: ubuntu-latest
 
+    timeout-minutes: 10
+
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -62,6 +64,8 @@ jobs:
     needs: install_and_compile_dependencies
 
     runs-on: ubuntu-latest
+
+    timeout-minutes: 10
 
     steps:
       - name: Cancel Previous Runs
@@ -120,6 +124,8 @@ jobs:
     needs: lint_codebase
 
     runs-on: ubuntu-latest
+
+    timeout-minutes: 10
 
     steps:
       - name: Cancel Previous Runs

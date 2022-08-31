@@ -14,6 +14,8 @@ jobs:
     name: Verify the Release version
     runs-on: ubuntu-latest
 
+    timeout-minutes: 10
+
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
