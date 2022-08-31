@@ -144,9 +144,13 @@ defmodule NimbleTemplate.Generator do
   def print_log(prefix, content \\ ""), do: Mix.shell().info([:green, prefix, :reset, content])
 
   defp split_with_self(contents, text) do
-    case :binary.split(contents, text) do
-      [left, right] -> [left, text, right]
-      [_] -> :error
+    if String.match?(contents, ~r/\A#{text}\z/) do
+      case :binary.split(contents, text) do
+        [left, right] -> [left, text, right]
+        [_] -> :error
+      end
+    else
+      :error
     end
   end
 
