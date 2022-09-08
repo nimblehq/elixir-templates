@@ -10,6 +10,24 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
     |> edit_files()
   end
 
+  def edit_endpoint(%Project{otp_app: otp_app} = project) do
+    Generator.replace_content(
+      "lib/#{otp_app}_web/endpoint.ex",
+      """
+        use Phoenix.Endpoint, otp_app: :#{otp_app}
+      """,
+      """
+        use Phoenix.Endpoint, otp_app: :#{otp_app}
+
+        if Application.get_env(:#{otp_app}, :sql_sandbox) do
+          plug Phoenix.Ecto.SQL.Sandbox
+        end
+      """
+    )
+
+    project
+  end
+
   defp copy_files(
          %Project{web_module: web_module, base_module: base_module, web_test_path: web_test_path} =
            project
@@ -63,24 +81,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
       Ecto.Adapters.SQL.Sandbox.mode(#{base_module}.Repo, :manual)
 
       Application.put_env(:wallaby, :base_url, #{web_module}.Endpoint.url())
-      """
-    )
-
-    project
-  end
-
-  def edit_endpoint(%Project{otp_app: otp_app} = project) do
-    Generator.replace_content(
-      "lib/#{otp_app}_web/endpoint.ex",
-      """
-        use Phoenix.Endpoint, otp_app: :#{otp_app}
-      """,
-      """
-        use Phoenix.Endpoint, otp_app: :#{otp_app}
-
-        if Application.get_env(:#{otp_app}, :sql_sandbox) do
-          plug Phoenix.Ecto.SQL.Sandbox
-        end
       """
     )
 
