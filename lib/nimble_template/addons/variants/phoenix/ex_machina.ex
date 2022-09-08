@@ -10,6 +10,20 @@ defmodule NimbleTemplate.Addons.Phoenix.ExMachina do
     |> edit_files()
   end
 
+  def edit_mix_elixirc_paths(%Project{} = project) do
+    Generator.replace_content(
+      "mix.exs",
+      """
+      defp elixirc_paths(:test), do: ["lib", "test/support"]
+      """,
+      """
+      defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
+      """
+    )
+
+    project
+  end
+
   defp copy_files(%Project{base_module: base_module} = project) do
     Generator.copy_file([{:eex, "test/support/factory.ex.eex", "test/support/factory.ex"}],
       base_module: base_module
@@ -30,20 +44,6 @@ defmodule NimbleTemplate.Addons.Phoenix.ExMachina do
 
   defp inject_mix_dependency(%Project{} = project) do
     Generator.inject_mix_dependency({:ex_machina, latest_package_version(:ex_machina), only: :test})
-
-    project
-  end
-
-  def edit_mix_elixirc_paths(%Project{} = project) do
-    Generator.replace_content(
-      "mix.exs",
-      """
-      defp elixirc_paths(:test), do: ["lib", "test/support"]
-      """,
-      """
-      defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
-      """
-    )
 
     project
   end

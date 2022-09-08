@@ -10,6 +10,20 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     |> copy_files()
   end
 
+  def edit_app_js(%Project{live_project?: true} = project) do
+    update_topbar_js_variables()
+
+    project
+  end
+
+  def edit_app_js(%Project{web_project?: true} = project) do
+    update_topbar_js_variables()
+
+    project
+  end
+
+  def edit_app_js(project), do: project
+
   defp edit_files(%Project{} = project) do
     project
     |> edit_assets_package()
@@ -79,20 +93,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
 
     project
   end
-
-  def edit_app_js(%Project{live_project?: true} = project) do
-    update_topbar_js_variables()
-
-    project
-  end
-
-  def edit_app_js(%Project{web_project?: true} = project) do
-    update_topbar_js_variables()
-
-    project
-  end
-
-  def edit_app_js(project), do: project
 
   defp update_topbar_js_variables do
     Generator.replace_content(
