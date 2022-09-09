@@ -8,14 +8,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
     edit_files(project)
   end
 
-  defp edit_files(%Project{} = project) do
-    project
-    |> edit_package_json()
-    |> edit_app_js()
-
-    project
-  end
-
   def edit_package_json(%Project{} = project) do
     Generator.replace_content(
       "assets/package.json",
@@ -44,6 +36,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
       import "phoenix_html"
       """
     )
+
+    project
+  end
+
+  defp edit_files(%Project{} = project) do
+    project
+    |> edit_package_json()
+    |> edit_app_js()
 
     project
   end
