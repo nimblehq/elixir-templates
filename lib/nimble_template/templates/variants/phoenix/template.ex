@@ -19,7 +19,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
   # credo:disable-for-next-line Credo.Check.Refactor.ABCSize
   defp apply_phoenix_common_setup(%Project{} = project) do
     # TODO: Remove me after the Phoenix generator fix releases: https://github.com/phoenixframework/phoenix/pull/4894
-    remove_gettext_compiler()
+    remove_mix_compiler_config()
 
     project
     |> apply_default_common_phoenix_addons()
@@ -112,7 +112,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
   defp apply_phoenix_variant_setup(%Project{web_project?: true, live_project?: true} = project),
     do: LiveTemplate.apply(project)
 
-  defp remove_gettext_compiler() do
-    Generator.delete_content("mix.exs", "[:gettext] ++ ")
+  defp remove_mix_compiler_config() do
+    Generator.delete_content("mix.exs", "compilers: [:gettext] ++ Mix.compilers(),")
   end
 end
