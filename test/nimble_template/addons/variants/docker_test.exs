@@ -60,7 +60,7 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
           assert file =~ """
                  ARG ELIXIR_IMAGE_VERSION=1.14.0
                  ARG ERLANG_IMAGE_VERSION=25.0.4
-                 ARG RELEASE_IMAGE_VERSION=3.16.2
+                 ARG RELEASE_IMAGE_VERSION=3.16.1
 
                  FROM hexpm/elixir:${ELIXIR_IMAGE_VERSION}-erlang-${ERLANG_IMAGE_VERSION}-alpine-${RELEASE_IMAGE_VERSION} AS build
                  """

@@ -10,7 +10,7 @@ NimbleTemplate has been developed and actively tested with the below environment
 - Elixir 1.14.0
 - Erlang/OTP 25.0.4
 - Phoenix 1.6.11
-- Node 16.17.0
+- Node 16.15.0
 
 ## Installation
 

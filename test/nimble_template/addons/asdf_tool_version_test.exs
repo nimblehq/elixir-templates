@@ -13,7 +13,7 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
           assert file =~ """
                  erlang 25.0.4
                  elixir 1.14.0-otp-25
-                 nodejs 16.17.0
+                 nodejs 16.15.0
                  """
         end)
       end)
@@ -36,7 +36,7 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
                  elixir 1.14.0-otp-25
                  """
 
-          refute file =~ "nodejs 16.17.0"
+          refute file =~ "nodejs 16.15.0"
         end)
       end)
     end
@@ -58,7 +58,7 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
                  elixir 1.14.0-otp-25
                  """
 
-          refute file =~ "nodejs 16.17.0"
+          refute file =~ "nodejs 16.15.0"
         end)
       end)
     end
