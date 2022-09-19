@@ -1,6 +1,9 @@
 defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
   use NimbleTemplate.AddonCase, async: false
 
+  alias NimbleTemplate.Addons.AsdfToolVersion
+  alias NimbleTemplate.Projects.Project
+
   describe "#apply/2 with web_project" do
     test "copies the .tool-versions", %{
       project: project,
@@ -16,6 +19,17 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
                  nodejs 16.15.0
                  """
         end)
+      end)
+    end
+
+    test "appends NimbleTemplate.Addons.AsdfToolVersion to project installed_addons list", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        %Project{installed_addons: installed_addons} = Addons.AsdfToolVersion.apply(project)
+
+        assert AsdfToolVersion in installed_addons == true
       end)
     end
   end
