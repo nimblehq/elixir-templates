@@ -21,7 +21,7 @@ defmodule NimbleTemplate.Addons.IexTest do
   describe "#apply/2 with mix_project" do
     @describetag mix_project?: true
 
-    test "add the .iex.exs file", %{
+    test "does not add the .iex.exs file", %{
       project: project,
       test_project_path: test_project_path
     } do
@@ -29,7 +29,7 @@ defmodule NimbleTemplate.Addons.IexTest do
         Addons.Iex.apply(project)
 
         assert_file(".iex.exs", fn file ->
-          assert file =~ """
+          refute file =~ """
                  alias NimbleTemplate.Repo
                  """
         end)
