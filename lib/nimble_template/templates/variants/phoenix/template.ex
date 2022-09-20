@@ -44,6 +44,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     |> Addons.Faker.apply()
     |> Addons.Git.apply()
     |> Addons.TestInteractive.apply()
+    |> Addons.Iex.apply()
   end
 
   defp apply_default_phoenix_addons(project) do

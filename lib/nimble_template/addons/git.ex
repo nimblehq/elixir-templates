@@ -15,6 +15,9 @@ defmodule NimbleTemplate.Addons.Git do
 
     # Iex
     .iex.exs
+
+    # Ignore ElixirLS files
+    .elixir_ls
     """)
 
     project
