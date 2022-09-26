@@ -11,15 +11,5 @@ IEx.configure(
     pretty: true,
     limit: :infinity,
     charlists: :as_lists
-  ],
-  colors: [
-    syntax_colors: [
-      atom: :cyan,
-      boolean: :magenta,
-      charlist: :yellow,
-      nil: :magenta,
-      number: :yellow,
-      string: :green
-    ]
   ]
 )
