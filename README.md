@@ -7,8 +7,8 @@ Phoenix/Mix template for projects at [Nimble](https://nimblehq.co/).
 NimbleTemplate has been developed and actively tested with the below environment:
 
 - Mix 1.13.3
-- Elixir 1.13.3
-- Erlang/OTP 24.2.2
+- Elixir 1.14.0
+- Erlang/OTP 25.0.4
 - Phoenix 1.6.11
 - Node 16.15.0
 

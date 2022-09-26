@@ -366,8 +366,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 25.0.1"
-          assert file =~ "Elixir 1.13.4"
+          assert file =~ "Erlang 25.0.4"
+          assert file =~ "Elixir 1.14.0"
 
           assert file =~ "Node 16.15.0"
           assert file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
@@ -442,8 +442,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 25.0.1"
-          assert file =~ "Elixir 1.13.4"
+          assert file =~ "Erlang 25.0.4"
+          assert file =~ "Elixir 1.14.0"
 
           refute file =~ "Node 16.15.0"
           refute file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"
@@ -501,8 +501,8 @@ defmodule NimbleTemplate.Addons.GithubTest do
         assert_file(".github/workflows/publish_wiki.yml")
 
         assert_file(".github/wiki/Getting-Started.md", fn file ->
-          assert file =~ "Erlang 25.0.1"
-          assert file =~ "Elixir 1.13.4"
+          assert file =~ "Erlang 25.0.4"
+          assert file =~ "Elixir 1.14.0"
 
           refute file =~ "Node 16.15.0"
           refute file =~ "- [asdf-node](https://github.com/asdf-vm/asdf-node)"

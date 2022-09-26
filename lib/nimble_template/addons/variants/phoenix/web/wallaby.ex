@@ -21,7 +21,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
       """
         use Phoenix.Endpoint, otp_app: :#{otp_app}
 
-        if Application.get_env(:#{otp_app}, :sql_sandbox) do
+        if Application.compile_env(:#{otp_app}, :sql_sandbox) do
           plug Phoenix.Ecto.SQL.Sandbox
         end
       """
