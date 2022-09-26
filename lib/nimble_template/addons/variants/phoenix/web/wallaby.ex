@@ -3,6 +3,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
 
   use NimbleTemplate.Addons.Addon
 
+  alias NimbleTemplate.Addons.Phoenix.ExVCR
+
   @impl true
   def do_apply(%Project{} = project, _opts) do
     project
@@ -29,12 +31,17 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
   end
 
   defp copy_files(
-         %Project{web_module: web_module, base_module: base_module, web_test_path: web_test_path} =
-           project
+         %Project{
+           web_module: web_module,
+           base_module: base_module,
+           web_test_path: web_test_path,
+           installed_addons: installed_addons
+         } = project
        ) do
     binding = [
       web_module: web_module,
-      base_module: base_module
+      base_module: base_module,
+      with_ex_vcr?: ExVCR in installed_addons
     ]
 
     files = [
