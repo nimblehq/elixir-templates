@@ -92,7 +92,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
 
         # coveralls-ignore-stop
 
-        forward Application.get_env(:#{otp_app}, #{web_module}.Endpoint)[:health_path], #{web_module}.HealthPlug
+        forward Application.compile_env(:#{otp_app}, #{web_module}.Endpoint)[:health_path], #{web_module}.HealthPlug
       """
     )
 

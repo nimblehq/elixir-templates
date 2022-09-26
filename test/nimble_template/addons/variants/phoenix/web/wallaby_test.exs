@@ -18,7 +18,46 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
 
                    using do
                      quote do
+
+                       use Wallaby.Feature
+                       use Mimic
+
+                       import NimbleTemplate.Factory
+                       import NimbleTemplateWeb.Gettext
+
+                       alias NimbleTemplate.Repo
+                       alias NimbleTemplateWeb.Endpoint
+                       alias NimbleTemplateWeb.Router.Helpers, as: Routes
+
+                       @moduletag :feature_test
+                     end
+                   end
+                 end
+                 """
+        end)
+      end)
+    end
+
+    test "given the ExVCR addon installed, copies the test/support/feature_case.ex with ExVCR.Mock",
+         %{
+           project: project,
+           test_project_path: test_project_path
+         } do
+      in_test_project(test_project_path, fn ->
+        project = ProjectHelper.append_installed_addon(project, NimbleTemplate.Addons.Phoenix.ExVCR)
+
+        WebAddons.Wallaby.apply(project)
+
+        assert_file("test/support/feature_case.ex", fn file ->
+          assert file =~ """
+                 defmodule NimbleTemplateWeb.FeatureCase do
+                   use ExUnit.CaseTemplate
+
+                   using do
+                     quote do
+
                        use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
                        use Wallaby.Feature
                        use Mimic
 
@@ -97,7 +136,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
           assert file =~ """
                    use Phoenix.Endpoint, otp_app: :nimble_template
 
-                   if Application.get_env(:nimble_template, :sql_sandbox) do
+                   if Application.compile_env(:nimble_template, :sql_sandbox) do
                      plug Phoenix.Ecto.SQL.Sandbox
                    end
                  """

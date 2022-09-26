@@ -16,11 +16,14 @@ defmodule NimbleTemplate.Addons.Addon do
       alias NimbleTemplate.Generator
       alias NimbleTemplate.Hex.Package
       alias NimbleTemplate.Projects.Project
+      alias NimbleTemplate.ProjectHelper
 
       def apply(%Project{} = project, opts \\ %{}) when is_map(opts) do
         Generator.print_log("* applying ", inspect(__MODULE__))
 
-        do_apply(project, opts)
+        project
+        |> do_apply(opts)
+        |> ProjectHelper.append_installed_addon(__MODULE__)
       end
 
       def do_apply(%Project{} = project, opts) when is_map(opts), do: project
