@@ -1,0 +1,15 @@
+# Load personal IEx config
+import_file_if_available("~/.iex.exs")
+<%= if web_project? do %>
+import_if_available(Ecto.Query)
+
+alias <%= base_module %>.Repo
+<% end %>
+IEx.configure(
+  history_size: 200,
+  inspect: [
+    pretty: true,
+    limit: :infinity,
+    charlists: :as_lists
+  ]
+)
