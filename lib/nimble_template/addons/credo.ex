@@ -23,9 +23,11 @@ defmodule NimbleTemplate.Addons.Credo do
   end
 
   defp inject_mix_dependency(project) do
-    Generator.inject_mix_dependency(
-      {:credo, latest_package_version(:credo), only: [:dev, :test], runtime: false}
-    )
+    Generator.inject_mix_dependency([
+      {:credo, latest_package_version(:credo), only: [:dev, :test], runtime: false},
+      {:compass_credo_plugin, latest_package_version(:compass_credo_plugin),
+       only: [:dev, :test], runtime: false}
+    ])
 
     project
   end
