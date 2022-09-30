@@ -2,8 +2,8 @@ defmodule NimbleTemplate.Projects.Project do
   @moduledoc false
 
   @alpine_version "3.14.6"
-  @elixir_version "1.13.4"
-  @erlang_version "25.0.1"
+  @elixir_version "1.14.0"
+  @erlang_version "25.0.4"
   @node_asdf_version "16.15.0"
 
   defstruct base_module: nil,
@@ -23,7 +23,8 @@ defmodule NimbleTemplate.Projects.Project do
             api_project?: false,
             live_project?: false,
             web_project?: false,
-            mix_project?: false
+            mix_project?: false,
+            installed_addons: []
 
   def new(opts \\ %{}) do
     %__MODULE__{
@@ -38,7 +39,8 @@ defmodule NimbleTemplate.Projects.Project do
       web_project?: web_project?(opts),
       live_project?: live_project?(opts),
       mix_project?: mix_project?(opts),
-      elixir_asdf_version: "#{@elixir_version}-otp-#{get_otp_major_version(@erlang_version)}"
+      elixir_asdf_version: "#{@elixir_version}-otp-#{get_otp_major_version(@erlang_version)}",
+      installed_addons: []
     }
   end
 

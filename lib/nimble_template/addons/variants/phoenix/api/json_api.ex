@@ -8,12 +8,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.JsonApi do
     edit_files(project)
   end
 
-  defp edit_files(%Project{} = project) do
-    project
-    |> inject_mix_dependency()
-    |> edit_config()
-  end
-
   def inject_mix_dependency(project) do
     Generator.inject_mix_dependency({:jsonapi, latest_package_version(:jsonapi)})
 
@@ -36,5 +30,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.JsonApi do
     )
 
     project
+  end
+
+  defp edit_files(%Project{} = project) do
+    project
+    |> inject_mix_dependency()
+    |> edit_config()
   end
 end

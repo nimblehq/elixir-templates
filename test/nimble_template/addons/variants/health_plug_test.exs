@@ -60,7 +60,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
 
         assert_file("lib/nimble_template_web/router.ex", fn file ->
           assert file =~ """
-                   forward Application.get_env(:nimble_template, NimbleTemplateWeb.Endpoint)[:health_path], NimbleTemplateWeb.HealthPlug
+                   forward Application.compile_env(:nimble_template, NimbleTemplateWeb.Endpoint)[:health_path], NimbleTemplateWeb.HealthPlug
                  """
         end)
       end)

@@ -3,7 +3,9 @@ defmodule <%= web_module %>.FeatureCase do
 
   using do
     quote do
+<%= if with_ex_vcr? do %>
       use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+<% end %>
       use Wallaby.Feature
       use Mimic
 

@@ -8,12 +8,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.Config do
     edit_files(project)
   end
 
-  defp edit_files(%Project{} = project) do
-    edit_config_prod(project)
-
-    project
-  end
-
   def edit_config_prod(%Project{otp_app: otp_app, web_module: web_module} = project) do
     Generator.delete_content(
       "config/prod.exs",
@@ -39,6 +33,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.Config do
       "config/prod.exs",
       "cache_static_manifest: \"priv/static/cache_manifest.json\""
     )
+
+    project
+  end
+
+  defp edit_files(%Project{} = project) do
+    edit_config_prod(project)
 
     project
   end

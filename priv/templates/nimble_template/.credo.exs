@@ -159,7 +159,8 @@
         {Credo.Check.Readability.StrictModuleLayout,
          [
            order:
-             ~w/shortdoc moduledoc behaviour use import alias require module_attribute defstruct callback/a
+             ~w/shortdoc moduledoc behaviour use import alias require module_attribute defstruct callback public_fun private_fun/a,
+           ignore: ~w/callback_impl/a
          ]},
         {Credo.Check.Consistency.MultiAliasImportRequireUse, []},
         {Credo.Check.Consistency.UnusedVariableNames, false},

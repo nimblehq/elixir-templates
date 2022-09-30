@@ -20,6 +20,9 @@ defmodule NimbleTemplate.Addons.GitTest do
 
                  # Iex
                  .iex.exs
+
+                 # Ignore ElixirLS files
+                 .elixir_ls
                  """
         end)
       end)
@@ -47,6 +50,9 @@ defmodule NimbleTemplate.Addons.GitTest do
 
                  # Iex
                  .iex.exs
+
+                 # Ignore ElixirLS files
+                 .elixir_ls
                  """
         end)
       end)
