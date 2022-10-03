@@ -36,3 +36,14 @@ The following workflows are supported.
 
   otherwise, leaving it set to `false` as default.
 <% end %>
+
+
+<%= if with_deploy_to_aws_ecs_workflow? do %>
+- [Deploy to AWS ECS](#deploy-to-aws-ecs-workflow-usage-instruction)
+<% end %>
+
+<%= if with_deploy_to_aws_ecs_workflow? do %>
+## Deploy to AWS ECS usage instruction
+
+### Requirements
+<% end %>

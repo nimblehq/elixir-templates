@@ -57,7 +57,8 @@ defmodule NimbleTemplate.Addons.Github do
         %{
           github_workflows_readme: true,
           with_test_workflow?: with_test_workflow?,
-          with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
+          with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?,
+          with_deploy_to_aws_ecs_workflow?: with_deploy_to_aws_ecs_workflow?
         }
       ) do
     Generator.copy_file(
@@ -65,7 +66,8 @@ defmodule NimbleTemplate.Addons.Github do
         {:eex, ".github/workflows/README.md.eex", ".github/workflows/README.md"}
       ],
       with_test_workflow?: with_test_workflow?,
-      with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
+      with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?,
+      with_deploy_to_aws_ecs_workflow?: with_deploy_to_aws_ecs_workflow?
     )
 
     project
@@ -94,6 +96,16 @@ defmodule NimbleTemplate.Addons.Github do
         force_ssl: [rewrite_on: [:x_forwarded_proto]]
       """
     )
+
+    project
+  end
+
+  @impl true
+  def do_apply(%Project{mix_project?: false} = project, %{github_action_deploy_aws_ecs: true}) do
+    Generator.copy_file([
+      {:eex, ".github/workflows/deploy_to_aws_ecs.yml.eex",
+       ".github/workflows/deploy_to_aws_ecs.yml"}
+    ])
 
     project
   end

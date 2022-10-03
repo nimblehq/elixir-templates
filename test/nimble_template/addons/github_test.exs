@@ -547,4 +547,19 @@ defmodule NimbleTemplate.Addons.GithubTest do
       end)
     end
   end
+
+  describe "#apply/2 with web_project and github_action_deploy_to_aws_ecs option" do
+    test "copies the .github/workflows/deploy_to_aws_ecs.yml file", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      project = %{project | api_project?: false, web_project?: true}
+
+      in_test_project(test_project_path, fn ->
+        Addons.Github.apply(project, %{github_action_deploy_aws_ecs: true})
+
+        assert_file(".github/workflows/deploy_to_aws_ecs.yml")
+      end)
+    end
+  end
 end

@@ -92,16 +92,24 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     if generate_github_action_deploy_heroku?,
       do: Addons.Github.apply(project, %{github_action_deploy_heroku: true})
 
+    generate_github_action_deploy_aws_ecs? = generate_github_action_deploy_aws_ecs?()
+
+    if generate_github_action_deploy_aws_ecs?,
+      do: Addons.Github.apply(project, %{github_action_deploy_aws_ecs: true})
+
     if generate_github_workflows_readme?(),
       do:
         Addons.Github.apply(project, %{
           github_workflows_readme: true,
           with_test_workflow?: generate_github_action_test?,
-          with_deploy_to_heroku_workflow?: generate_github_action_deploy_heroku?
-        })
+          with_deploy_to_heroku_workflow?: generate_github_action_deploy_heroku?,
+          with_deploy_to_aws_ecs_workflow?: generate_github_action_deploy_aws_ecs?
+          })
 
     if generate_github_wiki?(),
       do: Addons.Github.apply(project, %{github_wiki: true})
+
+    project
   end
 
   defp apply_phoenix_variant_setup(%Project{api_project?: true} = project),
