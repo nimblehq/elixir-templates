@@ -75,9 +75,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Oban do
       """
 
         # Conditionally disable crontab, queues, or plugins here.
-        defp oban_config do
-          Application.get_env(:#{otp_app}, Oban)
-        end
+        defp oban_config, do: Application.get_env(:#{otp_app}, Oban)
       """
     )
 

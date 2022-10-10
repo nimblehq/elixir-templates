@@ -19,7 +19,7 @@ defmodule NimbleTemplate.Addons.Addon do
       alias NimbleTemplate.ProjectHelper
 
       def apply(%Project{} = project, opts \\ %{}) when is_map(opts) do
-        Generator.print_log("* applying ", inspect(__MODULE__))
+        Generator.info_log("* applying ", inspect(__MODULE__))
 
         project
         |> do_apply(opts)
