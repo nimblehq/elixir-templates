@@ -9,6 +9,8 @@ defmodule NimbleTemplate.AddonCase do
   alias NimbleTemplate.Hex.Package
   alias NimbleTemplate.Projects.Project
 
+  @default_project_name "nimble_template"
+
   using do
     quote do
       alias NimbleTemplate.Addons
@@ -39,12 +41,13 @@ defmodule NimbleTemplate.AddonCase do
 
   setup context do
     parent_test_project_path = Path.join(tmp_path(), parent_test_project_path())
-    test_project_path = Path.join(parent_test_project_path, "/nimble_template")
+    test_project_path = Path.join(parent_test_project_path, "/#{@default_project_name}")
 
     project =
       cond do
         context[:mix_project?] == true ->
-          create_mix_test_project(test_project_path)
+          opts = Map.get(context, :opts, "")
+          create_mix_test_project(test_project_path, opts)
 
           Project.new(mix: true)
 
@@ -94,10 +97,10 @@ defmodule NimbleTemplate.AddonCase do
     )
   end
 
-  defp create_mix_test_project(test_project_path) do
+  defp create_mix_test_project(test_project_path, opts) do
     # N - in response to Fetch and install dependencies?
     Mix.shell().cmd(
-      "printf \"N\n\" | make create_mix_project PROJECT_DIRECTORY=#{test_project_path} > /dev/null"
+      "printf \"N\n\" | make create_mix_project PROJECT_DIRECTORY=#{test_project_path} OPTIONS=#{opts} > /dev/null"
     )
   end
 
