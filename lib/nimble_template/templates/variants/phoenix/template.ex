@@ -92,11 +92,14 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     if generate_github_action_deploy_heroku?,
       do: Addons.Github.apply(project, %{github_action_deploy_heroku: true})
 
+    generate_github_wiki? = generate_github_wiki?()
+
     if generate_github_workflows_readme?(),
       do:
         Addons.Github.apply(project, %{
           github_workflows_readme: true,
           with_test_workflow?: generate_github_action_test?,
+          with_github_wiki?: generate_github_wiki?,
           with_deploy_to_heroku_workflow?: generate_github_action_deploy_heroku?
         })
 
