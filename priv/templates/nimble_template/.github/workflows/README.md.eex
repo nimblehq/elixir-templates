@@ -1,27 +1,20 @@
 # Github Actions
 
 The following workflows are supported.
-<%= if with_test_workflow? do %>
-- [Test](#test)
-<% end %>
-<%= if with_github_wiki? do %>
-- [Publish Wiki](#publish-wiki)
-<% end %>
-<%= if with_deploy_to_heroku_workflow? do %>
-- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)
-<% end %>
-<%= if with_test_workflow? do %>
-## Test
 
-Runs a workflow to test the codebase formatting/linting, database seeds successfully seeding, and unit tests.
-<% end %>
-<%= if with_github_wiki? do %>
-## Publish Wiki
+<%= if with_test_workflow? do %>- [Test](#test)<% end %>
+<%= if with_github_wiki? do %>- [Publish Wiki](#publish-wiki)<% end %>
+<%= if with_deploy_to_heroku_workflow? do %>- [Deploy to Heroku](#deploy-to-heroku-workflow-usage-instruction)<% end %>
 
-Runs a workflow to publish updates of the `.github/wiki/` folder to the Github Wiki.
-<% end %>
-<%= if with_deploy_to_heroku_workflow? do %>
-## Deploy to Heroku Workflow usage instruction
+<%= if with_test_workflow? do %>## Test
+
+Runs a workflow to test the codebase formatting/linting, database seeds successfully seeding, and unit tests.<% end %>
+
+<%= if with_github_wiki? do %>## Publish Wiki
+
+Runs a workflow to publish updates of the `.github/wiki/` folder to the Github Wiki.<% end %>
+
+<%= if with_deploy_to_heroku_workflow? do %>## Deploy to Heroku Workflow usage instruction
 
 ### Requirements
 
@@ -47,5 +40,4 @@ Runs a workflow to publish updates of the `.github/wiki/` folder to the Github W
     ...
   ```
 
-  otherwise, leaving it set to `false` as default.
-<% end %>
+  otherwise, leaving it set to `false` as default.<% end %>
