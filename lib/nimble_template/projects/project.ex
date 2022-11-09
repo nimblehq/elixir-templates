@@ -95,7 +95,7 @@ defmodule NimbleTemplate.Projects.Project do
            mix_project?: true
          } = project
        ) do
-    Map.merge(project, %{base_module: base_module(project)})
+    Map.merge(project, %{base_module: base_module()})
   end
 
   defp init_base_module_fields(project) do
@@ -105,7 +105,7 @@ defmodule NimbleTemplate.Projects.Project do
       |> Macro.underscore()
 
     Map.merge(project, %{
-      base_module: base_module(project),
+      base_module: base_module(),
       base_path: "lib/" <> base_module_path,
       base_test_path: "test/" <> base_module_path
     })
@@ -130,7 +130,7 @@ defmodule NimbleTemplate.Projects.Project do
 
   defp maybe_init_web_fields(project), do: project
 
-  defp base_module(%{mix_project?: true}) do
+  defp base_module do
     mix_file_content = File.read!("mix.exs")
 
     ~r/defmodule (.*) do/
@@ -139,6 +139,4 @@ defmodule NimbleTemplate.Projects.Project do
     |> String.split(".")
     |> List.first()
   end
-
-  defp base_module(_project), do: Mix.Phoenix.base()
 end
