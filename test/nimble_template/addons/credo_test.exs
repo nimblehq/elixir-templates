@@ -28,6 +28,7 @@ defmodule NimbleTemplate.Addons.CredoTest do
                    defp deps do
                      [
                        {:credo, "~> 1.4", [only: [:dev, :test], runtime: false]},
+                       {:compass_credo_plugin, "~> 1.0.0", [only: [:dev, :test], runtime: false]},
                  """
         end)
       end)

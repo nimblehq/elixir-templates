@@ -68,7 +68,6 @@ defmodule NimbleTemplate.Templates.Template do
         "#{web_path}/controllers/page_controller.ex",
         "#{web_path}/telemetry.ex",
         "#{web_path}/views/error_view.ex",
-        "#{web_path}/views/error_view.ex",
         "#{base_path}/release_tasks.ex"
       ],
       fn file_path ->
