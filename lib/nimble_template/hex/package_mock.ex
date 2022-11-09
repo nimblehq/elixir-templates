@@ -5,5 +5,10 @@ defmodule NimbleTemplate.Hex.PackageMock do
 
   alias NimbleTemplate.Exception.MockHexPackageRequiredException
 
-  def get_latest_version(_package), do: raise(MockHexPackageRequiredException)
+  def get_latest_version(package) do
+    raise(MockHexPackageRequiredException,
+      message:
+        "Mock Hex Package with `@describetag mock_latest_package_versions: [{#{package}, :version}]` required"
+    )
+  end
 end
