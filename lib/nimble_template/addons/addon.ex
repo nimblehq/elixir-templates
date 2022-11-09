@@ -14,6 +14,7 @@ defmodule NimbleTemplate.Addons.Addon do
       import NimbleTemplate.GithubHelper, only: [has_github_wiki_directory?: 0]
 
       alias NimbleTemplate.Generator
+      alias NimbleTemplate.Hex.Package
       alias NimbleTemplate.Projects.Project
       alias NimbleTemplate.ProjectHelper
 
@@ -30,7 +31,9 @@ defmodule NimbleTemplate.Addons.Addon do
       defp latest_package_version(package),
         do: "~> " <> hex_package_resource().get_latest_version(package)
 
-      defp hex_package_resource, do: Application.get_env(:nimble_template, :hex_package_resource)
+      # TODO: `Application.get_env(:nimble_template, :hex_package_resource)` returns nil on runtime, temporary fix by fallback to `Package`
+      defp hex_package_resource,
+        do: Application.get_env(:nimble_template, :hex_package_resource, Package)
 
       defoverridable do_apply!: 2
     end
