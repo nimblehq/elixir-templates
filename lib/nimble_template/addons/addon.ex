@@ -28,9 +28,10 @@ defmodule NimbleTemplate.Addons.Addon do
 
       def do_apply!(%Project{} = project, opts) when is_map(opts), do: project
 
-      defp latest_package_version(package) do
-        "~> " <> Package.get_latest_version(package)
-      end
+      defp latest_package_version(package),
+        do: "~> " <> hex_package_resource().get_latest_version(package)
+
+      defp hex_package_resource, do: Application.get_env(:nimble_template, :hex_package_resource)
 
       defoverridable do_apply!: 2
     end
