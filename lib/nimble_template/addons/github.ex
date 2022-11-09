@@ -57,6 +57,7 @@ defmodule NimbleTemplate.Addons.Github do
         %{
           github_workflows_readme: true,
           with_test_workflow?: with_test_workflow?,
+          with_github_wiki?: with_github_wiki?,
           with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
         }
       ) do
@@ -65,6 +66,7 @@ defmodule NimbleTemplate.Addons.Github do
         {:eex, ".github/workflows/README.md.eex", ".github/workflows/README.md"}
       ],
       with_test_workflow?: with_test_workflow?,
+      with_github_wiki?: with_github_wiki?,
       with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
     )
 
