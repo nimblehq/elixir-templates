@@ -1,15 +1,15 @@
 defmodule NimbleTemplate.Addons.MimicTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag mock_latest_package_versions: [{:mimic, "1.3.1"}]
 
     test "injects mimic to mix dependency", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.Mimic.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.Mimic.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -25,8 +25,8 @@ defmodule NimbleTemplate.Addons.MimicTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.Mimic.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.Mimic.apply!(project)
 
         assert_file("test/test_helper.exs", fn file ->
           assert file =~ """
@@ -39,8 +39,8 @@ defmodule NimbleTemplate.Addons.MimicTest do
     end
 
     test "updates test cases", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.Mimic.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.Mimic.apply!(project)
 
         assert_file("test/support/data_case.ex", fn file ->
           assert file =~ "use Mimic"

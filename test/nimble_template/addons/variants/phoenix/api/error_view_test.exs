@@ -1,13 +1,13 @@
 defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorViewTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     test "copies the error view files", %{
       project: project,
       test_project_path: project_path
     } do
-      in_test_project(project_path, fn ->
-        ApiAddons.ErrorView.apply(project)
+      in_test_project!(project_path, fn ->
+        ApiAddons.ErrorView.apply!(project)
 
         assert_file("lib/nimble_template_web/views/error_helpers.ex")
         assert_file("lib/nimble_template_web/views/api/error_view.ex")

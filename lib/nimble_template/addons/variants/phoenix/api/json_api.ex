@@ -4,18 +4,18 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.JsonApi do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
-    edit_files(project)
+  def do_apply!(%Project{} = project, _opts) do
+    edit_files!(project)
   end
 
-  def inject_mix_dependency(project) do
-    Generator.inject_mix_dependency({:jsonapi, latest_package_version(:jsonapi)})
+  def inject_mix_dependency!(project) do
+    Generator.inject_mix_dependency!({:jsonapi, latest_package_version(:jsonapi)})
 
     project
   end
 
-  def edit_config(project) do
-    Generator.replace_content(
+  def edit_config!(project) do
+    Generator.replace_content!(
       "config/config.exs",
       """
       # Import environment specific config. This must remain at the bottom
@@ -32,9 +32,9 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.JsonApi do
     project
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files!(%Project{} = project) do
     project
-    |> inject_mix_dependency()
-    |> edit_config()
+    |> inject_mix_dependency!()
+    |> edit_config!()
   end
 end

@@ -6,14 +6,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
   alias NimbleTemplate.Addons.Phoenix.ExVCR
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> copy_files()
-    |> edit_files()
+    |> copy_files!()
+    |> edit_files!()
   end
 
-  def edit_endpoint(%Project{otp_app: otp_app} = project) do
-    Generator.replace_content(
+  def edit_endpoint!(%Project{otp_app: otp_app} = project) do
+    Generator.replace_content!(
       "lib/#{otp_app}_web/endpoint.ex",
       """
         use Phoenix.Endpoint, otp_app: :#{otp_app}
@@ -30,7 +30,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
     project
   end
 
-  defp copy_files(
+  defp copy_files!(
          %Project{
            web_module: web_module,
            base_module: base_module,
@@ -50,32 +50,32 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
        "#{web_test_path}/features/home_page/view_home_page_test.exs"}
     ]
 
-    Generator.copy_file(files, binding)
+    Generator.copy_file!(files, binding)
 
     project
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files!(%Project{} = project) do
     project
-    |> inject_mix_dependency()
-    |> edit_test_helper()
-    |> edit_endpoint()
-    |> edit_test_config()
-    |> edit_gitignore()
+    |> inject_mix_dependency!()
+    |> edit_test_helper!()
+    |> edit_endpoint!()
+    |> edit_test_config!()
+    |> edit_gitignore!()
 
     project
   end
 
-  defp inject_mix_dependency(%Project{} = project) do
-    Generator.inject_mix_dependency(
+  defp inject_mix_dependency!(%Project{} = project) do
+    Generator.inject_mix_dependency!(
       {:wallaby, latest_package_version(:wallaby), only: :test, runtime: false}
     )
 
     project
   end
 
-  defp edit_test_helper(%Project{base_module: base_module, web_module: web_module} = project) do
-    Generator.replace_content(
+  defp edit_test_helper!(%Project{base_module: base_module, web_module: web_module} = project) do
+    Generator.replace_content!(
       "test/test_helper.exs",
       """
       ExUnit.start()
@@ -94,8 +94,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
     project
   end
 
-  defp edit_test_config(%Project{otp_app: otp_app} = project) do
-    Generator.replace_content(
+  defp edit_test_config!(%Project{otp_app: otp_app} = project) do
+    Generator.replace_content!(
       "config/test.exs",
       """
         server: false
@@ -116,8 +116,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
     project
   end
 
-  defp edit_gitignore(%Project{} = project) do
-    Generator.replace_content(
+  defp edit_gitignore!(%Project{} = project) do
+    Generator.replace_content!(
       ".gitignore",
       """
       /_build/

@@ -1,13 +1,13 @@
 defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlugTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     test "copies the empty body plug file", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        ApiAddons.EmptyBodyParamsPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        ApiAddons.EmptyBodyParamsPlug.apply!(project)
 
         assert_file("lib/nimble_template_web/plugs/check_empty_body_params_plug.ex")
       end)
@@ -17,8 +17,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlugTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        ApiAddons.EmptyBodyParamsPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        ApiAddons.EmptyBodyParamsPlug.apply!(project)
 
         assert_file("test/nimble_template_web/plugs/check_empty_body_params_plug_test.exs")
       end)
@@ -28,8 +28,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlugTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        ApiAddons.EmptyBodyParamsPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        ApiAddons.EmptyBodyParamsPlug.apply!(project)
 
         assert_file("lib/nimble_template_web/router.ex", fn file ->
           assert file =~ """

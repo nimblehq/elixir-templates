@@ -4,28 +4,28 @@ defmodule NimbleTemplate.Addons.Phoenix.EctoDataMigration do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> copy_files()
-    |> edit_files()
+    |> copy_files!()
+    |> edit_files!()
   end
 
-  defp copy_files(%Project{} = project) do
-    Generator.copy_file([
+  defp copy_files!(%Project{} = project) do
+    Generator.copy_file!([
       {:text, "priv/repo/data_migrations/.keep", "priv/repo/data_migrations/.keep"}
     ])
 
     project
   end
 
-  defp edit_files(%Project{} = project) do
-    edit_mix(project)
+  defp edit_files!(%Project{} = project) do
+    edit_mix!(project)
 
     project
   end
 
-  defp edit_mix(project) do
-    Generator.inject_content(
+  defp edit_mix!(project) do
+    Generator.inject_content!(
       "mix.exs",
       """
         defp aliases do
@@ -38,7 +38,7 @@ defmodule NimbleTemplate.Addons.Phoenix.EctoDataMigration do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "mix.exs",
       """
         end
@@ -58,7 +58,7 @@ defmodule NimbleTemplate.Addons.Phoenix.EctoDataMigration do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "mix.exs",
       """
             "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],

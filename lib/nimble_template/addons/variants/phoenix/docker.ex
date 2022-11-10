@@ -4,7 +4,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Docker do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(
+  def do_apply!(
         %Project{
           web_project?: web_project?,
           otp_app: otp_app,
@@ -15,7 +15,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Docker do
         } = project,
         _opts
       ) do
-    Generator.copy_file(
+    Generator.copy_file!(
       [
         {:eex, "docker-compose.dev.yml.eex", "docker-compose.dev.yml"},
         {:eex, "docker-compose.yml.eex", "docker-compose.yml"},

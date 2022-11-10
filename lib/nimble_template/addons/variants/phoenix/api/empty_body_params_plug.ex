@@ -4,13 +4,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlug do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> copy_files()
-    |> edit_files()
+    |> copy_files!()
+    |> edit_files!()
   end
 
-  defp copy_files(
+  defp copy_files!(
          %Project{
            web_module: web_module,
            web_path: web_path,
@@ -28,13 +28,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlug do
        "#{web_test_path}/plugs/check_empty_body_params_plug_test.exs"}
     ]
 
-    Generator.copy_file(files, binding)
+    Generator.copy_file!(files, binding)
 
     project
   end
 
-  defp edit_files(%Project{web_path: web_path, web_module: web_module} = project) do
-    Generator.replace_content(
+  defp edit_files!(%Project{web_path: web_path, web_module: web_module} = project) do
+    Generator.replace_content!(
       "#{web_path}/router.ex",
       """
         pipeline :api do

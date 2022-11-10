@@ -8,35 +8,35 @@ defmodule NimbleTemplate.Templates.Template do
   alias NimbleTemplate.Templates.Mix.Template, as: MixTemplate
   alias NimbleTemplate.Templates.Phoenix.Template, as: PhoenixTemplate
 
-  def apply(%Project{mix_project?: true} = project) do
-    MixTemplate.apply(project)
+  def apply!(%Project{mix_project?: true} = project) do
+    MixTemplate.apply!(project)
 
-    ExUnit.apply(project)
+    ExUnit.apply!(project)
 
-    post_apply(project)
+    post_apply!(project)
   end
 
-  def apply(%Project{mix_project?: false} = project) do
-    PhoenixTemplate.apply(project)
+  def apply!(%Project{mix_project?: false} = project) do
+    PhoenixTemplate.apply!(project)
 
-    ExUnit.apply(project)
+    ExUnit.apply!(project)
 
-    post_apply(project)
+    post_apply!(project)
   end
 
-  defp post_apply(%Project{mix_project?: true}) do
+  defp post_apply!(%Project{mix_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
     format_codebase()
   end
 
-  defp post_apply(%Project{api_project?: true}) do
+  defp post_apply!(%Project{api_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
     format_codebase()
   end
 
-  defp post_apply(%Project{web_project?: true}) do
+  defp post_apply!(%Project{web_project?: true}) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
     fetch_and_install_node_dependencies()

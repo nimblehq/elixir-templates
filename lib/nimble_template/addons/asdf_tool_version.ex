@@ -4,7 +4,7 @@ defmodule NimbleTemplate.Addons.AsdfToolVersion do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(
+  def do_apply!(
         %Project{
           erlang_version: erlang_version,
           elixir_asdf_version: elixir_asdf_version,
@@ -13,13 +13,13 @@ defmodule NimbleTemplate.Addons.AsdfToolVersion do
         } = project,
         _opts
       ) do
-    Generator.copy_file([{:eex, ".tool-versions.eex", ".tool-versions"}],
+    Generator.copy_file!([{:eex, ".tool-versions.eex", ".tool-versions"}],
       erlang_version: erlang_version,
       elixir_asdf_version: elixir_asdf_version
     )
 
     if web_project? do
-      Generator.append_content(
+      Generator.append_content!(
         ".tool-versions",
         """
         nodejs #{node_asdf_version}

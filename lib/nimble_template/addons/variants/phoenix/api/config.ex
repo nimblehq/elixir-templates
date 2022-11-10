@@ -4,12 +4,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.Config do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
-    edit_files(project)
+  def do_apply!(%Project{} = project, _opts) do
+    edit_files!(project)
   end
 
-  def edit_config_prod(%Project{otp_app: otp_app, web_module: web_module} = project) do
-    Generator.delete_content(
+  def edit_config_prod!(%Project{otp_app: otp_app, web_module: web_module} = project) do
+    Generator.delete_content!(
       "config/prod.exs",
       """
       # For production, don't forget to configure the url host
@@ -24,12 +24,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.Config do
       """
     )
 
-    Generator.delete_content(
+    Generator.delete_content!(
       "config/prod.exs",
       "config :#{otp_app}, #{web_module}.Endpoint,"
     )
 
-    Generator.delete_content(
+    Generator.delete_content!(
       "config/prod.exs",
       "cache_static_manifest: \"priv/static/cache_manifest.json\""
     )
@@ -37,8 +37,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.Config do
     project
   end
 
-  defp edit_files(%Project{} = project) do
-    edit_config_prod(project)
+  defp edit_files!(%Project{} = project) do
+    edit_config_prod!(project)
 
     project
   end

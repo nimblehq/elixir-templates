@@ -4,13 +4,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.FallbackController do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> edit_files()
-    |> copy_files()
+    |> edit_files!()
+    |> copy_files!()
   end
 
-  defp copy_files(%Project{web_module: web_module, web_path: web_path} = project) do
+  defp copy_files!(%Project{web_module: web_module, web_path: web_path} = project) do
     binding = [
       web_module: web_module
     ]
@@ -20,13 +20,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.FallbackController do
        "#{web_path}/controllers/api/fallback_controller.ex"}
     ]
 
-    Generator.copy_file(files, binding)
+    Generator.copy_file!(files, binding)
 
     project
   end
 
-  defp edit_files(%Project{web_module: web_module, web_path: web_entry_point} = project) do
-    Generator.replace_content(
+  defp edit_files!(%Project{web_module: web_module, web_path: web_entry_point} = project) do
+    Generator.replace_content!(
       "#{web_entry_point}.ex",
       """
         def controller do
