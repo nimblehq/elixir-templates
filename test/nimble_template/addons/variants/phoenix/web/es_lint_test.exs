@@ -1,15 +1,15 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "adds eslint, eslint-config-prettier and eslint-plugin-prettier into package.json", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.EsLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.EsLint.apply!(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -26,8 +26,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.EsLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.EsLint.apply!(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -43,8 +43,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.EsLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.EsLint.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -59,8 +59,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.EsLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.EsLint.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -75,15 +75,15 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.EsLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.EsLint.apply!(project)
 
         assert_file("assets/.eslintrc.json")
       end)
     end
   end
 
-  describe "#apply/2 to a Live project" do
+  describe "#apply!/2 to a Live project" do
     @describetag live_project?: true
     @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
@@ -91,8 +91,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.EsLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.EsLint.apply!(project)
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~

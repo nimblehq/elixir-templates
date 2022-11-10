@@ -6,21 +6,21 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
   @dart_sass_version "1.49.11"
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> inject_mix_dependency()
-    |> edit_config()
-    |> edit_mix()
-    |> edit_app_js()
-    |> rename_app_css()
+    |> inject_mix_dependency!()
+    |> edit_config!()
+    |> edit_mix!()
+    |> edit_app_js!()
+    |> rename_app_css!()
   end
 
-  defp inject_mix_dependency(%Project{} = project) do
-    Generator.inject_mix_dependency(
+  defp inject_mix_dependency!(%Project{} = project) do
+    Generator.inject_mix_dependency!(
       {:dart_sass, latest_package_version(:dart_sass), runtime: "Mix.env() == :dev"}
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "mix.exs",
       "runtime: \"Mix.env() == :dev\"",
       "runtime: Mix.env() == :dev"
@@ -29,8 +29,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
     project
   end
 
-  defp edit_config(%Project{} = project) do
-    Generator.replace_content(
+  defp edit_config!(%Project{} = project) do
+    Generator.replace_content!(
       "config/config.exs",
       """
       # Configure esbuild (the version is required)
@@ -52,7 +52,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "config/dev.exs",
       """
         watchers: [
@@ -70,8 +70,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
     project
   end
 
-  defp edit_mix(project) do
-    Generator.replace_content(
+  defp edit_mix!(project) do
+    Generator.replace_content!(
       "mix.exs",
       """
             "assets.deploy": [
@@ -93,8 +93,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
     project
   end
 
-  defp edit_app_js(project) do
-    Generator.delete_content(
+  defp edit_app_js!(project) do
+    Generator.delete_content!(
       "assets/js/app.js",
       """
       // We import the CSS which is extracted to its own file by esbuild.
@@ -107,8 +107,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSass do
     project
   end
 
-  defp rename_app_css(project) do
-    Generator.rename_file(
+  defp rename_app_css!(project) do
+    Generator.rename_file!(
       "assets/css/app.css",
       "assets/css/app.scss"
     )
