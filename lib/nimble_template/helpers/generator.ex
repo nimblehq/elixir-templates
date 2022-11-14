@@ -24,7 +24,12 @@ defmodule NimbleTemplate.Generator do
 
   def rename_file(old_path, new_path), do: File.rename(old_path, new_path)
 
-  def replace_content(file_path, anchor, content, raise_exception \\ true) do
+  def replace_content(file_path, anchor, content, raise_exception \\ true)
+
+  def replace_content(_file_path, anchor, content, _raise_exception) when anchor == content,
+    do: :ok
+
+  def replace_content(file_path, anchor, content, raise_exception) do
     file = Path.join([file_path])
 
     file_content =
@@ -47,6 +52,8 @@ defmodule NimbleTemplate.Generator do
         end
     end
   end
+
+  def replace_content_all(_file_path, anchor, content) when anchor == content, do: :ok
 
   def replace_content_all(file_path, anchor, content) do
     case replace_content(file_path, anchor, content, false) do
