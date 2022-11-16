@@ -51,6 +51,48 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       end)
     end
 
+    test "creates the `router_helper.ex` file", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply(project)
+
+        assert_file("lib/nimble_template_web/helpers/router_helper.ex", fn file ->
+          assert file =~ """
+                 defmodule NimbleTemplateWeb.RouterHelper do
+                   def health_path, do: Application.get_env(:nimble_template, NimbleTemplateWeb.Endpoint)[:health_path]
+                 end
+                 """
+        end)
+      end)
+    end
+
+    test "creates the `router_helper_test.exs` file", %{
+      project: project,
+      test_project_path: test_project_path
+    } do
+      in_test_project(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply(project)
+
+        assert_file("test/nimble_template_web/helpers/router_helper_test.exs", fn file ->
+          assert file =~ """
+                 defmodule NimbleTemplateWeb.RouterHelperTest do
+                   use NimbleTemplateWeb.ConnCase, async: true
+
+                   alias NimbleTemplateWeb.RouterHelper
+
+                   describe "health_path/0" do
+                     test "returns the `health_path` from the Application configuration" do
+                       assert RouterHelper.health_path() == "/_health"
+                     end
+                   end
+                 end
+                 """
+        end)
+      end)
+    end
+
     test "adds forward health path in router", %{
       project: project,
       test_project_path: test_project_path
@@ -59,9 +101,8 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
         PhoenixAddons.HealthPlug.apply(project)
 
         assert_file("lib/nimble_template_web/router.ex", fn file ->
-          assert file =~ """
-                   forward Application.compile_env(:nimble_template, NimbleTemplateWeb.Endpoint)[:health_path], NimbleTemplateWeb.HealthPlug
-                 """
+          assert file =~ "alias NimbleTemplateWeb.RouterHelper"
+          assert file =~ "forward RouterHelper.health_path(), NimbleTemplateWeb.HealthPlug"
         end)
       end)
     end
