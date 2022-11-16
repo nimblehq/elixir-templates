@@ -21,17 +21,6 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
         end)
       end)
     end
-
-    test "appends NimbleTemplate.Addons.AsdfToolVersion to project installed_addons list", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project(test_project_path, fn ->
-        %Project{installed_addons: installed_addons} = Addons.AsdfToolVersion.apply(project)
-
-        assert AsdfToolVersion in installed_addons == true
-      end)
-    end
   end
 
   describe "#apply/2 with api_project" do

@@ -30,7 +30,7 @@ defmodule NimbleTemplate.Templates.Mix.Template do
     |> Addons.Iex.apply()
   end
 
-  defp apply_optional_mix_addons(%Project{addons: addons} = project) do
+  defp apply_optional_mix_addons(%Project{optional_addons: optional_addons} = project) do
     if host_on_github?() do
       if generate_github_template?(),
         do: Addons.Github.apply(project, %{github_template: true})
@@ -55,7 +55,7 @@ defmodule NimbleTemplate.Templates.Mix.Template do
           })
     end
 
-    if Addons.Mimic in addons, do: Addons.Mimic.apply(project)
+    if Addons.Mimic in optional_addons, do: Addons.Mimic.apply(project)
 
     project
   end

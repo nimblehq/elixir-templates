@@ -20,8 +20,8 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
     |> apply_optional_web_addons()
   end
 
-  defp dart_sass_additional_addons_prompt(%Project{addons: addons} = project) do
-    if Web.DartSass in addons do
+  defp dart_sass_additional_addons_prompt(%Project{optional_addons: optional_addons} = project) do
+    if Web.DartSass in optional_addons do
       project
       |> install_addon_prompt(Web.NimbleCSS, "Nimble CSS")
       |> install_addon_prompt(Web.Bootstrap)
@@ -45,16 +45,16 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
     |> Web.HeexFormatter.apply()
   end
 
-  defp apply_optional_web_addons(%Project{addons: addons} = project) do
-    with_nimble_css_addon? = Web.NimbleCSS in addons
-    with_nimble_js_addon? = Web.NimbleJS in addons
+  defp apply_optional_web_addons(%Project{optional_addons: optional_addons} = project) do
+    with_nimble_css_addon? = Web.NimbleCSS in optional_addons
+    with_nimble_js_addon? = Web.NimbleJS in optional_addons
 
-    if Web.SvgSprite in addons, do: Web.SvgSprite.apply(project)
-    if Web.DartSass in addons, do: Web.DartSass.apply(project)
+    if Web.SvgSprite in optional_addons, do: Web.SvgSprite.apply(project)
+    if Web.DartSass in optional_addons, do: Web.DartSass.apply(project)
     if with_nimble_css_addon?, do: Web.NimbleCSS.apply(project)
     if with_nimble_js_addon?, do: Web.NimbleJS.apply(project)
 
-    if Web.Bootstrap in addons,
+    if Web.Bootstrap in optional_addons,
       do:
         Web.Bootstrap.apply(project, %{
           with_nimble_css_addon: with_nimble_css_addon?,

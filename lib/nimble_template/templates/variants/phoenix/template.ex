@@ -84,9 +84,9 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     project
   end
 
-  defp apply_optional_phoenix_addons(%Project{addons: addons} = project) do
-    if PhoenixAddons.Oban in addons, do: PhoenixAddons.Oban.apply(project)
-    if PhoenixAddons.ExVCR in addons, do: PhoenixAddons.ExVCR.apply(project)
+  defp apply_optional_phoenix_addons(%Project{optional_addons: optional_addons} = project) do
+    if PhoenixAddons.Oban in optional_addons, do: PhoenixAddons.Oban.apply(project)
+    if PhoenixAddons.ExVCR in optional_addons, do: PhoenixAddons.ExVCR.apply(project)
 
     project
   end

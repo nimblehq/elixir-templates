@@ -24,8 +24,7 @@ defmodule NimbleTemplate.Projects.Project do
             live_project?: false,
             web_project?: false,
             mix_project?: false,
-            installed_addons: [],
-            addons: []
+            optional_addons: []
 
   @type t :: %__MODULE__{
           base_module: String.t() | nil,
@@ -44,7 +43,7 @@ defmodule NimbleTemplate.Projects.Project do
           live_project?: boolean(),
           web_project?: boolean(),
           mix_project?: boolean(),
-          installed_addons: list(atom())
+          optional_addons: list(atom())
         }
 
   @spec new(map()) :: __MODULE__.t()
@@ -56,7 +55,7 @@ defmodule NimbleTemplate.Projects.Project do
       live_project?: live_project?(opts),
       mix_project?: mix_project?(opts),
       elixir_asdf_version: "#{@elixir_version}-otp-#{get_otp_major_version(@erlang_version)}",
-      installed_addons: []
+      optional_addons: []
     }
     |> init_base_module_fields()
     |> maybe_init_web_fields()
@@ -79,6 +78,14 @@ defmodule NimbleTemplate.Projects.Project do
     erlang_version
     |> String.split(".")
     |> List.first()
+  end
+
+  @spec prepend_optional_addon(__MODULE__.t(), atom()) :: __MODULE__.t()
+  def prepend_optional_addon(
+        %__MODULE__{optional_addons: existing_addons} = project,
+        addon_module
+      ) do
+    Map.put(project, :optional_addons, [addon_module | existing_addons])
   end
 
   defp api_project?(opts), do: opts[:api] === true
