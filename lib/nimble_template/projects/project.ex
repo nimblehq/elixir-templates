@@ -24,7 +24,8 @@ defmodule NimbleTemplate.Projects.Project do
             live_project?: false,
             web_project?: false,
             mix_project?: false,
-            installed_addons: []
+            installed_addons: [],
+            addons: []
 
   @type t :: %__MODULE__{
           base_module: String.t() | nil,

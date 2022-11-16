@@ -10,11 +10,24 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
   alias NimbleTemplate.Templates.Phoenix.Live.Template, as: LiveTemplate
   alias NimbleTemplate.Templates.Phoenix.Web.Template, as: WebTemplate
 
+  def pre_apply(%Project{} = project) do
+    project
+    |> install_addon_prompt(PhoenixAddons.Oban)
+    |> install_addon_prompt(PhoenixAddons.ExVCR)
+    |> pre_apply_variant_prompt()
+  end
+
   def apply(%Project{} = project) do
     project
     |> apply_phoenix_common_setup()
     |> apply_phoenix_variant_setup()
   end
+
+  defp pre_apply_variant_prompt(%Project{web_project?: true} = project) do
+    WebTemplate.pre_apply(project)
+  end
+
+  defp pre_apply_variant_prompt(project), do: project
 
   # credo:disable-for-next-line Credo.Check.Refactor.ABCSize
   defp apply_phoenix_common_setup(%Project{} = project) do
@@ -71,9 +84,9 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     project
   end
 
-  defp apply_optional_phoenix_addons(project) do
-    if install_addon_prompt?("Oban"), do: PhoenixAddons.Oban.apply(project)
-    if install_addon_prompt?("ExVCR"), do: PhoenixAddons.ExVCR.apply(project)
+  defp apply_optional_phoenix_addons(%Project{addons: addons} = project) do
+    if PhoenixAddons.Oban in addons, do: PhoenixAddons.Oban.apply(project)
+    if PhoenixAddons.ExVCR in addons, do: PhoenixAddons.ExVCR.apply(project)
 
     project
   end

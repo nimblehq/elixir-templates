@@ -1,4 +1,19 @@
 defmodule NimbleTemplate.AddonHelper do
-  def install_addon_prompt?(addon),
-    do: Mix.shell().yes?("\nWould you like to add the #{addon} addon?")
+  alias NimbleTemplate.ProjectHelper
+
+  def install_addon_prompt(project, addon, addon_label \\ nil) do
+    if Mix.shell().yes?(
+         "\nWould you like to add the #{build_addon_label(addon, addon_label)} addon?"
+       ) do
+      ProjectHelper.append_addon(project, addon)
+    end
+  end
+
+  defp build_addon_label(addon, nil) do
+    addon
+    |> Module.split()
+    |> List.last()
+  end
+
+  defp build_addon_label(_, addon_label), do: addon_label
 end

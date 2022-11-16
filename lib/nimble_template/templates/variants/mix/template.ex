@@ -6,6 +6,10 @@ defmodule NimbleTemplate.Templates.Mix.Template do
   alias NimbleTemplate.Addons
   alias NimbleTemplate.Projects.Project
 
+  def pre_apply(%Project{} = project) do
+    install_addon_prompt(project, Addons.Mimic)
+  end
+
   def apply(%Project{} = project) do
     project
     |> apply_default_mix_addons()
@@ -26,7 +30,7 @@ defmodule NimbleTemplate.Templates.Mix.Template do
     |> Addons.Iex.apply()
   end
 
-  defp apply_optional_mix_addons(project) do
+  defp apply_optional_mix_addons(%Project{addons: addons} = project) do
     if host_on_github?() do
       if generate_github_template?(),
         do: Addons.Github.apply(project, %{github_template: true})
@@ -51,7 +55,7 @@ defmodule NimbleTemplate.Templates.Mix.Template do
           })
     end
 
-    if install_addon_prompt?("Mimic"), do: Addons.Mimic.apply(project)
+    if Addons.Mimic in addons, do: Addons.Mimic.apply(project)
 
     project
   end
