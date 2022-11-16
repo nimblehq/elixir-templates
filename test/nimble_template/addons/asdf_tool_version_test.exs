@@ -2,7 +2,6 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
   use NimbleTemplate.AddonCase, async: false
 
   alias NimbleTemplate.Addons.AsdfToolVersion
-  alias NimbleTemplate.Projects.Project
 
   describe "#apply/2 with web_project" do
     test "copies the .tool-versions", %{
@@ -10,7 +9,7 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.AsdfToolVersion.apply(project)
+        AsdfToolVersion.apply(project)
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """
@@ -31,7 +30,7 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
       project = %{project | api_project?: true, web_project?: false}
 
       in_test_project(test_project_path, fn ->
-        Addons.AsdfToolVersion.apply(project)
+        AsdfToolVersion.apply(project)
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """
@@ -53,7 +52,7 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        Addons.AsdfToolVersion.apply(project)
+        AsdfToolVersion.apply(project)
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """
