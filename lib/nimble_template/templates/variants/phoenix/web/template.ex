@@ -46,8 +46,8 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
   end
 
   defp apply_optional_web_addons(%Project{addons: addons} = project) do
-    with_nimble_css_addon? = NimbleCSS in addons
-    with_nimble_js_addon? = NimbleJS in addons
+    with_nimble_css_addon? = Web.NimbleCSS in addons
+    with_nimble_js_addon? = Web.NimbleJS in addons
 
     if Web.SvgSprite in addons, do: Web.SvgSprite.apply(project)
     if Web.DartSass in addons, do: Web.DartSass.apply(project)

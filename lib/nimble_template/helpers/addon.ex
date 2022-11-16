@@ -5,7 +5,7 @@ defmodule NimbleTemplate.AddonHelper do
     if Mix.shell().yes?(
          "\nWould you like to add the #{build_addon_label(addon, addon_label)} addon?"
        ) do
-      ProjectHelper.append_addon(project, addon)
+      ProjectHelper.prepend_addon(project, addon)
     end
   end
 
@@ -15,5 +15,5 @@ defmodule NimbleTemplate.AddonHelper do
     |> List.last()
   end
 
-  defp build_addon_label(_, addon_label), do: addon_label
+  defp build_addon_label(_addon, addon_label), do: addon_label
 end
