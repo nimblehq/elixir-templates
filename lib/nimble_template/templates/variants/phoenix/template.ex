@@ -5,6 +5,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
 
   alias NimbleTemplate.{Addons, Generator}
   alias NimbleTemplate.Addons.Phoenix, as: PhoenixAddons
+  alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
   alias NimbleTemplate.Projects.Project
   alias NimbleTemplate.Templates.Phoenix.Api.Template, as: ApiTemplate
   alias NimbleTemplate.Templates.Phoenix.Live.Template, as: LiveTemplate
@@ -24,10 +25,24 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
   end
 
   defp pre_apply_variant_prompt(%Project{web_project?: true} = project) do
-    WebTemplate.pre_apply(project)
+    project
+    |> install_addon_prompt(WebAddons.SvgSprite, "SVG Sprite")
+    |> install_addon_prompt(WebAddons.DartSass, "Dart Sass")
+    |> dart_sass_additional_addons_prompt()
+    |> install_addon_prompt(WebAddons.NimbleJS, "Nimble JS")
   end
 
   defp pre_apply_variant_prompt(project), do: project
+
+  defp dart_sass_additional_addons_prompt(%Project{optional_addons: optional_addons} = project) do
+    if WebAddons.DartSass in optional_addons do
+      project
+      |> install_addon_prompt(WebAddons.NimbleCSS, "Nimble CSS")
+      |> install_addon_prompt(WebAddons.Bootstrap)
+    else
+      project
+    end
+  end
 
   # credo:disable-for-next-line Credo.Check.Refactor.ABCSize
   defp apply_phoenix_common_setup(%Project{} = project) do

@@ -1,33 +1,13 @@
 defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
   @moduledoc false
 
-  import NimbleTemplate.AddonHelper
-
   alias NimbleTemplate.Addons.Phoenix.Web
   alias NimbleTemplate.Projects.Project
-
-  def pre_apply(%Project{} = project) do
-    project
-    |> install_addon_prompt(Web.SvgSprite, "SVG Sprite")
-    |> install_addon_prompt(Web.DartSass, "Dart Sass")
-    |> dart_sass_additional_addons_prompt()
-    |> install_addon_prompt(Web.NimbleJS, "Nimble JS")
-  end
 
   def apply(%Project{} = project) do
     project
     |> apply_default_web_addons()
     |> apply_optional_web_addons()
-  end
-
-  defp dart_sass_additional_addons_prompt(%Project{optional_addons: optional_addons} = project) do
-    if Web.DartSass in optional_addons do
-      project
-      |> install_addon_prompt(Web.NimbleCSS, "Nimble CSS")
-      |> install_addon_prompt(Web.Bootstrap)
-    else
-      project
-    end
   end
 
   defp apply_default_web_addons(project) do
