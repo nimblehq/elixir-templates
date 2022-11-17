@@ -1,0 +1,3 @@
+defmodule <%= web_module %>.RouterHelper do
+  def health_path, do: Application.get_env(:<%= otp_app %>, <%= web_module %>.Endpoint)[:health_path]
+end

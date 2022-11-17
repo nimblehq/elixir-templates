@@ -43,6 +43,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
   defp edit_files(project) do
     project
     |> edit_config()
+    |> create_router_helper()
     |> edit_router()
     |> edit_test_helper()
   end
@@ -73,7 +74,44 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
     project
   end
 
-  defp edit_router(%Project{web_path: web_path, web_module: web_module, otp_app: otp_app} = project) do
+  defp create_router_helper(
+         %Project{
+           web_module: web_module,
+           web_path: web_path,
+           web_test_path: web_test_path,
+           otp_app: otp_app
+         } = project
+       ) do
+    binding = [
+      web_module: web_module,
+      otp_app: otp_app
+    ]
+
+    files = [
+      {:eex, "lib/otp_app_web/helpers/router_helper.ex.eex",
+       "#{web_path}/helpers/router_helper.ex"},
+      {:eex, "test/otp_app_web/helpers/router_helper_test.exs.eex",
+       "#{web_test_path}/helpers/router_helper_test.exs"}
+    ]
+
+    Generator.copy_file(files, binding)
+
+    project
+  end
+
+  defp edit_router(%Project{web_path: web_path, web_module: web_module} = project) do
+    Generator.replace_content(
+      "#{web_path}/router.ex",
+      """
+        use #{web_module}, :router
+      """,
+      """
+        use #{web_module}, :router
+
+        alias #{web_module}.RouterHelper
+      """
+    )
+
     Generator.replace_content(
       "#{web_path}/router.ex",
       """
@@ -92,7 +130,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
 
         # coveralls-ignore-stop
 
-        forward Application.compile_env(:#{otp_app}, #{web_module}.Endpoint)[:health_path], #{web_module}.HealthPlug
+        forward RouterHelper.health_path(), #{web_module}.HealthPlug
       """
     )
 
