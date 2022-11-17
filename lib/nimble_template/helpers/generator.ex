@@ -148,7 +148,9 @@ defmodule NimbleTemplate.Generator do
     end
   end
 
-  def print_log(prefix, content \\ ""), do: Mix.shell().info([:green, prefix, :reset, content])
+  def print_log(prefix, content \\ "") do
+    # Mix.shell().info([:green, prefix, :reset, content])
+  end
 
   defp split_with_self(contents, text) do
     case :binary.split(contents, text) do
