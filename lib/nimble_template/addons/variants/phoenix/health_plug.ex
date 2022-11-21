@@ -103,6 +103,17 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
     Generator.replace_content!(
       "#{web_path}/router.ex",
       """
+        use #{web_module}, :router
+      """,
+      """
+        use #{web_module}, :router
+        alias #{web_module}.RouterHelper
+      """
+    )
+
+    Generator.replace_content!(
+      "#{web_path}/router.ex",
+      """
         # coveralls-ignore-start
         pipeline :api do
           plug :accepts, ["json"]

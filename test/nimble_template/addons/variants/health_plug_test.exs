@@ -56,7 +56,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       test_project_path: test_project_path
     } do
       in_test_project!(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("lib/nimble_template_web/helpers/router_helper.ex", fn file ->
           assert file =~ """
@@ -73,7 +73,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       test_project_path: test_project_path
     } do
       in_test_project!(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("test/nimble_template_web/helpers/router_helper_test.exs", fn file ->
           assert file =~ """
