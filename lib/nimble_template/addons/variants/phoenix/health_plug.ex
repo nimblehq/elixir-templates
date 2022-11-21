@@ -99,9 +99,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlug do
     project
   end
 
-  defp edit_router!(
-         %Project{web_path: web_path, web_module: web_module} = project
-       ) do
+  defp edit_router!(%Project{web_path: web_path, web_module: web_module} = project) do
     Generator.replace_content!(
       "#{web_path}/router.ex",
       """
