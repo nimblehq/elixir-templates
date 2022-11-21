@@ -7,7 +7,7 @@ defmodule NimbleTemplate.CredoHelperTest do
     test "prepends credo rule disabling in the given file", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         File.write!("sample_module.exs", """
         defmodule SampleModule do
           def foo, do: "bar"
