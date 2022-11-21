@@ -2,7 +2,7 @@ defmodule NimbleTemplate.Addons.CredoTest do
   use NimbleTemplate.AddonCase, async: false
 
   describe "#apply/2" do
-    @describetag mock_latest_package_versions: [{:credo, "1.4"}]
+    @describetag mock_latest_package_versions: [{:credo, "1.4"}, {:compass_credo_plugin, "1.0.0"}]
     @describetag required_addons: [:TestEnv]
 
     test "copies the .credo.exs", %{
@@ -28,6 +28,7 @@ defmodule NimbleTemplate.Addons.CredoTest do
                    defp deps do
                      [
                        {:credo, "~> 1.4", [only: [:dev, :test], runtime: false]},
+                       {:compass_credo_plugin, "~> 1.0.0", [only: [:dev, :test], runtime: false]},
                  """
         end)
       end)

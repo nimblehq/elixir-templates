@@ -40,7 +40,7 @@ defmodule NimbleTemplate.Generator do
 
     case split_with_self(file_content, anchor) do
       [left, _middle, right] ->
-        print_log("* replacing ", Path.relative_to_cwd(file_path))
+        info_log("* replacing ", Path.relative_to_cwd(file_path))
 
         File.write!(file, [left, content, right])
 
@@ -80,12 +80,38 @@ defmodule NimbleTemplate.Generator do
 
     case split_with_self(file_content, anchor) do
       [left, middle, right] ->
-        print_log("* injecting ", Path.relative_to_cwd(file_path))
+        info_log("* injecting ", Path.relative_to_cwd(file_path))
 
         File.write!(file, [left, middle, content, right])
 
       :error ->
         Mix.raise(~s[Could not find #{anchor} in #{file_path}])
+    end
+  end
+
+  @spec prepend_content(String.t(), String.t()) :: :ok | {:error, :failed_to_read_file}
+  def prepend_content(file_path, content) do
+    case File.read(file_path) do
+      {:ok, file_content} ->
+        info_log("* prepending ", Path.relative_to_cwd(file_path))
+        File.write!(file_path, [content, file_content])
+
+      {:error, _} ->
+        error_log("Can't read #{file_path}")
+
+        {:error, :failed_to_read_file}
+    end
+  end
+
+  @spec prepend_content!(String.t(), String.t()) :: :ok
+  def prepend_content!(file_path, content) do
+    case File.read(file_path) do
+      {:ok, file_content} ->
+        info_log("* prepending ", Path.relative_to_cwd(file_path))
+        File.write!(file_path, [content, file_content])
+
+      {:error, _} ->
+        Mix.raise(~s[Can't read #{file_path}])
     end
   end
 
@@ -98,7 +124,7 @@ defmodule NimbleTemplate.Generator do
         {:error, _} -> Mix.raise(~s[Can't read #{file}])
       end
 
-    print_log("* appending ", Path.relative_to_cwd(file_path))
+    info_log("* appending ", Path.relative_to_cwd(file_path))
     File.write!(file, [file_content, content])
   end
 
@@ -148,7 +174,9 @@ defmodule NimbleTemplate.Generator do
     end
   end
 
-  def print_log(prefix, content \\ ""), do: Mix.shell().info([:green, prefix, :reset, content])
+  def info_log(prefix, content \\ ""), do: Mix.shell().info([:green, prefix, :reset, content])
+
+  def error_log(content \\ ""), do: Mix.shell().error(content)
 
   defp split_with_self(contents, text) do
     case :binary.split(contents, text) do

@@ -136,9 +136,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
           assert file =~ """
                    use Phoenix.Endpoint, otp_app: :nimble_template
 
-                   if Application.compile_env(:nimble_template, :sql_sandbox) do
-                     plug Phoenix.Ecto.SQL.Sandbox
-                   end
+                   if Application.compile_env(:nimble_template, :sql_sandbox), do: plug Phoenix.Ecto.SQL.Sandbox
                  """
         end)
       end)

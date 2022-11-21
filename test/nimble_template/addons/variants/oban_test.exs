@@ -65,9 +65,7 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
 
           assert file =~ """
                    # Conditionally disable crontab, queues, or plugins here.
-                   defp oban_config do
-                     Application.get_env(:nimble_template, Oban)
-                   end
+                   defp oban_config, do: Application.get_env(:nimble_template, Oban)
                  """
         end)
       end)
