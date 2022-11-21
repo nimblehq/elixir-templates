@@ -8,7 +8,7 @@ defmodule NimbleTemplate.Hex.PackageMock do
   def get_latest_version(package) do
     raise(MockHexPackageRequiredException,
       message:
-        "Mock Hex Package with `@describetag mock_latest_package_versions: [{#{package}, :version}]` required"
+        "Requires to mock Hex package with `@describetag mock_latest_package_versions: [{#{package}, :version}]`"
     )
   end
 end
