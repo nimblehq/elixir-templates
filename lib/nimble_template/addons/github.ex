@@ -4,7 +4,7 @@ defmodule NimbleTemplate.Addons.Github do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, %{github_template: true}) do
+  def do_apply!(%Project{} = project, %{github_template: true}) do
     files = [
       {:text, Path.join([".github", "ISSUE_TEMPLATE.md"]),
        Path.join([".github", "ISSUE_TEMPLATE.md"])},
@@ -14,13 +14,13 @@ defmodule NimbleTemplate.Addons.Github do
        Path.join([".github", "PULL_REQUEST_TEMPLATE", "RELEASE_TEMPLATE.md"])}
     ]
 
-    Generator.copy_file(files)
+    Generator.copy_file!(files)
 
     project
   end
 
   @impl true
-  def do_apply(
+  def do_apply!(
         %Project{
           web_project?: web_project?,
           mix_project?: mix_project?,
@@ -46,13 +46,13 @@ defmodule NimbleTemplate.Addons.Github do
       {:eex, template_file_path, ".github/workflows/test.yml"}
     ]
 
-    Generator.copy_file(files, binding)
+    Generator.copy_file!(files, binding)
 
     project
   end
 
   @impl true
-  def do_apply(
+  def do_apply!(
         %Project{} = project,
         %{
           github_workflows_readme: true,
@@ -61,7 +61,7 @@ defmodule NimbleTemplate.Addons.Github do
           with_deploy_to_heroku_workflow?: with_deploy_to_heroku_workflow?
         }
       ) do
-    Generator.copy_file(
+    Generator.copy_file!(
       [
         {:eex, ".github/workflows/README.md.eex", ".github/workflows/README.md"}
       ],
@@ -74,22 +74,25 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{mix_project?: false, otp_app: otp_app, web_module: web_module} = project, %{
-        github_action_deploy_heroku: true
-      }) do
-    Generator.copy_file([
+  def do_apply!(
+        %Project{mix_project?: false, otp_app: otp_app, web_module: web_module} = project,
+        %{
+          github_action_deploy_heroku: true
+        }
+      ) do
+    Generator.copy_file!([
       {:eex, ".github/workflows/deploy_heroku.yml", ".github/workflows/deploy_heroku.yml"}
     ])
 
-    Generator.replace_content("config/runtime.exs", "# ssl: true,", "ssl: true,")
+    Generator.replace_content!("config/runtime.exs", "# ssl: true,", "ssl: true,")
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "config/runtime.exs",
       "url: [host: host,",
       "url: [scheme: \"https\", host: host,"
     )
 
-    Generator.append_content(
+    Generator.append_content!(
       "config/prod.exs",
       """
       config :#{otp_app}, #{web_module}.Endpoint,
@@ -101,15 +104,15 @@ defmodule NimbleTemplate.Addons.Github do
   end
 
   @impl true
-  def do_apply(%Project{} = project, %{github_wiki: true}) do
+  def do_apply!(%Project{} = project, %{github_wiki: true}) do
     project
-    |> copy_wiki_files()
-    |> append_wiki_into_readme()
+    |> copy_wiki_files!()
+    |> append_wiki_into_readme!()
 
     project
   end
 
-  defp copy_wiki_files(
+  defp copy_wiki_files!(
          %Project{
            mix_project?: true,
            erlang_version: erlang_version,
@@ -133,12 +136,12 @@ defmodule NimbleTemplate.Addons.Github do
       {:text, sidebar_path, ".github/wiki/_Sidebar.md"}
     ]
 
-    Generator.copy_file(files, binding)
+    Generator.copy_file!(files, binding)
 
     project
   end
 
-  defp copy_wiki_files(
+  defp copy_wiki_files!(
          %Project{
            web_project?: web_project?,
            mix_project?: false,
@@ -170,13 +173,13 @@ defmodule NimbleTemplate.Addons.Github do
       {:eex, environment_variables_path, ".github/wiki/Environment-Variables.md"}
     ]
 
-    Generator.copy_file(files, binding)
+    Generator.copy_file!(files, binding)
 
     project
   end
 
-  defp append_wiki_into_readme(project) do
-    Generator.append_content(
+  defp append_wiki_into_readme!(project) do
+    Generator.append_content!(
       "README.md",
       """
 

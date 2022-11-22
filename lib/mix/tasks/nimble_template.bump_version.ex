@@ -20,7 +20,7 @@ defmodule Mix.Tasks.NimbleTemplate.BumpVersion do
   def run(args) do
     new_version = parse_opts(args)
 
-    Version.bump(new_version)
+    Version.bump!(new_version)
   end
 
   defp parse_opts(args) do

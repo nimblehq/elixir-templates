@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "adds stylelint,
@@ -11,8 +11,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
            project: project,
            test_project_path: test_project_path
          } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.StyleLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.StyleLint.apply!(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -29,8 +29,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.StyleLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.StyleLint.apply!(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -46,8 +46,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.StyleLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.StyleLint.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -62,8 +62,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.StyleLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.StyleLint.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -78,8 +78,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLintTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.StyleLint.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.StyleLint.apply!(project)
 
         assert_file("assets/.stylelintrc.json")
       end)

@@ -60,18 +60,18 @@ defmodule NimbleTemplate.AddonCase do
 
     if required_addons = context[:required_addons] do
       File.cd!(test_project_path, fn ->
-        Enum.each(required_addons, &apply_required_addon(&1, project))
+        Enum.each(required_addons, &apply_required_addon!(&1, project))
       end)
     end
 
     {:ok, project: project, test_project_path: test_project_path}
   end
 
-  defp apply_required_addon(required_addon, project) when is_atom(required_addon),
-    do: Module.safe_concat([Addons, required_addon]).apply(project)
+  defp apply_required_addon!(required_addon, project) when is_atom(required_addon),
+    do: Module.safe_concat([Addons, required_addon]).apply!(project)
 
-  defp apply_required_addon({required_addon_module, required_addon_opt}, project),
-    do: Module.safe_concat([Addons, required_addon_module]).apply(project, required_addon_opt)
+  defp apply_required_addon!({required_addon_module, required_addon_opt}, project),
+    do: Module.safe_concat([Addons, required_addon_module]).apply!(project, required_addon_opt)
 
   defp mock_latest_package_version({_package, version}),
     do: expect(Package, :get_latest_version, fn _package -> version end)

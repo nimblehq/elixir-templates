@@ -1,15 +1,15 @@
 defmodule NimbleTemplate.Addons.Phoenix.ExVCRTest do
   use NimbleTemplate.AddonCase
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag mock_latest_package_versions: [{:exvcr, "0.12.2"}]
 
     test "injects ExVCR to mix dependency", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.ExVCR.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.ExVCR.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ "{:exvcr, \"~> 0.12.2\", [only: :test]}"
@@ -21,8 +21,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCRTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.ExVCR.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.ExVCR.apply!(project)
 
         assert_file("config/test.exs", fn file ->
           assert file =~ """
@@ -36,8 +36,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCRTest do
     end
 
     test "updates test cases", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.ExVCR.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.ExVCR.apply!(project)
 
         assert_file("test/support/data_case.ex", fn file ->
           assert file =~ "use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney"
@@ -53,8 +53,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCRTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.ExVCR.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.ExVCR.apply!(project)
 
         assert(File.exists?("test/support/fixtures/vcr_cassettes/.keep")) == true
       end)

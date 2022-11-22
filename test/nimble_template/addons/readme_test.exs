@@ -1,13 +1,13 @@
 defmodule NimbleTemplate.Addons.ReadmeTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     test "copies the README.md", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.Readme.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.Readme.apply!(project)
 
         assert_file("README.md", fn file ->
           assert file =~ "Erlang 25.0.4"
@@ -36,15 +36,15 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
     end
   end
 
-  describe "#apply/2 with api_project" do
+  describe "#apply!/2 with api_project" do
     test "copies the README.md", %{
       project: project,
       test_project_path: test_project_path
     } do
       project = %{project | api_project?: true, web_project?: false}
 
-      in_test_project(test_project_path, fn ->
-        Addons.Readme.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.Readme.apply!(project)
 
         assert_file("README.md", fn file ->
           assert file =~ "Erlang 25.0.4"
@@ -73,15 +73,15 @@ defmodule NimbleTemplate.Addons.ReadmeTest do
     end
   end
 
-  describe "#apply/2 with mix_project" do
+  describe "#apply!/2 with mix_project" do
     @describetag mix_project?: true
 
     test "copies the README.md", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.Readme.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.Readme.apply!(project)
 
         assert_file("README.md", fn file ->
           assert file =~ "Erlang 25.0.4"

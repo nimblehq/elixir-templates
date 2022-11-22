@@ -4,28 +4,28 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLint do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> edit_files()
-    |> copy_files()
+    |> edit_files!()
+    |> copy_files!()
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files!(%Project{} = project) do
     project
-    |> edit_assets_package()
-    |> edit_mix()
-
-    project
-  end
-
-  defp copy_files(%Project{} = project) do
-    Generator.copy_file([{:text, "assets/.stylelintrc.json", "assets/.stylelintrc.json"}])
+    |> edit_assets_package!()
+    |> edit_mix!()
 
     project
   end
 
-  defp edit_assets_package(%Project{} = project) do
-    Generator.replace_content(
+  defp copy_files!(%Project{} = project) do
+    Generator.copy_file!([{:text, "assets/.stylelintrc.json", "assets/.stylelintrc.json"}])
+
+    project
+  end
+
+  defp edit_assets_package!(%Project{} = project) do
+    Generator.replace_content!(
       "assets/package.json",
       """
         "scripts": {
@@ -37,7 +37,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLint do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "assets/package.json",
       """
         "devDependencies": {
@@ -53,8 +53,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLint do
     project
   end
 
-  defp edit_mix(%Project{} = project) do
-    Generator.replace_content(
+  defp edit_mix!(%Project{} = project) do
+    Generator.replace_content!(
       "mix.exs",
       """
             codebase: [
@@ -65,7 +65,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLint do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "mix.exs",
       """
             "codebase.fix": [

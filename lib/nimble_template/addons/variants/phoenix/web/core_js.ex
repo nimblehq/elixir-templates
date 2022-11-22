@@ -4,12 +4,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
-    edit_files(project)
+  def do_apply!(%Project{} = project, _opts) do
+    edit_files!(project)
   end
 
-  def edit_package_json(%Project{} = project) do
-    Generator.replace_content(
+  def edit_package_json!(%Project{} = project) do
+    Generator.replace_content!(
       "assets/package.json",
       """
         "dependencies": {
@@ -23,8 +23,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
     project
   end
 
-  def edit_app_js(project) do
-    Generator.replace_content(
+  def edit_app_js!(project) do
+    Generator.replace_content!(
       "assets/js/app.js",
       """
       import "phoenix_html"
@@ -40,10 +40,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
     project
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files!(%Project{} = project) do
     project
-    |> edit_package_json()
-    |> edit_app_js()
+    |> edit_package_json!()
+    |> edit_app_js!()
 
     project
   end

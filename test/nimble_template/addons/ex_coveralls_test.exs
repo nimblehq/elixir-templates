@@ -1,15 +1,15 @@
 defmodule NimbleTemplate.Addons.ExCoverallsTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag mock_latest_package_versions: [{:excoveralls, "0.12.2"}]
 
     test "copies the coveralls.json", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.ExCoveralls.apply!(project)
 
         assert_file("coveralls.json", fn file ->
           assert file =~ "minimum_coverage\": 100"
@@ -22,8 +22,8 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.ExCoveralls.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -36,8 +36,8 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
     end
 
     test "sets ExCoveralls tool", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.ExCoveralls.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -55,8 +55,8 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
     end
 
     test "adds coverage alias", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.ExCoveralls.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -69,7 +69,7 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
     end
   end
 
-  describe "#apply/2 with mix_project" do
+  describe "#apply!/2 with mix_project" do
     @describetag mix_project?: true
     @describetag required_addons: [:TestEnv]
     @describetag mock_latest_package_versions: [{:excoveralls, "0.12.2"}]
@@ -78,8 +78,8 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.ExCoveralls.apply!(project)
 
         assert_file("coveralls.json")
       end)
@@ -89,8 +89,8 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.ExCoveralls.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -103,8 +103,8 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
     end
 
     test "sets ExCoveralls tool", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.ExCoveralls.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -122,8 +122,8 @@ defmodule NimbleTemplate.Addons.ExCoverallsTest do
     end
 
     test "adds coverage alias", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.ExCoveralls.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.ExCoveralls.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """

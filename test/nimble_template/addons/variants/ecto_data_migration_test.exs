@@ -1,13 +1,13 @@
 defmodule NimbleTemplate.Addons.Phoenix.EctoDataMigrationTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     test "adds `ecto.migrate_all` into mix aliases", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.EctoDataMigration.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.EctoDataMigration.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -23,8 +23,8 @@ defmodule NimbleTemplate.Addons.Phoenix.EctoDataMigrationTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.EctoDataMigration.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.EctoDataMigration.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -44,8 +44,8 @@ defmodule NimbleTemplate.Addons.Phoenix.EctoDataMigrationTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.EctoDataMigration.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.EctoDataMigration.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -59,8 +59,8 @@ defmodule NimbleTemplate.Addons.Phoenix.EctoDataMigrationTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.EctoDataMigration.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.EctoDataMigration.apply!(project)
 
         assert_file("priv/repo/data_migrations/.keep")
       end)

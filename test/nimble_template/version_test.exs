@@ -3,7 +3,7 @@ defmodule NimbleTemplate.VersionTest do
 
   alias NimbleTemplate.Version
 
-  describe "bump/1" do
+  describe "bump!/1" do
     test "updates the version in mix.exs and README.md files given a valid version number", %{
       test_project_path: test_project_path
     } do
@@ -23,7 +23,7 @@ defmodule NimbleTemplate.VersionTest do
           |> List.replace_at(2, patch_number + 1)
           |> Enum.join(".")
 
-        assert Version.bump(new_version) == :ok
+        assert Version.bump!(new_version) == :ok
 
         assert_file("mix.exs", fn file ->
           assert file =~ "version: \"#{new_version}\""
@@ -59,7 +59,7 @@ defmodule NimbleTemplate.VersionTest do
           |> Enum.join(".")
 
         assert_raise Mix.Error, "The new version must be greater than #{current_version}", fn ->
-          Version.bump(new_version)
+          Version.bump!(new_version)
         end
 
         assert_file("mix.exs", fn file ->
@@ -77,12 +77,12 @@ defmodule NimbleTemplate.VersionTest do
     end
   end
 
-  describe "upgrade_stack/1" do
+  describe "upgrade_stack!/1" do
     test "upgrade elixir version given the new elixir_version", %{
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        assert Version.upgrade_stack(elixir: "a.b.c") == :ok
+        assert Version.upgrade_stack!(elixir: "a.b.c") == :ok
 
         assert_file("lib/nimble_template/projects/project.ex", fn file ->
           assert file =~ "@elixir_version \"a.b.c\""
@@ -114,7 +114,7 @@ defmodule NimbleTemplate.VersionTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        assert Version.upgrade_stack(erlang: "x.y.z") == :ok
+        assert Version.upgrade_stack!(erlang: "x.y.z") == :ok
 
         assert_file("lib/nimble_template/projects/project.ex", fn file ->
           assert file =~ "@erlang_version \"x.y.z\""
@@ -148,7 +148,7 @@ defmodule NimbleTemplate.VersionTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        assert Version.upgrade_stack(node: "a.s.d") == :ok
+        assert Version.upgrade_stack!(node: "a.s.d") == :ok
 
         assert_file("lib/nimble_template/projects/project.ex", fn file ->
           assert file =~ "@node_asdf_version \"a.s.d\""
@@ -176,7 +176,7 @@ defmodule NimbleTemplate.VersionTest do
       test_project_path: test_project_path
     } do
       in_test_project(test_project_path, fn ->
-        assert Version.upgrade_stack(alpine: "z.x.c") == :ok
+        assert Version.upgrade_stack!(alpine: "z.x.c") == :ok
 
         assert_file("lib/nimble_template/projects/project.ex", fn file ->
           assert file =~ "@alpine_version \"z.x.c\""
