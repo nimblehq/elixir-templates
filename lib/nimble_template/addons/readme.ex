@@ -4,19 +4,19 @@ defmodule NimbleTemplate.Addons.Readme do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> delete_files()
-    |> copy_files()
+    |> delete_files!()
+    |> copy_files!()
   end
 
-  def delete_files(project) do
-    File.rm("README.md")
+  def delete_files!(project) do
+    File.rm!("README.md")
 
     project
   end
 
-  defp copy_files(
+  defp copy_files!(
          %Project{
            web_project?: web_project?,
            mix_project?: mix_project?,
@@ -32,7 +32,7 @@ defmodule NimbleTemplate.Addons.Readme do
         "README.md.eex"
       end
 
-    Generator.copy_file([{:eex, template_file_path, "README.md"}],
+    Generator.copy_file!([{:eex, template_file_path, "README.md"}],
       erlang_version: erlang_version,
       elixir_version: elixir_version,
       node_asdf_version: node_asdf_version,

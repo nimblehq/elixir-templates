@@ -1,10 +1,10 @@
 defmodule NimbleTemplate.Addons.TestEnvTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     test "injects the DB_HOST ENV", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file("config/test.exs", fn file ->
           assert file =~ "hostname: System.get_env(\"DB_HOST\") || \"localhost\","
@@ -13,8 +13,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
     end
 
     test "adds codebase alias", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -30,8 +30,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
     end
 
     test "adds codebase.fix alias", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -46,8 +46,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
 
     test "adds `Code.put_compiler_option(:warnings_as_errors, true)` into `test/test_helper.exs`",
          %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file("test/test_helper.exs", fn file ->
           assert file =~ """
@@ -63,8 +63,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file(".formatter.exs", fn file ->
           assert file =~ """
@@ -76,15 +76,15 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
     end
   end
 
-  describe "#apply/2 with mix_project" do
+  describe "#apply!/2 with mix_project" do
     @describetag mix_project?: true
 
     test "adds codebase and codebase.fix alias", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ "aliases: aliases()"
@@ -108,8 +108,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
     end
 
     test "adds elixirc_paths", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ "elixirc_paths: elixirc_paths(Mix.env()),"
@@ -125,8 +125,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
 
     test "adds `Code.put_compiler_option(:warnings_as_errors, true)` into `test/test_helper.exs`",
          %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file("test/test_helper.exs", fn file ->
           assert file =~ """
@@ -142,8 +142,8 @@ defmodule NimbleTemplate.Addons.TestEnvTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.TestEnv.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestEnv.apply!(project)
 
         assert_file(".formatter.exs", fn file ->
           assert file =~ """

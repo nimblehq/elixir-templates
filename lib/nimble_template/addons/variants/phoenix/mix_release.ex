@@ -4,18 +4,18 @@ defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> copy_files()
-    |> edit_files()
+    |> copy_files!()
+    |> edit_files!()
 
     project
   end
 
-  defp copy_files(
+  defp copy_files!(
          %Project{otp_app: otp_app, base_module: base_module, base_path: base_path} = project
        ) do
-    Generator.copy_file(
+    Generator.copy_file!(
       [
         {:eex, "lib/otp_app/release_tasks.ex.eex", base_path <> "/release_tasks.ex"}
       ],
@@ -26,8 +26,8 @@ defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
     project
   end
 
-  defp edit_files(%{otp_app: otp_app, web_module: web_module} = project) do
-    Generator.delete_content(
+  defp edit_files!(%{otp_app: otp_app, web_module: web_module} = project) do
+    Generator.delete_content!(
       "config/runtime.exs",
       """
 
@@ -47,7 +47,7 @@ defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "config/runtime.exs",
       """
         config :#{otp_app}, #{web_module}.Endpoint,
@@ -58,7 +58,7 @@ defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "config/runtime.exs",
       """
         host = System.get_env("PHX_HOST") || "example.com"

@@ -1,15 +1,15 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJSTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage", :"Phoenix.Web.EsLint"]
 
     test "copies Nimble JS structure", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.NimbleJS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.NimbleJS.apply!(project)
 
         assert_directory("assets/js/adapters")
         assert_directory("assets/js/components")
@@ -27,8 +27,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJSTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.NimbleJS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.NimbleJS.apply!(project)
 
         assert_file("assets/js/app.js", fn file ->
           assert file =~ """
@@ -54,8 +54,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJSTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.NimbleJS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.NimbleJS.apply!(project)
 
         assert_file("assets/js/vendor/topbar.js")
         refute_file("assets/vendor/topbar.js")
@@ -66,8 +66,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.NimbleJSTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.NimbleJS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.NimbleJS.apply!(project)
 
         assert_file("assets/.eslintrc.json", fn file ->
           assert file =~ """

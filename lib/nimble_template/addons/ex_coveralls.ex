@@ -4,13 +4,13 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> copy_files()
-    |> edit_files()
+    |> copy_files!()
+    |> edit_files!()
   end
 
-  defp copy_files(%Project{otp_app: otp_app, mix_project?: mix_project?} = project) do
+  defp copy_files!(%Project{otp_app: otp_app, mix_project?: mix_project?} = project) do
     binding = [
       otp_app: otp_app,
       minimum_coverage: 100,
@@ -24,38 +24,38 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
         "coveralls.json.eex"
       end
 
-    Generator.copy_file([{:eex, template_file_path, "coveralls.json"}], binding)
+    Generator.copy_file!([{:eex, template_file_path, "coveralls.json"}], binding)
 
     project
   end
 
-  defp edit_files(%Project{mix_project?: true} = project) do
+  defp edit_files!(%Project{mix_project?: true} = project) do
     project
-    |> inject_mix_dependency()
-    |> edit_mix()
+    |> inject_mix_dependency!()
+    |> edit_mix!()
 
     project
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files!(%Project{} = project) do
     project
-    |> inject_mix_dependency()
-    |> edit_mix()
-    |> edit_web_router()
+    |> inject_mix_dependency!()
+    |> edit_mix!()
+    |> edit_web_router!()
 
     project
   end
 
-  defp inject_mix_dependency(project) do
-    Generator.inject_mix_dependency(
+  defp inject_mix_dependency!(project) do
+    Generator.inject_mix_dependency!(
       {:excoveralls, latest_package_version(:excoveralls), only: :test}
     )
 
     project
   end
 
-  defp edit_mix(project) do
-    Generator.replace_content(
+  defp edit_mix!(project) do
+    Generator.replace_content!(
       "mix.exs",
       """
             deps: deps()
@@ -72,7 +72,7 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
       """
     )
 
-    Generator.inject_content(
+    Generator.inject_content!(
       "mix.exs",
       """
         defp aliases do
@@ -86,14 +86,14 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
     project
   end
 
-  defp edit_web_router(%Project{} = project) do
+  defp edit_web_router!(%Project{} = project) do
     project
-    |> ignore_ex_coverall_on_api_pipeline()
-    |> ignore_ex_coverall_on_live_dashboard()
+    |> ignore_ex_coverall_on_api_pipeline!()
+    |> ignore_ex_coverall_on_live_dashboard!()
   end
 
-  defp ignore_ex_coverall_on_api_pipeline(%Project{web_path: web_path} = project) do
-    Generator.replace_content(
+  defp ignore_ex_coverall_on_api_pipeline!(%Project{web_path: web_path} = project) do
+    Generator.replace_content!(
       "#{web_path}/router.ex",
       """
         pipeline :api do
@@ -113,10 +113,10 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
     project
   end
 
-  defp ignore_ex_coverall_on_live_dashboard(
+  defp ignore_ex_coverall_on_live_dashboard!(
          %Project{web_path: web_path, web_module: web_module} = project
        ) do
-    Generator.replace_content(
+    Generator.replace_content!(
       "#{web_path}/router.ex",
       """
             live_dashboard "/dashboard", metrics: #{web_module}.Telemetry

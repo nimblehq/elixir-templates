@@ -24,7 +24,7 @@ defmodule Mix.Tasks.NimbleTemplate.UpgradeStack do
   def run(args) do
     stack_versions = parse_opts(args)
 
-    Version.upgrade_stack(stack_versions)
+    Version.upgrade_stack!(stack_versions)
   end
 
   defp parse_opts(args) do

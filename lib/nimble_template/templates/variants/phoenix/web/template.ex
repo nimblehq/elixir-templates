@@ -6,7 +6,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
   alias NimbleTemplate.Addons.Phoenix.Web
   alias NimbleTemplate.Projects.Project
 
-  def apply(%Project{} = project) do
+  def apply!(%Project{} = project) do
     project
     |> apply_default_web_addons()
     |> apply_optional_web_addons()
@@ -14,28 +14,28 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
 
   defp apply_default_web_addons(project) do
     project
-    |> Web.NodePackage.apply()
-    |> Web.Assets.apply()
-    |> Web.CoreJS.apply()
-    |> Web.Prettier.apply()
-    |> Web.Sobelow.apply()
-    |> Web.Wallaby.apply()
-    |> Web.EsLint.apply()
-    |> Web.StyleLint.apply()
-    |> Web.EsBuild.apply()
-    |> Web.PostCSS.apply()
-    |> Web.HeexFormatter.apply()
+    |> Web.NodePackage.apply!()
+    |> Web.Assets.apply!()
+    |> Web.CoreJS.apply!()
+    |> Web.Prettier.apply!()
+    |> Web.Sobelow.apply!()
+    |> Web.Wallaby.apply!()
+    |> Web.EsLint.apply!()
+    |> Web.StyleLint.apply!()
+    |> Web.EsBuild.apply!()
+    |> Web.PostCSS.apply!()
+    |> Web.HeexFormatter.apply!()
   end
 
   defp apply_optional_web_addons(project) do
-    if install_addon_prompt?("SVG Sprite"), do: Web.SvgSprite.apply(project)
+    if install_addon_prompt?("SVG Sprite"), do: Web.SvgSprite.apply!(project)
 
     if install_addon_prompt?("Dart Sass") do
-      Web.DartSass.apply(project)
+      Web.DartSass.apply!(project)
 
       apply_dart_sass_requires_addons(project)
     else
-      if install_addon_prompt?("Nimble JS"), do: Web.NimbleJS.apply(project)
+      if install_addon_prompt?("Nimble JS"), do: Web.NimbleJS.apply!(project)
     end
 
     project
@@ -45,7 +45,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
   defp apply_dart_sass_requires_addons(project) do
     with_nimble_css_addon =
       if install_addon_prompt?("Nimble CSS") do
-        Web.NimbleCSS.apply(project)
+        Web.NimbleCSS.apply!(project)
 
         true
       else
@@ -54,7 +54,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
 
     with_nimble_js_addon =
       if install_addon_prompt?("Nimble JS") do
-        Web.NimbleJS.apply(project)
+        Web.NimbleJS.apply!(project)
 
         true
       else
@@ -63,7 +63,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
 
     if install_addon_prompt?("Bootstrap"),
       do:
-        Web.Bootstrap.apply(project, %{
+        Web.Bootstrap.apply!(project, %{
           with_nimble_css_addon: with_nimble_css_addon,
           with_nimble_js_addon: with_nimble_js_addon
         })
