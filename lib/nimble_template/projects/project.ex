@@ -84,9 +84,8 @@ defmodule NimbleTemplate.Projects.Project do
   def prepend_optional_addon(
         %__MODULE__{optional_addons: existing_addons} = project,
         addon_module
-      ) do
-    Map.put(project, :optional_addons, [addon_module | existing_addons])
-  end
+      ),
+      do: Map.put(project, :optional_addons, [addon_module | existing_addons])
 
   defp api_project?(opts), do: opts[:api] === true
 

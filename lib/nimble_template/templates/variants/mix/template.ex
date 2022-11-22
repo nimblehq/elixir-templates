@@ -6,9 +6,7 @@ defmodule NimbleTemplate.Templates.Mix.Template do
   alias NimbleTemplate.Addons
   alias NimbleTemplate.Projects.Project
 
-  def pre_apply(%Project{} = project) do
-    install_addon_prompt(project, Addons.Mimic)
-  end
+  def pre_apply(%Project{} = project), do: install_addon_prompt(project, Addons.Mimic)
 
   def apply(%Project{} = project) do
     project
