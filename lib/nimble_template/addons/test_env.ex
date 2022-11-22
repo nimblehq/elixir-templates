@@ -4,25 +4,25 @@ defmodule NimbleTemplate.Addons.TestEnv do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{mix_project?: true} = project, _opts) do
+  def do_apply!(%Project{mix_project?: true} = project, _opts) do
     project
-    |> edit_mix()
+    |> edit_mix!()
     |> edit_formatter_exs()
-    |> edit_test_helper()
+    |> edit_test_helper!()
   end
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> edit_mix()
+    |> edit_mix!()
     |> edit_formatter_exs()
-    |> edit_test_helper()
-    |> edit_test_config()
+    |> edit_test_helper!()
+    |> edit_test_config!()
     |> edit_test_support_cases()
   end
 
-  defp edit_mix(%Project{mix_project?: true} = project) do
-    Generator.replace_content(
+  defp edit_mix!(%Project{mix_project?: true} = project) do
+    Generator.replace_content!(
       "mix.exs",
       """
             deps: deps()
@@ -34,7 +34,7 @@ defmodule NimbleTemplate.Addons.TestEnv do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "mix.exs",
       """
         # Run "mix help deps" to learn about dependencies.
@@ -64,8 +64,8 @@ defmodule NimbleTemplate.Addons.TestEnv do
     project
   end
 
-  defp edit_mix(project) do
-    Generator.inject_content(
+  defp edit_mix!(project) do
+    Generator.inject_content!(
       "mix.exs",
       """
         defp aliases do
@@ -86,8 +86,8 @@ defmodule NimbleTemplate.Addons.TestEnv do
     project
   end
 
-  defp edit_test_helper(%Project{} = project) do
-    Generator.replace_content(
+  defp edit_test_helper!(%Project{} = project) do
+    Generator.replace_content!(
       "test/test_helper.exs",
       """
       ExUnit.start()
@@ -102,8 +102,8 @@ defmodule NimbleTemplate.Addons.TestEnv do
     project
   end
 
-  defp edit_test_config(project) do
-    Generator.replace_content(
+  defp edit_test_config!(project) do
+    Generator.replace_content!(
       "config/test.exs",
       """
         hostname: "localhost",
@@ -117,7 +117,7 @@ defmodule NimbleTemplate.Addons.TestEnv do
   end
 
   defp edit_formatter_exs(project) do
-    Generator.inject_content(
+    Generator.inject_content!(
       ".formatter.exs",
       "[",
       String.slice(
@@ -139,7 +139,7 @@ defmodule NimbleTemplate.Addons.TestEnv do
   defp edit_test_support_case(project, support_case_name) do
     support_case_path = "test/support/" <> support_case_name <> ".ex"
 
-    Generator.inject_content(
+    Generator.inject_content!(
       support_case_path,
       """
         use ExUnit.CaseTemplate
@@ -150,13 +150,13 @@ defmodule NimbleTemplate.Addons.TestEnv do
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       support_case_path,
       "Ecto.Adapters.SQL.Sandbox.start_owner!",
       "Sandbox.start_owner!"
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       support_case_path,
       "Ecto.Adapters.SQL.Sandbox.stop_owner",
       "Sandbox.stop_owner"

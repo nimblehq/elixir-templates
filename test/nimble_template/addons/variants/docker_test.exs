@@ -1,13 +1,13 @@
 defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     test "copies the docker-compose.dev.yml", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Docker.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Docker.apply!(project)
 
         assert_file("docker-compose.dev.yml", fn file ->
           assert file =~ """
@@ -31,8 +31,8 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Docker.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Docker.apply!(project)
 
         assert_file("docker-compose.yml")
       end)
@@ -42,8 +42,8 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Docker.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Docker.apply!(project)
 
         assert_file(".dockerignore")
       end)
@@ -53,8 +53,8 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Docker.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Docker.apply!(project)
 
         assert_file("Dockerfile", fn file ->
           assert file =~ """
@@ -95,8 +95,8 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Docker.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Docker.apply!(project)
 
         assert_file("bin/start.sh", fn file ->
           assert file =~ """
@@ -109,15 +109,15 @@ defmodule NimbleTemplate.Addons.Phoenix.DockerTest do
     end
   end
 
-  describe "#apply/2 with api_project" do
+  describe "#apply!/2 with api_project" do
     test "copies the Dockerfile", %{
       project: project,
       test_project_path: test_project_path
     } do
       project = %{project | api_project?: true, web_project?: false}
 
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Docker.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Docker.apply!(project)
 
         assert_file("Dockerfile", fn file ->
           refute file =~ """

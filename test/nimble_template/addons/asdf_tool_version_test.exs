@@ -3,13 +3,13 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
 
   alias NimbleTemplate.Addons.AsdfToolVersion
 
-  describe "#apply/2 with web_project" do
+  describe "#apply!/2 with web_project" do
     test "copies the .tool-versions", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        AsdfToolVersion.apply(project)
+      in_test_project!(test_project_path, fn ->
+        AsdfToolVersion.apply!(project)
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """
@@ -22,15 +22,15 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
     end
   end
 
-  describe "#apply/2 with api_project" do
+  describe "#apply!/2 with api_project" do
     test "copies the .tool-versions", %{
       project: project,
       test_project_path: test_project_path
     } do
       project = %{project | api_project?: true, web_project?: false}
 
-      in_test_project(test_project_path, fn ->
-        AsdfToolVersion.apply(project)
+      in_test_project!(test_project_path, fn ->
+        AsdfToolVersion.apply!(project)
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """
@@ -44,15 +44,15 @@ defmodule NimbleTemplate.Addons.AsdfToolVersionTest do
     end
   end
 
-  describe "#apply/2 with mix_project" do
+  describe "#apply!/2 with mix_project" do
     @describetag mix_project?: true
 
     test "copies the .tool-versions", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        AsdfToolVersion.apply(project)
+      in_test_project!(test_project_path, fn ->
+        AsdfToolVersion.apply!(project)
 
         assert_file(".tool-versions", fn file ->
           assert file =~ """

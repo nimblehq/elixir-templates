@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag mock_latest_package_versions: [{:sobelow, "0.8"}]
     @describetag required_addons: [:TestEnv]
 
@@ -9,8 +9,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Sobelow.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Sobelow.apply!(project)
 
         assert_file(".sobelow-conf")
       end)
@@ -20,8 +20,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Sobelow.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Sobelow.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -34,8 +34,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SobelowTest do
     end
 
     test "adds sobelow codebase alias", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Sobelow.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Sobelow.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """

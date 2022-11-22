@@ -2,15 +2,15 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
   use NimbleTemplate.AddonCase, async: false
   use Mimic
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag mock_latest_package_versions: [{:oban, "2.3"}]
 
     test "injects oban to mix dependency", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Oban.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Oban.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -26,10 +26,10 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         expect(Calendar, :strftime, fn _datetime, _format -> "20201120074154" end)
 
-        PhoenixAddons.Oban.apply(project)
+        PhoenixAddons.Oban.apply!(project)
 
         assert_file("priv/repo/migrations/20201120074154_add_oban_jobs_table.exs", fn file ->
           assert file =~ """
@@ -55,8 +55,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Oban.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Oban.apply!(project)
 
         assert_file("lib/nimble_template/application.ex", fn file ->
           assert file =~ """
@@ -65,9 +65,7 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
 
           assert file =~ """
                    # Conditionally disable crontab, queues, or plugins here.
-                   defp oban_config do
-                     Application.get_env(:nimble_template, Oban)
-                   end
+                   defp oban_config, do: Application.get_env(:nimble_template, Oban)
                  """
         end)
       end)
@@ -77,8 +75,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Oban.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Oban.apply!(project)
 
         assert_file("config/config.exs", fn file ->
           assert file =~ """
@@ -95,8 +93,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Oban.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Oban.apply!(project)
 
         assert_file("config/test.exs", fn file ->
           assert file =~ """
@@ -110,8 +108,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ObanTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Oban.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Oban.apply!(project)
 
         assert(File.exists?("lib/nimble_template_worker/.keep")) == true
       end)

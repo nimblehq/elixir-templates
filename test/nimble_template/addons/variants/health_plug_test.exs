@@ -1,15 +1,15 @@
 defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag required_addons: [:ExCoveralls, :"Phoenix.MixRelease"]
 
     test "copies the health plug file", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("lib/nimble_template_web/plugs/health_plug.ex")
       end)
@@ -19,8 +19,8 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("test/nimble_template_web/plugs/health_plug_test.exs")
         assert_file("test/nimble_template_web/requests/_health/liveness_request_test.exs")
@@ -32,8 +32,8 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("config/config.exs", fn file ->
           assert file =~ """
@@ -55,8 +55,8 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("lib/nimble_template_web/helpers/router_helper.ex", fn file ->
           assert file =~ """
@@ -72,8 +72,8 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("test/nimble_template_web/helpers/router_helper_test.exs", fn file ->
           assert file =~ """
@@ -97,8 +97,8 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("lib/nimble_template_web/router.ex", fn file ->
           assert file =~ "alias NimbleTemplateWeb.RouterHelper"
@@ -111,8 +111,8 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.HealthPlug.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.HealthPlug.apply!(project)
 
         assert_file("test/test_helper.exs", fn file ->
           assert file =~ "Mimic.copy(Ecto.Adapters.SQL)"

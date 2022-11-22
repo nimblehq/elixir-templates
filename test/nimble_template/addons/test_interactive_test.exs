@@ -1,15 +1,15 @@
 defmodule NimbleTemplate.Addons.TestInteractiveTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag mock_latest_package_versions: [{:mix_test_interactive, "1.2"}]
 
     test "injects mix_test_interactive to mix dependencies list", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.TestInteractive.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestInteractive.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -25,8 +25,8 @@ defmodule NimbleTemplate.Addons.TestInteractiveTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.TestInteractive.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestInteractive.apply!(project)
 
         assert_file("config/dev.exs", fn file ->
           assert file =~ """
@@ -38,7 +38,7 @@ defmodule NimbleTemplate.Addons.TestInteractiveTest do
     end
   end
 
-  describe "#apply/2 with mix_project" do
+  describe "#apply!/2 with mix_project" do
     @describetag mix_project?: true
     @describetag mock_latest_package_versions: [{:mix_test_interactive, "1.2"}]
 
@@ -46,8 +46,8 @@ defmodule NimbleTemplate.Addons.TestInteractiveTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        Addons.TestInteractive.apply(project)
+      in_test_project!(test_project_path, fn ->
+        Addons.TestInteractive.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """

@@ -3,15 +3,15 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
 
   alias NimbleTemplate.Projects.Project
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag mock_latest_package_versions: [{:wallaby, "0.26.2"}]
 
     test "copies the test/support/feature_case.ex", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Wallaby.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Wallaby.apply!(project)
 
         assert_file("test/support/feature_case.ex", fn file ->
           assert file =~ """
@@ -45,10 +45,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
            project: project,
            test_project_path: test_project_path
          } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.prepend_optional_addon(project, NimbleTemplate.Addons.Phoenix.ExVCR)
 
-        WebAddons.Wallaby.apply(project)
+        WebAddons.Wallaby.apply!(project)
 
         assert_file("test/support/feature_case.ex", fn file ->
           assert file =~ """
@@ -83,8 +83,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Wallaby.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Wallaby.apply!(project)
 
         assert_file("test/nimble_template_web/features/home_page/view_home_page_test.exs")
       end)
@@ -94,8 +94,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Wallaby.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Wallaby.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -111,8 +111,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Wallaby.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Wallaby.apply!(project)
 
         assert_file("test/test_helper.exs", fn file ->
           assert file =~ """
@@ -131,16 +131,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Wallaby.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Wallaby.apply!(project)
 
         assert_file("lib/nimble_template_web/endpoint.ex", fn file ->
           assert file =~ """
                    use Phoenix.Endpoint, otp_app: :nimble_template
 
-                   if Application.compile_env(:nimble_template, :sql_sandbox) do
-                     plug Phoenix.Ecto.SQL.Sandbox
-                   end
+                   if Application.compile_env(:nimble_template, :sql_sandbox), do: plug Phoenix.Ecto.SQL.Sandbox
                  """
         end)
       end)
@@ -150,8 +148,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Wallaby.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Wallaby.apply!(project)
 
         assert_file("config/test.exs", fn file ->
           assert file =~ """
@@ -173,8 +171,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Wallaby.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Wallaby.apply!(project)
 
         assert_file(".gitignore", fn file ->
           assert file =~ "**/tmp/"
