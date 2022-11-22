@@ -179,7 +179,15 @@
         {Credo.Check.Refactor.VariableRebinding, []},
         {Credo.Check.Warning.LeakyEnvironment, []},
         {Credo.Check.Warning.MapGetUnsafePass, []},
-        {Credo.Check.Warning.UnsafeToAtom, []}
+        {Credo.Check.Warning.UnsafeToAtom, []},
+
+        #
+        ## Checks from CompassCredoPlugin
+        #
+        {CompassCredoPlugin.Check.DefdelegateOrder, []},
+        {CompassCredoPlugin.Check.SingleModuleFile, []},
+        {CompassCredoPlugin.Check.RepeatingFragments, []},
+        {CompassCredoPlugin.Check.DoSingleExpression, []}
 
         #
         # Custom checks can be created using `mix credo.gen.check`.

@@ -8,7 +8,7 @@ defmodule <%= web_module %>.IconHelper do
   alias <%= web_module %>.Router.Helpers, as: Routes
 
   @svg_shape_id_prefix "icon-priv--static--images--icons--"
-  
+
   def icon_tag(conn, icon_file_name, opts \\ []) do
     classes = "icon " <> Keyword.get(opts, :class, "")
 
