@@ -3,7 +3,7 @@ defmodule NimbleTemplate.Test.FileHelper do
 
   # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
   # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3
-  def in_test_project(test_project_path, function), do: File.cd!(test_project_path, function)
+  def in_test_project!(test_project_path, function), do: File.cd!(test_project_path, function)
 
   def assert_file(path),
     do: assert(File.regular?(path), "Expected #{path} to exist, but does not")
