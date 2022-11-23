@@ -3,7 +3,6 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
 
   import NimbleTemplate.{AddonHelper, GithubHelper}
 
-  alias NimbleTemplate.{Addons, Generator}
   alias NimbleTemplate.Addons.Phoenix, as: PhoenixAddons
   alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
   alias NimbleTemplate.Projects.Project
