@@ -27,7 +27,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
       """,
       """
         "devDependencies": {
-          "postcss": "8.4.12",
+          "postcss": "8.4.19",
+          "postcss-scss": "4.0.6",
           "postcss-cli": "9.1.0",
           "postcss-load-config": "3.1.4",
           "autoprefixer": "10.4.5",
