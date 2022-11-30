@@ -6,7 +6,7 @@ defmodule NimbleTemplate.AddonCase do
   alias NimbleTemplate.Addons
   alias NimbleTemplate.Addons.Phoenix.Api, as: ApiAddons
   alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
-  alias NimbleTemplate.Hex.Package
+  alias NimbleTemplate.Hex.PackageMock
   alias NimbleTemplate.Projects.Project
 
   @default_project_name "nimble_template"
@@ -88,7 +88,7 @@ defmodule NimbleTemplate.AddonCase do
     do: Module.safe_concat([Addons, required_addon_module]).apply!(project, required_addon_opt)
 
   defp mock_latest_package_version({_package, version}),
-    do: expect(Package, :get_latest_version, fn _package -> version end)
+    do: expect(PackageMock, :get_latest_version, fn _package -> version end)
 
   defp create_phoenix_test_project(test_project_path, opts) do
     # N - in response to Fetch and install dependencies?

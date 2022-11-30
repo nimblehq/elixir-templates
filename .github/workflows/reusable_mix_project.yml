@@ -9,7 +9,7 @@ on:
 
 env:
   BASE_PROJECT_DIRECTORY: sample_project
-  MIX_ENV: test
+  MIX_ENV: dev
 
 jobs:
   unit_test:
@@ -62,6 +62,10 @@ jobs:
 
       - name: Run mix codebase
         run: cd $BASE_PROJECT_DIRECTORY && mix codebase
+        env:
+          MIX_ENV: test
 
       - name: Run mix test
         run: cd $BASE_PROJECT_DIRECTORY && mix test
+        env:
+          MIX_ENV: test
