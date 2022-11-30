@@ -14,6 +14,7 @@ env:
   PHOENIX_VERSION: 1.6.11
   BASE_PROJECT_DIRECTORY: sample_project
   DB_HOST: localhost
+  MIX_ENV: dev
 
 jobs:
   unit_test:
@@ -94,9 +95,13 @@ jobs:
 
       - name: Run mix codebase
         run: cd $BASE_PROJECT_DIRECTORY && mix codebase
+        env:
+          MIX_ENV: test
 
       - name: Run mix test
         run: cd $BASE_PROJECT_DIRECTORY && mix coverage
+        env:
+          MIX_ENV: test
 
       - name: Remove nimble_template dependency
         run: make remove_nimble_template PROJECT_DIRECTORY=$BASE_PROJECT_DIRECTORY

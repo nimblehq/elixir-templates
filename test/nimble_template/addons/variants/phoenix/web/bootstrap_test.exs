@@ -9,6 +9,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :"Phoenix.Web.PostCSS",
                    :"Phoenix.Web.DartSass"
                  ]
+    @describetag mock_latest_package_versions: [{:dart_sass, "0.26.2"}]
 
     test "copies Bootstrap vendor file", %{project: project, test_project_path: test_project_path} do
       in_test_project!(test_project_path, fn ->
@@ -133,6 +134,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :"Phoenix.Web.NimbleCSS",
                    :"Phoenix.Web.NimbleJS"
                  ]
+    @describetag mock_latest_package_versions: [{:dart_sass, "0.26.2"}]
 
     test "copies Bootstrap vendor file", %{project: project, test_project_path: test_project_path} do
       in_test_project!(test_project_path, fn ->
