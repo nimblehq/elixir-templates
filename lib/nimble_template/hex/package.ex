@@ -1,6 +1,8 @@
 defmodule NimbleTemplate.Hex.Package do
   @moduledoc false
 
+  @behaviour NimbleTemplate.Hex.PackageBehaviour
+
   alias NimbleTemplate.Hex.HexClient
 
   def get_latest_version(package) do

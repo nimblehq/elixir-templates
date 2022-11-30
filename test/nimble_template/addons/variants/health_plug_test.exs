@@ -3,6 +3,7 @@ defmodule NimbleTemplate.Addons.Phoenix.HealthPlugTest do
 
   describe "#apply!/2" do
     @describetag required_addons: [:ExCoveralls, :"Phoenix.MixRelease"]
+    @describetag mock_latest_package_versions: [{:excoveralls, "0.12.2"}]
 
     test "copies the health plug file", %{
       project: project,
