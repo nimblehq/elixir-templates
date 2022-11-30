@@ -39,8 +39,7 @@ defmodule NimbleTemplate.Templates.Template do
   defp post_apply!(%Project{api_project?: true} = project) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
-    suppress_credo_warnings_for_base_project(project)
-    suppress_credo_warnings_for_project_type(project)
+    suppress_credo_warnings_for_phoenix_api_project(project)
     format_codebase()
   end
 
@@ -48,8 +47,7 @@ defmodule NimbleTemplate.Templates.Template do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
     fetch_and_install_node_dependencies()
-    suppress_credo_warnings_for_base_project(project)
-    suppress_credo_warnings_for_project_type(project)
+    suppress_credo_warnings_for_phoenix_project(project)
     format_codebase()
   end
 
@@ -69,19 +67,14 @@ defmodule NimbleTemplate.Templates.Template do
     )
   end
 
-  defp suppress_credo_warnings_for_project_type(%Project{web_project?: true} = project) do
-    suppress_credo_warnings_for_phoenix_project(project)
-  end
+  defp suppress_credo_warnings_for_phoenix_project(
+         %Project{
+           base_path: base_path,
+           web_path: web_path
+         } = project
+       ) do
+    suppress_credo_warnings_for_base_project(project)
 
-  defp suppress_credo_warnings_for_project_type(%Project{api_project?: true} = project) do
-    suppress_credo_warnings_for_phoenix_project(project)
-    suppress_credo_warnings_for_phoenix_api_project(project)
-  end
-
-  defp suppress_credo_warnings_for_phoenix_project(%Project{
-         base_path: base_path,
-         web_path: web_path
-       }) do
     Enum.each(
       [
         "#{web_path}/controllers/page_controller.ex",
@@ -95,9 +88,14 @@ defmodule NimbleTemplate.Templates.Template do
     )
   end
 
-  defp suppress_credo_warnings_for_phoenix_api_project(%Project{
-         web_test_path: web_test_path
-       }) do
+  defp suppress_credo_warnings_for_phoenix_api_project(
+         %Project{
+           web_test_path: web_test_path
+         } = project
+       ) do
+    suppress_credo_warnings_for_base_project(project)
+    suppress_credo_warnings_for_phoenix_project(project)
+
     Enum.each(
       [
         "#{web_test_path}/views/api/error_view_test.exs",
