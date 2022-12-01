@@ -10,7 +10,9 @@ defmodule NimbleTemplate.Templates.Template do
   alias NimbleTemplate.Templates.Phoenix.Template, as: PhoenixTemplate
 
   def apply!(%Project{mix_project?: true} = project) do
-    MixTemplate.apply!(project)
+    project
+    |> MixTemplate.pre_apply()
+    |> MixTemplate.apply!()
 
     ExUnit.apply!(project)
 
@@ -18,7 +20,9 @@ defmodule NimbleTemplate.Templates.Template do
   end
 
   def apply!(%Project{mix_project?: false} = project) do
-    PhoenixTemplate.apply!(project)
+    project
+    |> PhoenixTemplate.pre_apply()
+    |> PhoenixTemplate.apply!()
 
     ExUnit.apply!(project)
 

@@ -1,6 +1,8 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
   use NimbleTemplate.AddonCase, async: false
 
+  alias NimbleTemplate.Projects.Project
+
   describe "#apply!/2" do
     @describetag mock_latest_package_versions: [{:wallaby, "0.26.2"}]
 
@@ -44,7 +46,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
            test_project_path: test_project_path
          } do
       in_test_project!(test_project_path, fn ->
-        project = ProjectHelper.append_installed_addon(project, NimbleTemplate.Addons.Phoenix.ExVCR)
+        project = Project.prepend_optional_addon(project, NimbleTemplate.Addons.Phoenix.ExVCR)
 
         WebAddons.Wallaby.apply!(project)
 

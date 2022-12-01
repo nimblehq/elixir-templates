@@ -21,9 +21,7 @@ defmodule NimbleTemplate.Addons.Addon do
       def apply!(%Project{} = project, opts \\ %{}) when is_map(opts) do
         Generator.info_log("* applying ", inspect(__MODULE__))
 
-        project
-        |> do_apply!(opts)
-        |> ProjectHelper.append_installed_addon(__MODULE__)
+        do_apply!(project, opts)
       end
 
       def do_apply!(%Project{} = project, opts) when is_map(opts), do: project

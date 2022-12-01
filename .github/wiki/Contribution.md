@@ -28,7 +28,7 @@ The module should implement `do_apply!` callbacks of a behaviour.
 
 With a new corresponding test file at `test/nimble_template/addons/variants/phoenix/web/addon_test.exs`.
 
-Then call `NimbleTemplate.Addons.Phoenix.Web.SampleAddon.apply(project)` inside `lib/nimble_template/templates/variants/phoenix/web/template.ex` file which will be executed on Terminal prompt.
+Then call `NimbleTemplate.Addons.Phoenix.Web.SampleAddon.apply!(project)` inside `lib/nimble_template/templates/variants/phoenix/web/template.ex` file which will be executed on Terminal prompt.
 
 ## Functions
 
