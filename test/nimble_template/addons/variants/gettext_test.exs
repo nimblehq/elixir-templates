@@ -13,7 +13,13 @@ defmodule NimbleTemplate.Addons.Phoenix.GettextTest do
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
-                  "gettext.extract-and-merge": ["gettext.extract --merge --no-fuzzy"],
+                       codebase: [
+                         "gettext.extract --check-up-to-date",
+                 """
+
+          assert file =~ """
+                       "codebase.fix": [
+                         "gettext.extract --merge --no-fuzzy",
                  """
         end)
       end)

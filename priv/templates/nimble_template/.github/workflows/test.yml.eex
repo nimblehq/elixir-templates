@@ -148,9 +148,6 @@ jobs:
       - name: Migrate database
         run: mix ecto.migrate
 
-      - name: Ensure that localization files (POs, POTs) are up-to-date.
-        run: mix gettext.extract --check-up-to-date
-
       - name: Run codebase check
         run: mix codebase
 
