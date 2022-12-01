@@ -33,13 +33,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
            web_module: web_module,
            base_module: base_module,
            web_test_path: web_test_path,
-           installed_addons: installed_addons
+           optional_addons: optional_addons
          } = project
        ) do
     binding = [
       web_module: web_module,
       base_module: base_module,
-      with_ex_vcr?: ExVCR in installed_addons
+      with_ex_vcr?: ExVCR in optional_addons
     ]
 
     files = [

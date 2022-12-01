@@ -8,6 +8,7 @@ defmodule NimbleTemplate.AddonCase do
   alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
   alias NimbleTemplate.Hex.PackageMock
   alias NimbleTemplate.Projects.Project
+  alias NimbleTemplate.Test.FileHelper
 
   @default_project_name "nimble_template"
 
@@ -19,28 +20,13 @@ defmodule NimbleTemplate.AddonCase do
       alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
       alias NimbleTemplate.ProjectHelper
 
-      # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
-      # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3
-      defp in_test_project!(test_project_path, function), do: File.cd!(test_project_path, function)
-
-      defp assert_file(path),
-        do: assert(File.regular?(path), "Expected #{path} to exist, but does not")
-
-      defp assert_directory(path),
-        do: assert(File.dir?(path), "Expected #{path} to exist, but does not")
-
-      defp assert_file(path, match) do
-        assert_file(path)
-        match.(File.read!(path))
-      end
-
-      defp refute_file(path),
-        do: refute(File.regular?(path), "Expected #{path} does not exist, but it does")
+      import NimbleTemplate.Test.FileHelper
     end
   end
 
   setup context do
-    parent_test_project_path = Path.join(tmp_path(), parent_test_project_path())
+    parent_test_project_path = FileHelper.parent_test_project_path()
+
     test_project_path = Path.join(parent_test_project_path, "/#{@default_project_name}")
     opts = Map.get(context, :opts, "")
 
@@ -103,13 +89,4 @@ defmodule NimbleTemplate.AddonCase do
       "printf \"N\n\" | make create_mix_project PROJECT_DIRECTORY=#{test_project_path} OPTIONS=#{opts} > /dev/null"
     )
   end
-
-  defp parent_test_project_path do
-    20
-    |> :crypto.strong_rand_bytes()
-    |> Base.url_encode64(padding: false)
-    |> String.downcase()
-  end
-
-  defp tmp_path, do: Path.expand("../../tmp", __DIR__)
 end
