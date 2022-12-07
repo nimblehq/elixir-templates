@@ -10,7 +10,15 @@ defmodule NimbleTemplate.Addons.Credo do
     |> edit_files!()
   end
 
-  defp copy_files!(%Project{web_path: web_path, base_path: base_path} = project) do
+  defp copy_files!(%Project{mix_project?: true} = project) do
+    Generator.copy_file!([{:text, ".credo.mix.exs", ".credo.exs"}])
+
+    project
+  end
+
+  defp copy_files!(
+         %Project{web_path: web_path, base_path: base_path, mix_project?: false} = project
+       ) do
     binding = [
       base_entry_path: "#{base_path}.ex",
       web_entry_path: "#{web_path}.ex"
