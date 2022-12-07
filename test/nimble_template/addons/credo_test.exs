@@ -15,15 +15,15 @@ defmodule NimbleTemplate.Addons.CredoTest do
         assert_file(".credo.exs", fn file ->
           assert file =~ """
                  {Credo.Check.Consistency.MultiAliasImportRequireUse,
-                           files: %{
-                             excluded: [
-                               "lib/nimble_template.ex",
-                               "lib/nimble_template_web.ex",
-                               "test/support/conn_case.ex",
-                               "test/support/data_case.ex",
-                               "test/support/feature_case.ex"
-                             ]
-                           }},
+                         files: %{
+                           excluded: [
+                             "lib/nimble_template.ex",
+                             "lib/nimble_template_web.ex",
+                             "test/support/conn_case.ex",
+                             "test/support/data_case.ex",
+                             "test/support/feature_case.ex"
+                           ]
+                         }},
                  """
         end)
       end)
