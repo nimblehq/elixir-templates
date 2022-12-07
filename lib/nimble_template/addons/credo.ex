@@ -10,8 +10,13 @@ defmodule NimbleTemplate.Addons.Credo do
     |> edit_files!()
   end
 
-  defp copy_files!(%Project{} = project) do
-    Generator.copy_file!([{:text, ".credo.exs", ".credo.exs"}])
+  defp copy_files!(%Project{web_path: web_path, base_path: base_path} = project) do
+    binding = [
+      base_entry_path: "#{base_path}.ex",
+      web_entry_path: "#{web_path}.ex"
+    ]
+
+    Generator.copy_file!([{:eex, ".credo.exs", ".credo.exs"}], binding)
 
     project
   end
