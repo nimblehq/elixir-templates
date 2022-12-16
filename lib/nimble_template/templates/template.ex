@@ -32,14 +32,14 @@ defmodule NimbleTemplate.Templates.Template do
   defp post_apply!(%Project{mix_project?: true} = project) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
-    suppress_necessary_credo_warnings(project)
+    suppress_credo_warnings_for_base_project(project)
     format_codebase()
   end
 
   defp post_apply!(%Project{api_project?: true} = project) do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
-    suppress_necessary_credo_warnings(project)
+    suppress_credo_warnings_for_phoenix_api_project(project)
     format_codebase()
   end
 
@@ -47,7 +47,7 @@ defmodule NimbleTemplate.Templates.Template do
     order_dependencies!()
     fetch_and_install_elixir_dependencies()
     fetch_and_install_node_dependencies()
-    suppress_necessary_credo_warnings(project)
+    suppress_credo_warnings_for_phoenix_project(project)
     format_codebase()
   end
 
@@ -60,15 +60,23 @@ defmodule NimbleTemplate.Templates.Template do
     Mix.shell().cmd("npm install --prefix assets")
   end
 
-  defp suppress_necessary_credo_warnings(%Project{
-         base_module: base_module,
-         base_path: base_path,
-         web_path: web_path,
-         web_test_path: web_test_path
-       }) do
+  defp suppress_credo_warnings_for_base_project(%Project{base_module: base_module}) do
+    CredoHelper.disable_rule(
+      "lib/#{Macro.underscore(base_module)}.ex",
+      "CompassCredoPlugin.Check.DoSingleExpression"
+    )
+  end
+
+  defp suppress_credo_warnings_for_phoenix_project(
+         %Project{
+           base_path: base_path,
+           web_path: web_path
+         } = project
+       ) do
+    suppress_credo_warnings_for_base_project(project)
+
     Enum.each(
       [
-        "lib/#{Macro.underscore(base_module)}.ex",
         "#{web_path}/controllers/page_controller.ex",
         "#{web_path}/telemetry.ex",
         "#{web_path}/views/error_view.ex",
@@ -78,6 +86,15 @@ defmodule NimbleTemplate.Templates.Template do
         CredoHelper.disable_rule(file_path, "CompassCredoPlugin.Check.DoSingleExpression")
       end
     )
+  end
+
+  defp suppress_credo_warnings_for_phoenix_api_project(
+         %Project{
+           web_test_path: web_test_path
+         } = project
+       ) do
+    suppress_credo_warnings_for_base_project(project)
+    suppress_credo_warnings_for_phoenix_project(project)
 
     Enum.each(
       [
