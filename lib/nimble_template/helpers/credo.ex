@@ -32,47 +32,44 @@ defmodule NimbleTemplate.CredoHelper do
     disable_do_single_expression_rule(["lib/#{Macro.underscore(base_module)}.ex"])
   end
 
-  def suppress_credo_warnings_for_phoenix_project(
-        %Project{
-          base_path: base_path,
-          web_path: web_path
-        } = project
-      ) do
+  def suppress_credo_warnings_for_phoenix_project(project) do
     suppress_credo_warnings_for_base_project(project)
 
-    files_contain_single_expression = [
-      "#{web_path}/controllers/page_controller.ex",
-      "#{web_path}/telemetry.ex",
-      "#{web_path}/views/error_view.ex",
-      "#{base_path}/release_tasks.ex"
-    ]
-
-    disable_do_single_expression_rule(files_contain_single_expression)
+    project
+    |> get_files_contain_single_expression()
+    |> disable_do_single_expression_rule()
   end
 
-  def suppress_credo_warnings_for_phoenix_api_project(
-        %Project{
-          base_path: base_path,
-          web_path: web_path,
-          web_test_path: web_test_path
-        } = project
-      ) do
+  def suppress_credo_warnings_for_phoenix_api_project(project) do
     suppress_credo_warnings_for_base_project(project)
 
-    files_contain_multiple_module = [
-      "#{web_test_path}/views/api/error_view_test.exs",
-      "#{web_test_path}/params/params_validator_test.exs"
-    ]
+    project
+    |> get_files_contain_multiple_modules()
+    |> disable_single_module_file_rule()
 
-    disable_single_module_file_rule(files_contain_multiple_module)
+    project
+    |> get_files_contain_single_expression()
+    |> disable_do_single_expression_rule()
+  end
 
-    files_contain_single_expression = [
+  defp get_files_contain_single_expression(%Project{
+         base_path: base_path,
+         web_path: web_path
+       }) do
+    [
       "#{web_path}/controllers/page_controller.ex",
       "#{base_path}/release_tasks.ex",
       "#{web_path}/telemetry.ex",
       "#{web_path}/views/error_view.ex"
     ]
+  end
 
-    disable_do_single_expression_rule(files_contain_single_expression)
+  defp get_files_contain_multiple_modules(%Project{
+         web_test_path: web_test_path
+       }) do
+    [
+      "#{web_test_path}/views/api/error_view_test.exs",
+      "#{web_test_path}/params/params_validator_test.exs"
+    ]
   end
 end
