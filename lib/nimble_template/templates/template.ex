@@ -1,8 +1,7 @@
 defmodule NimbleTemplate.Templates.Template do
   @moduledoc false
 
-  import NimbleTemplate.DependencyHelper
-  import NimbleTemplate.CredoHelper
+  import NimbleTemplate.{CredoHelper, DependencyHelper}
 
   alias NimbleTemplate.Addons.ExUnit
   alias NimbleTemplate.Projects.Project

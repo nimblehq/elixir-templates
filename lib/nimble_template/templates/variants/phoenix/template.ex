@@ -44,7 +44,6 @@ defmodule NimbleTemplate.Templates.Phoenix.Template do
     end
   end
 
-  # credo:disable-for-next-line Credo.Check.Refactor.ABCSize
   defp apply_phoenix_common_setup(%Project{} = project) do
     # TODO: Remove me after the Phoenix generator fix releases: https://github.com/phoenixframework/phoenix/pull/4894
     remove_mix_compiler_config!()
