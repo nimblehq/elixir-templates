@@ -5,39 +5,15 @@ defmodule NimbleTemplate.CredoHelper do
   @do_single_expression_rule_name "CompassCredoPlugin.Check.DoSingleExpression"
   @single_module_file_rule_name "CompassCredoPlugin.Check.SingleModuleFile"
 
-  @spec disable_rule(String.t(), String.t()) :: :ok | {:error, :failed_to_read_file}
-  def disable_rule(file_path, rule) do
-    if File.exists?(file_path) do
-      Generator.prepend_content(file_path, """
-      # credo:disable-for-this-file #{rule}
-      """)
-    end
-  end
-
-  @spec disable_do_single_expression_rule(list()) :: :ok | {:error, :failed_to_read_file}
-  def disable_do_single_expression_rule(file_paths) do
-    Enum.each(file_paths, fn file_path ->
-      disable_rule(file_path, @do_single_expression_rule_name)
-    end)
-  end
-
-  @spec disable_single_module_file_rule(list()) :: :ok | {:error, :failed_to_read_file}
-  def disable_single_module_file_rule(file_paths) do
-    Enum.each(file_paths, fn file_path ->
-      disable_rule(file_path, @single_module_file_rule_name)
-    end)
-  end
-
-  def suppress_credo_warnings_for_base_project(%Project{base_module: base_module}) do
-    disable_do_single_expression_rule(["lib/#{Macro.underscore(base_module)}.ex"])
-  end
+  def suppress_credo_warnings_for_base_project(%Project{base_module: base_module}),
+    do: disable_rules(["lib/#{Macro.underscore(base_module)}.ex"], @do_single_expression_rule_name)
 
   def suppress_credo_warnings_for_phoenix_project(project) do
     suppress_credo_warnings_for_base_project(project)
 
     project
     |> get_files_contain_single_expression()
-    |> disable_do_single_expression_rule()
+    |> disable_rules(@do_single_expression_rule_name)
   end
 
   def suppress_credo_warnings_for_phoenix_api_project(project) do
@@ -45,11 +21,11 @@ defmodule NimbleTemplate.CredoHelper do
 
     project
     |> get_files_contain_multiple_modules()
-    |> disable_single_module_file_rule()
+    |> disable_rules(@single_module_file_rule_name)
 
     project
     |> get_files_contain_single_expression()
-    |> disable_do_single_expression_rule()
+    |> disable_rules(@do_single_expression_rule_name)
   end
 
   defp get_files_contain_single_expression(%Project{
@@ -71,5 +47,19 @@ defmodule NimbleTemplate.CredoHelper do
       "#{web_test_path}/views/api/error_view_test.exs",
       "#{web_test_path}/params/params_validator_test.exs"
     ]
+  end
+
+  defp disable_rules(file_paths, rule_name) do
+    Enum.each(file_paths, fn file_path ->
+      disable_rule(file_path, rule_name)
+    end)
+  end
+
+  defp disable_rule(file_path, rule) do
+    if File.exists?(file_path) do
+      Generator.prepend_content(file_path, """
+      # credo:disable-for-this-file #{rule}
+      """)
+    end
   end
 end

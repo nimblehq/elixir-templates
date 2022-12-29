@@ -55,11 +55,7 @@ defmodule NimbleTemplate.Templates.Template do
     Mix.shell().cmd("MIX_ENV=test mix do deps.get, deps.compile")
   end
 
-  defp install_node_dependencies() do
-    Mix.shell().cmd("npm install --prefix assets")
-  end
+  defp install_node_dependencies(), do: Mix.shell().cmd("npm install --prefix assets")
 
-  defp format_codebase() do
-    Mix.shell().cmd("mix codebase.fix")
-  end
+  defp format_codebase(), do: Mix.shell().cmd("mix codebase.fix")
 end
