@@ -3,22 +3,25 @@ defmodule NimbleTemplate.CredoHelperTest do
 
   alias NimbleTemplate.CredoHelper
 
-  describe "disable_rule/2" do
+  describe "suppress_credo_warnings_for_base_project/1" do
     test "prepends credo rule disabling in the given file", %{
-      test_project_path: test_project_path
+      test_project_path: test_project_path,
+      project: project
     } do
       in_test_project!(test_project_path, fn ->
-        File.write!("sample_module.exs", """
+        sample_module_file = "lib/nimble_template.ex"
+
+        File.write!(sample_module_file, """
         defmodule SampleModule do
           def foo, do: "bar"
         end
         """)
 
-        CredoHelper.disable_rule("sample_module.exs", "Credo.Check.Readability.RedundantBlankLines")
+        CredoHelper.suppress_credo_warnings_for_base_project(project)
 
-        assert_file("sample_module.exs", fn file ->
+        assert_file(sample_module_file, fn file ->
           assert file == """
-                 # credo:disable-for-this-file Credo.Check.Readability.RedundantBlankLines
+                 # credo:disable-for-this-file CompassCredoPlugin.Check.DoSingleExpression
                  defmodule SampleModule do
                    def foo, do: "bar"
                  end

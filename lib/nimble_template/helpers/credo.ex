@@ -5,14 +5,17 @@ defmodule NimbleTemplate.CredoHelper do
   @do_single_expression_rule_name "CompassCredoPlugin.Check.DoSingleExpression"
   @single_module_file_rule_name "CompassCredoPlugin.Check.SingleModuleFile"
 
-  def suppress_credo_warnings_for_base_project(%Project{base_module: base_module}),
-    do: disable_rules(["lib/#{Macro.underscore(base_module)}.ex"], @do_single_expression_rule_name)
+  def suppress_credo_warnings_for_base_project(%Project{base_module: base_module}) do
+    base_module_path = "lib/#{Macro.underscore(base_module)}.ex"
+
+    disable_rule(base_module_path, @do_single_expression_rule_name)
+  end
 
   def suppress_credo_warnings_for_phoenix_project(project) do
     suppress_credo_warnings_for_base_project(project)
 
     project
-    |> get_files_contain_single_expression()
+    |> get_files_containing_single_expression()
     |> disable_rules(@do_single_expression_rule_name)
   end
 
@@ -20,27 +23,27 @@ defmodule NimbleTemplate.CredoHelper do
     suppress_credo_warnings_for_base_project(project)
 
     project
-    |> get_files_contain_multiple_modules()
+    |> get_files_containing_multiple_modules()
     |> disable_rules(@single_module_file_rule_name)
 
     project
-    |> get_files_contain_single_expression()
+    |> get_files_containing_single_expression()
     |> disable_rules(@do_single_expression_rule_name)
   end
 
-  defp get_files_contain_single_expression(%Project{
+  defp get_files_containing_single_expression(%Project{
          base_path: base_path,
          web_path: web_path
        }) do
     [
-      "#{web_path}/controllers/page_controller.ex",
       "#{base_path}/release_tasks.ex",
+      "#{web_path}/controllers/page_controller.ex",
       "#{web_path}/telemetry.ex",
       "#{web_path}/views/error_view.ex"
     ]
   end
 
-  defp get_files_contain_multiple_modules(%Project{
+  defp get_files_containing_multiple_modules(%Project{
          web_test_path: web_test_path
        }) do
     [
