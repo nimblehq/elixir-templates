@@ -1,9 +1,8 @@
 defmodule NimbleTemplate.Templates.Template do
   @moduledoc false
 
-  import NimbleTemplate.{CredoHelper, DependencyHelper}
-
   alias NimbleTemplate.Addons.ExUnit
+  alias NimbleTemplate.{CredoHelper, DependencyHelper}
   alias NimbleTemplate.Projects.Project
   alias NimbleTemplate.Templates.Mix.Template, as: MixTemplate
   alias NimbleTemplate.Templates.Phoenix.Template, as: PhoenixTemplate
@@ -29,24 +28,24 @@ defmodule NimbleTemplate.Templates.Template do
   end
 
   defp post_apply!(%Project{mix_project?: true} = project) do
-    order_dependencies!()
+    DependencyHelper.order_dependencies!()
     install_elixir_dependencies()
-    suppress_credo_warnings_for_base_project(project)
+    CredoHelper.suppress_credo_warnings_for_base_project(project)
     format_codebase()
   end
 
   defp post_apply!(%Project{api_project?: true} = project) do
-    order_dependencies!()
+    DependencyHelper.order_dependencies!()
     install_elixir_dependencies()
-    suppress_credo_warnings_for_phoenix_api_project(project)
+    CredoHelper.suppress_credo_warnings_for_phoenix_api_project(project)
     format_codebase()
   end
 
   defp post_apply!(%Project{web_project?: true} = project) do
-    order_dependencies!()
+    DependencyHelper.order_dependencies!()
     install_elixir_dependencies()
     install_node_dependencies()
-    suppress_credo_warnings_for_phoenix_project(project)
+    CredoHelper.suppress_credo_warnings_for_phoenix_project(project)
     format_codebase()
   end
 
