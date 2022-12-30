@@ -5,12 +5,14 @@ defmodule NimbleTemplate.CredoHelper do
   @do_single_expression_rule_name "CompassCredoPlugin.Check.DoSingleExpression"
   @single_module_file_rule_name "CompassCredoPlugin.Check.SingleModuleFile"
 
+  @spec suppress_credo_warnings_for_base_project(Project.t()) :: :ok
   def suppress_credo_warnings_for_base_project(%Project{base_module: base_module}) do
     base_module_path = "lib/#{Macro.underscore(base_module)}.ex"
 
     disable_rule(base_module_path, @do_single_expression_rule_name)
   end
 
+  @spec suppress_credo_warnings_for_phoenix_project(Project.t()) :: :ok
   def suppress_credo_warnings_for_phoenix_project(project) do
     suppress_credo_warnings_for_base_project(project)
 
@@ -19,6 +21,7 @@ defmodule NimbleTemplate.CredoHelper do
     |> disable_rules(@do_single_expression_rule_name)
   end
 
+  @spec suppress_credo_warnings_for_phoenix_api_project(Project.t()) :: :ok
   def suppress_credo_warnings_for_phoenix_api_project(project) do
     suppress_credo_warnings_for_base_project(project)
 
