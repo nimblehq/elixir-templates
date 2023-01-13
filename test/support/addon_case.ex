@@ -6,8 +6,9 @@ defmodule NimbleTemplate.AddonCase do
   alias NimbleTemplate.Addons
   alias NimbleTemplate.Addons.Phoenix.Api, as: ApiAddons
   alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
-  alias NimbleTemplate.Hex.Package
+  alias NimbleTemplate.Hex.PackageMock
   alias NimbleTemplate.Projects.Project
+  alias NimbleTemplate.Test.FileHelper
 
   @default_project_name "nimble_template"
 
@@ -19,28 +20,13 @@ defmodule NimbleTemplate.AddonCase do
       alias NimbleTemplate.Addons.Phoenix.Web, as: WebAddons
       alias NimbleTemplate.ProjectHelper
 
-      # ATTENTION: File.cd! doesn't support `async: true`, the test will fail randomly in async mode
-      # https://elixirforum.com/t/randomly-getting-compilationerror-on-tests/17298/3
-      defp in_test_project(test_project_path, function), do: File.cd!(test_project_path, function)
-
-      defp assert_file(path),
-        do: assert(File.regular?(path), "Expected #{path} to exist, but does not")
-
-      defp assert_directory(path),
-        do: assert(File.dir?(path), "Expected #{path} to exist, but does not")
-
-      defp assert_file(path, match) do
-        assert_file(path)
-        match.(File.read!(path))
-      end
-
-      defp refute_file(path),
-        do: refute(File.regular?(path), "Expected #{path} does not exist, but it does")
+      import NimbleTemplate.Test.FileHelper
     end
   end
 
   setup context do
-    parent_test_project_path = Path.join(tmp_path(), parent_test_project_path())
+    parent_test_project_path = FileHelper.parent_test_project_path()
+
     test_project_path = Path.join(parent_test_project_path, "/#{@default_project_name}")
     opts = Map.get(context, :opts, "")
 
@@ -74,21 +60,21 @@ defmodule NimbleTemplate.AddonCase do
 
     if required_addons = context[:required_addons] do
       File.cd!(test_project_path, fn ->
-        Enum.each(required_addons, &apply_required_addon(&1, project))
+        Enum.each(required_addons, &apply_required_addon!(&1, project))
       end)
     end
 
     {:ok, project: project, test_project_path: test_project_path}
   end
 
-  defp apply_required_addon(required_addon, project) when is_atom(required_addon),
-    do: Module.safe_concat([Addons, required_addon]).apply(project)
+  defp apply_required_addon!(required_addon, project) when is_atom(required_addon),
+    do: Module.safe_concat([Addons, required_addon]).apply!(project)
 
-  defp apply_required_addon({required_addon_module, required_addon_opt}, project),
-    do: Module.safe_concat([Addons, required_addon_module]).apply(project, required_addon_opt)
+  defp apply_required_addon!({required_addon_module, required_addon_opt}, project),
+    do: Module.safe_concat([Addons, required_addon_module]).apply!(project, required_addon_opt)
 
   defp mock_latest_package_version({_package, version}),
-    do: expect(Package, :get_latest_version, fn _package -> version end)
+    do: expect(PackageMock, :get_latest_version, fn _package -> version end)
 
   defp create_phoenix_test_project(test_project_path, opts) do
     # N - in response to Fetch and install dependencies?
@@ -103,13 +89,4 @@ defmodule NimbleTemplate.AddonCase do
       "printf \"N\n\" | make create_mix_project PROJECT_DIRECTORY=#{test_project_path} OPTIONS=#{opts} > /dev/null"
     )
   end
-
-  defp parent_test_project_path do
-    20
-    |> :crypto.strong_rand_bytes()
-    |> Base.url_encode64(padding: false)
-    |> String.downcase()
-  end
-
-  defp tmp_path, do: Path.expand("../../tmp", __DIR__)
 end

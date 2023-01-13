@@ -11,9 +11,9 @@ defmodule NimbleTemplate.DependencyTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.ExVCR.apply(project)
-        Addons.Mimic.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.ExVCR.apply!(project)
+        Addons.Mimic.apply!(project)
 
         # Unordered mix dependencies
         assert_file("mix.exs", fn file ->

@@ -7,7 +7,7 @@ defmodule NimbleTemplate.GeneratorTest do
     test "prepends the given content in the given file", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         File.write!("sample_module.exs", """
         defmodule SampleModule do
           def foo, do: "bar"
@@ -30,7 +30,7 @@ defmodule NimbleTemplate.GeneratorTest do
     test "when the given file does not exist, returns an error", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         assert Generator.prepend_content("unknown_file.exs", "# This is sample module\n") ==
                  {:error, :failed_to_read_file}
       end)
@@ -41,7 +41,7 @@ defmodule NimbleTemplate.GeneratorTest do
     test "prepends the given content in the given file", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         File.write!("sample_module.exs", """
         defmodule SampleModule do
           def foo, do: "bar"
@@ -64,7 +64,7 @@ defmodule NimbleTemplate.GeneratorTest do
     test "when the given file does not exist, raises an error", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         assert_raise Mix.Error, "Can't read unknown_file.exs", fn ->
           Generator.prepend_content!("unknown_file.exs", "# This is sample module\n")
         end

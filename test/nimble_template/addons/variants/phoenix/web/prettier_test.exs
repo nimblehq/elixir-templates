@@ -1,15 +1,15 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
 
     test "adds prettier and prettier-plugin-eex into package.json", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Prettier.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Prettier.apply!(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -25,8 +25,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Prettier.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Prettier.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -43,8 +43,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Prettier.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Prettier.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -59,8 +59,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Prettier.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Prettier.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -75,8 +75,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PrettierTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Prettier.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Prettier.apply!(project)
 
         assert_file(".prettierignore")
         assert_file(".prettierrc.yaml")

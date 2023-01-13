@@ -18,17 +18,17 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SampleAddon do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, opts) do
+  def do_apply!(%Project{} = project, opts) do
     project
   end
 end
 ```
 
-The module should implement `do_apply` callbacks of a behaviour.
+The module should implement `do_apply!` callbacks of a behaviour.
 
 With a new corresponding test file at `test/nimble_template/addons/variants/phoenix/web/addon_test.exs`.
 
-Then call `NimbleTemplate.Addons.Phoenix.Web.SampleAddon.apply(project)` inside `lib/nimble_template/templates/variants/phoenix/web/template.ex` file which will be executed on Terminal prompt.
+Then call `NimbleTemplate.Addons.Phoenix.Web.SampleAddon.apply!(project)` inside `lib/nimble_template/templates/variants/phoenix/web/template.ex` file which will be executed on Terminal prompt.
 
 ## Functions
 
@@ -36,7 +36,7 @@ These are functions from `NimbleTemplate.Generator` which can be called.
 
 ---
 
-`copy_directory(source_path, target_path, binding \\ [])`
+`copy_directory!(source_path, target_path, binding \\ [])`
 
 Copy a directory and its content from source path to target path.
 
@@ -48,12 +48,12 @@ Copy a directory and its content from source path to target path.
 
 Example
 ```elixir
-Generator.copy_directory("assets/nimble_js", "assets/js")
+Generator.copy_directory!("assets/nimble_js", "assets/js")
 ```
 
 ---
 
-`copy_file(files, binding \\ [])`
+`copy_file!(files, binding \\ [])`
 
 Copy a list of files from source path to target path.
 
@@ -64,7 +64,7 @@ Copy a list of files from source path to target path.
 
 Example
 ```elixir
-Generator.copy_file([
+Generator.copy_file!([
   {:eex, "bin/start.sh.eex", "bin/start.sh"},
   {:text, "assets/bootstrap_css/vendor/_bootstrap.scss", "assets/css/vendor/_bootstrap.scss"}
 ])
@@ -72,7 +72,7 @@ Generator.copy_file([
 
 ---
 
-`rename_file(old_path, new_path)`
+`rename_file!(old_path, new_path)`
 
 Rename a file from old path to new path.
 
@@ -83,12 +83,12 @@ Rename a file from old path to new path.
 
 Example
 ```elixir
-Generator.rename_file("assets/css/app.css", "assets/css/app.scss")
+Generator.rename_file!("assets/css/app.css", "assets/css/app.scss")
 ```
 
 ---
 
-`replace_content(file_path, anchor, content)`
+`replace_content!(file_path, anchor, content)`
 
 Find and replace specified content of an existing file.
 
@@ -100,7 +100,7 @@ Find and replace specified content of an existing file.
 
 Example
 ```elixir
-Generator.replace_content(
+Generator.replace_content!(
   "test/test_helper.exs",
   """
   ExUnit.start()
@@ -113,7 +113,7 @@ Generator.replace_content(
 
 ---
 
-`delete_content(file_path, anchor)`
+`delete_content!(file_path, anchor)`
 
 Find and remove specified content of an existing file.
 
@@ -124,7 +124,7 @@ Find and remove specified content of an existing file.
 
 Example
 ```elixir
-Generator.delete_content(
+Generator.delete_content!(
   "assets/js/app.js",
   """
   // We import the CSS which is extracted to its own file by esbuild.
@@ -137,7 +137,7 @@ Generator.delete_content(
 
 ---
 
-`inject_content(file_path, anchor, content)`
+`inject_content!(file_path, anchor, content)`
 
 Inject a specified content below a specified content of an existing file.
 
@@ -149,7 +149,7 @@ Inject a specified content below a specified content of an existing file.
 
 Example
 ```elixir
-Generator.inject_content(
+Generator.inject_content!(
   support_case_path,
   """
     use ExUnit.CaseTemplate
@@ -163,7 +163,7 @@ Generator.inject_content(
 
 ---
 
-`append_content(file_path, content)`
+`append_content!(file_path, content)`
 
 Append a specified content to the end of an existing file.
 
@@ -174,7 +174,7 @@ Append a specified content to the end of an existing file.
 
 Example
 ```elixir
-Generator.append_content(
+Generator.append_content!(
   "assets/css/_variables.scss",
   """
   Content
@@ -184,7 +184,7 @@ Generator.append_content(
 
 ---
 
-`inject_mix_dependency(dependency)`
+`inject_mix_dependency!(dependency)`
 
 Inject a new mix dependency into `mix.exs` file.
 
@@ -196,14 +196,14 @@ Inject a new mix dependency into `mix.exs` file.
 
 Example
 ```elixir
-Generator.inject_mix_dependency(
+Generator.inject_mix_dependency!(
   {:credo, latest_package_version(:credo), only: [:dev, :test], runtime: false}
 )
 ```
 
 ---
 
-`make_directory(path, touch_directory \\ true)`
+`make_directory!(path, touch_directory \\ true)`
 
 Create a new directory.
 
@@ -214,12 +214,12 @@ Create a new directory.
 
 Example
 ```elixir
-Generator.make_directory("assets/css/vendor/", false)
+Generator.make_directory!("assets/css/vendor/", false)
 ```
 
 ---
 
-`create_file(path, content)`
+`create_file!(path, content)`
 
 Create a new file with specified content.
 
@@ -230,7 +230,7 @@ Create a new file with specified content.
 
 Example
 ```elixir
-Generator.create_file(
+Generator.create_file!(
   "assets/css/_variables.scss",
   """
   Content

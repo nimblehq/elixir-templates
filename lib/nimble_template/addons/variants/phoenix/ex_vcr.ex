@@ -6,29 +6,29 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
   @cassette_directory "test/support/fixtures/vcr_cassettes"
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> edit_files()
-    |> create_cassette_directory()
+    |> edit_files!()
+    |> create_cassette_directory!()
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files!(%Project{} = project) do
     project
-    |> inject_mix_dependency()
-    |> edit_test_config()
-    |> edit_case()
-
-    project
-  end
-
-  defp inject_mix_dependency(%Project{} = project) do
-    Generator.inject_mix_dependency({:exvcr, latest_package_version(:exvcr), only: :test})
+    |> inject_mix_dependency!()
+    |> edit_test_config!()
+    |> edit_case!()
 
     project
   end
 
-  defp edit_test_config(project) do
-    Generator.append_content(
+  defp inject_mix_dependency!(%Project{} = project) do
+    Generator.inject_mix_dependency!({:exvcr, latest_package_version(:exvcr), only: :test})
+
+    project
+  end
+
+  defp edit_test_config!(project) do
+    Generator.append_content!(
       "config/test.exs",
       """
 
@@ -42,8 +42,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
     project
   end
 
-  defp edit_case(project) do
-    Generator.inject_content(
+  defp edit_case!(project) do
+    Generator.inject_content!(
       "test/support/conn_case.ex",
       """
           quote do
@@ -54,7 +54,7 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
       """
     )
 
-    Generator.inject_content(
+    Generator.inject_content!(
       "test/support/data_case.ex",
       """
           quote do
@@ -68,8 +68,8 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
     project
   end
 
-  defp create_cassette_directory(project) do
-    Generator.make_directory(@cassette_directory)
+  defp create_cassette_directory!(project) do
+    Generator.make_directory!(@cassette_directory)
 
     project
   end

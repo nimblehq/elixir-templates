@@ -4,19 +4,30 @@ defmodule NimbleTemplate.Addons.Phoenix.Gettext do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
-    edit_mix(project)
+  def do_apply!(%Project{} = project, _opts) do
+    edit_mix!(project)
   end
 
-  defp edit_mix(%Project{} = project) do
-    Generator.inject_content(
+  defp edit_mix!(%Project{} = project) do
+    Generator.replace_content!(
       "mix.exs",
       """
-        defp aliases do
-          [
+            codebase: [
       """,
       """
-        "gettext.extract-and-merge": ["gettext.extract --merge --no-fuzzy"],
+            codebase: [
+              "gettext.extract --check-up-to-date",
+      """
+    )
+
+    Generator.replace_content!(
+      "mix.exs",
+      """
+            "codebase.fix": [
+      """,
+      """
+            "codebase.fix": [
+              "gettext.extract --merge --no-fuzzy",
       """
     )
 

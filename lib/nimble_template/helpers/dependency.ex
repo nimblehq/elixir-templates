@@ -12,7 +12,7 @@ defmodule NimbleTemplate.DependencyHelper do
       |> Enum.sort()
       |> Enum.join(",\n")
 
-    Generator.replace_content("mix.exs", dependencies, ordered_dependencies)
+    Generator.replace_content!("mix.exs", dependencies, ordered_dependencies)
   end
 
   defp extract_dependencies(contents) do

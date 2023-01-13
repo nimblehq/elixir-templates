@@ -3,12 +3,12 @@ defmodule NimbleTemplate.Projects.ProjectTest do
 
   alias NimbleTemplate.Projects.Project
 
-  describe "#new/1" do
+  describe "new/1" do
     @tag mix_project?: true
     test "given mix project, returns project without web modules and paths", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.new(mix: true)
 
         assert project.base_module == "NimbleTemplate"
@@ -29,7 +29,7 @@ defmodule NimbleTemplate.Projects.ProjectTest do
     test "given mix project with a custom module name, returns project with valid base module", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.new(mix: true)
 
         assert project.base_module == "SampleCustomModule"
@@ -40,7 +40,7 @@ defmodule NimbleTemplate.Projects.ProjectTest do
     test "given web project, returns valid project with valid modules and paths", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.new(web: true)
 
         assert project.base_module == "NimbleTemplate"
@@ -62,7 +62,7 @@ defmodule NimbleTemplate.Projects.ProjectTest do
          %{
            test_project_path: test_project_path
          } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.new(web: true)
 
         assert project.base_module == "SampleCustomModule"
@@ -83,7 +83,7 @@ defmodule NimbleTemplate.Projects.ProjectTest do
     test "given live project, returns valid project with valid modules and paths", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.new(live: true)
 
         assert project.base_module == "NimbleTemplate"
@@ -105,7 +105,7 @@ defmodule NimbleTemplate.Projects.ProjectTest do
          %{
            test_project_path: test_project_path
          } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.new(live: true)
 
         assert project.base_module == "SampleCustomModule"
@@ -125,7 +125,7 @@ defmodule NimbleTemplate.Projects.ProjectTest do
     test "given api project, returns valid project with valid modules and paths", %{
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.new(api: true)
 
         assert project.base_module == "NimbleTemplate"
@@ -147,7 +147,7 @@ defmodule NimbleTemplate.Projects.ProjectTest do
          %{
            test_project_path: test_project_path
          } do
-      in_test_project(test_project_path, fn ->
+      in_test_project!(test_project_path, fn ->
         project = Project.new(api: true)
 
         assert project.base_module == "SampleCustomModule"
@@ -162,6 +162,17 @@ defmodule NimbleTemplate.Projects.ProjectTest do
         assert project.live_project? == false
         assert project.api_project? == true
       end)
+    end
+  end
+
+  describe "prepend_optional_addon/2" do
+    test "prepends the given addon to the project" do
+      project =
+        Project.new()
+        |> Project.prepend_optional_addon(FirstAddon)
+        |> Project.prepend_optional_addon(SecondAddon)
+
+      assert project.optional_addons == [SecondAddon, FirstAddon]
     end
   end
 end

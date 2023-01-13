@@ -42,7 +42,9 @@ defmodule Mix.Tasks.NimbleTemplate.Gen do
 
     {:ok, _} = Application.ensure_all_started(:httpoison)
 
-    Template.apply(Project.new(opts))
+    opts
+    |> Project.new()
+    |> Template.apply!()
   end
 
   defp parse_opts(args) do

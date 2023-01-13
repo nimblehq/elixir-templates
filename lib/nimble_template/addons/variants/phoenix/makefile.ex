@@ -4,8 +4,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Makefile do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
-    Generator.copy_file([{:text, "Makefile", "Makefile"}])
+  def do_apply!(%Project{} = project, _opts) do
+    Generator.copy_file!([{:text, "Makefile", "Makefile"}])
 
     project
   end

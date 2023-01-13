@@ -4,37 +4,38 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
+  def do_apply!(%Project{} = project, _opts) do
     project
-    |> edit_files()
-    |> copy_files()
+    |> edit_files!()
+    |> copy_files!()
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files!(%Project{} = project) do
     project
-    |> edit_package()
-    |> edit_mix()
-    |> edit_phoenix_watcher()
+    |> edit_package!()
+    |> edit_mix!()
+    |> edit_phoenix_watcher!()
 
     project
   end
 
-  defp edit_package(project) do
-    Generator.replace_content(
+  defp edit_package!(project) do
+    Generator.replace_content!(
       "assets/package.json",
       """
         "devDependencies": {
       """,
       """
         "devDependencies": {
-          "postcss": "8.4.12",
+          "postcss": "8.4.19",
+          "postcss-scss": "4.0.6",
           "postcss-cli": "9.1.0",
           "postcss-load-config": "3.1.4",
           "autoprefixer": "10.4.5",
       """
     )
 
-    Generator.replace_content(
+    Generator.replace_content!(
       "assets/package.json",
       """
         "scripts": {
@@ -49,8 +50,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
     project
   end
 
-  defp edit_mix(project) do
-    Generator.replace_content(
+  defp edit_mix!(project) do
+    Generator.replace_content!(
       "mix.exs",
       """
             "assets.deploy": ["esbuild app --minify", "phx.digest"]
@@ -67,8 +68,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
     project
   end
 
-  defp edit_phoenix_watcher(project) do
-    Generator.replace_content(
+  defp edit_phoenix_watcher!(project) do
+    Generator.replace_content!(
       "config/dev.exs",
       """
         watchers: [
@@ -86,8 +87,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
     project
   end
 
-  defp copy_files(%Project{} = project) do
-    Generator.copy_file([{:text, "assets/postcss.config.js", "assets/postcss.config.js"}])
+  defp copy_files!(%Project{} = project) do
+    Generator.copy_file!([{:text, "assets/postcss.config.js", "assets/postcss.config.js"}])
 
     project
   end

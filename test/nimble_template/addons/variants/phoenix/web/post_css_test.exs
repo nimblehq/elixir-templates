@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     @describetag required_addons: [
                    :"Phoenix.Web.NodePackage",
                    :"Phoenix.Web.EsBuild"
@@ -10,8 +10,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.PostCSS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.PostCSS.apply!(project)
 
         assert_file("mix.exs", fn file ->
           assert file =~ """
@@ -29,8 +29,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.PostCSS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.PostCSS.apply!(project)
 
         assert_file("config/dev.exs", fn file ->
           assert file =~ """
@@ -49,13 +49,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.PostCSS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.PostCSS.apply!(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
                    "devDependencies": {
-                     "postcss": "8.4.12",
+                     "postcss": "8.4.19",
+                     "postcss-scss": "4.0.6",
                      "postcss-cli": "9.1.0",
                      "postcss-load-config": "3.1.4",
                      "autoprefixer": "10.4.5",
@@ -68,8 +69,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.PostCSS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.PostCSS.apply!(project)
 
         assert_file("assets/package.json", fn file ->
           assert file =~ """
@@ -85,8 +86,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.PostCSS.apply(project)
+      in_test_project!(test_project_path, fn ->
+        WebAddons.PostCSS.apply!(project)
 
         assert_file("assets/postcss.config.js")
       end)

@@ -4,8 +4,8 @@ defmodule NimbleTemplate.Addons.Dialyxir do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
-    Generator.inject_mix_dependency(
+  def do_apply!(%Project{} = project, _opts) do
+    Generator.inject_mix_dependency!(
       {:dialyxir, latest_package_version(:dialyxir), only: [:dev], runtime: false}
     )
 

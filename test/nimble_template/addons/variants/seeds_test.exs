@@ -1,13 +1,13 @@
 defmodule NimbleTemplate.Addons.Phoenix.SeedsTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     test "adds the condition into the seeds.exs file", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.Seeds.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.Seeds.apply!(project)
 
         assert_file("priv/repo/seeds.exs", fn file ->
           assert file =~ """

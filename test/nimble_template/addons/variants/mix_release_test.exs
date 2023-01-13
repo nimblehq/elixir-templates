@@ -1,13 +1,13 @@
 defmodule NimbleTemplate.Addons.Phoenix.MixReleaseTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2" do
+  describe "#apply!/2" do
     test "creates the lib/nimble_template/release_tasks.ex", %{
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.MixRelease.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.MixRelease.apply!(project)
 
         assert_file("lib/nimble_template/release_tasks.ex", fn file ->
           assert file =~ """
@@ -37,8 +37,8 @@ defmodule NimbleTemplate.Addons.Phoenix.MixReleaseTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        PhoenixAddons.MixRelease.apply(project)
+      in_test_project!(test_project_path, fn ->
+        PhoenixAddons.MixRelease.apply!(project)
 
         assert_file("config/runtime.exs", fn file ->
           assert file =~ """

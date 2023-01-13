@@ -3,25 +3,49 @@ defmodule NimbleTemplate.CredoHelperTest do
 
   alias NimbleTemplate.CredoHelper
 
-  describe "disable_rule/2" do
+  describe "suppress_credo_warnings_for_base_project/1" do
     test "prepends credo rule disabling in the given file", %{
-      test_project_path: test_project_path
+      test_project_path: test_project_path,
+      project: project
     } do
-      in_test_project(test_project_path, fn ->
-        File.write!("sample_module.exs", """
-        defmodule SampleModule do
-          def foo, do: "bar"
-        end
-        """)
+      in_test_project!(test_project_path, fn ->
+        CredoHelper.suppress_credo_warnings_for_base_project(project)
 
-        CredoHelper.disable_rule("sample_module.exs", "Credo.Check.Readability.RedundantBlankLines")
+        assert_file("#{test_project_path}/lib/nimble_template.ex", fn file ->
+          assert file =~ """
+                 # credo:disable-for-this-file CompassCredoPlugin.Check.DoSingleExpression
+                 """
+        end)
+      end)
+    end
+  end
 
-        assert_file("sample_module.exs", fn file ->
-          assert file == """
-                 # credo:disable-for-this-file Credo.Check.Readability.RedundantBlankLines
-                 defmodule SampleModule do
-                   def foo, do: "bar"
-                 end
+  describe "suppress_credo_warnings_for_phoenix_project/1" do
+    test "prepends credo rule disabling in the given file", %{
+      test_project_path: test_project_path,
+      project: project
+    } do
+      in_test_project!(test_project_path, fn ->
+        CredoHelper.suppress_credo_warnings_for_phoenix_project(project)
+
+        assert_file(
+          "#{test_project_path}/lib/nimble_template_web/controllers/page_controller.ex",
+          fn file ->
+            assert file =~ """
+                   # credo:disable-for-this-file CompassCredoPlugin.Check.DoSingleExpression
+                   """
+          end
+        )
+
+        assert_file("#{test_project_path}/lib/nimble_template_web/telemetry.ex", fn file ->
+          assert file =~ """
+                 # credo:disable-for-this-file CompassCredoPlugin.Check.DoSingleExpression
+                 """
+        end)
+
+        assert_file("#{test_project_path}/lib/nimble_template_web/views/error_view.ex", fn file ->
+          assert file =~ """
+                 # credo:disable-for-this-file CompassCredoPlugin.Check.DoSingleExpression
                  """
         end)
       end)

@@ -157,12 +157,21 @@
         # Controversial and experimental checks (opt-in, just replace `false` with `[]`)
         #
         {Credo.Check.Readability.StrictModuleLayout,
-         [
-           order:
-             ~w/shortdoc moduledoc behaviour use import alias require module_attribute defstruct callback public_fun private_fun/a,
-           ignore: ~w/callback_impl/a
-         ]},
-        {Credo.Check.Consistency.MultiAliasImportRequireUse, []},
+          [
+            order:
+              ~w/shortdoc moduledoc behaviour use import alias require module_attribute defstruct callback public_fun private_fun/a,
+            ignore: ~w/callback_impl/a
+          ]},
+        {Credo.Check.Consistency.MultiAliasImportRequireUse,
+          files: %{
+            excluded: [
+              "<%= base_entry_path %>",
+              "<%= web_entry_path %>",
+              "test/support/conn_case.ex",
+              "test/support/data_case.ex",
+              "test/support/feature_case.ex"
+            ]
+          }},
         {Credo.Check.Consistency.UnusedVariableNames, false},
         {Credo.Check.Design.DuplicatedCode, files: %{excluded: ["**/*_test.exs"]}},
         {Credo.Check.Readability.AliasAs, false},

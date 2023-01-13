@@ -4,27 +4,27 @@ defmodule NimbleTemplate.Addons.Mimic do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply(%Project{} = project, _opts) do
-    edit_files(project)
+  def do_apply!(%Project{} = project, _opts) do
+    edit_files!(project)
   end
 
-  defp edit_files(%Project{} = project) do
+  defp edit_files!(%Project{} = project) do
     project
-    |> inject_mix_dependency()
-    |> edit_test_helper()
-    |> edit_case()
-
-    project
-  end
-
-  defp inject_mix_dependency(project) do
-    Generator.inject_mix_dependency({:mimic, latest_package_version(:mimic), only: :test})
+    |> inject_mix_dependency!()
+    |> edit_test_helper!()
+    |> edit_case!()
 
     project
   end
 
-  defp edit_test_helper(project) do
-    Generator.replace_content(
+  defp inject_mix_dependency!(project) do
+    Generator.inject_mix_dependency!({:mimic, latest_package_version(:mimic), only: :test})
+
+    project
+  end
+
+  defp edit_test_helper!(project) do
+    Generator.replace_content!(
       "test/test_helper.exs",
       """
       ExUnit.start()
@@ -39,8 +39,8 @@ defmodule NimbleTemplate.Addons.Mimic do
     project
   end
 
-  defp edit_case(%Project{mix_project?: false} = project) do
-    Generator.inject_content(
+  defp edit_case!(%Project{mix_project?: false} = project) do
+    Generator.inject_content!(
       "test/support/conn_case.ex",
       """
           quote do
@@ -51,7 +51,7 @@ defmodule NimbleTemplate.Addons.Mimic do
       """
     )
 
-    Generator.inject_content(
+    Generator.inject_content!(
       "test/support/data_case.ex",
       """
           quote do
@@ -65,7 +65,7 @@ defmodule NimbleTemplate.Addons.Mimic do
     project
   end
 
-  defp edit_case(project) do
+  defp edit_case!(project) do
     project
   end
 end

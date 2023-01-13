@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
   use NimbleTemplate.AddonCase, async: false
 
-  describe "#apply/2 given no Nimble CSS and Nimble JS structure" do
+  describe "#apply!/2 given no Nimble CSS and Nimble JS structure" do
     @describetag required_addons: [
                    :TestEnv,
                    :"Phoenix.Web.NodePackage",
@@ -9,10 +9,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :"Phoenix.Web.PostCSS",
                    :"Phoenix.Web.DartSass"
                  ]
+    @describetag mock_latest_package_versions: [{:dart_sass, "0.26.2"}]
 
     test "copies Bootstrap vendor file", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: false,
           with_nimble_js_addon: false
         })
@@ -25,8 +26,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: false,
           with_nimble_js_addon: false
         })
@@ -45,8 +46,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_js_addon: false,
           with_nimble_css_addon: false
         })
@@ -63,8 +64,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: false,
           with_nimble_js_addon: false
         })
@@ -83,8 +84,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: false,
           with_nimble_js_addon: false
         })
@@ -99,8 +100,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: false,
           with_nimble_js_addon: false
         })
@@ -121,7 +122,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
     end
   end
 
-  describe "#apply/2 given Nimble CSS and Nimble JS structure" do
+  describe "#apply!/2 given Nimble CSS and Nimble JS structure" do
     @describetag required_addons: [
                    :TestEnv,
                    :"Phoenix.Web.NodePackage",
@@ -133,10 +134,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
                    :"Phoenix.Web.NimbleCSS",
                    :"Phoenix.Web.NimbleJS"
                  ]
+    @describetag mock_latest_package_versions: [{:dart_sass, "0.26.2"}]
 
     test "copies Bootstrap vendor file", %{project: project, test_project_path: test_project_path} do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: true,
           with_nimble_js_addon: true
         })
@@ -149,8 +151,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: true,
           with_nimble_js_addon: true
         })
@@ -169,8 +171,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: true,
           with_nimble_js_addon: true
         })
@@ -187,8 +189,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: true,
           with_nimble_js_addon: true
         })
@@ -207,8 +209,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: true,
           with_nimble_js_addon: true
         })
@@ -223,8 +225,8 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.BootstrapTest do
       project: project,
       test_project_path: test_project_path
     } do
-      in_test_project(test_project_path, fn ->
-        WebAddons.Bootstrap.apply(project, %{
+      in_test_project!(test_project_path, fn ->
+        WebAddons.Bootstrap.apply!(project, %{
           with_nimble_css_addon: true,
           with_nimble_js_addon: true
         })
