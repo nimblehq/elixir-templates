@@ -17,8 +17,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
     |> edit_app_scss!(opts)
     |> edit_vendor_index!(opts)
     |> edit_css_variables!(opts)
-
-    project
   end
 
   defp copy_files!(%Project{} = project) do
