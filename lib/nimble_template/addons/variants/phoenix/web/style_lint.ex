@@ -14,8 +14,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.StyleLint do
     project
     |> edit_assets_package!()
     |> edit_mix!()
-
-    project
   end
 
   defp copy_files!(%Project{} = project) do

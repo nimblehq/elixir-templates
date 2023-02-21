@@ -108,8 +108,6 @@ defmodule NimbleTemplate.Addons.Github do
     project
     |> copy_wiki_files!()
     |> append_wiki_into_readme!()
-
-    project
   end
 
   defp copy_wiki_files!(

@@ -15,16 +15,12 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
     |> edit_assets_package!()
     |> edit_web_entry_point!()
     |> edit_wiki_sidebar!()
-
-    project
   end
 
   defp copy_files!(%Project{} = project) do
     project
     |> copy_icon_helper!()
     |> copy_wiki_documentation!()
-
-    project
   end
 
   defp edit_assets_package!(%Project{} = project) do

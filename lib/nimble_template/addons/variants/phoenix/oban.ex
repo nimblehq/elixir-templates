@@ -31,8 +31,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Oban do
     |> edit_application_ex!()
     |> edit_config!()
     |> edit_test_config!()
-
-    project
   end
 
   defp create_folders!(%Project{otp_app: otp_app} = project) do

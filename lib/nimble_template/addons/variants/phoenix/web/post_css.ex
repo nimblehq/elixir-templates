@@ -15,8 +15,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
     |> edit_package!()
     |> edit_mix!()
     |> edit_phoenix_watcher!()
-
-    project
   end
 
   defp edit_package!(project) do

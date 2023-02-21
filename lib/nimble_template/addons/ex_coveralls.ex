@@ -33,8 +33,6 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
     project
     |> inject_mix_dependency!()
     |> edit_mix!()
-
-    project
   end
 
   defp edit_files!(%Project{} = project) do
@@ -42,8 +40,6 @@ defmodule NimbleTemplate.Addons.ExCoveralls do
     |> inject_mix_dependency!()
     |> edit_mix!()
     |> edit_web_router!()
-
-    project
   end
 
   defp inject_mix_dependency!(project) do

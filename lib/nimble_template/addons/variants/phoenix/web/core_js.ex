@@ -44,7 +44,5 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreJS do
     project
     |> edit_package_json!()
     |> edit_app_js!()
-
-    project
   end
 end
