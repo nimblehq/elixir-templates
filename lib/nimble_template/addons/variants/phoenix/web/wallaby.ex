@@ -60,8 +60,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
     |> edit_endpoint!()
     |> edit_test_config!()
     |> edit_gitignore!()
-
-    project
   end
 
   defp inject_mix_dependency!(%Project{} = project) do

@@ -29,8 +29,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     |> edit_assets_package!()
     |> edit_mix!()
     |> edit_app_js!()
-
-    project
   end
 
   defp copy_files!(%Project{} = project) do

@@ -17,8 +17,6 @@ defmodule NimbleTemplate.Addons.Phoenix.ExVCR do
     |> inject_mix_dependency!()
     |> edit_test_config!()
     |> edit_case!()
-
-    project
   end
 
   defp inject_mix_dependency!(%Project{} = project) do

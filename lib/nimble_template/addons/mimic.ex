@@ -13,8 +13,6 @@ defmodule NimbleTemplate.Addons.Mimic do
     |> inject_mix_dependency!()
     |> edit_test_helper!()
     |> edit_case!()
-
-    project
   end
 
   defp inject_mix_dependency!(project) do

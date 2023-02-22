@@ -38,8 +38,6 @@ defmodule NimbleTemplate.Addons.Phoenix.ExMachina do
     |> edit_mix_elixirc_paths!()
     |> edit_test_helper!()
     |> import_factory!()
-
-    project
   end
 
   defp inject_mix_dependency!(%Project{} = project) do

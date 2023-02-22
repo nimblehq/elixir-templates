@@ -8,8 +8,6 @@ defmodule NimbleTemplate.Addons.Phoenix.MixRelease do
     project
     |> copy_files!()
     |> edit_files!()
-
-    project
   end
 
   defp copy_files!(

@@ -14,8 +14,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Prettier do
     project
     |> edit_npm_dev_dependencies!()
     |> edit_mix!()
-
-    project
   end
 
   defp edit_npm_dev_dependencies!(%Project{} = project) do
