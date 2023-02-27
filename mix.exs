@@ -30,12 +30,12 @@ defmodule NimbleTemplate.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.23", only: :dev, runtime: false},
-      {:httpoison, "~> 1.7"},
-      {:jason, "~> 1.2"},
-      {:mimic, "~> 1.3", only: :test},
-      {:phoenix, "~> 1.6.11"}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false},
+      {:httpoison, "~> 2.0"},
+      {:jason, "~> 1.4"},
+      {:mimic, "~> 1.7", only: :test},
+      {:phoenix, "~> 1.7.0"}
     ]
   end
 
