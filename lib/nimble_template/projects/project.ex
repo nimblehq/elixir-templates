@@ -1,7 +1,7 @@
 defmodule NimbleTemplate.Projects.Project do
   @moduledoc false
 
-  @alpine_version "3.17.0"
+  @alpine_version "3.15.6"
   @elixir_version "1.14.3"
   @erlang_version "25.2.3"
   @node_asdf_version "18.14.2"
