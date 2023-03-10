@@ -8,6 +8,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.ErrorView do
     # TODO: Revisit on the next PR
     project
   end
+
   # def do_apply!(%Project{} = project, _opts) do
   #   project
   #   |> delete_files!()

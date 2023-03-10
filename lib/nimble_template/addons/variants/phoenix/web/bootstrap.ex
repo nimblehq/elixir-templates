@@ -7,6 +7,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
   def do_apply!(%Project{} = project, _opts) do
     project
   end
+
   # TODO: Enable Bootstrap on the next PR
   # def do_apply!(%Project{} = project, opts) do
   #   project
@@ -105,7 +106,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
   #     // Shared variables           //
   #     ////////////////////////////////
 
-
   #     ////////////////////////////////
   #     // Custom Bootstrap variables //
   #     ////////////////////////////////
@@ -122,7 +122,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Bootstrap do
   #     ////////////////////////////////
   #     // Shared variables           //
   #     ////////////////////////////////
-
 
   #     ////////////////////////////////
   #     // Custom Bootstrap variables //
