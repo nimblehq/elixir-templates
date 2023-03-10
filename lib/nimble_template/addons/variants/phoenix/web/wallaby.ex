@@ -63,7 +63,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
   end
 
   defp inject_mix_dependency!(%Project{} = project) do
-    Generator.inject_mix_dependency!({:httpoison, latest_package_version(:httpoison)})
+    Generator.inject_mix_dependency!({:httpoison, "1.8.2"})
 
     Generator.inject_mix_dependency!(
       {:wallaby, latest_package_version(:wallaby), only: :test, runtime: false}
