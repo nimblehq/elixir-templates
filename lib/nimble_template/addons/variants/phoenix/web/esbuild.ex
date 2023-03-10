@@ -19,7 +19,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsBuild do
   end
 
   defp edit_mix!(project) do
-    Generator.replace_content!("mix.exs", "esbuild default", "esbuild app")
+    Generator.replace_content_all("mix.exs", "esbuild default", "esbuild app")
 
     project
   end
