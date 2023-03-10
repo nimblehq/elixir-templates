@@ -4,7 +4,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreComponents do
   use NimbleTemplate.Addons.Addon
 
   @impl true
-  def do_apply!(%Project{web_path: web_path} = project, _opts) do
+  def do_apply!(%Project{web_path: web_path, web_module: web_module} = project, _opts) do
     Generator.replace_content_all(
       "#{web_path}/components/core_components.ex",
       "Phoenix.HTML.Form.",
@@ -15,10 +15,10 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.CoreComponents do
       "#{web_path}/components/core_components.ex",
       """
         alias Phoenix.LiveView.JS
-        import SampleProjectWeb.Gettext
+        import #{web_module}.Gettext
       """,
       """
-        import SampleProjectWeb.Gettext
+        import #{web_module}.Gettext
 
         alias Phoenix.HTML.Form
         alias Phoenix.LiveView.JS
