@@ -13,8 +13,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlug do
   defp copy_files!(
          %Project{
            web_module: web_module,
-           web_path: web_path,
-           web_test_path: web_test_path
+           web_path: web_path
          } = project
        ) do
     binding = [
