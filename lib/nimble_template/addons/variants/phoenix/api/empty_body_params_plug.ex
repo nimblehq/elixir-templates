@@ -21,11 +21,16 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.EmptyBodyParamsPlug do
       web_module: web_module
     ]
 
+    # files = [
+    #   {:eex, "lib/otp_app_web/plugs/check_empty_body_params_plug.ex.eex",
+    #    "#{web_path}/plugs/check_empty_body_params_plug.ex"},
+    #   {:eex, "test/otp_app_web/plugs/check_empty_body_params_plug_test.exs.eex",
+    #    "#{web_test_path}/plugs/check_empty_body_params_plug_test.exs"}
+    # ]
+    # TODO: Update the test with new ErrorView
     files = [
       {:eex, "lib/otp_app_web/plugs/check_empty_body_params_plug.ex.eex",
-       "#{web_path}/plugs/check_empty_body_params_plug.ex"},
-      {:eex, "test/otp_app_web/plugs/check_empty_body_params_plug_test.exs.eex",
-       "#{web_test_path}/plugs/check_empty_body_params_plug_test.exs"}
+       "#{web_path}/plugs/check_empty_body_params_plug.ex"}
     ]
 
     Generator.copy_file!(files, binding)
