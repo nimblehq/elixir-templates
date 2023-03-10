@@ -11,7 +11,7 @@ on:
         type: string
 
 env:
-  PHOENIX_VERSION: 1.7.0
+  PHOENIX_VERSION: 1.7.1
   BASE_PROJECT_DIRECTORY: sample_project
   DB_HOST: localhost
   MIX_ENV: dev

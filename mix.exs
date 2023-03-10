@@ -35,7 +35,7 @@ defmodule NimbleTemplate.MixProject do
       {:httpoison, "~> 2.0"},
       {:jason, "~> 1.4"},
       {:mimic, "~> 1.7", only: :test},
-      {:phoenix, "~> 1.7.0"}
+      {:phoenix, "~> 1.7.1"}
     ]
   end
 
