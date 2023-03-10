@@ -63,6 +63,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.Wallaby do
   end
 
   defp inject_mix_dependency!(%Project{} = project) do
+    # TODO: Remove this once Wallaby allow the httpoison 2.x
     Generator.inject_mix_dependency!({:httpoison, "~> 1.8.2", override: true})
 
     Generator.inject_mix_dependency!(
