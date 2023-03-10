@@ -36,7 +36,7 @@ Modify the path to locate the `elixir-templates` directory. For example `~/elixi
 
 - Web project: `make create_phoenix_project PROJECT_DIRECTORY=sample_project OPTIONS="--no-live"`
 - Live project: `make create_phoenix_project PROJECT_DIRECTORY=sample_project OPTIONS=""`
-- API project: `make create_phoenix_project PROJECT_DIRECTORY=sample_project OPTIONS="--no-html --no-assets --no-live"`
+- API project: `make create_phoenix_project PROJECT_DIRECTORY=sample_project OPTIONS="--no-html --no-assets"`
 
 3. Answer the prompt `Fetch and install dependencies? [Yn]` with `n` (not install)
 
