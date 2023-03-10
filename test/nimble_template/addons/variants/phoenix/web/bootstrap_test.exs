@@ -11,7 +11,8 @@
 #                  ]
 #     @describetag mock_latest_package_versions: [{:dart_sass, "0.26.2"}]
 
-#     test "copies Bootstrap vendor file", %{project: project, test_project_path: test_project_path} do
+#     test "copies Bootstrap vendor file",
+# %{project: project, test_project_path: test_project_path} do
 #       in_test_project!(test_project_path, fn ->
 #         WebAddons.Bootstrap.apply!(project, %{
 #           with_nimble_css_addon: false,
@@ -135,7 +136,8 @@
 #                  ]
 #     @describetag mock_latest_package_versions: [{:dart_sass, "0.26.2"}]
 
-#     test "copies Bootstrap vendor file", %{project: project, test_project_path: test_project_path} do
+#     test "copies Bootstrap vendor file", %{project: project,
+# test_project_path: test_project_path} do
 #       in_test_project!(test_project_path, fn ->
 #         WebAddons.Bootstrap.apply!(project, %{
 #           with_nimble_css_addon: true,
