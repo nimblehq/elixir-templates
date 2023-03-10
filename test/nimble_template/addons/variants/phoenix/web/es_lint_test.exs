@@ -82,26 +82,4 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLintTest do
       end)
     end
   end
-
-  describe "#apply!/2 to a Live project" do
-    @describetag live_project?: true
-    @describetag required_addons: [:TestEnv, :"Phoenix.Web.NodePackage"]
-
-    test "updates the assets/js/app.js", %{
-      project: project,
-      test_project_path: test_project_path
-    } do
-      in_test_project!(test_project_path, fn ->
-        WebAddons.EsLint.apply!(project)
-
-        assert_file("assets/js/app.js", fn file ->
-          assert file =~
-                   "window.addEventListener(\"phx:page-loading-start\", _info => topbar.show())"
-
-          assert file =~
-                   "window.addEventListener(\"phx:page-loading-stop\", _info => topbar.hide())"
-        end)
-      end)
-    end
-  end
 end

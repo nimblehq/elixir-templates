@@ -42,12 +42,6 @@ defmodule NimbleTemplate.CredoHelperTest do
                  # credo:disable-for-this-file CompassCredoPlugin.Check.DoSingleExpression
                  """
         end)
-
-        assert_file("#{test_project_path}/lib/nimble_template_web/views/error_view.ex", fn file ->
-          assert file =~ """
-                 # credo:disable-for-this-file CompassCredoPlugin.Check.DoSingleExpression
-                 """
-        end)
       end)
     end
   end

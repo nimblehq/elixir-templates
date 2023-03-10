@@ -53,14 +53,14 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.SvgSprite do
     Generator.replace_content!(
       "#{web_path}.ex",
       """
-            # Include shared imports and aliases for views
-            unquote(view_helpers())
+            # HTML escaping functionality
+            import Phoenix.HTML
       """,
       """
-            import #{web_module}.IconHelper
+            # HTML escaping functionality
+            import Phoenix.HTML
 
-            # Include shared imports and aliases for views
-            unquote(view_helpers())
+            import #{web_module}.IconHelper
       """
     )
 
