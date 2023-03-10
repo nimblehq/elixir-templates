@@ -11,7 +11,7 @@
 5. Edit `mix.exs` file and add this line to the dependencies.
 
 ```elixir
-{:nimble_template, "~> 3.0", path: "~/elixir-templates", only: :dev, runtime: false}
+{:nimble_template, "~> 4.7", path: "~/elixir-templates", only: :dev, runtime: false}
 ```
 
 Modify the path to locate the `elixir-templates` directory. For example `~/elixir-templates` if inside the home directory.
