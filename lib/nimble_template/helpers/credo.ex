@@ -24,7 +24,7 @@ defmodule NimbleTemplate.CredoHelper do
 
     disable_on_core_components(project)
 
-    edit_web_entry(project)
+    disable_on_web_entry(project)
   end
 
   @spec suppress_credo_warnings_for_phoenix_api_project(Project.t()) :: :ok
@@ -40,6 +40,8 @@ defmodule NimbleTemplate.CredoHelper do
     |> disable_rules(@do_single_expression_rule_name)
 
     disable_on_core_components(project)
+
+    disable_on_web_entry(project)
   end
 
   defp get_files_containing_single_expression(%Project{
@@ -92,40 +94,12 @@ defmodule NimbleTemplate.CredoHelper do
     end
   end
 
-  defp edit_web_entry(%Project{web_path: web_path, web_module: web_module} = project) do
-    Generator.delete_content!(
+  defp disable_on_web_entry(%Project{web_path: web_path}) do
+    Generator.prepend_content(
       "#{web_path}.ex",
       """
-        def verified_routes do
-          quote do
-            use Phoenix.VerifiedRoutes,
-              endpoint: #{web_module}.Endpoint,
-              router: #{web_module}.Router,
-              statics: #{web_module}.static_paths()
-          end
-        end
+      # credo:disable-for-this-file Credo.Check.Readability.StrictModuleLayout
       """
     )
-
-    Generator.replace_content!(
-      "#{web_path}.ex",
-      """
-        defp html_helpers do
-      """,
-      """
-        def verified_routes do
-          quote do
-            use Phoenix.VerifiedRoutes,
-              endpoint: #{web_module}.Endpoint,
-              router: #{web_module}.Router,
-              statics: #{web_module}.static_paths()
-          end
-        end
-
-        defp html_helpers do
-      """
-    )
-
-    project
   end
 end
