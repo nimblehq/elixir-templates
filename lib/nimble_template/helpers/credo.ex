@@ -49,8 +49,7 @@ defmodule NimbleTemplate.CredoHelper do
       "#{web_path}/controllers/page_controller.ex",
       "#{web_path}/telemetry.ex",
       "#{web_path}/controllers/error_json.ex",
-      "#{web_path}/controllers/error_html.ex",
-      "#{web_path}/components/core_components.ex"
+      "#{web_path}/controllers/error_html.ex"
     ]
   end
 
