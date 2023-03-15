@@ -13,7 +13,6 @@ defmodule NimbleTemplate.Templates.Phoenix.Web.Template do
   defp apply_default_web_addons(project) do
     project
     |> Web.NodePackage.apply!()
-    |> Web.CoreComponents.apply!()
     |> Web.Assets.apply!()
     |> Web.CoreJS.apply!()
     |> Web.Prettier.apply!()
