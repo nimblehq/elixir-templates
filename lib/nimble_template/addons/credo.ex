@@ -79,7 +79,7 @@ defmodule NimbleTemplate.Addons.Credo do
       ""
     )
 
-    Generator.replace_content!(
+    Generator.replace_content(
       "#{web_path}.ex",
       """
         defp html_helpers do
