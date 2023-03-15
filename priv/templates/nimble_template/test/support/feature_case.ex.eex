@@ -8,6 +8,7 @@ defmodule <%= web_module %>.FeatureCase do
 <% end %>
       use Wallaby.Feature
       use Mimic
+      use <%= web_module %>, :verified_routes
 
       import <%= base_module %>.Factory
       import <%= web_module %>.Gettext

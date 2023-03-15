@@ -62,9 +62,9 @@ defmodule NimbleTemplate.Addons.Credo do
   end
 
   defp edit_web_entry!(
-         %Project{web_path: web_path, web_module: web_module, web_project?: true} = project
+         %Project{web_path: web_path, web_module: web_module, mix_project?: false} = project
        ) do
-    Generator.delete_content!(
+    Generator.replace_content(
       "#{web_path}.ex",
       """
         def verified_routes do
@@ -75,7 +75,8 @@ defmodule NimbleTemplate.Addons.Credo do
               statics: #{web_module}.static_paths()
           end
         end
-      """
+      """,
+      ""
     )
 
     Generator.replace_content!(
