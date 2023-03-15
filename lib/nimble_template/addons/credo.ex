@@ -33,6 +33,7 @@ defmodule NimbleTemplate.Addons.Credo do
     project
     |> inject_mix_dependency!()
     |> edit_mix!()
+    |> edit_web_entry!()
   end
 
   defp inject_mix_dependency!(project) do
@@ -57,6 +58,49 @@ defmodule NimbleTemplate.Addons.Credo do
       """
     )
 
+    project
+  end
+
+  defp edit_web_entry!(
+         %Project{web_path: web_path, web_module: web_module, web_project?: true} = project
+       ) do
+    Generator.delete_content!(
+      "#{web_path}.ex",
+      """
+        def verified_routes do
+          quote do
+            use Phoenix.VerifiedRoutes,
+              endpoint: #{web_module}.Endpoint,
+              router: #{web_module}.Router,
+              statics: #{web_module}.static_paths()
+          end
+        end
+      """
+    )
+
+    Generator.replace_content!(
+      "#{web_path}.ex",
+      """
+        defp html_helpers do
+      """,
+      """
+        def verified_routes do
+          quote do
+            use Phoenix.VerifiedRoutes,
+              endpoint: #{web_module}.Endpoint,
+              router: #{web_module}.Router,
+              statics: #{web_module}.static_paths()
+          end
+        end
+
+        defp html_helpers do
+      """
+    )
+
+    project
+  end
+
+  defp edit_web_entry!(project) do
     project
   end
 end

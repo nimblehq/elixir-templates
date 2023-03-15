@@ -2,6 +2,8 @@ defmodule NimbleTemplate.CredoHelper do
   alias NimbleTemplate.Generator
   alias NimbleTemplate.Projects.Project
 
+  # TODO: Move this to the Credo Addon
+
   @do_single_expression_rule_name "CompassCredoPlugin.Check.DoSingleExpression"
   @single_module_file_rule_name "CompassCredoPlugin.Check.SingleModuleFile"
 
@@ -19,6 +21,8 @@ defmodule NimbleTemplate.CredoHelper do
     project
     |> get_files_containing_single_expression()
     |> disable_rules(@do_single_expression_rule_name)
+
+    disable_on_core_components(project)
   end
 
   @spec suppress_credo_warnings_for_phoenix_api_project(Project.t()) :: :ok
@@ -32,6 +36,8 @@ defmodule NimbleTemplate.CredoHelper do
     project
     |> get_files_containing_single_expression()
     |> disable_rules(@do_single_expression_rule_name)
+
+    disable_on_core_components(project)
   end
 
   defp get_files_containing_single_expression(%Project{
@@ -68,6 +74,20 @@ defmodule NimbleTemplate.CredoHelper do
       Generator.prepend_content(file_path, """
       # credo:disable-for-this-file #{rule}
       """)
+    end
+  end
+
+  # TODO: Could remove the core_components file as we might not need it
+  defp disable_on_core_components(%Project{web_path: web_path}) do
+    core_components_path = "#{web_path}/components/core_components.ex"
+
+    if File.exists?(core_components_path) do
+      Generator.prepend_content(
+        core_components_path,
+        """
+        # credo:disable-for-this-file
+        """
+      )
     end
   end
 end
