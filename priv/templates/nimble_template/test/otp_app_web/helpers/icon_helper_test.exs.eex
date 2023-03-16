@@ -8,10 +8,14 @@ defmodule <%= web_module %>.IconHelperTest do
   describe "icon_tag/2" do
     test "renders a svg icon" do
       first_svg_icon =
-        safe_to_string(IconHelper.icon_tag("active", class: "customize-icon-class"))
+        "active"
+        |> IconHelper.icon_tag(class: "customize-icon-class")
+        |> safe_to_string()
 
       second_svg_icon =
-        safe_to_string(IconHelper.icon_tag("icon-lock"))
+        "icon-lock"
+        |> IconHelper.icon_tag()
+        |> safe_to_string()
 
       assert first_svg_icon ==
                "<svg class=\"icon customize-icon-class\"><use xlink:href=\"/images/icon-sprite.svg#icon-priv--static--images--icons--active\"></svg>"
