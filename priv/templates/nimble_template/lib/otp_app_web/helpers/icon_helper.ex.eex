@@ -5,20 +5,17 @@ defmodule <%= web_module %>.IconHelper do
 
   use Phoenix.HTML
 
-  alias <%= web_module %>.Router.Helpers, as: Routes
+  use <%= web_module %>, :verified_routes
 
   @svg_shape_id_prefix "icon-priv--static--images--icons--"
 
-  def icon_tag(conn, icon_file_name, opts \\ []) do
+  def icon_tag(icon_file_name, opts \\ []) do
     classes = "icon " <> Keyword.get(opts, :class, "")
 
     content_tag(:svg, class: classes) do
       tag(:use,
         "xlink:href":
-          Routes.static_path(
-            conn,
-            "/images/icon-sprite.svg#" <> @svg_shape_id_prefix <> icon_file_name
-          )
+        ~p"/images/icon-sprite.svg#" <> "#{@svg_shape_id_prefix}#{icon_file_name}"
       )
     end
   end

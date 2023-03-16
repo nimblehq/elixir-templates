@@ -5,16 +5,16 @@ defmodule <%= web_module %>.IconHelperTest do
 
   alias <%= web_module %>.IconHelper
 
-  describe "icon_tag/3" do
+  describe "icon_tag/2" do
     test "renders a svg icon" do
       first_svg_icon =
-        <%= web_module %>.Endpoint
-        |> IconHelper.icon_tag("active", class: "customize-icon-class")
+        "active"
+        |> IconHelper.icon_tag(class: "customize-icon-class")
         |> safe_to_string()
 
       second_svg_icon =
-        <%= web_module %>.Endpoint
-        |> IconHelper.icon_tag("icon-lock")
+        "icon-lock"
+        |> IconHelper.icon_tag()
         |> safe_to_string()
 
       assert first_svg_icon ==
