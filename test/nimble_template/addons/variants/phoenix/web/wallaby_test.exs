@@ -25,8 +25,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
                        use Mimic
                        use NimbleTemplateWeb, :verified_routes
 
-                       use NimbleTemplateWeb, :verified_routes
-
                        import NimbleTemplate.Factory
                        import NimbleTemplateWeb.Gettext
 
@@ -65,8 +63,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
 
                        use Wallaby.Feature
                        use Mimic
-                       use NimbleTemplateWeb, :verified_routes
-
                        use NimbleTemplateWeb, :verified_routes
 
                        import NimbleTemplate.Factory

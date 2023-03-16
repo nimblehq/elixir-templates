@@ -10,8 +10,6 @@ defmodule <%= web_module %>.FeatureCase do
       use Mimic
       use <%= web_module %>, :verified_routes
 
-      use <%= web_module %>, :verified_routes
-
       import <%= base_module %>.Factory
       import <%= web_module %>.Gettext
 
