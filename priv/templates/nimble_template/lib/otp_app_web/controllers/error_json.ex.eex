@@ -11,6 +11,7 @@ defmodule <%= web_module %>.ErrorJSON do
   # By default, Phoenix returns the status message from
   # the template name. For example, "404.json" becomes
   # "Not Found".
+
   def render(template, assigns) do
     build_error_response(
       code: assigns[:code] || status_code_from_template(template),
@@ -18,7 +19,6 @@ defmodule <%= web_module %>.ErrorJSON do
       message: assigns[:message] || Phoenix.Controller.status_message_from_template(template)
     )
   end
-
 
   defp status_code_from_template(template) do
     template

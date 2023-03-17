@@ -4,11 +4,16 @@ defmodule <%= web_module %>.ErrorJSONTest do
   alias <%= web_module %>.ErrorJSON
 
   test "renders 404" do
-    assert ErrorJSON.render("404.json", %{}) == %{errors: [%{code: :not_found, detail: %{}, message: "Not Found"}]}
+    assert ErrorJSON.render("404.json", []) == %{errors: [%{code: :not_found, detail: %{}, message: "Not Found"}]}
   end
 
   test "renders 500" do
-    assert ErrorJSON.render("500.json", %{}) ==
+    assert ErrorJSON.render("500.json", []) ==
+      %{errors: [%{code: :internal_server_error, detail: %{}, message: "Internal Server Error"}]}
+  end
+
+  test "renders 500 when invalid error number" do
+    assert ErrorJSON.render("99999.json", []) ==
       %{errors: [%{code: :internal_server_error, detail: %{}, message: "Internal Server Error"}]}
   end
 
