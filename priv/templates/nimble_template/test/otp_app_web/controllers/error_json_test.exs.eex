@@ -1,3 +1,4 @@
+# credo:disable-for-this-file CompassCredoPlugin.Check.SingleModuleFile
 defmodule <%= web_module %>.ErrorJSONTest do
   use <%= web_module %>.ConnCase, async: true
 
