@@ -1,4 +1,5 @@
 defmodule <%= web_module %>.ErrorJSON do
+  alias Ecto.Changeset
   alias Plug.Conn.Status
 
   # If you want to customize a particular status code,
@@ -11,6 +12,14 @@ defmodule <%= web_module %>.ErrorJSON do
   # By default, Phoenix returns the status message from
   # the template name. For example, "404.json" becomes
   # "Not Found".
+
+  def render(_template, %{code: code, changeset: %Changeset{} = changeset}) do
+    build_error_response(
+      code: code,
+      detail: translate_errors(changeset),
+      message: build_changeset_error_message(changeset)
+    )
+  end
 
   def render(template, assigns) do
     build_error_response(
@@ -40,5 +49,35 @@ defmodule <%= web_module %>.ErrorJSON do
         }
       ]
     }
+  end
+
+  defp build_changeset_error_message(%Changeset{} = changeset) do
+    changeset
+    |> translate_errors()
+    |> Enum.flat_map(fn {key, messages} ->
+      Enum.map(messages, &"#{Phoenix.Naming.humanize(key)} #{&1}")
+    end)
+    |> to_sentence()
+  end
+
+  defp to_sentence([message]), do: message
+
+  defp to_sentence(messages) do
+    sentence =
+      messages
+      |> Enum.slice(0..(length(messages) - 2))
+      |> Enum.join(", ")
+
+    "#{sentence} and #{List.last(messages)}"
+  end
+
+  defp translate_errors(changeset), do: Changeset.traverse_errors(changeset, &translate_error/1)
+
+  defp translate_error({msg, opts}) do
+    if count = opts[:count] do
+      Gettext.dngettext(AwesomeProjectWeb.Gettext, "errors", msg, msg, count, opts)
+    else
+      Gettext.dgettext(AwesomeProjectWeb.Gettext, "errors", msg, opts)
+    end
   end
 end

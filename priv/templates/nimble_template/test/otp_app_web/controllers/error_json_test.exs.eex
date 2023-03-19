@@ -3,6 +3,35 @@ defmodule <%= web_module %>.ErrorJSONTest do
 
   alias <%= web_module %>.ErrorJSON
 
+  defmodule Device do
+    use Ecto.Schema
+
+    import Ecto.Changeset
+
+    schema "devices" do
+      field :device_id, :string
+      field :operating_system, :string
+      field :device_name, :string
+
+      timestamps()
+    end
+
+    def changeset(device \\ %__MODULE__{}, attrs) do
+      device
+      |> cast(attrs, [
+        :device_id,
+        :operating_system,
+        :device_name
+      ])
+      |> validate_required([
+        :device_id,
+        :operating_system,
+        :device_name
+      ])
+      |> validate_length(:device_name, min: 3)
+    end
+  end
+
   test "renders 404" do
     assert ErrorJSON.render("404.json", []) == %{errors: [%{code: :not_found, detail: %{}, message: "Not Found"}]}
   end
@@ -31,6 +60,45 @@ defmodule <%= web_module %>.ErrorJSONTest do
              %{
                errors: [
                  %{code: :custom_error_code, detail: %{}, message: "Internal Server Error"}
+               ]
+             }
+  end
+
+  test "given error code and an invalid changeset with multiple errors fields, renders error.json" do
+    changeset = Device.changeset(%{})
+    error = %{code: :validation_error, changeset: changeset}
+
+    assert ErrorJSON.render("error.json", error) ==
+             %{
+               errors: [
+                 %{
+                   code: :validation_error,
+                   detail: %{
+                     device_id: ["can't be blank"],
+                     device_name: ["can't be blank"],
+                     operating_system: ["can't be blank"]
+                   },
+                   message:
+                     "Device can't be blank, Device name can't be blank and Operating system can't be blank"
+                 }
+               ]
+             }
+  end
+
+  test "given error code and an invalid changeset with single error field, renders error.json" do
+    changeset =
+      Device.changeset(%{device_id: "12345678-9012", operating_system: "Android", device_name: "A"})
+
+    error = %{code: :validation_error, changeset: changeset}
+
+    assert ErrorJSON.render("error.json", error) ==
+             %{
+               errors: [
+                 %{
+                   code: :validation_error,
+                   detail: %{device_name: ["should be at least 3 character(s)"]},
+                   message: "Device name should be at least 3 character(s)"
+                 }
                ]
              }
   end
