@@ -61,7 +61,7 @@ defmodule NimbleTemplate.CredoHelper do
          web_test_path: web_test_path
        }) do
     [
-      "#{web_test_path}/views/api/error_view_test.exs",
+      "#{web_test_path}/controllers/error_json_test.exs",
       "#{web_test_path}/params/params_validator_test.exs"
     ]
   end
