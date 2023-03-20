@@ -72,5 +72,5 @@ defmodule <%= web_module %>.ErrorJSON do
   end
 
   defp translate_errors(changeset),
-    do: Changeset.traverse_errors(changeset, &CoreComponents.translate_error/1)
+    do: Changeset.traverse_errors(changeset, &<%= web_module %>.CoreComponents.translate_error/1)
 end
