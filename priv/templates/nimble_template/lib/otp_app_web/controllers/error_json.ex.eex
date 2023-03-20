@@ -1,5 +1,4 @@
 defmodule <%= web_module %>.ErrorJSON do
-  alias <%= web_module %>.CoreComponents
   alias Ecto.Changeset
   alias Plug.Conn.Status
 
@@ -72,6 +71,13 @@ defmodule <%= web_module %>.ErrorJSON do
     "#{sentence} and #{List.last(messages)}"
   end
 
-  defp translate_errors(changeset),
-    do: Changeset.traverse_errors(changeset, &CoreComponents.translate_error/1)
+  defp translate_errors(changeset), do: Changeset.traverse_errors(changeset, &translate_error/1)
+
+  defp translate_error({msg, opts}) do
+    if count = opts[:count] do
+      Gettext.dngettext(<%= web_module %>.Gettext, "errors", msg, msg, count, opts)
+    else
+      Gettext.dgettext(<%= web_module %>.Gettext, "errors", msg, opts)
+    end
+  end
 end
