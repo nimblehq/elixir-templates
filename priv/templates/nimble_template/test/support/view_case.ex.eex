@@ -1,0 +1,22 @@
+defmodule <%= web_module %>.ViewCase do
+  use ExUnit.CaseTemplate
+
+  using do
+    quote do
+      use <%= web_module %>, :verified_routes
+      use Phoenix.Component
+      
+      import Mimic
+      import <%= base_module %>.Factory
+      import <%= web_module %>.ViewCase
+      import Phoenix.ConnTest, only: [get: 2, bypass_through: 1]
+
+      # The default endpoint for testing
+      @endpoint <%= web_module %>.Endpoint
+    end
+  end
+
+  setup do
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
+  end
+end
