@@ -4,7 +4,7 @@ defmodule <%= web_module %>.ViewCase do
   using do
     quote do
       use <%= web_module %>, :verified_routes
-      use Phoenix.Component
+      # TODO: use Phoenix.Controller for previous View.render?
       
       import Mimic
       import <%= base_module %>.Factory
