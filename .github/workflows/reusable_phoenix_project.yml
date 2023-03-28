@@ -16,6 +16,10 @@ env:
   DB_HOST: localhost
   MIX_ENV: dev
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   unit_test:
     name: Unit test
@@ -33,11 +37,6 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access_token: ${{ github.token }}
-
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
