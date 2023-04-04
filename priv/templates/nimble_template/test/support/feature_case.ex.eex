@@ -15,7 +15,6 @@ defmodule <%= web_module %>.FeatureCase do
 
       alias <%= base_module %>.Repo
       alias <%= web_module %>.Endpoint
-      alias <%= web_module %>.Router.Helpers, as: Routes
 
       @moduletag :feature_test
     end
