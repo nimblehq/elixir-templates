@@ -1,7 +1,7 @@
-defmodule <%= web_module %>.Api.ErrorViewTest do
-  use <%= web_module %>.ViewCase, async: true
+defmodule <%= web_module %>.ErrorJSONTest do
+  use <%= web_module %>.ConnCase, async: true
 
-  alias <%= web_module %>.Api.ErrorView
+  alias <%= web_module %>.ErrorJSON
 
   defmodule Device do
     use Ecto.Schema
@@ -28,25 +28,26 @@ defmodule <%= web_module %>.Api.ErrorViewTest do
         :operating_system,
         :device_name
       ])
+      |> validate_length(:device_name, min: 3)
     end
   end
 
-  test "renders 404.json" do
-    assert render(ErrorView, "404.json", []) == %{
-             errors: [%{code: :not_found, detail: %{}, message: "Not Found"}]
-           }
+  test "renders 404" do
+    assert ErrorJSON.render("404.json", []) == %{errors: [%{code: :not_found, detail: %{}, message: "Not Found"}]}
   end
 
-  test "renders 500.json" do
-    assert render(ErrorView, "500.json", []) == %{
-             errors: [
-               %{code: :internal_server_error, detail: %{}, message: "Internal Server Error"}
-             ]
-           }
+  test "renders 500" do
+    assert ErrorJSON.render("500.json", []) ==
+      %{errors: [%{code: :internal_server_error, detail: %{}, message: "Internal Server Error"}]}
+  end
+
+  test "renders 500 when invalid error number" do
+    assert ErrorJSON.render("99999.json", []) ==
+      %{errors: [%{code: :internal_server_error, detail: %{}, message: "Internal Server Error"}]}
   end
 
   test "renders custom error message" do
-    assert render(ErrorView, "500.json", status: 500, message: "Something went wrong") ==
+    assert ErrorJSON.render("500.json", status: 500, message: "Something went wrong") ==
              %{
                errors: [
                  %{code: :internal_server_error, detail: %{}, message: "Something went wrong"}
@@ -55,7 +56,7 @@ defmodule <%= web_module %>.Api.ErrorViewTest do
   end
 
   test "renders custom error code" do
-    assert render(ErrorView, "500.json", status: 500, code: :custom_error_code) ==
+    assert ErrorJSON.render("500.json", status: 500, code: :custom_error_code) ==
              %{
                errors: [
                  %{code: :custom_error_code, detail: %{}, message: "Internal Server Error"}
@@ -67,7 +68,7 @@ defmodule <%= web_module %>.Api.ErrorViewTest do
     changeset = Device.changeset(%{})
     error = %{code: :validation_error, changeset: changeset}
 
-    assert render(ErrorView, "error.json", error) ==
+    assert ErrorJSON.render("error.json", error) ==
              %{
                errors: [
                  %{
@@ -85,16 +86,18 @@ defmodule <%= web_module %>.Api.ErrorViewTest do
   end
 
   test "given error code and an invalid changeset with single error field, renders error.json" do
-    changeset = Device.changeset(%{device_id: "12345678-9012", device_name: "Android"})
+    changeset =
+      Device.changeset(%{device_id: "12345678-9012", operating_system: "Android", device_name: "A"})
+
     error = %{code: :validation_error, changeset: changeset}
 
-    assert render(ErrorView, "error.json", error) ==
+    assert ErrorJSON.render("error.json", error) ==
              %{
                errors: [
                  %{
                    code: :validation_error,
-                   detail: %{operating_system: ["can't be blank"]},
-                   message: "Operating system can't be blank"
+                   detail: %{device_name: ["should be at least 3 character(s)"]},
+                   message: "Device name should be at least 3 character(s)"
                  }
                ]
              }

@@ -1,0 +1,83 @@
+defmodule <%= web_module %>.ErrorJSON do
+  alias Ecto.Changeset
+  alias Plug.Conn.Status
+
+  # If you want to customize a particular status code,
+  # you may add your own clauses, such as:
+  #
+  # def render("500.json", _assigns) do
+  #   %{errors: %{detail: "Internal Server Error"}}
+  # end
+
+  # By default, Phoenix returns the status message from
+  # the template name. For example, "404.json" becomes
+  # "Not Found".
+
+  def render(_template, %{code: code, changeset: %Changeset{} = changeset}) do
+    build_error_response(
+      code: code,
+      detail: translate_errors(changeset),
+      message: build_changeset_error_message(changeset)
+    )
+  end
+
+  def render(template, assigns) do
+    build_error_response(
+      code: assigns[:code] || status_code_from_template(template),
+      detail: %{},
+      message: assigns[:message] || Phoenix.Controller.status_message_from_template(template)
+    )
+  end
+
+  defp status_code_from_template(template) do
+    template
+    |> String.split(".")
+    |> hd()
+    |> String.to_integer()
+    |> Status.reason_atom()
+  rescue
+    _ -> :internal_server_error
+  end
+
+  defp build_error_response(code: code, detail: detail, message: message) do
+    %{
+      errors: [
+        %{
+          code: code,
+          detail: detail,
+          message: message
+        }
+      ]
+    }
+  end
+
+  defp build_changeset_error_message(%Changeset{} = changeset) do
+    changeset
+    |> translate_errors()
+    |> Enum.flat_map(fn {key, messages} ->
+      Enum.map(messages, &"#{Phoenix.Naming.humanize(key)} #{&1}")
+    end)
+    |> to_sentence()
+  end
+
+  defp to_sentence([message]), do: message
+
+  defp to_sentence(messages) do
+    sentence =
+      messages
+      |> Enum.slice(0..(length(messages) - 2))
+      |> Enum.join(", ")
+
+    "#{sentence} and #{List.last(messages)}"
+  end
+
+  defp translate_errors(changeset), do: Changeset.traverse_errors(changeset, &translate_error/1)
+
+  defp translate_error({msg, opts}) do
+    if count = opts[:count] do
+      Gettext.dngettext(<%= web_module %>.Gettext, "errors", msg, msg, count, opts)
+    else
+      Gettext.dgettext(<%= web_module %>.Gettext, "errors", msg, opts)
+    end
+  end
+end
