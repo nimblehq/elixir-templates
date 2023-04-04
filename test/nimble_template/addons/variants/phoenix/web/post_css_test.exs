@@ -16,6 +16,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSSTest do
         assert_file("mix.exs", fn file ->
           assert file =~ """
                        "assets.deploy": [
+                         "tailwind default --minify",
                          "esbuild app --minify",
                          "cmd npm run postcss --prefix assets",
                          "phx.digest"

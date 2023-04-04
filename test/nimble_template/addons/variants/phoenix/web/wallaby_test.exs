@@ -23,13 +23,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
 
                        use Wallaby.Feature
                        use Mimic
+                       use NimbleTemplateWeb, :verified_routes
 
                        import NimbleTemplate.Factory
                        import NimbleTemplateWeb.Gettext
 
                        alias NimbleTemplate.Repo
                        alias NimbleTemplateWeb.Endpoint
-                       alias NimbleTemplateWeb.Router.Helpers, as: Routes
 
                        @moduletag :feature_test
                      end
@@ -62,13 +62,13 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.WallabyTest do
 
                        use Wallaby.Feature
                        use Mimic
+                       use NimbleTemplateWeb, :verified_routes
 
                        import NimbleTemplate.Factory
                        import NimbleTemplateWeb.Gettext
 
                        alias NimbleTemplate.Repo
                        alias NimbleTemplateWeb.Endpoint
-                       alias NimbleTemplateWeb.Router.Helpers, as: Routes
 
                        @moduletag :feature_test
                      end

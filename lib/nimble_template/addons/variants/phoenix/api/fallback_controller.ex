@@ -31,24 +31,26 @@ defmodule NimbleTemplate.Addons.Phoenix.Api.FallbackController do
       """
         def controller do
           quote do
-            use Phoenix.Controller, namespace: #{web_module}
+            use Phoenix.Controller,
+              formats: [:html, :json],
+              layouts: [html: #{web_module}.Layouts]
 
             import Plug.Conn
             import #{web_module}.Gettext
 
             alias #{web_module}.ParamsValidator
-            alias #{web_module}.Router.Helpers, as: Routes
       """,
       """
         def controller do
           quote do
-            use Phoenix.Controller, namespace: #{web_module}
+            use Phoenix.Controller,
+              formats: [:html, :json],
+              layouts: [html: #{web_module}.Layouts]
 
             import Plug.Conn
             import #{web_module}.Gettext
 
             alias #{web_module}.ParamsValidator
-            alias #{web_module}.Router.Helpers, as: Routes
 
             action_fallback #{web_module}.Api.FallbackController
       """

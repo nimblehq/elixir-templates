@@ -37,6 +37,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.DartSassTest do
         assert_file("mix.exs", fn file ->
           assert file =~ """
                        "assets.deploy": [
+                         "tailwind default --minify",
                          "esbuild app --minify",
                          "sass app --no-source-map --style=compressed",
                          "cmd npm run postcss --prefix assets",

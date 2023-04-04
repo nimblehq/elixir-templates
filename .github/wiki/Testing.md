@@ -83,7 +83,7 @@ mix phx.new awesome_project
 - API variants do NOT support HTML and Assets configuration.
 
 ```bash
-mix phx.new awesome_project --no-html --no-assets --no-live
+mix phx.new awesome_project --no-html --no-assets
 ```
 
 - Custom project variants allow us to modify the app name or module name.
@@ -108,8 +108,8 @@ Web project
 
 API project
 
-- Standard (`mix phx.new awesome_project --no-html --no-assets --no-live`)
-- Custom (`mix phx.new awesome_project --no-html --no-assets --no-live --module=CustomModuleName --app=custom_otp_app_name`)
+- Standard (`mix phx.new awesome_project --no-html --no-assets`)
+- Custom (`mix phx.new awesome_project --no-html --no-assets --module=CustomModuleName --app=custom_otp_app_name`)
 
 LiveView project
 

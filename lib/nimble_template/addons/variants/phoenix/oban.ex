@@ -102,7 +102,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Oban do
     Generator.inject_content!(
       "config/test.exs",
       """
-      config :logger, level: :warn
+      config :logger, level: :warning
       """,
       """
 

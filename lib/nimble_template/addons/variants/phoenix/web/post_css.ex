@@ -52,10 +52,11 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.PostCSS do
     Generator.replace_content!(
       "mix.exs",
       """
-            "assets.deploy": ["esbuild app --minify", "phx.digest"]
+            "assets.deploy": ["tailwind default --minify", "esbuild app --minify", "phx.digest"]
       """,
       """
             "assets.deploy": [
+              "tailwind default --minify",
               "esbuild app --minify",
               "cmd npm run postcss --prefix assets",
               "phx.digest"

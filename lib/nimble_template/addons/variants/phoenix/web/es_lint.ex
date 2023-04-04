@@ -10,18 +10,6 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     |> copy_files!()
   end
 
-  def edit_app_js!(%Project{live_project?: true} = project) do
-    update_topbar_js_variables!()
-
-    project
-  end
-
-  def edit_app_js!(%Project{web_project?: true} = project) do
-    update_topbar_js_variables!()
-
-    project
-  end
-
   def edit_app_js!(project), do: project
 
   defp edit_files!(%Project{} = project) do
@@ -90,19 +78,5 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsLint do
     )
 
     project
-  end
-
-  defp update_topbar_js_variables! do
-    Generator.replace_content!(
-      "assets/js/app.js",
-      "window.addEventListener(\"phx:page-loading-start\", info => topbar.show())",
-      "window.addEventListener(\"phx:page-loading-start\", _info => topbar.show())"
-    )
-
-    Generator.replace_content!(
-      "assets/js/app.js",
-      "window.addEventListener(\"phx:page-loading-stop\", info => topbar.hide())",
-      "window.addEventListener(\"phx:page-loading-stop\", _info => topbar.hide())"
-    )
   end
 end

@@ -30,3 +30,6 @@ nimble_template-*.tar
 nimble_template.iml
 
 **/tmp
+
+# The sample generated project on local
+sample_project/

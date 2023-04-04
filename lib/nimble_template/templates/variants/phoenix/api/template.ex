@@ -13,7 +13,7 @@ defmodule NimbleTemplate.Templates.Phoenix.Api.Template do
     |> Api.Config.apply!()
     |> Api.EmptyBodyParamsPlug.apply!()
     |> Api.ParamsValidation.apply!()
-    |> Api.ErrorView.apply!()
+    |> Api.ErrorJSON.apply!()
     |> Api.JsonApi.apply!()
     |> Api.FallbackController.apply!()
   end

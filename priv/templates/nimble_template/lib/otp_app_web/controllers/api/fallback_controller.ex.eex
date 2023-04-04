@@ -2,19 +2,18 @@ defmodule <%= web_module %>.Api.FallbackController do
   use Phoenix.Controller
 
   alias Ecto.Changeset
-  alias <%= web_module %>.Api.ErrorView
 
   def call(conn, {:error, :invalid_params, %Changeset{valid?: false} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> put_view(ErrorView)
+    |> put_view(json: <%= web_module %>.ErrorJSON)
     |> render("error.json", %{code: :validation_error, changeset: changeset})
   end
   
   def call(conn, {:error, %Changeset{valid?: false} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> put_view(ErrorView)
+    |> put_view(json: <%= web_module %>.ErrorJSON)
     |> render("error.json", %{code: :unprocessable_entity, changeset: changeset})
   end
 end

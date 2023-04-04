@@ -3,13 +3,12 @@ defmodule <%= web_module %>.ViewCase do
 
   using do
     quote do
+      use <%= web_module %>, :verified_routes
+      
       import Mimic
-      import Phoenix.View
       import <%= base_module %>.Factory
       import <%= web_module %>.ViewCase
       import Phoenix.ConnTest, only: [get: 2, bypass_through: 1]
-
-      alias <%= web_module %>.Router.Helpers, as: Routes
 
       # The default endpoint for testing
       @endpoint <%= web_module %>.Endpoint

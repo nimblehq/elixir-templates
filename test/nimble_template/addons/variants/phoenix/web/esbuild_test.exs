@@ -10,7 +10,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsBuildTest do
         WebAddons.EsBuild.apply!(project)
 
         assert_file("mix.exs", fn file ->
-          assert file =~ "\"assets.deploy\": [\"esbuild app --minify\","
+          assert file =~ "\"esbuild app --minify\","
         end)
       end)
     end
@@ -25,7 +25,7 @@ defmodule NimbleTemplate.Addons.Phoenix.Web.EsBuildTest do
         assert_file("config/config.exs", fn file ->
           assert file =~ """
                  config :esbuild,
-                   version: "0.14.29",
+                   version: "0.14.41",
                    app: [
                      args:
                  """
