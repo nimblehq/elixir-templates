@@ -2,6 +2,10 @@ name: Apply Live variant
 
 on: push
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   standard_project:
     name: Test on a Standard Live project

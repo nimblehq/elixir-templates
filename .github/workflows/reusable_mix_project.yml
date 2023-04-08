@@ -11,10 +11,6 @@ env:
   BASE_PROJECT_DIRECTORY: sample_project
   MIX_ENV: dev
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   unit_test:
     name: Unit test
