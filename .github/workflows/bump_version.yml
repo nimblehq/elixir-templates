@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       newVersion:
-        description: "TEMP New version"
+        description: "New version"
         required: true
         type: string
 
