@@ -16,10 +16,6 @@ env:
   DB_HOST: localhost
   MIX_ENV: dev
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   unit_test:
     name: Unit test
