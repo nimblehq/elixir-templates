@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       newVersion:
-        description: "New version"
+        description: "Z New version"
         required: true
         type: string
 
