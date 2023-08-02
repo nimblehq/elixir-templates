@@ -2,6 +2,10 @@ name: Apply API variant
 
 on: push
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   standard_api_project:
     name: Test on a Standard API project
